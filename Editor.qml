@@ -2,6 +2,22 @@ import QtQuick 2.9
 
 Rectangle
 {
+	enum Tool
+	{
+		Select = 1,
+		Line = 11,
+		Polyline = 12,
+		RectangleCenter = 21,
+		RectangleCorner = 22,
+		CircleCenter = 31,
+		CircleHorizontal = 32,
+		CircleVertical = 33,
+		CircleCorner = 34,
+		ArcSemicircle = 41,
+		ArcQuarter = 42,
+		Text = 51
+	}
+
 	property int margin: 20
 	property int units: 100
 	property int max: units / 2
@@ -46,7 +62,7 @@ Rectangle
 
 		onPressed:
 		{
-			if ( tool == 12 )	// polyline
+			if ( tool === Editor.Tool.Polyline )
 			{
 				startx = endx
 				starty = endy
@@ -123,16 +139,19 @@ Rectangle
 
 			if ( down )
 			{
-				var deltax = Math.abs(mousex - startx), deltay = Math.abs(mousey - starty)
+				var cornerx = (mousex < startx ? mousex : startx)
+				var cornery = (mousey > starty ? mousey : starty)
+				var deltax = Math.abs(mousex - startx)
+				var deltay = Math.abs(mousey - starty)
 				if ( tool > 10 && tool < 20 )	// line
 				{
-					if ( tool == 11 )	// line
+					if ( tool === Editor.Tool.Line )
 					{
 						context.beginPath().moveTo((startx + max) * scalexy, (max - starty) * scalexy)
 						context.lineTo((mousex + max) * scalexy, (max - mousey) * scalexy)
 						context.closePath().stroke()
 					}
-					else if ( tool == 12 )	// polyline
+					else if ( tool === Editor.Tool.Polyline )
 					{
 						context.beginPath().moveTo((startx + max) * scalexy, (max - starty) * scalexy)
 						context.lineTo((mousex + max) * scalexy, (max - mousey) * scalexy)
@@ -141,17 +160,14 @@ Rectangle
 				}
 				else if ( tool > 20 && tool < 30 )	// rectangle
 				{
-					if ( tool == 21 )	// center
+					if ( tool === Editor.Tool.RectangleCenter )
 					{
 						//##
 					}
-					else if ( tool == 22 )	// corners
+					else if ( tool === Editor.Tool.RectangleCorner )
 					{
-						var cornerx = (mousex < startx ? mousex : startx)
-						var cornery = (mousey < starty ? mousey : starty)
-						var delta = (deltax < deltay ? deltax : deltay)
 						context.rect((cornerx + max) * scalexy, (max - cornery) * scalexy,
-							delta * scalexy, delta * scalexy)
+							deltax * scalexy, deltay * scalexy)
 					}
 					if ( fill )
 						context.fill()
@@ -161,33 +177,29 @@ Rectangle
 				else if ( tool > 30 && tool < 40 )	// circle
 				{
 					var centerx, centery, radius
-					if ( tool == 31 )	// center
+					if ( tool === Editor.Tool.CircleCenter )
 					{
 						radius = Math.sqrt(deltax * deltax + deltay * deltay)
 						centerx = startx
 						centery = starty
 					}
-					else if ( tool == 32 )	// horizontal
+					else if ( tool === Editor.Tool.CircleHorizontal )
 					{
 						radius = deltax / 2
 						centerx = startx + (mousex < startx ? -radius : radius)
 						centery = starty
 					}
-					else if ( tool == 33 )	// vertical
+					else if ( tool === Editor.Tool.CircleVertical )
 					{
 						radius = deltay / 2
 						centerx = startx
 						centery = starty + (mousey < starty ? -radius : radius)
 					}
-					else if ( tool == 34 )	// corners
+					else if ( tool === Editor.Tool.CircleCorner )
 					{
-/*
-						var cornerx = (mousex < startx ? mousex : startx)
-						var cornery = (mousey < starty ? mousey : starty)
-						var delta = (deltax < deltay ? deltax : deltay)
-						context.ellipse((cornerx + max) * scalexy, (max - cornery) * scalexy,
-							delta * scalexy, delta * scalexy).stroke()
-*/
+						radius = (deltax < deltay ? deltax : deltay) / 2
+						centerx = cornerx + radius
+						centery = cornery - radius
 					}
 					if ( radius )
 					{
@@ -201,7 +213,7 @@ Rectangle
 				}
 				else if ( tool > 40 && tool < 50 )	// text
 				{
-					if ( tool == 31 )	// text
+					if ( tool === Editor.Tool.Texts )
 					{
 						//##
 					}

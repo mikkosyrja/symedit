@@ -54,75 +54,90 @@ ApplicationWindow
 			{
 				text: "Select"	//%%
 				checkable : true
-				checked: (tool == 0)
-				onTriggered: { tool = 0 }
+				checked: (tool === Editor.Tool.Select)
+				onTriggered: { tool = Editor.Tool.Select }
 			}
 			MenuSeparator { }
 			MenuItem
 			{
 				text: "Line"	//%%
 				checkable : true
-				checked: (tool == 11)
-				onTriggered: { tool = 11 }
+				checked: (tool === Editor.Tool.Line)
+				onTriggered: { tool = Editor.Tool.Line }
 			}
 			MenuItem
 			{
 				text: "Polyline"	//%%
 				checkable : true
-				checked: (tool == 12)
-				onTriggered: { tool = 12 }
+				checked: (tool === Editor.Tool.Polyline)
+				onTriggered: { tool = Editor.Tool.Polyline }
 			}
 			MenuSeparator { }
 			MenuItem
 			{
 				text: "Rectangle Center"	//%%
 				checkable : true
-				checked: (tool == 21)
-				onTriggered: { tool = 21 }
+				checked: (tool === Editor.Tool.RectangleCenter)
+				onTriggered: { tool = Editor.Tool.RectangleCenter }
 			}
 			MenuItem
 			{
 				text: "Rectangle Corners"	//%%
 				checkable : true
-				checked: (tool == 22)
-				onTriggered: { tool = 22 }
+				checked: (tool === Editor.Tool.RectangleCorner)
+				onTriggered: { tool = Editor.Tool.RectangleCorner }
 			}
 			MenuSeparator { }
 			MenuItem
 			{
 				text: "Circle Center"	//%%
 				checkable : true
-				checked: (tool == 31)
-				onTriggered: { tool = 31 }
+				checked: (tool === Editor.Tool.CircleCenter)
+				onTriggered: { tool = Editor.Tool.CircleCenter }
 			}
 			MenuItem
 			{
 				text: "Circle Horizontal"	//%%
 				checkable : true
-				checked: (tool == 32)
-				onTriggered: { tool = 32 }
+				checked: (tool === Editor.Tool.CircleHorizontal)
+				onTriggered: { tool = Editor.Tool.CircleHorizontal }
 			}
 			MenuItem
 			{
 				text: "Circle Vertical"	//%%
 				checkable : true
-				checked: (tool == 33)
-				onTriggered: { tool = 33 }
+				checked: (tool === Editor.Tool.CircleVertical)
+				onTriggered: { tool = Editor.Tool.CircleVertical }
 			}
 			MenuItem
 			{
 				text: "Circle Corners"	//%%
 				checkable : true
-				checked: (tool == 34)
-				onTriggered: { tool = 34 }
+				checked: (tool === Editor.Tool.CircleCorner)
+				onTriggered: { tool = Editor.Tool.CircleCorner }
+			}
+			MenuSeparator { }
+			MenuItem
+			{
+				text: "Semicircle"	//%%
+				checkable : true
+				checked: (tool === Editor.Tool.ArcSemicircle)
+				onTriggered: { tool = Editor.Tool.ArcSemicircle }
+			}
+			MenuItem
+			{
+				text: "Quarter circle"	//%%
+				checkable : true
+				checked: (tool === Editor.Tool.ArcQuarter)
+				onTriggered: { tool = Editor.Tool.ArcQuarter }
 			}
 			MenuSeparator { }
 			MenuItem
 			{
 				text: "Text"	//%%
 				checkable : true
-				checked: (tool == 41)
-				onTriggered: { tool = 41 }
+				checked: (tool === Editor.Tool.Text)
+				onTriggered: { tool = Editor.Tool.Text }
 			}
 		}
 		Menu
@@ -230,5 +245,6 @@ ApplicationWindow
 	{
 		snaplist.setsnap()
 		fill = true
+		tool = Editor.Tool.Select
 	}
 }
