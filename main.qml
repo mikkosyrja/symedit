@@ -6,7 +6,8 @@ ApplicationWindow
 {
 	property alias mousex: editor.mousex
 	property alias mousey: editor.mousey
-	property real snap: 5.0
+	property int align: 1
+	property int snap: 1
 
 	property int tool: 0
 	property bool fill: false
@@ -243,8 +244,9 @@ ApplicationWindow
 
 	Component.onCompleted:
 	{
+		tool = Editor.Tool.Line
+		fill = manager.getFill()
+		snap = manager.getSnap();
 		snaplist.setsnap()
-		fill = true
-		tool = Editor.Tool.Select
 	}
 }

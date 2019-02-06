@@ -162,13 +162,14 @@ Rectangle
 				{
 					if ( tool === Editor.Tool.RectangleCenter )
 					{
-						//##
+						cornerx = startx + (mousex < startx ? -deltax : -deltax)
+						cornery = starty + (mousey < starty ? deltay : deltay)
+						deltax *= 2
+						deltay *= 2
 					}
-					else if ( tool === Editor.Tool.RectangleCorner )
-					{
-						context.rect((cornerx + max) * scalexy, (max - cornery) * scalexy,
-							deltax * scalexy, deltay * scalexy)
-					}
+					else if ( tool === Editor.Tool.RectangleCorner ) { }
+					context.rect((cornerx + max) * scalexy, (max - cornery) * scalexy,
+						deltax * scalexy, deltay * scalexy)
 					if ( fill )
 						context.fill()
 					else
