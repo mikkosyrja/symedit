@@ -13,10 +13,7 @@ ApplicationWindow
 	property int tool: 0
 
 	id: window
-	x: 500
-	y: 100
 	visible: true
-	width: 640; height: 480
 	title: qsTr("Symbol editor")	//%%
 
 	menuBar: MenuBar
@@ -176,6 +173,14 @@ ApplicationWindow
 			ToolButton { iconSource: "clear.png" }
 			ToolButton { iconSource: "copy.png" }
 			Item { Layout.fillWidth: true }
+			CheckBox
+			{
+				id: fillcheck
+				checked: fill
+				text: qsTr("Fill")	//%%
+				onClicked: { fill = !fill }
+			}
+			Item { Layout.fillWidth: true }
 			Label { text: qsTr("Alignment") }	//%%
 			ComboBox
 			{
@@ -220,13 +225,6 @@ ApplicationWindow
 					else { currentIndex = 2 }	// default 5
 				}
 			}
-			CheckBox
-			{
-				id: fillcheck
-				checked: fill
-				text: qsTr("Fill")	//%%
-				onClicked: { fill = !fill }
-			}
 		}
 	}
 
@@ -246,10 +244,10 @@ ApplicationWindow
 		}
 	}
 
-	onXChanged: { manager.setPosition(Qt.point(x, y)) }
-	onYChanged: { manager.setPosition(Qt.point(x, y)) }
-	onWidthChanged: { manager.setSize(Qt.size(width, height)) }
-	onHeightChanged: { manager.setSize(Qt.size(width, height)) }
+	onXChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
+	onYChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
+	onWidthChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
+	onHeightChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 
 	onFillChanged: { manager.setFill(fill); }
 	onAlignChanged: { manager.setAlign(align); }

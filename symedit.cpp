@@ -24,25 +24,30 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	LoadSettings();
 }
 
-//
-void SymEditManager::setPosition(QPoint point)
+//! Set window geometry.
+/*!
+	\param point		Window position.
+	\param size			Window size.
+*/
+void SymEditManager::setGeometry(QPoint point, QSize size)
 {
 	Settings.Position = point;
-}
-
-//
-void SymEditManager::setSize(QSize size)
-{
 	Settings.Size = size;
 }
 
-//
+//! Get window position.
+/*!
+	\return				Window position.
+*/
 QPoint SymEditManager::getPosition() const
 {
 	return Settings.Position;
 }
 
-//
+//! Get window size.
+/*!
+	\return				Window size.
+*/
 QSize SymEditManager::getSize() const
 {
 	return Settings.Size;
@@ -100,4 +105,53 @@ void SymEditManager::SaveSettings()
 	settings.setValue("editor/align", Settings.Align);
 	settings.setValue("editor/snap", Settings.Snap);
 	settings.setValue("editor/tool", Settings.Tool);
+}
+
+//
+void SymEditManager::addItem(int operation, QPoint point)
+{
+
+}
+
+//
+void SymEditManager::removeItem(int index)
+{
+
+}
+
+
+//
+int SymEditManager::getItemCount() const
+{
+	return 2;
+}
+
+//
+int SymEditManager::getItemOperation(int index) const
+{
+	if ( index == 0 )
+		return 'U';
+	else
+		return 'R';
+}
+
+//
+QPoint SymEditManager::getItemPoint(int index) const
+{
+	if ( index == 0 )
+		return QPoint(0, 0);
+	else
+		return QPoint(30, 30);
+}
+
+//
+QString SymEditManager::getItemString(int index) const
+{
+	return "T3";
+}
+
+//
+bool SymEditManager::getItemFill(int index) const
+{
+	return false;
 }

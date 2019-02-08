@@ -18,6 +18,13 @@ Rectangle
 		Text = 51
 	}
 
+	enum Operation
+	{
+		Move = 85,
+		Line = 68,
+		Radius = 82
+	}
+
 	property int margin: 20
 	property int units: 100
 	property int max: units / 2
@@ -124,6 +131,38 @@ Rectangle
 			context.strokeRect(0, 0, units * scalexy, units * scalexy)
 		}
 
+		function paintsymbol(context)
+		{
+			var previous = Qt.point(0, 0)
+			var index, count = manager.getItemCount()
+			for ( index = 0; index < count; index++ )
+			{
+				var operation = manager.getItemOperation(index)
+				var itempoint = manager.getItemPoint(index)
+				var itemfill = manager.getItemFill(index)
+				if ( operation === Editor.Operation.Move )
+				{
+					previous = itempoint
+				}
+				else if ( operation === Editor.Operation.Line )
+				{
+					//##
+					previous = itempoint
+				}
+				else if ( operation === Editor.Operation.Radius )
+				{
+					var radius = itempoint.x
+					context.ellipse((previous.x + max - radius) * scalexy,
+						(max - previous.y - radius) * scalexy,
+						radius * 2 * scalexy, radius * 2 * scalexy)
+					if ( itemfill )
+						context.fill()
+					else
+						context.stroke()
+				}
+			}
+		}
+
 		onPaint:
 		{
 			var context = getContext("2d")
@@ -133,6 +172,8 @@ Rectangle
 			context.strokeStyle = "black"
 			context.fillStyle = "black"
 //			context.lineWidth = 2
+
+			paintsymbol(context)
 
 			if ( down )
 			{

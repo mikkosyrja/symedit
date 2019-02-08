@@ -6,6 +6,8 @@
 #include <QPoint>
 #include <QSize>
 
+#include "symbol.h"
+
 //! Settings class.
 class SymEditSettings
 {
@@ -29,9 +31,7 @@ class SymEditManager : public QObject
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
 
-	Q_INVOKABLE void setPosition(QPoint point);
-	Q_INVOKABLE void setSize(QSize size);
-
+	Q_INVOKABLE void setGeometry(QPoint point, QSize size);
 	Q_INVOKABLE QPoint getPosition() const;
 	Q_INVOKABLE QSize getSize() const;
 
@@ -45,10 +45,20 @@ public:
 	Q_INVOKABLE int getTool() const;
 	Q_INVOKABLE int getSnap() const;
 
+	Q_INVOKABLE void addItem(int operation, QPoint point);
+	Q_INVOKABLE void removeItem(int index);
+
+	Q_INVOKABLE int getItemCount() const;
+	Q_INVOKABLE int getItemOperation(int index) const;
+	Q_INVOKABLE QPoint getItemPoint(int index) const;
+	Q_INVOKABLE QString getItemString(int index ) const;
+	Q_INVOKABLE bool getItemFill(int index) const;
+
 	void LoadSettings();
 	void SaveSettings();
 
 private:
+	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.
 };
 
