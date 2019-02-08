@@ -10,7 +10,11 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
-	SymEdit manager;
+	QCoreApplication::setOrganizationName("Syrja");
+	QCoreApplication::setOrganizationDomain("syrja.org");
+	QCoreApplication::setApplicationName("SymEdit");
+
+	SymEditManager manager;
 
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("manager", &manager);
@@ -19,5 +23,9 @@ int main(int argc, char *argv[])
 	if ( engine.rootObjects().isEmpty() )
 		return -1;
 
-	return app.exec();
+	int result = app.exec();
+
+	manager.SaveSettings();
+
+	return result;
 }

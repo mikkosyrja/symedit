@@ -26,9 +26,6 @@ Rectangle
 	property bool horizontal: (height < width)
 	property real scalexy: (horizontal ? (height - margin * 2) / units : (width - margin * 2) / units)
 
-	property int mousex: 0
-	property int mousey: 0
-
 	property int startx: 0
 	property int starty: 0
 	property bool down: false

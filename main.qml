@@ -4,15 +4,17 @@ import QtQuick.Layouts 1.0
 
 ApplicationWindow
 {
-	property alias mousex: editor.mousex
-	property alias mousey: editor.mousey
+	property int mousex: 0
+	property int mousey: 0
+
+	property bool fill: false
 	property int align: 1
 	property int snap: 1
-
 	property int tool: 0
-	property bool fill: false
 
 	id: window
+	x: 500
+	y: 100
 	visible: true
 	width: 640; height: 480
 	title: qsTr("Symbol editor")	//%%
@@ -21,10 +23,10 @@ ApplicationWindow
 	{
 		Menu
 		{
-			title: "File"	//%%
+			title: qsTr("File")	//%%
 			MenuItem
 			{
-				text: "Open"	//%%
+				text: qsTr("Open")	//%%
 				shortcut: "Ctrl+O"
 				onTriggered:
 				{
@@ -33,7 +35,7 @@ ApplicationWindow
 			}
 			MenuItem
 			{
-				text: "Save"	//%%
+				text: qsTr("Save")	//%%
 				shortcut: "Ctrl+S"
 				onTriggered:
 				{
@@ -43,17 +45,17 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Exit"	//%%
+				text: qsTr("Exit")	//%%
 				shortcut: "F4"
 				onTriggered: { Qt.quit() }
 			}
 		}
 		Menu
 		{
-			title: "Tool"	//%%
+			title: qsTr("Tool")	//%%
 			MenuItem
 			{
-				text: "Select"	//%%
+				text: qsTr("Select")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.Select)
 				onTriggered: { tool = Editor.Tool.Select }
@@ -61,14 +63,14 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Line"	//%%
+				text: qsTr("Line")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.Line)
 				onTriggered: { tool = Editor.Tool.Line }
 			}
 			MenuItem
 			{
-				text: "Polyline"	//%%
+				text: qsTr("Polyline")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.Polyline)
 				onTriggered: { tool = Editor.Tool.Polyline }
@@ -76,14 +78,14 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Rectangle Center"	//%%
+				text: qsTr("Rectangle Center")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.RectangleCenter)
 				onTriggered: { tool = Editor.Tool.RectangleCenter }
 			}
 			MenuItem
 			{
-				text: "Rectangle Corners"	//%%
+				text: qsTr("Rectangle Corners")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.RectangleCorner)
 				onTriggered: { tool = Editor.Tool.RectangleCorner }
@@ -91,28 +93,28 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Circle Center"	//%%
+				text: qsTr("Circle Center")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.CircleCenter)
 				onTriggered: { tool = Editor.Tool.CircleCenter }
 			}
 			MenuItem
 			{
-				text: "Circle Horizontal"	//%%
+				text: qsTr("Circle Horizontal")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.CircleHorizontal)
 				onTriggered: { tool = Editor.Tool.CircleHorizontal }
 			}
 			MenuItem
 			{
-				text: "Circle Vertical"	//%%
+				text: qsTr("Circle Vertical")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.CircleVertical)
 				onTriggered: { tool = Editor.Tool.CircleVertical }
 			}
 			MenuItem
 			{
-				text: "Circle Corners"	//%%
+				text: qsTr("Circle Corners")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.CircleCorner)
 				onTriggered: { tool = Editor.Tool.CircleCorner }
@@ -120,14 +122,14 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Semicircle"	//%%
+				text: qsTr("Semicircle")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.ArcSemicircle)
 				onTriggered: { tool = Editor.Tool.ArcSemicircle }
 			}
 			MenuItem
 			{
-				text: "Quarter circle"	//%%
+				text: qsTr("Quarter circle")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.ArcQuarter)
 				onTriggered: { tool = Editor.Tool.ArcQuarter }
@@ -135,7 +137,7 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "Text"	//%%
+				text: qsTr("Text")	//%%
 				checkable : true
 				checked: (tool === Editor.Tool.Text)
 				onTriggered: { tool = Editor.Tool.Text }
@@ -143,10 +145,10 @@ ApplicationWindow
 		}
 		Menu
 		{
-			title: "Help"	//%%
+			title: qsTr("Help")	//%%
 			MenuItem
 			{
-				text: "Help"	//%%
+				text: qsTr("Help")	//%%
 				shortcut: "F1"
 				onTriggered:
 				{
@@ -156,7 +158,7 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
-				text: "About"	//%%
+				text: qsTr("About")	//%%
 				onTriggered:
 				{
 					//##
@@ -174,36 +176,31 @@ ApplicationWindow
 			ToolButton { iconSource: "clear.png" }
 			ToolButton { iconSource: "copy.png" }
 			Item { Layout.fillWidth: true }
-			CheckBox
-			{
-				id: fillcheck
-				checked: fill
-				text: "Fill"
-				onClicked: { fill = !fill }
-			}
-			Label { text: "Alignment" }	//%%
+			Label { text: qsTr("Alignment") }	//%%
 			ComboBox
 			{
 				id: alignlist
 				model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-/*
 				onCurrentIndexChanged:
 				{
+/*
 					if ( currentIndex == 0 ) { snap = 1 }
 					else if ( currentIndex == 1 ) { snap = 2 }
 					else if ( currentIndex == 2 ) { snap = 5 }
 					else if ( currentIndex == 3 ) { snap = 10 }
+*/
 				}
-				function setsnap()
+				function setAlign()
 				{
+/*
 					if ( snap == 1 ) { currentIndex = 0 }
 					else if ( snap == 2 ) { currentIndex = 1 }
 					else if ( snap == 10 ) { currentIndex = 3 }
 					else { currentIndex = 2 }	// default 5
-				}
 */
+				}
 			}
-			Label { text: "Snap" }	//%%
+			Label { text: qsTr("Snap") }	//%%
 			ComboBox
 			{
 				id: snaplist
@@ -215,13 +212,20 @@ ApplicationWindow
 					else if ( currentIndex == 2 ) { snap = 5 }
 					else if ( currentIndex == 3 ) { snap = 10 }
 				}
-				function setsnap()
+				function setSnap()
 				{
 					if ( snap == 1 ) { currentIndex = 0 }
 					else if ( snap == 2 ) { currentIndex = 1 }
 					else if ( snap == 10 ) { currentIndex = 3 }
 					else { currentIndex = 2 }	// default 5
 				}
+			}
+			CheckBox
+			{
+				id: fillcheck
+				checked: fill
+				text: qsTr("Fill")	//%%
+				onClicked: { fill = !fill }
 			}
 		}
 	}
@@ -242,11 +246,29 @@ ApplicationWindow
 		}
 	}
 
+	onXChanged: { manager.setPosition(Qt.point(x, y)) }
+	onYChanged: { manager.setPosition(Qt.point(x, y)) }
+	onWidthChanged: { manager.setSize(Qt.size(width, height)) }
+	onHeightChanged: { manager.setSize(Qt.size(width, height)) }
+
+	onFillChanged: { manager.setFill(fill); }
+	onAlignChanged: { manager.setAlign(align); }
+	onSnapChanged: { manager.setSnap(snap); }
+	onToolChanged: { manager.setTool(tool); }
+
 	Component.onCompleted:
 	{
-		tool = Editor.Tool.Line
+		x = manager.getPosition().x
+		y = manager.getPosition().y
+		width = manager.getSize().width
+		height = manager.getSize().height
+
 		fill = manager.getFill()
-		snap = manager.getSnap();
-		snaplist.setsnap()
+		align = manager.getAlign()
+		snap = manager.getSnap()
+		tool = manager.getTool()
+
+		alignlist.setAlign()
+		snaplist.setSnap()
 	}
 }
