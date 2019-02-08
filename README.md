@@ -1,0 +1,2 @@
+# symedit
+Symbol editor
