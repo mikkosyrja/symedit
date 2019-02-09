@@ -45,7 +45,8 @@ public:
 	Q_INVOKABLE int getTool() const;
 	Q_INVOKABLE int getSnap() const;
 
-	Q_INVOKABLE void addItem(int operation, QPoint point);
+	Q_INVOKABLE void addItem(int operation, QPoint point, bool fill);
+	Q_INVOKABLE void addText(int operation, QPoint point, QString text, int align);
 	Q_INVOKABLE void removeItem(int index);
 
 	Q_INVOKABLE int getItemCount() const;
@@ -53,6 +54,8 @@ public:
 	Q_INVOKABLE QPoint getItemPoint(int index) const;
 	Q_INVOKABLE QString getItemString(int index ) const;
 	Q_INVOKABLE bool getItemFill(int index) const;
+
+	Q_INVOKABLE int selectItem(QPoint point) const;
 
 	void LoadSettings();
 	void SaveSettings();

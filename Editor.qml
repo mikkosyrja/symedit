@@ -66,7 +66,11 @@ Rectangle
 
 		onPressed:
 		{
-			if ( tool === Editor.Tool.Polyline )
+			if ( tool === Editor.Tool.Select )
+			{
+
+			}
+			else if ( tool === Editor.Tool.Polyline )
 			{
 				startx = endx
 				starty = endy
@@ -81,9 +85,16 @@ Rectangle
 
 		onReleased:
 		{
-			endx = mousex
-			endy = mousey
-			down = false
+			if ( tool === Editor.Tool.Select )
+			{
+				var index = manager.selectItem(Qt.point(mousex, mousey))
+			}
+			else
+			{
+				endx = mousex
+				endy = mousey
+				down = false
+			}
 		}
 	}
 
@@ -131,6 +142,16 @@ Rectangle
 			context.strokeRect(0, 0, units * scalexy, units * scalexy)
 		}
 
+		function paintcircle(context, center, radius, fill)
+		{
+			context.ellipse((center.x + max - radius) * scalexy, (max - center.y - radius) * scalexy,
+				radius * 2 * scalexy, radius * 2 * scalexy)
+			if ( fill )
+				context.fill()
+			else
+				context.stroke()
+		}
+
 		function paintsymbol(context)
 		{
 			var previous = Qt.point(0, 0)
@@ -138,27 +159,21 @@ Rectangle
 			for ( index = 0; index < count; index++ )
 			{
 				var operation = manager.getItemOperation(index)
-				var itempoint = manager.getItemPoint(index)
-				var itemfill = manager.getItemFill(index)
+				var position = manager.getItemPoint(index)
+				var fill = manager.getItemFill(index)
 				if ( operation === Editor.Operation.Move )
 				{
-					previous = itempoint
+					previous = position
 				}
 				else if ( operation === Editor.Operation.Line )
 				{
 					//##
-					previous = itempoint
+					previous = position
 				}
 				else if ( operation === Editor.Operation.Radius )
 				{
-					var radius = itempoint.x
-					context.ellipse((previous.x + max - radius) * scalexy,
-						(max - previous.y - radius) * scalexy,
-						radius * 2 * scalexy, radius * 2 * scalexy)
-					if ( itemfill )
-						context.fill()
-					else
-						context.stroke()
+					var radius = position.x
+					paintcircle(context, previous, radius, fill)
 				}
 			}
 		}
@@ -242,12 +257,8 @@ Rectangle
 					}
 					if ( radius )
 					{
-						context.ellipse((centerx + max - radius) * scalexy, (max - centery - radius) * scalexy,
-							radius * 2 * scalexy, radius * 2 * scalexy)
-						if ( fill )
-							context.fill()
-						else
-							context.stroke()
+						var center = Qt.point(centerx, centery)
+						paintcircle(context, center, radius, fill)
 					}
 				}
 				else if ( tool > 40 && tool < 50 )	// text

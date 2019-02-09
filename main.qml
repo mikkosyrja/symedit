@@ -42,9 +42,88 @@ ApplicationWindow
 			MenuSeparator { }
 			MenuItem
 			{
+				text: qsTr("From Clipboard")	//%%
+//				shortcut: "Ctrl+O"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuItem
+			{
+				text: qsTr("To Clipboard")	//%%
+//				shortcut: "Ctrl+S"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuSeparator { }
+			MenuItem
+			{
 				text: qsTr("Exit")	//%%
 				shortcut: "F4"
 				onTriggered: { Qt.quit() }
+			}
+		}
+		Menu
+		{
+			title: qsTr("Edit")	//%%
+			MenuItem
+			{
+				text: qsTr("Cut")	//%%
+				shortcut: "Ctrl+X"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuItem
+			{
+				text: qsTr("Copy")	//%%
+				shortcut: "Ctrl+C"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuItem
+			{
+				text: qsTr("Paste")	//%%
+				shortcut: "Ctrl+V"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuSeparator { }
+			MenuItem
+			{
+				text: qsTr("Up")	//%%
+//				shortcut: "Ctrl+V"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuItem
+			{
+				text: qsTr("Down")	//%%
+//				shortcut: "Ctrl+V"
+				onTriggered:
+				{
+					//##
+				}
+			}
+			MenuSeparator { }
+			MenuItem
+			{
+				text: qsTr("Delete")	//%%
+				shortcut: "Delete"
+				onTriggered:
+				{
+					//##
+				}
 			}
 		}
 		Menu
