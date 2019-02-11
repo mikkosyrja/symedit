@@ -35,12 +35,14 @@ void SymEditSymbol::Load(const QString& buffer)
 	for ( const auto& string : list )
 	{
 		int operation = string.at(0).toLatin1();
-		int x = string.mid(1).toInt();
-		int y = x;
-		int comma = string.indexOf(',');
+		int x, y, comma = string.indexOf(',');
 		if ( comma >= 0 )
+		{
+			x = string.mid(1, comma - 1).toInt();
 			y = string.mid(comma + 1).toInt();
-
+		}
+		else
+			x = y = string.mid(1).toInt();
 		Item item(operation, QPoint(x, y));
 		Items.push_back(item);
 	}

@@ -12,6 +12,38 @@ SymEditSettings::SymEditSettings() : Fill(false), Align(9), Snap(5), Tool(1)
 
 }
 
+//! Load settings.
+void SymEditSettings::Load()
+{
+	QSettings settings;
+
+	Position.setX(settings.value("window/x", 100).toInt());
+	Position.setY(settings.value("window/y", 100).toInt());
+	Size.setWidth(settings.value("window/width", 500).toInt());
+	Size.setHeight(settings.value("window/height", 500).toInt());
+
+	Fill = settings.value("editor/fill", false).toBool();
+	Align = settings.value("editor/align", 9).toInt();
+	Snap = settings.value("editor/snap", 5).toInt();
+	Tool = settings.value("editor/tool", 1).toInt();
+}
+
+//! Save settings.
+void SymEditSettings::Save() const
+{
+	QSettings settings;
+
+	settings.setValue("window/x", Position.x());
+	settings.setValue("window/y", Position.y());
+	settings.setValue("window/width", Size.width());
+	settings.setValue("window/height", Size.height());
+
+	settings.setValue("editor/fill", Fill);
+	settings.setValue("editor/align", Align);
+	settings.setValue("editor/snap", Snap);
+	settings.setValue("editor/tool", Tool);
+}
+
 //
 //	manager functions
 //
@@ -21,9 +53,15 @@ SymEditSettings::SymEditSettings() : Fill(false), Align(9), Snap(5), Tool(1)
 */
 SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 {
-	LoadSettings();
+	Settings.Load();
 
-	Symbol.Load("U00,00;R50;U-35,-35;D35,35;U-35,35;D35,-35;");
+	Symbol.Load("U00,00;R50;U-34,-34;D34,34;U-34,34;D34,-34;");
+}
+
+//! Set window initialized.
+void SymEditManager::setInitialized()
+{
+	Initialized = true;
 }
 
 //! Set window geometry.
@@ -33,8 +71,11 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 */
 void SymEditManager::setGeometry(QPoint point, QSize size)
 {
-	Settings.Position = point;
-	Settings.Size = size;
+	if ( Initialized )
+	{
+		Settings.Position = point;
+		Settings.Size = size;
+	}
 }
 
 //! Get window position.
@@ -76,38 +117,6 @@ int SymEditManager::getAlign() const { return Settings.Align; }
 int SymEditManager::getSnap() const { return Settings.Snap; }
 int SymEditManager::getTool() const { return Settings.Tool; }
 //@}
-
-//! Load settings.
-void SymEditManager::LoadSettings()
-{
-	QSettings settings;
-
-	Settings.Position.setX(settings.value("window/x", 100).toInt());
-	Settings.Position.setY(settings.value("window/y", 100).toInt());
-	Settings.Size.setWidth(settings.value("window/width", 500).toInt());
-	Settings.Size.setHeight(settings.value("window/height", 500).toInt());
-
-	Settings.Fill = settings.value("editor/fill", false).toBool();
-	Settings.Align = settings.value("editor/align", 9).toInt();
-	Settings.Snap = settings.value("editor/snap", 5).toInt();
-	Settings.Tool = settings.value("editor/tool", 1).toInt();
-}
-
-//! Save settings.
-void SymEditManager::SaveSettings()
-{
-	QSettings settings;
-
-	settings.setValue("window/x", Settings.Position.x());
-	settings.setValue("window/y", Settings.Position.y());
-	settings.setValue("window/width", Settings.Size.width());
-	settings.setValue("window/height", Settings.Size.height());
-
-	settings.setValue("editor/fill", Settings.Fill);
-	settings.setValue("editor/align", Settings.Align);
-	settings.setValue("editor/snap", Settings.Snap);
-	settings.setValue("editor/tool", Settings.Tool);
-}
 
 //! Add symbol item.
 /*!
@@ -152,21 +161,33 @@ int SymEditManager::getItemCount() const
 	return Symbol.GetItemCount();
 }
 
-//
+//! Get item operation.
+/*!
+	\param index		Item index.
+	\return				Item operation.
+*/
 int SymEditManager::getItemOperation(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
 	return item.Operation;
 }
 
-//
+//! Get item position.
+/*!
+	\param index		Item index.
+	\return				Item position.
+*/
 QPoint SymEditManager::getItemPoint(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
 	return item.Point;
 }
 
-//
+//! Get item string.
+/*!
+	\param index		Item index.
+	\return				Item string.
+*/
 QString SymEditManager::getItemString(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
@@ -180,6 +201,7 @@ bool SymEditManager::getItemFill(int index) const
 	return item.Fill;
 }
 
+//
 int SymEditManager::selectItem(QPoint point) const
 {
 	return -1;	//##

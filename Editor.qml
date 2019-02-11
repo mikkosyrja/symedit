@@ -20,9 +20,9 @@ Rectangle
 
 	enum Operation
 	{
-		Move = 85,
-		Line = 68,
-		Radius = 82
+		Move = 85,		// U
+		Line = 68,		// D
+		Radius = 82		// R
 	}
 
 	property int margin: 20
@@ -66,11 +66,7 @@ Rectangle
 
 		onPressed:
 		{
-			if ( tool === Editor.Tool.Select )
-			{
-
-			}
-			else if ( tool === Editor.Tool.Polyline )
+			if ( tool === Editor.Tool.Polyline )
 			{
 				startx = endx
 				starty = endy
@@ -106,6 +102,23 @@ Rectangle
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 
+		function paintline(context, start, end)
+		{
+			context.beginPath().moveTo((start.x + max) * scalexy, (max - start.y) * scalexy)
+			context.lineTo((end.x + max) * scalexy, (max - end.y) * scalexy)
+			context.closePath().stroke()
+		}
+
+		function paintcircle(context, center, radius, fill)
+		{
+			context.ellipse((center.x + max - radius) * scalexy, (max - center.y - radius) * scalexy,
+				radius * 2 * scalexy, radius * 2 * scalexy)
+			if ( fill )
+				context.fill()
+			else
+				context.stroke()
+		}
+
 		function paintgrid(context)
 		{
 			context.lineWidth = 0.2
@@ -130,30 +143,16 @@ Rectangle
 			}
 
 			context.lineWidth = 1
-
-			context.beginPath().moveTo(0, max * scalexy)
-			context.lineTo(units * scalexy, max * scalexy)
-			context.closePath().stroke()
-
-			context.beginPath().moveTo(max * scalexy, 0)
-			context.lineTo(max * scalexy, units * scalexy)
-			context.closePath().stroke()
+			paintline(context, Qt.point(0, -max), Qt.point(0, max))
+			paintline(context, Qt.point(-max, 0), Qt.point(max, 0))
 
 			context.strokeRect(0, 0, units * scalexy, units * scalexy)
 		}
 
-		function paintcircle(context, center, radius, fill)
-		{
-			context.ellipse((center.x + max - radius) * scalexy, (max - center.y - radius) * scalexy,
-				radius * 2 * scalexy, radius * 2 * scalexy)
-			if ( fill )
-				context.fill()
-			else
-				context.stroke()
-		}
-
 		function paintsymbol(context)
 		{
+			context.lineWidth = 2
+
 			var previous = Qt.point(0, 0)
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
@@ -167,7 +166,7 @@ Rectangle
 				}
 				else if ( operation === Editor.Operation.Line )
 				{
-					//##
+					paintline(context, previous, position)
 					previous = position
 				}
 				else if ( operation === Editor.Operation.Radius )
@@ -186,7 +185,6 @@ Rectangle
 
 			context.strokeStyle = "black"
 			context.fillStyle = "black"
-//			context.lineWidth = 2
 
 			paintsymbol(context)
 
@@ -196,19 +194,15 @@ Rectangle
 				var cornery = (mousey > starty ? mousey : starty)
 				var deltax = Math.abs(mousex - startx)
 				var deltay = Math.abs(mousey - starty)
+				var start = Qt.point(startx, starty)
+				var end = Qt.point(mousex, mousey)
 				if ( tool > 10 && tool < 20 )	// line
 				{
 					if ( tool === Editor.Tool.Line )
-					{
-						context.beginPath().moveTo((startx + max) * scalexy, (max - starty) * scalexy)
-						context.lineTo((mousex + max) * scalexy, (max - mousey) * scalexy)
-						context.closePath().stroke()
-					}
+						paintline(context, start, end)
 					else if ( tool === Editor.Tool.Polyline )
 					{
-						context.beginPath().moveTo((startx + max) * scalexy, (max - starty) * scalexy)
-						context.lineTo((mousex + max) * scalexy, (max - mousey) * scalexy)
-						context.closePath().stroke()
+						paintline(context, start, end)	//##
 					}
 				}
 				else if ( tool > 20 && tool < 30 )	// rectangle

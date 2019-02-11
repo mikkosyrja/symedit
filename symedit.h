@@ -14,6 +14,9 @@ class SymEditSettings
 public:
 	SymEditSettings();
 
+	void Load();
+	void Save() const;
+
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
@@ -30,6 +33,11 @@ class SymEditManager : public QObject
 
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
+
+	//! Save settings.
+	void SaveSettings() const { Settings.Save(); }
+
+	Q_INVOKABLE void setInitialized();
 
 	Q_INVOKABLE void setGeometry(QPoint point, QSize size);
 	Q_INVOKABLE QPoint getPosition() const;
@@ -57,10 +65,8 @@ public:
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
 
-	void LoadSettings();
-	void SaveSettings();
-
 private:
+	bool Initialized = false;				//!< Initialization mutex.
 	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.
 };

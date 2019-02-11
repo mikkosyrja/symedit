@@ -1,18 +1,19 @@
 #include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QSettings>
 
 #include "symedit.h"
 
 int main(int argc, char *argv[])
 {
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-	QGuiApplication app(argc, argv);
-
 	QCoreApplication::setOrganizationName("Syrja");
 	QCoreApplication::setOrganizationDomain("syrja.org");
 	QCoreApplication::setApplicationName("SymEdit");
+	QSettings::setDefaultFormat(QSettings::IniFormat);
+
+	QGuiApplication app(argc, argv);
 
 	SymEditManager manager;
 
