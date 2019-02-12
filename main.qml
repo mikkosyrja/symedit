@@ -13,7 +13,7 @@ ApplicationWindow
 	property int tool: 0
 
 	id: window
-	visible: true
+	visible: false
 	title: qsTr("Symbol editor")	//%%
 
 	menuBar: MenuBar
@@ -43,20 +43,14 @@ ApplicationWindow
 			MenuItem
 			{
 				text: qsTr("From Clipboard")	//%%
-//				shortcut: "Ctrl+O"
-				onTriggered:
-				{
-					//##
-				}
+				shortcut: "Ctrl+Alt+V"
+				onTriggered: { manager.readClipboard() }
 			}
 			MenuItem
 			{
 				text: qsTr("To Clipboard")	//%%
-//				shortcut: "Ctrl+S"
-				onTriggered:
-				{
-					//##
-				}
+				shortcut: "Ctrl+Alt+C"
+				onTriggered: { manager.writeClipboard() }
 			}
 			MenuSeparator { }
 			MenuItem
@@ -100,7 +94,7 @@ ApplicationWindow
 			MenuItem
 			{
 				text: qsTr("Up")	//%%
-//				shortcut: "Ctrl+V"
+				shortcut: "Alt+Up"
 				onTriggered:
 				{
 					//##
@@ -109,7 +103,7 @@ ApplicationWindow
 			MenuItem
 			{
 				text: qsTr("Down")	//%%
-//				shortcut: "Ctrl+V"
+				shortcut: "Alt+Down"
 				onTriggered:
 				{
 					//##
@@ -307,10 +301,7 @@ ApplicationWindow
 		}
 	}
 
-	Editor
-	{
-		id: editor
-	}
+	Editor { id: editor }
 
 	statusBar: StatusBar
 	{
@@ -320,6 +311,7 @@ ApplicationWindow
 			Label { Layout.minimumWidth: 40; text: " X: " + mousex }
 			Label {	Layout.minimumWidth: 40; text: " Y: " + mousey }
 			Item { Layout.fillWidth: true }
+			Label {	Layout.minimumWidth: 40; text: manager.getSymbol() }
 		}
 	}
 
@@ -335,10 +327,10 @@ ApplicationWindow
 
 	Component.onCompleted:
 	{
-		x = manager.getPosition().x
-		y = manager.getPosition().y
-		width = manager.getSize().width
-		height = manager.getSize().height
+		x = manager.getWindowPos().x
+		y = manager.getWindowPos().y
+		width = manager.getWindowSize().width
+		height = manager.getWindowSize().height
 
 		fill = manager.getFill()
 		align = manager.getAlign()
@@ -347,5 +339,8 @@ ApplicationWindow
 
 		alignlist.setAlign()
 		snaplist.setSnap()
+
+		visible = true
+		manager.setInitialized()
 	}
 }

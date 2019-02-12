@@ -6,6 +6,7 @@
 #include <QPoint>
 #include <QString>
 
+//! Symbol class.
 class SymEditSymbol
 {
 public:
@@ -24,7 +25,7 @@ public:
 	};
 
 	void Load(const QString& buffer);
-	void Save(QString& buffer) const;
+	QString& Save(QString& buffer) const;
 
 	Item& AddItem(int operation, QPoint point, bool fill);
 	Item& AddItem(int operation, QPoint point, QString text, int align);

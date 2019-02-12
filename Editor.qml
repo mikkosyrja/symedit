@@ -102,6 +102,8 @@ Rectangle
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 
+//		clip: false
+
 		function paintline(context, start, end)
 		{
 			context.beginPath().moveTo((start.x + max) * scalexy, (max - start.y) * scalexy)
@@ -151,7 +153,7 @@ Rectangle
 
 		function paintsymbol(context)
 		{
-			context.lineWidth = 2
+			context.lineWidth = 1.2
 
 			var previous = Qt.point(0, 0)
 			var index, count = manager.getItemCount()

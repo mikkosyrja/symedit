@@ -11,12 +11,15 @@
 //! Settings class.
 class SymEditSettings
 {
+	friend class SymEditManager;
+
 public:
 	SymEditSettings();
 
 	void Load();
 	void Save() const;
 
+private:
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
@@ -40,8 +43,8 @@ public:
 	Q_INVOKABLE void setInitialized();
 
 	Q_INVOKABLE void setGeometry(QPoint point, QSize size);
-	Q_INVOKABLE QPoint getPosition() const;
-	Q_INVOKABLE QSize getSize() const;
+	Q_INVOKABLE QPoint getWindowPos() const;
+	Q_INVOKABLE QSize getWindowSize() const;
 
 	Q_INVOKABLE void setFill(bool fill);
 	Q_INVOKABLE void setAlign(int align);
@@ -52,6 +55,8 @@ public:
 	Q_INVOKABLE int getAlign() const;
 	Q_INVOKABLE int getTool() const;
 	Q_INVOKABLE int getSnap() const;
+
+	Q_INVOKABLE QString getSymbol() const;
 
 	Q_INVOKABLE void addItem(int operation, QPoint point, bool fill);
 	Q_INVOKABLE void addText(int operation, QPoint point, QString text, int align);
@@ -64,6 +69,9 @@ public:
 	Q_INVOKABLE bool getItemFill(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
+
+	Q_INVOKABLE void readClipboard();
+	Q_INVOKABLE void writeClipboard() const;
 
 private:
 	bool Initialized = false;				//!< Initialization mutex.

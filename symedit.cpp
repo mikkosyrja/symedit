@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QClipboard>
 #include <QSettings>
 
 #include "symedit.h"
@@ -55,7 +56,7 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 {
 	Settings.Load();
 
-	Symbol.Load("U00,00;R50;U-34,-34;D34,34;U-34,34;D34,-34;");
+	Symbol.Load("U00,00;R50;U-34,-34;D34,34;U-34,34;D34,-34;");		//##
 }
 
 //! Set window initialized.
@@ -82,7 +83,7 @@ void SymEditManager::setGeometry(QPoint point, QSize size)
 /*!
 	\return				Window position.
 */
-QPoint SymEditManager::getPosition() const
+QPoint SymEditManager::getWindowPos() const
 {
 	return Settings.Position;
 }
@@ -91,7 +92,7 @@ QPoint SymEditManager::getPosition() const
 /*!
 	\return				Window size.
 */
-QSize SymEditManager::getSize() const
+QSize SymEditManager::getWindowSize() const
 {
 	return Settings.Size;
 }
@@ -117,6 +118,16 @@ int SymEditManager::getAlign() const { return Settings.Align; }
 int SymEditManager::getSnap() const { return Settings.Snap; }
 int SymEditManager::getTool() const { return Settings.Tool; }
 //@}
+
+//! Get symbol as string.
+/*!
+	\return				Symbol as string.
+*/
+QString SymEditManager::getSymbol() const
+{
+	QString buffer;
+	return Symbol.Save(buffer);
+}
 
 //! Add symbol item.
 /*!
@@ -205,5 +216,19 @@ bool SymEditManager::getItemFill(int index) const
 int SymEditManager::selectItem(QPoint point) const
 {
 	return -1;	//##
+}
+
+//! Read symbol from clipboard.
+void SymEditManager::readClipboard()
+{
+	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
+		Symbol.Load(clipboard->text());
+}
+
+//! Write symbol to clipboard.
+void SymEditManager::writeClipboard() const
+{
+	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
+		clipboard->setText(getSymbol());
 }
 

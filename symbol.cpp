@@ -11,7 +11,7 @@
 	\param point		Item position.
 */
 SymEditSymbol::Item::Item(int operation, QPoint point)
-	: Operation(operation), Point(point), Fill(false)
+	: Operation(operation), Point(point), Fill(false), Align(9)
 {
 
 }
@@ -41,7 +41,7 @@ void SymEditSymbol::Load(const QString& buffer)
 			x = string.mid(1, comma - 1).toInt();
 			y = string.mid(comma + 1).toInt();
 		}
-		else
+		else	// single parameter
 			x = y = string.mid(1).toInt();
 		Item item(operation, QPoint(x, y));
 		Items.push_back(item);
@@ -51,14 +51,29 @@ void SymEditSymbol::Load(const QString& buffer)
 //! Save symbol to string.
 /*!
 	\param buffer		String buffer.
+	\return				Reference to buffer.
 */
-void SymEditSymbol::Save(QString& buffer) const
+QString& SymEditSymbol::Save(QString& buffer) const
 {
-	buffer.clear();
-	for ( const auto& item : Items )
+	auto appendvalue = [](QString& buffer, const QPoint& point, int count)
 	{
-		//##
+		QString value;
+		buffer.append(value.setNum(point.x()));
+		if ( count > 1 )
+			buffer.append(',').append(value.setNum(point.y()));
+		buffer.append(';');
+	};
+
+	buffer.clear();
+	for ( const auto& item : Items ) switch ( item.Operation )
+	{
+		case 'D':	appendvalue(buffer.append('D'), item.Point, 2); break;
+		case 'U':	appendvalue(buffer.append('U'), item.Point, 2); break;
+		case 'R':	appendvalue(buffer.append('R'), item.Point, 1); break;
 	}
+	if ( !buffer.isEmpty() && buffer.back() == ';' )
+		buffer.chop(1);
+	return buffer;
 }
 
 //! Add symbol item.
