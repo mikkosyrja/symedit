@@ -1,8 +1,17 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>clear.png</file>
-        <file>copy.png</file>
         <file>Editor.qml</file>
+        <file>image/rectangle_center.png</file>
+        <file>image/rectangle_corner.png</file>
+        <file>image/circle_corner.png</file>
+        <file>image/circle_center.png</file>
+        <file>image/circle_horizontal.png</file>
+        <file>image/circle_vertical.png</file>
+        <file>image/line_single.png</file>
+        <file>image/line_poly.png</file>
+        <file>image/clipboard_copy_icon&amp;48.png</file>
+        <file>image/clipboard_cut_icon&amp;48.png</file>
+        <file>image/clipboard_past_icon&amp;48.png</file>
     </qresource>
 </RCC>

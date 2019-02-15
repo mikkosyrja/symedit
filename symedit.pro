@@ -34,4 +34,4 @@ HEADERS += \
     symbol.h
 
 DISTFILES += \
-    README.md
+	README.md

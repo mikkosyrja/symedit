@@ -241,10 +241,153 @@ ApplicationWindow
 	{
 		RowLayout
 		{
-			anchors.fill: parent
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/clipboard_cut_icon&48.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
 
-			ToolButton { iconSource: "clear.png" }
-			ToolButton { iconSource: "copy.png" }
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/clipboard_copy_icon&48.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/clipboard_past_icon&48.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton { implicitWidth: 8 }
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/line_single.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/line_poly.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton { implicitWidth: 8 }
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/rectangle_corner.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/rectangle_center.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton { implicitWidth: 8 }
+			ToolButton
+			{
+				width: 32; height: 32
+				tooltip: qsTr("Circle Corners")	//%%
+				Image
+				{
+					source: "image/circle_corner.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/circle_center.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/circle_horizontal.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
+			ToolButton
+			{
+				width: 32; height: 32
+				Image
+				{
+					source: "image/circle_vertical.png"
+					anchors.fill: parent
+				}
+				onClicked:
+				{
+
+				}
+			}
 			Item { Layout.fillWidth: true }
 			CheckBox
 			{
