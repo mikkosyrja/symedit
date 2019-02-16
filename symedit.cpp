@@ -8,7 +8,7 @@
 //	settings functions
 //
 //! Constructor.
-SymEditSettings::SymEditSettings() : Fill(false), Align(9), Snap(5), Tool(1)
+SymEditSettings::SymEditSettings() : FillItem(false), Alignment(9), LineWidth(1), SnapGrid(5), Tool(1)
 {
 
 }
@@ -23,9 +23,10 @@ void SymEditSettings::Load()
 	Size.setWidth(settings.value("window/width", 500).toInt());
 	Size.setHeight(settings.value("window/height", 500).toInt());
 
-	Fill = settings.value("editor/fill", false).toBool();
-	Align = settings.value("editor/align", 9).toInt();
-	Snap = settings.value("editor/snap", 5).toInt();
+	FillItem = settings.value("editor/fill", false).toBool();
+	Alignment = settings.value("editor/align", 9).toInt();
+	LineWidth = settings.value("editor/width", 1).toInt();
+	SnapGrid = settings.value("editor/snap", 5).toInt();
 	Tool = settings.value("editor/tool", 1).toInt();
 }
 
@@ -39,9 +40,10 @@ void SymEditSettings::Save() const
 	settings.setValue("window/width", Size.width());
 	settings.setValue("window/height", Size.height());
 
-	settings.setValue("editor/fill", Fill);
-	settings.setValue("editor/align", Align);
-	settings.setValue("editor/snap", Snap);
+	settings.setValue("editor/fill", FillItem);
+	settings.setValue("editor/align", Alignment);
+	settings.setValue("editor/width", LineWidth);
+	settings.setValue("editor/snap", SnapGrid);
 	settings.setValue("editor/tool", Tool);
 }
 
@@ -102,9 +104,10 @@ QSize SymEditManager::getWindowSize() const
 /*!
 	\param value		Setting value.
 */
-void SymEditManager::setFill(bool value) { Settings.Fill = value; }
-void SymEditManager::setAlign(int value) { Settings.Align = value; }
-void SymEditManager::setSnap(int value) { Settings.Snap = value; }
+void SymEditManager::setFillItem(bool value) { Settings.FillItem = value; }
+void SymEditManager::setAlignment(int value) { Settings.Alignment = value; }
+void SymEditManager::setLineWidth(int value) { Settings.LineWidth = value; }
+void SymEditManager::setSnapGrid(int value) { Settings.SnapGrid = value; }
 void SymEditManager::setTool(int value) { Settings.Tool = value; }
 //@}
 
@@ -113,9 +116,10 @@ void SymEditManager::setTool(int value) { Settings.Tool = value; }
 /*!
 	\return				Setting value.
 */
-bool SymEditManager::getFill() const { return Settings.Fill; }
-int SymEditManager::getAlign() const { return Settings.Align; }
-int SymEditManager::getSnap() const { return Settings.Snap; }
+bool SymEditManager::getFillItem() const { return Settings.FillItem; }
+int SymEditManager::getAlignment() const { return Settings.Alignment; }
+int SymEditManager::getLineWidth() const { return Settings.LineWidth; }
+int SymEditManager::getSnapGrid() const { return Settings.SnapGrid; }
 int SymEditManager::getTool() const { return Settings.Tool; }
 //@}
 

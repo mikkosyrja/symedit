@@ -23,9 +23,10 @@ private:
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
-	bool Fill;								//!< Fill object.
-	int Align;								//!< Text alignment.
-	int Snap;								//!< Snap granularity.
+	bool FillItem;							//!< Fill object.
+	int Alignment;							//!< Text alignment.
+	int LineWidth;							//!< Line width.
+	int SnapGrid;							//!< Snap granularity.
 	int Tool;								//!< Current tool.
 };
 
@@ -46,15 +47,17 @@ public:
 	Q_INVOKABLE QPoint getWindowPos() const;
 	Q_INVOKABLE QSize getWindowSize() const;
 
-	Q_INVOKABLE void setFill(bool fill);
-	Q_INVOKABLE void setAlign(int align);
-	Q_INVOKABLE void setSnap(int snap);
+	Q_INVOKABLE void setFillItem(bool fill);
+	Q_INVOKABLE void setAlignment(int align);
+	Q_INVOKABLE void setLineWidth(int align);
+	Q_INVOKABLE void setSnapGrid(int snap);
 	Q_INVOKABLE void setTool(int tool);
 
-	Q_INVOKABLE bool getFill() const;
-	Q_INVOKABLE int getAlign() const;
+	Q_INVOKABLE bool getFillItem() const;
+	Q_INVOKABLE int getAlignment() const;
+	Q_INVOKABLE int getLineWidth() const;
+	Q_INVOKABLE int getSnapGrid() const;
 	Q_INVOKABLE int getTool() const;
-	Q_INVOKABLE int getSnap() const;
 
 	Q_INVOKABLE QString getSymbol() const;
 

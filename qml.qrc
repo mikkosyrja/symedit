@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Tool.qml</file>
         <file>Editor.qml</file>
         <file>image/rectangle_center.png</file>
         <file>image/rectangle_corner.png</file>
@@ -13,5 +14,12 @@
         <file>image/clipboard_copy_icon&amp;48.png</file>
         <file>image/clipboard_cut_icon&amp;48.png</file>
         <file>image/clipboard_past_icon&amp;48.png</file>
+        <file>image/folder_open_icon&amp;48.png</file>
+        <file>image/save_icon&amp;48.png</file>
+        <file>image/br_down_icon&amp;48.png</file>
+        <file>image/br_up_icon&amp;48.png</file>
+        <file>image/text.png</file>
+        <file>image/delete.png</file>
+        <file>Separator.qml</file>
     </qresource>
 </RCC>

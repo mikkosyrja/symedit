@@ -7,9 +7,10 @@ ApplicationWindow
 	property int mousex: 0
 	property int mousey: 0
 
-	property bool fill: false
-	property int align: 1
-	property int snap: 1
+	property bool fillitem: false
+	property int alignment: 1
+	property real linewidth: 1.2
+	property int snapgrid: 1
 	property int tool: 0
 
 	id: window
@@ -135,17 +136,24 @@ ApplicationWindow
 			{
 				text: qsTr("Line")	//%%
 				checkable : true
-				checked: (tool === Editor.Tool.Line)
-				onTriggered: { tool = Editor.Tool.Line }
+				checked: (tool === Editor.Tool.LineSingle)
+				onTriggered: { tool = Editor.Tool.LineSingle }
 			}
 			MenuItem
 			{
 				text: qsTr("Polyline")	//%%
 				checkable : true
-				checked: (tool === Editor.Tool.Polyline)
-				onTriggered: { tool = Editor.Tool.Polyline }
+				checked: (tool === Editor.Tool.LinePoly)
+				onTriggered: { tool = Editor.Tool.LinePoly }
 			}
 			MenuSeparator { }
+			MenuItem
+			{
+				text: qsTr("Rectangle Corner")	//%%
+				checkable : true
+				checked: (tool === Editor.Tool.RectangleCorner)
+				onTriggered: { tool = Editor.Tool.RectangleCorner }
+			}
 			MenuItem
 			{
 				text: qsTr("Rectangle Center")	//%%
@@ -153,14 +161,14 @@ ApplicationWindow
 				checked: (tool === Editor.Tool.RectangleCenter)
 				onTriggered: { tool = Editor.Tool.RectangleCenter }
 			}
+			MenuSeparator { }
 			MenuItem
 			{
-				text: qsTr("Rectangle Corners")	//%%
+				text: qsTr("Circle Corner")	//%%
 				checkable : true
-				checked: (tool === Editor.Tool.RectangleCorner)
-				onTriggered: { tool = Editor.Tool.RectangleCorner }
+				checked: (tool === Editor.Tool.CircleCorner)
+				onTriggered: { tool = Editor.Tool.CircleCorner }
 			}
-			MenuSeparator { }
 			MenuItem
 			{
 				text: qsTr("Circle Center")	//%%
@@ -181,13 +189,6 @@ ApplicationWindow
 				checkable : true
 				checked: (tool === Editor.Tool.CircleVertical)
 				onTriggered: { tool = Editor.Tool.CircleVertical }
-			}
-			MenuItem
-			{
-				text: qsTr("Circle Corners")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.CircleCorner)
-				onTriggered: { tool = Editor.Tool.CircleCorner }
 			}
 			MenuSeparator { }
 			MenuItem
@@ -239,206 +240,209 @@ ApplicationWindow
 
 	toolBar: ToolBar
 	{
-		RowLayout
+		Column
 		{
-			ToolButton
+			RowLayout
 			{
-				width: 32; height: 32
-				Image
+				height: 32
+				ToolButton
 				{
-					source: "image/clipboard_cut_icon&48.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/folder_open_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton
 				{
-					source: "image/clipboard_copy_icon&48.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/save_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton { implicitWidth: 8 }
+				ToolButton
 				{
-					source: "image/clipboard_past_icon&48.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/clipboard_cut_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton { implicitWidth: 8 }
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton
 				{
-					source: "image/line_single.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/clipboard_copy_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton
 				{
-					source: "image/line_poly.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/clipboard_past_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton { implicitWidth: 8 }
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton
 				{
-					source: "image/rectangle_corner.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/br_up_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				ToolButton
 				{
-					source: "image/rectangle_center.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/br_down_icon&48.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
-			}
-			ToolButton { implicitWidth: 8 }
-			ToolButton
-			{
-				width: 32; height: 32
-				tooltip: qsTr("Circle Corners")	//%%
-				Image
+				ToolButton
 				{
-					source: "image/circle_corner.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
+					implicitHeight: 32; implicitWidth: 32
+					Image
+					{
+						source: "image/delete.png"
+						anchors { fill: parent; margins: 4 }
+					}
+					onClicked:
+					{
 
+					}
 				}
+				Separator { }
+				Tool { tool: Editor.Tool.LineSingle; image: "image/line_single.png" }
+				Tool { tool: Editor.Tool.LinePoly; image: "image/line_poly.png" }
+				Separator { }
+				Tool { tool: Editor.Tool.RectangleCorner; image: "image/rectangle_corner.png" }
+				Tool { tool: Editor.Tool.RectangleCenter; image: "image/rectangle_center.png" }
+				Separator { }
+				Tool { tool: Editor.Tool.CircleCorner; image: "image/circle_corner.png" }
+				Tool { tool: Editor.Tool.CircleCenter; image: "image/circle_center.png" }
+				Tool { tool: Editor.Tool.CircleHorizontal; image: "image/circle_horizontal.png" }
+				Tool { tool: Editor.Tool.CircleVertical; image: "image/circle_vertical.png" }
+				Separator { }
+				Tool { tool: Editor.Tool.Text; image: "image/text.png" }
 			}
-			ToolButton
+			RowLayout
 			{
-				width: 32; height: 32
-				Image
+				height: 32
+				Item { Layout.fillWidth: true }
+				CheckBox
 				{
-					source: "image/circle_center.png"
-					anchors.fill: parent
+					id: fillcheck
+					checked: fillitem
+					text: qsTr("Fill")	//%%
+					onClicked: { fillitem = !fillitem }
 				}
-				onClicked:
+				Separator { }
+				Label { text: qsTr("Snap") }	//%%
+				ComboBox
 				{
-
+					id: snaplist
+					model: [ 1, 2, 5, 10 ]
+					onCurrentIndexChanged:
+					{
+						if ( currentIndex == 0 ) { snapgrid = 1 }
+						else if ( currentIndex == 1 ) { snapgrid = 2 }
+						else if ( currentIndex == 2 ) { snapgrid = 5 }
+						else if ( currentIndex == 3 ) { snapgrid = 10 }
+					}
+					function setSnap()
+					{
+						if ( snapgrid == 1 ) { currentIndex = 0 }
+						else if ( snapgrid == 2 ) { currentIndex = 1 }
+						else if ( snapgrid == 10 ) { currentIndex = 3 }
+						else { currentIndex = 2 }	// default 5
+					}
 				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
+				Separator { }
+				Label { text: qsTr("Line width") }	//%%
+				ComboBox
 				{
-					source: "image/circle_horizontal.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
-
-				}
-			}
-			ToolButton
-			{
-				width: 32; height: 32
-				Image
-				{
-					source: "image/circle_vertical.png"
-					anchors.fill: parent
-				}
-				onClicked:
-				{
-
-				}
-			}
-			Item { Layout.fillWidth: true }
-			CheckBox
-			{
-				id: fillcheck
-				checked: fill
-				text: qsTr("Fill")	//%%
-				onClicked: { fill = !fill }
-			}
-			Item { Layout.fillWidth: true }
-			Label { text: qsTr("Alignment") }	//%%
-			ComboBox
-			{
-				id: alignlist
-				model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-				onCurrentIndexChanged:
-				{
+					id: widthlist
+					model: [ 1, 2 ]
 /*
-					if ( currentIndex == 0 ) { snap = 1 }
-					else if ( currentIndex == 1 ) { snap = 2 }
-					else if ( currentIndex == 2 ) { snap = 5 }
-					else if ( currentIndex == 3 ) { snap = 10 }
+					onCurrentIndexChanged:
+					{
+						if ( currentIndex == 0 ) { snap = 1 }
+						else if ( currentIndex == 1 ) { snap = 2 }
+						else if ( currentIndex == 2 ) { snap = 5 }
+						else if ( currentIndex == 3 ) { snap = 10 }
+					}
+					function setSnap()
+					{
+						if ( snap == 1 ) { currentIndex = 0 }
+						else if ( snap == 2 ) { currentIndex = 1 }
+						else if ( snap == 10 ) { currentIndex = 3 }
+						else { currentIndex = 2 }	// default 5
+					}
 */
 				}
-				function setAlign()
+				Separator { }
+				Label { text: qsTr("Alignment") }	//%%
+				ComboBox
 				{
+					id: alignlist
+					model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+					onCurrentIndexChanged:
+					{
 /*
-					if ( snap == 1 ) { currentIndex = 0 }
-					else if ( snap == 2 ) { currentIndex = 1 }
-					else if ( snap == 10 ) { currentIndex = 3 }
-					else { currentIndex = 2 }	// default 5
+						if ( currentIndex == 0 ) { snap = 1 }
+						else if ( currentIndex == 1 ) { snap = 2 }
+						else if ( currentIndex == 2 ) { snap = 5 }
+						else if ( currentIndex == 3 ) { snap = 10 }
 */
-				}
-			}
-			Label { text: qsTr("Snap") }	//%%
-			ComboBox
-			{
-				id: snaplist
-				model: [ 1, 2, 5, 10 ]
-				onCurrentIndexChanged:
-				{
-					if ( currentIndex == 0 ) { snap = 1 }
-					else if ( currentIndex == 1 ) { snap = 2 }
-					else if ( currentIndex == 2 ) { snap = 5 }
-					else if ( currentIndex == 3 ) { snap = 10 }
-				}
-				function setSnap()
-				{
-					if ( snap == 1 ) { currentIndex = 0 }
-					else if ( snap == 2 ) { currentIndex = 1 }
-					else if ( snap == 10 ) { currentIndex = 3 }
-					else { currentIndex = 2 }	// default 5
+					}
+					function setAlign()
+					{
+/*
+						if ( snap == 1 ) { currentIndex = 0 }
+						else if ( snap == 2 ) { currentIndex = 1 }
+						else if ( snap == 10 ) { currentIndex = 3 }
+						else { currentIndex = 2 }	// default 5
+*/
+					}
 				}
 			}
 		}
@@ -463,9 +467,10 @@ ApplicationWindow
 	onWidthChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 	onHeightChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 
-	onFillChanged: { manager.setFill(fill); }
-	onAlignChanged: { manager.setAlign(align); }
-	onSnapChanged: { manager.setSnap(snap); }
+	onFillitemChanged: { manager.setFillItem(fillitem); }
+	onAlignmentChanged: { manager.setAlignment(alignment); }
+	onLinewidthChanged: { manager.setLineWidth(linewidth * 10); }
+	onSnapgridChanged: { manager.setSnapGrid(snapgrid); }
 	onToolChanged: { manager.setTool(tool); }
 
 	Component.onCompleted:
@@ -475,9 +480,10 @@ ApplicationWindow
 		width = manager.getWindowSize().width
 		height = manager.getWindowSize().height
 
-		fill = manager.getFill()
-		align = manager.getAlign()
-		snap = manager.getSnap()
+		fillitem = manager.getFillItem()
+		alignment = manager.getAlignment()
+		linewidth = manager.getLineWidth() / 10
+		snapgrid = manager.getSnapGrid()
 		tool = manager.getTool()
 
 		alignlist.setAlign()

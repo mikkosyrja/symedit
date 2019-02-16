@@ -8,4 +8,5 @@ krita:
 	icons:
 		48x48
 		transparent
-		line width 5pxkrita
+		line width: 6px
+		brush: basic-1

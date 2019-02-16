@@ -5,8 +5,8 @@ Rectangle
 	enum Tool
 	{
 		Select = 1,
-		Line = 11,
-		Polyline = 12,
+		LineSingle = 11,
+		LinePoly = 12,
 		RectangleCenter = 21,
 		RectangleCorner = 22,
 		CircleCenter = 31,
@@ -48,8 +48,8 @@ Rectangle
 
 		onPositionChanged:
 		{
-			mousex = Math.round((mouse.x - canvas.x) / scalexy / snap) * snap - max
-			mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snap) * snap
+			mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max
+			mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid
 
 			if ( mouse.x < canvas.x )
 				mousex = -max
@@ -66,7 +66,7 @@ Rectangle
 
 		onPressed:
 		{
-			if ( tool === Editor.Tool.Polyline )
+			if ( tool === Editor.Tool.LinePoly )
 			{
 				startx = endx
 				starty = endy
@@ -153,7 +153,7 @@ Rectangle
 
 		function paintsymbol(context)
 		{
-			context.lineWidth = 1.2
+			context.lineWidth = linewidth
 
 			var previous = Qt.point(0, 0)
 			var index, count = manager.getItemCount()
@@ -166,7 +166,7 @@ Rectangle
 				{
 					previous = position
 				}
-				else if ( operation === Editor.Operation.Line )
+				else if ( operation === Editor.Operation.LineSingle )
 				{
 					paintline(context, previous, position)
 					previous = position
@@ -200,7 +200,7 @@ Rectangle
 				var end = Qt.point(mousex, mousey)
 				if ( tool > 10 && tool < 20 )	// line
 				{
-					if ( tool === Editor.Tool.Line )
+					if ( tool === Editor.Tool.LineSingle )
 						paintline(context, start, end)
 					else if ( tool === Editor.Tool.Polyline )
 					{
@@ -219,7 +219,7 @@ Rectangle
 					else if ( tool === Editor.Tool.RectangleCorner ) { }
 					context.rect((cornerx + max) * scalexy, (max - cornery) * scalexy,
 						deltax * scalexy, deltay * scalexy)
-					if ( fill )
+					if ( fillitem )
 						context.fill()
 					else
 						context.stroke()
@@ -254,7 +254,7 @@ Rectangle
 					if ( radius )
 					{
 						var center = Qt.point(centerx, centery)
-						paintcircle(context, center, radius, fill)
+						paintcircle(context, center, radius, fillitem)
 					}
 				}
 				else if ( tool > 40 && tool < 50 )	// text
