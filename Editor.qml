@@ -28,9 +28,11 @@ Rectangle
 	property int units: 100
 	property int max: units / 2
 	property int grid: 10
+	property int offset: 10
+	property int total: units + offset * 2
 
 	property bool horizontal: (height < width)
-	property real scalexy: (horizontal ? (height - margin * 2) / units : (width - margin * 2) / units)
+	property real scalexy: (horizontal ? (height - margin * 2) / total : (width - margin * 2) / total)
 
 	property int startx: 0
 	property int starty: 0
@@ -47,17 +49,17 @@ Rectangle
 
 		onPositionChanged:
 		{
-			mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max
-			mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid
+			mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offset
+			mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offset
 
-			if ( mouse.x < canvas.x )
+			if ( mousex < -max)
 				mousex = -max
-			else if ( mouse.x > canvas.x + canvas.width )
+			else if ( mousex > max )
 				mousex = max
-			if ( mouse.y < canvas.y )
-				mousey = max
-			else if ( mouse.y >= canvas.y + canvas.height )
+			if ( mousey < -max )
 				mousey = -max
+			else if ( mousey > max )
+				mousey = max
 
 			if ( down )
 				canvas.requestPaint()
@@ -88,8 +90,8 @@ Rectangle
 			{
 				endx = mousex
 				endy = mousey
-				down = false
 			}
+			down = false
 		}
 	}
 
@@ -97,23 +99,30 @@ Rectangle
 	{
 		id: canvas
 
-		width: units * scalexy; height:  units * scalexy
+		width: total * scalexy; height: total * scalexy
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 
-//		clip: false
-
 		function paintline(context, start, end)
 		{
-			context.beginPath().moveTo((start.x + max) * scalexy, (max - start.y) * scalexy)
-			context.lineTo((end.x + max) * scalexy, (max - end.y) * scalexy)
-			context.closePath().stroke()
+			context.beginPath().moveTo((start.x + max + offset) * scalexy, (max - start.y + offset) * scalexy)
+			context.lineTo((end.x + max + offset) * scalexy, (max - end.y + offset) * scalexy).stroke()
+		}
+
+		function paintrect(context, start, size, fill)
+		{
+			context.beginPath().rect((start.x + max + offset) * scalexy, (max - start.y + offset) * scalexy,
+				size.width * scalexy, size.height * scalexy)
+			if ( fill )
+				context.fill()
+			else
+				context.stroke()
 		}
 
 		function paintcircle(context, center, radius, fill)
 		{
-			context.ellipse((center.x + max - radius) * scalexy, (max - center.y - radius) * scalexy,
-				radius * 2 * scalexy, radius * 2 * scalexy)
+			context.beginPath().ellipse((center.x + max - radius + offset) * scalexy,
+				(max - center.y - radius + offset) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
 			if ( fill )
 				context.fill()
 			else
@@ -126,28 +135,19 @@ Rectangle
 			context.strokeStyle = "gray"
 			context.fillStyle = "white"
 
-			context.fillRect(0, 0, units * scalexy, units * scalexy)
+			paintrect(context, Qt.point(-max - offset, max + offset), Qt.size(total, total), true)
 
 			var row, col;
-			for ( row = 0; row <= units; row += grid )
-			{
-				context.beginPath().moveTo(0, row * scalexy)
-				context.lineTo(units * scalexy, row * scalexy)
-				context.closePath().stroke()
-			}
-
-			for ( col = 0; col <= units; col += grid )
-			{
-				context.beginPath().moveTo(col * scalexy, 0)
-				context.lineTo(col * scalexy, units * scalexy)
-				context.closePath().stroke()
-			}
+			for ( row = -max; row <= max; row += grid )
+				paintline(context, Qt.point(-max, row), Qt.point(max, row))
+			for ( col = -max; col <= max; col += grid )
+				paintline(context, Qt.point(col, -max), Qt.point(col, max))
 
 			context.lineWidth = 1
 			paintline(context, Qt.point(0, -max), Qt.point(0, max))
 			paintline(context, Qt.point(-max, 0), Qt.point(max, 0))
 
-			context.strokeRect(0, 0, units * scalexy, units * scalexy)
+			paintrect(context, Qt.point(-max, max), Qt.size(units, units), false)
 		}
 
 		function paintsymbol(context)
@@ -165,7 +165,7 @@ Rectangle
 				{
 					previous = position
 				}
-				else if ( operation === Editor.Operation.LineSingle )
+				else if ( operation === Editor.Operation.Line )
 				{
 					paintline(context, previous, position)
 					previous = position
@@ -215,13 +215,7 @@ Rectangle
 						deltax *= 2
 						deltay *= 2
 					}
-					else if ( tool === Editor.Tool.RectangleCorner ) { }
-					context.rect((cornerx + max) * scalexy, (max - cornery) * scalexy,
-						deltax * scalexy, deltay * scalexy)
-					if ( fillitem )
-						context.fill()
-					else
-						context.stroke()
+					paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), fillitem)
 				}
 				else if ( tool > 30 && tool < 40 )	// circle
 				{
