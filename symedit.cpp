@@ -158,13 +158,10 @@ void SymEditManager::addText(int operation, QPoint point, QString text, int alig
 	Symbol.AddItem(operation, point, text, align);
 }
 
-//! Remove item.
-/*!
-	\param index		Item index.
-*/
-void SymEditManager::removeItem(int index)
+//! Remove active item.
+void SymEditManager::removeItem()
 {
-	Symbol.RemoveItem(index);
+	Symbol.RemoveItem(Symbol.GetActiveIndex());
 }
 
 //! Get item count.
@@ -219,7 +216,13 @@ bool SymEditManager::getItemFill(int index) const
 //
 int SymEditManager::selectItem(QPoint point) const
 {
-	return -1;	//##
+	return Symbol.SelectItem(point);
+}
+
+//
+int SymEditManager::getActiveIndex() const
+{
+	return Symbol.GetActiveIndex();
 }
 
 //! Read symbol from clipboard.

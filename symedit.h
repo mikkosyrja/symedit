@@ -63,7 +63,7 @@ public:
 
 	Q_INVOKABLE void addItem(int operation, QPoint point, bool fill);
 	Q_INVOKABLE void addText(int operation, QPoint point, QString text, int align);
-	Q_INVOKABLE void removeItem(int index);
+	Q_INVOKABLE void removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
 	Q_INVOKABLE int getItemOperation(int index) const;
@@ -72,6 +72,7 @@ public:
 	Q_INVOKABLE bool getItemFill(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
+	Q_INVOKABLE int getActiveIndex() const;
 
 	Q_INVOKABLE void readClipboard();
 	Q_INVOKABLE void writeClipboard() const;

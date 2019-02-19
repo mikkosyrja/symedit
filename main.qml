@@ -13,6 +13,8 @@ ApplicationWindow
 	property int snapgrid: 1
 	property int tool: 0
 
+	property string symbol
+
 	id: window
 	visible: false
 	title: qsTr("Symbol editor")	//%%
@@ -159,7 +161,7 @@ ApplicationWindow
 				{
 					id: widthlist
 					model: [ 1, 2, 3, 4, 5 ]
-					onCurrentIndexChanged: { linewidth = currentIndex + 1 }
+					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
 					function setWidth() { currentIndex = linewidth - 1 }
 				}
 				BarSeparator { }
@@ -185,7 +187,7 @@ ApplicationWindow
 			Label { Layout.minimumWidth: 40; text: " X: " + mousex }
 			Label {	Layout.minimumWidth: 40; text: " Y: " + mousey }
 			Item { Layout.fillWidth: true }
-			Label {	Layout.minimumWidth: 40; text: manager.getSymbol() }
+			Label {	Layout.minimumWidth: 40; text: symbol }
 		}
 	}
 
@@ -216,6 +218,8 @@ ApplicationWindow
 		snaplist.setSnap()
 		widthlist.setWidth()
 		alignlist.setAlign()
+
+		symbol = manager.getSymbol()
 
 		visible = true
 		manager.setInitialized()
@@ -258,7 +262,9 @@ ApplicationWindow
 
 	function remove()
 	{
-
+		manager.removeItem()
+		symbol = manager.getSymbol()
+		editor.update()
 	}
 
 	function help()

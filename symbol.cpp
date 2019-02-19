@@ -1,5 +1,7 @@
 #include <QStringList>
 
+#include <math.h>
+
 #include "symbol.h"
 
 //
@@ -46,6 +48,7 @@ void SymEditSymbol::Load(const QString& buffer)
 		Item item(operation, QPoint(x, y));
 		Items.push_back(item);
 	}
+	ActiveIndex = static_cast<int>(Items.size()) - 1;
 }
 
 //! Save symbol to string.
@@ -87,6 +90,7 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, bool fi
 {
 	Item item(operation, point);
 	item.Fill = fill;
+	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
@@ -104,6 +108,7 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QString
 	Item item(operation, point);
 	item.Text = text;
 	item.Align = align;
+	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
@@ -115,14 +120,51 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QString
 void SymEditSymbol::RemoveItem(int index)
 {
 	if ( static_cast<size_t>(index) < Items.size() )
+	{
 		Items.erase(Items.begin() + index);
+		ActiveIndex = index - 1;
+	}
 }
 
 //
 int SymEditSymbol::SelectItem(QPoint point) const
 {
-	ActiveIndex = -1;	//##
-	return ActiveIndex;
+	ActiveIndex = -1;
+	int index = 0;
+	QPoint previous(0, 0);
+	double minimum = 100.0;
+	for ( const auto& item : Items )
+	{
+		switch ( item.Operation )
+		{
+			case 'D':	// line
+			{
+				//##
+				break;
+			}
+			case 'R':	// circle
+			{
+				double dx = point.x() - previous.x();
+				double dy = point.y() - previous.y();
+				double distance = sqrt(dx * dx + dy * dy);
+				distance = abs(distance - item.Point.x());
+				if ( ActiveIndex < 0 || distance < minimum )
+				{
+					ActiveIndex = index;
+					minimum = distance;
+				}
+				break;
+			}
+		}
+		++index;
+	}
+	return static_cast<int>(ActiveIndex);
+}
+
+//
+int SymEditSymbol::GetActiveIndex() const
+{
+	return static_cast<int>(ActiveIndex);
 }
 
 //! Get item count.

@@ -24,13 +24,13 @@ Rectangle
 		Radius = 82		// R
 	}
 
-	property int margin: 20
 	property int units: 100
 	property int max: units / 2
 	property int grid: 10
 	property int offset: 10
 	property int total: units + offset * 2
 
+	property int margin: 20
 	property bool horizontal: (height < width)
 	property real scalexy: (horizontal ? (height - margin * 2) / total : (width - margin * 2) / total)
 
@@ -84,12 +84,19 @@ Rectangle
 		{
 			if ( tool === Editor.Tool.Select )
 			{
-				var index = manager.selectItem(Qt.point(mousex, mousey))
+				manager.selectItem(Qt.point(mousex, mousey))
+				canvas.requestPaint()
 			}
 			else
 			{
 				endx = mousex
 				endy = mousey
+				if ( tool === Editor.Tool.LineSingle )
+				{
+					manager.addItem(Editor.Operation.Move, Qt.point(startx, starty), false)
+					manager.addItem(Editor.Operation.Line, Qt.point(mousex, mousey), false)
+					symbol = manager.getSymbol()
+				}
 			}
 			down = false
 		}
@@ -155,9 +162,19 @@ Rectangle
 			context.lineWidth = linewidth
 
 			var previous = Qt.point(0, 0)
+			var active = manager.getActiveIndex();
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
 			{
+				if ( index === active )
+				{
+					context.strokeStyle = "red"
+				}
+				else
+				{
+					context.strokeStyle = "black"
+				}
+
 				var operation = manager.getItemOperation(index)
 				var position = manager.getItemPoint(index)
 				var fill = manager.getItemFill(index)
@@ -253,5 +270,10 @@ Rectangle
 				}
 			}
 		}
+	}
+
+	function update()
+	{
+		canvas.requestPaint()
 	}
 }

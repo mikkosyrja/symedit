@@ -30,7 +30,9 @@ public:
 	Item& AddItem(int operation, QPoint point, bool fill);
 	Item& AddItem(int operation, QPoint point, QString text, int align);
 	void RemoveItem(int index);
+
 	int SelectItem(QPoint point) const;
+	int GetActiveIndex() const;
 
 	int GetItemCount() const;
 	const Item& GetItem(int index) const;
