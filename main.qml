@@ -9,7 +9,7 @@ ApplicationWindow
 
 	property bool fillitem: false
 	property int alignment: 1
-	property real linewidth: 1.2
+	property real linewidth: 1
 	property int snapgrid: 1
 	property int tool: 0
 
@@ -22,24 +22,8 @@ ApplicationWindow
 		Menu
 		{
 			title: qsTr("File")	//%%
-			MenuItem
-			{
-				text: qsTr("Open")	//%%
-				shortcut: "Ctrl+O"
-				onTriggered:
-				{
-					//##
-				}
-			}
-			MenuItem
-			{
-				text: qsTr("Save")	//%%
-				shortcut: "Ctrl+S"
-				onTriggered:
-				{
-					//##
-				}
-			}
+			MenuItem { text: qsTr("Open"); shortcut: "Ctrl+O"; onTriggered: open() }	//%%
+			MenuItem { text: qsTr("Save"); shortcut: "Ctrl+S"; onTriggered: save() }	//%%
 			MenuSeparator { }
 			MenuItem
 			{
@@ -54,165 +38,39 @@ ApplicationWindow
 				onTriggered: { manager.writeClipboard() }
 			}
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Exit")	//%%
-				shortcut: "F4"
-				onTriggered: { Qt.quit() }
-			}
+			MenuItem { text: qsTr("Exit"); shortcut: "F4"; onTriggered: Qt.quit() }		//%%
 		}
 		Menu
 		{
 			title: qsTr("Edit")	//%%
-			MenuItem
-			{
-				text: qsTr("Cut")	//%%
-				shortcut: "Ctrl+X"
-				onTriggered:
-				{
-					//##
-				}
-			}
-			MenuItem
-			{
-				text: qsTr("Copy")	//%%
-				shortcut: "Ctrl+C"
-				onTriggered:
-				{
-					//##
-				}
-			}
-			MenuItem
-			{
-				text: qsTr("Paste")	//%%
-				shortcut: "Ctrl+V"
-				onTriggered:
-				{
-					//##
-				}
-			}
+			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cut() }		//%%
+			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copy() }	//%%
+			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: paste() }	//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Up")	//%%
-				shortcut: "Alt+Up"
-				onTriggered:
-				{
-					//##
-				}
-			}
-			MenuItem
-			{
-				text: qsTr("Down")	//%%
-				shortcut: "Alt+Down"
-				onTriggered:
-				{
-					//##
-				}
-			}
+			MenuItem { text: qsTr("Raise"); shortcut: "Alt+Up"; onTriggered: raise() }		//%%
+			MenuItem { text: qsTr("Lower"); shortcut: "Alt+Down"; onTriggered: lower() }	//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Delete")	//%%
-				shortcut: "Delete"
-				onTriggered:
-				{
-					//##
-				}
-			}
+			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: remove() }	//%%
 		}
 		Menu
 		{
 			title: qsTr("Tool")	//%%
-			MenuItem
-			{
-				text: qsTr("Select")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.Select)
-				onTriggered: { tool = Editor.Tool.Select }
-			}
+			MenuTool { text: qsTr("Select"); tool: Editor.Tool.Select }		//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Line")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.LineSingle)
-				onTriggered: { tool = Editor.Tool.LineSingle }
-			}
-			MenuItem
-			{
-				text: qsTr("Polyline")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.LinePoly)
-				onTriggered: { tool = Editor.Tool.LinePoly }
-			}
+			MenuTool { text: qsTr("Line"); tool: Editor.Tool.LineSingle }		//%%
+			MenuTool { text: qsTr("Polyline"); tool: Editor.Tool.LinePoly }		//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Rectangle Corner")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.RectangleCorner)
-				onTriggered: { tool = Editor.Tool.RectangleCorner }
-			}
-			MenuItem
-			{
-				text: qsTr("Rectangle Center")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.RectangleCenter)
-				onTriggered: { tool = Editor.Tool.RectangleCenter }
-			}
+			MenuTool { text: qsTr("Rectangle Corner"); tool: Editor.Tool.RectangleCorner }	//%%
+			MenuTool { text: qsTr("Rectangle Center"); tool: Editor.Tool.RectangleCenter }	//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Circle Corner")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.CircleCorner)
-				onTriggered: { tool = Editor.Tool.CircleCorner }
-			}
-			MenuItem
-			{
-				text: qsTr("Circle Center")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.CircleCenter)
-				onTriggered: { tool = Editor.Tool.CircleCenter }
-			}
-			MenuItem
-			{
-				text: qsTr("Circle Horizontal")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.CircleHorizontal)
-				onTriggered: { tool = Editor.Tool.CircleHorizontal }
-			}
-			MenuItem
-			{
-				text: qsTr("Circle Vertical")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.CircleVertical)
-				onTriggered: { tool = Editor.Tool.CircleVertical }
-			}
+			MenuTool { text: qsTr("Circle Corner"); tool: Editor.Tool.CircleCorner }	//%%
+			MenuTool { text: qsTr("Circle Radius"); tool: Editor.Tool.CircleRadius }	//%%
+			MenuTool { text: qsTr("Circle Center"); tool: Editor.Tool.CircleCenter }	//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Semicircle")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.ArcSemicircle)
-				onTriggered: { tool = Editor.Tool.ArcSemicircle }
-			}
-			MenuItem
-			{
-				text: qsTr("Quarter circle")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.ArcQuarter)
-				onTriggered: { tool = Editor.Tool.ArcQuarter }
-			}
+			MenuTool { text: qsTr("Semicircle"); tool: Editor.Tool.ArcSemicircle }		//%%
+			MenuTool { text: qsTr("Quarter circle"); tool: Editor.Tool.ArcQuarter }		//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("Text")	//%%
-				checkable : true
-				checked: (tool === Editor.Tool.Text)
-				onTriggered: { tool = Editor.Tool.Text }
-			}
+			MenuTool { text: qsTr("Text"); tool: Editor.Tool.Text }		//%%
 		}
 		Menu
 		{
@@ -221,19 +79,13 @@ ApplicationWindow
 			{
 				text: qsTr("Help")	//%%
 				shortcut: "F1"
-				onTriggered:
-				{
-					//##
-				}
+				onTriggered: { help() }
 			}
 			MenuSeparator { }
 			MenuItem
 			{
 				text: qsTr("About")	//%%
-				onTriggered:
-				{
-					//##
-				}
+				onTriggered: { about() }
 			}
 		}
 	}
@@ -245,124 +97,29 @@ ApplicationWindow
 			RowLayout
 			{
 				height: 32
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/folder_open_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/save_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton { implicitWidth: 8 }
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/clipboard_cut_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/clipboard_copy_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/clipboard_past_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/br_up_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/br_down_icon&48.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				ToolButton
-				{
-					implicitHeight: 32; implicitWidth: 32
-					Image
-					{
-						source: "image/delete.png"
-						anchors { fill: parent; margins: 4 }
-					}
-					onClicked:
-					{
-
-					}
-				}
-				Separator { }
-				Tool { tool: Editor.Tool.LineSingle; image: "image/line_single.png" }
-				Tool { tool: Editor.Tool.LinePoly; image: "image/line_poly.png" }
-				Separator { }
-				Tool { tool: Editor.Tool.RectangleCorner; image: "image/rectangle_corner.png" }
-				Tool { tool: Editor.Tool.RectangleCenter; image: "image/rectangle_center.png" }
-				Separator { }
-				Tool { tool: Editor.Tool.CircleCorner; image: "image/circle_corner.png" }
-				Tool { tool: Editor.Tool.CircleCenter; image: "image/circle_center.png" }
-				Tool { tool: Editor.Tool.CircleHorizontal; image: "image/circle_horizontal.png" }
-				Tool { tool: Editor.Tool.CircleVertical; image: "image/circle_vertical.png" }
-				Separator { }
-				Tool { tool: Editor.Tool.Text; image: "image/text.png" }
+				BarTool { image: "image/folder_open_icon&48.png"; onClicked: open() }
+				BarTool { image: "image/save_icon&48.png"; onClicked: save() }
+				BarSeparator { }
+				BarTool { image: "image/clipboard_cut_icon&48.png"; onClicked: cut() }
+				BarTool { image: "image/clipboard_copy_icon&48.png"; onClicked: copy() }
+				BarTool { image: "image/clipboard_past_icon&48.png"; onClicked: paste() }
+				BarTool { image: "image/br_up_icon&48.png"; onClicked: raise() }
+				BarTool { image: "image/br_down_icon&48.png"; onClicked: lower() }
+				BarTool { image: "image/delete.png"; onClicked: remove() }
+				BarSeparator { }
+				BarTool { image: "image/cursor_arrow_icon&48.png"; tool: Editor.Tool.Select }
+				BarSeparator { }
+				BarTool { image: "image/line_single.png"; tool: Editor.Tool.LineSingle }
+				BarTool { image: "image/line_poly.png"; tool: Editor.Tool.LinePoly }
+				BarSeparator { }
+				BarTool { image: "image/rectangle_corner.png"; tool: Editor.Tool.RectangleCorner }
+				BarTool { image: "image/rectangle_center.png"; tool: Editor.Tool.RectangleCenter }
+				BarSeparator { }
+				BarTool { image: "image/circle_corner.png"; tool: Editor.Tool.CircleCorner }
+				BarTool { image: "image/circle_radius.png"; tool: Editor.Tool.CircleRadius }
+				BarTool { image: "image/circle_center.png"; tool: Editor.Tool.CircleCenter }
+				BarSeparator { }
+				BarTool { image: "image/text.png"; tool: Editor.Tool.Text }
 			}
 			RowLayout
 			{
@@ -375,7 +132,7 @@ ApplicationWindow
 					text: qsTr("Fill")	//%%
 					onClicked: { fillitem = !fillitem }
 				}
-				Separator { }
+				BarSeparator { }
 				Label { text: qsTr("Snap") }	//%%
 				ComboBox
 				{
@@ -396,53 +153,23 @@ ApplicationWindow
 						else { currentIndex = 2 }	// default 5
 					}
 				}
-				Separator { }
+				BarSeparator { }
 				Label { text: qsTr("Line width") }	//%%
 				ComboBox
 				{
 					id: widthlist
-					model: [ 1, 2 ]
-/*
-					onCurrentIndexChanged:
-					{
-						if ( currentIndex == 0 ) { snap = 1 }
-						else if ( currentIndex == 1 ) { snap = 2 }
-						else if ( currentIndex == 2 ) { snap = 5 }
-						else if ( currentIndex == 3 ) { snap = 10 }
-					}
-					function setSnap()
-					{
-						if ( snap == 1 ) { currentIndex = 0 }
-						else if ( snap == 2 ) { currentIndex = 1 }
-						else if ( snap == 10 ) { currentIndex = 3 }
-						else { currentIndex = 2 }	// default 5
-					}
-*/
+					model: [ 1, 2, 3, 4, 5 ]
+					onCurrentIndexChanged: { linewidth = currentIndex + 1 }
+					function setWidth() { currentIndex = linewidth - 1 }
 				}
-				Separator { }
+				BarSeparator { }
 				Label { text: qsTr("Alignment") }	//%%
 				ComboBox
 				{
 					id: alignlist
 					model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-					onCurrentIndexChanged:
-					{
-/*
-						if ( currentIndex == 0 ) { snap = 1 }
-						else if ( currentIndex == 1 ) { snap = 2 }
-						else if ( currentIndex == 2 ) { snap = 5 }
-						else if ( currentIndex == 3 ) { snap = 10 }
-*/
-					}
-					function setAlign()
-					{
-/*
-						if ( snap == 1 ) { currentIndex = 0 }
-						else if ( snap == 2 ) { currentIndex = 1 }
-						else if ( snap == 10 ) { currentIndex = 3 }
-						else { currentIndex = 2 }	// default 5
-*/
-					}
+					onCurrentIndexChanged: { alignment = currentIndex + 1 }
+					function setAlign() { currentIndex = alignment - 1 }
 				}
 			}
 		}
@@ -469,7 +196,7 @@ ApplicationWindow
 
 	onFillitemChanged: { manager.setFillItem(fillitem); }
 	onAlignmentChanged: { manager.setAlignment(alignment); }
-	onLinewidthChanged: { manager.setLineWidth(linewidth * 10); }
+	onLinewidthChanged: { manager.setLineWidth(linewidth); }
 	onSnapgridChanged: { manager.setSnapGrid(snapgrid); }
 	onToolChanged: { manager.setTool(tool); }
 
@@ -482,14 +209,65 @@ ApplicationWindow
 
 		fillitem = manager.getFillItem()
 		alignment = manager.getAlignment()
-		linewidth = manager.getLineWidth() / 10
+		linewidth = manager.getLineWidth()
 		snapgrid = manager.getSnapGrid()
 		tool = manager.getTool()
 
-		alignlist.setAlign()
 		snaplist.setSnap()
+		widthlist.setWidth()
+		alignlist.setAlign()
 
 		visible = true
 		manager.setInitialized()
+	}
+
+	function open()
+	{
+
+	}
+
+	function save()
+	{
+
+	}
+
+	function cut()
+	{
+
+	}
+
+	function copy()
+	{
+
+	}
+
+	function paste()
+	{
+
+	}
+
+	function raise()
+	{
+
+	}
+
+	function lower()
+	{
+
+	}
+
+	function remove()
+	{
+
+	}
+
+	function help()
+	{
+
+	}
+
+	function about()
+	{
+
 	}
 }

@@ -9,10 +9,9 @@ Rectangle
 		LinePoly = 12,
 		RectangleCenter = 21,
 		RectangleCorner = 22,
-		CircleCenter = 31,
-		CircleHorizontal = 32,
-		CircleVertical = 33,
-		CircleCorner = 34,
+		CircleCorner = 31,
+		CircleRadius = 32,
+		CircleCenter = 33,
 		ArcSemicircle = 41,
 		ArcQuarter = 42,
 		Text = 51
@@ -227,29 +226,23 @@ Rectangle
 				else if ( tool > 30 && tool < 40 )	// circle
 				{
 					var centerx, centery, radius
-					if ( tool === Editor.Tool.CircleCenter )
-					{
-						radius = Math.sqrt(deltax * deltax + deltay * deltay)
-						centerx = startx
-						centery = starty
-					}
-					else if ( tool === Editor.Tool.CircleHorizontal )
-					{
-						radius = deltax / 2
-						centerx = startx + (mousex < startx ? -radius : radius)
-						centery = starty
-					}
-					else if ( tool === Editor.Tool.CircleVertical )
-					{
-						radius = deltay / 2
-						centerx = startx
-						centery = starty + (mousey < starty ? -radius : radius)
-					}
-					else if ( tool === Editor.Tool.CircleCorner )
+					if ( tool === Editor.Tool.CircleCorner )
 					{
 						radius = (deltax < deltay ? deltax : deltay) / 2
 						centerx = cornerx + radius
 						centery = cornery - radius
+					}
+					else if ( tool === Editor.Tool.CircleRadius )
+					{
+						radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
+						centerx = (startx + mousex) / 2
+						centery = (starty + mousey) / 2
+					}
+					else if ( tool === Editor.Tool.CircleCenter )
+					{
+						radius = Math.sqrt(deltax * deltax + deltay * deltay)
+						centerx = startx
+						centery = starty
 					}
 					if ( radius )
 					{

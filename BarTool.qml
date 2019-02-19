@@ -3,8 +3,8 @@ import QtQuick.Controls 1.4
 
 ToolButton
 {
-	property int tool
 	property string image
+	property int tool: 0
 
 	implicitHeight: 32
 	implicitWidth: 32
@@ -15,6 +15,7 @@ ToolButton
 	}
 	onClicked:
 	{
-		window.tool = tool
+		if ( tool )
+			window.tool = tool
 	}
 }
