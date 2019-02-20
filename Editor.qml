@@ -5,23 +5,22 @@ Rectangle
 	enum Tool
 	{
 		Select = 1,
-		LineSingle = 11,
-		LinePoly = 12,
-		RectangleCenter = 21,
-		RectangleCorner = 22,
+		Line = 11,
+		RectCenter = 21,
+		RectCorner = 22,
 		CircleCorner = 31,
 		CircleRadius = 32,
 		CircleCenter = 33,
-		ArcSemicircle = 41,
+		ArcSemi = 41,
 		ArcQuarter = 42,
 		Text = 51
 	}
 
 	enum Operation
 	{
-		Move = 85,		// U
 		Line = 68,		// D
-		Radius = 82		// R
+		Rectangle = 66,	// B
+		Circle = 82		// R
 	}
 
 	property int units: 100
@@ -67,16 +66,9 @@ Rectangle
 
 		onPressed:
 		{
-			if ( tool === Editor.Tool.LinePoly )
-			{
-				startx = endx
-				starty = endy
-			}
-			else
-			{
-				startx = mousex
-				starty = mousey
-			}
+			startx = mousex
+			starty = mousey
+			manager.setActiveIndex(-1);
 			down = true
 		}
 
@@ -91,10 +83,19 @@ Rectangle
 			{
 				endx = mousex
 				endy = mousey
-				if ( tool === Editor.Tool.LineSingle )
+				if ( tool === Editor.Tool.Line )
 				{
-					manager.addItem(Editor.Operation.Move, Qt.point(startx, starty), false)
-					manager.addItem(Editor.Operation.Line, Qt.point(mousex, mousey), false)
+					manager.addPointItem(Editor.Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
+					symbol = manager.getSymbol()
+				}
+				else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
+				{
+					if ( tool === Editor.Tool.RectCenter )
+					{
+						startx -= (endx - startx)
+						starty -= (endy - starty)
+					}
+					manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem)
 					symbol = manager.getSymbol()
 				}
 			}
@@ -161,36 +162,34 @@ Rectangle
 		{
 			context.lineWidth = linewidth
 
-			var previous = Qt.point(0, 0)
 			var active = manager.getActiveIndex();
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
 			{
 				if ( index === active )
-				{
 					context.strokeStyle = "red"
-				}
 				else
-				{
 					context.strokeStyle = "black"
-				}
 
 				var operation = manager.getItemOperation(index)
-				var position = manager.getItemPoint(index)
+				var point, position = manager.getItemPosition(index)
 				var fill = manager.getItemFill(index)
-				if ( operation === Editor.Operation.Move )
+				if ( operation === Editor.Operation.Line )
 				{
-					previous = position
+					point = manager.getItemPoint(index)
+					paintline(context, position, point)
 				}
-				else if ( operation === Editor.Operation.Line )
+				else if ( operation === Editor.Operation.Rectangle )
 				{
-					paintline(context, previous, position)
-					previous = position
+					point = manager.getItemPoint(index)
+					var deltax = point.x - position.x
+					var deltay = position.y - point.y
+					paintrect(context, position, Qt.size(deltax, deltay), fill)
 				}
-				else if ( operation === Editor.Operation.Radius )
+				else if ( operation === Editor.Operation.Circle )
 				{
-					var radius = position.x
-					paintcircle(context, previous, radius, fill)
+					var radius = manager.getItemValue(index)
+					paintcircle(context, position, radius, fill)
 				}
 			}
 		}
@@ -208,6 +207,9 @@ Rectangle
 
 			if ( down )
 			{
+				context.strokeStyle = "red"
+				context.fillStyle = "red"
+
 				var cornerx = (mousex < startx ? mousex : startx)
 				var cornery = (mousey > starty ? mousey : starty)
 				var deltax = Math.abs(mousex - startx)
@@ -216,21 +218,16 @@ Rectangle
 				var end = Qt.point(mousex, mousey)
 				if ( tool > 10 && tool < 20 )	// line
 				{
-					if ( tool === Editor.Tool.LineSingle )
+					if ( tool === Editor.Tool.Line )
 						paintline(context, start, end)
-					else if ( tool === Editor.Tool.Polyline )
-					{
-						paintline(context, start, end)	//##
-					}
 				}
 				else if ( tool > 20 && tool < 30 )	// rectangle
 				{
-					if ( tool === Editor.Tool.RectangleCenter )
+					if ( tool === Editor.Tool.RectCenter )
 					{
 						cornerx = startx + (mousex < startx ? -deltax : -deltax)
 						cornery = starty + (mousey < starty ? deltay : deltay)
-						deltax *= 2
-						deltay *= 2
+						deltax *= 2; deltay *= 2
 					}
 					paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), fillitem)
 				}

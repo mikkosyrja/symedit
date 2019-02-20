@@ -61,21 +61,26 @@ public:
 
 	Q_INVOKABLE QString getSymbol() const;
 
-	Q_INVOKABLE void addItem(int operation, QPoint point, bool fill);
-	Q_INVOKABLE void addText(int operation, QPoint point, QString text, int align);
+	Q_INVOKABLE void addValueItem(int operation, QPoint point, int value, bool fill);
+	Q_INVOKABLE void addPointItem(int operation, QPoint point, QPoint value, bool fill);
+	Q_INVOKABLE void addTextItem(int operation, QPoint point, QString value, int align);
 	Q_INVOKABLE void removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
 	Q_INVOKABLE int getItemOperation(int index) const;
+	Q_INVOKABLE QPoint getItemPosition(int index) const;
+	Q_INVOKABLE int getItemValue(int index) const;
 	Q_INVOKABLE QPoint getItemPoint(int index) const;
-	Q_INVOKABLE QString getItemString(int index ) const;
+	Q_INVOKABLE QString getItemText(int index ) const;
 	Q_INVOKABLE bool getItemFill(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
+	Q_INVOKABLE void setActiveIndex(int index);
 	Q_INVOKABLE int getActiveIndex() const;
 
-	Q_INVOKABLE void readClipboard();
-	Q_INVOKABLE void writeClipboard() const;
+	Q_INVOKABLE void cutClipboard();
+	Q_INVOKABLE void copyClipboard() const;
+	Q_INVOKABLE void pasteClipboard();
 
 private:
 	bool Initialized = false;				//!< Initialization mutex.

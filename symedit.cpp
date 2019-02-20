@@ -137,25 +137,39 @@ QString SymEditManager::getSymbol() const
 /*!
 	\param operation	Item operation.
 	\param point		Item position.
+	\param value		Item value.
 	\param fill			Item area fill.
 	\return				Reference to item.
 */
-void SymEditManager::addItem(int operation, QPoint point, bool fill)
+void SymEditManager::addValueItem(int operation, QPoint point, int value, bool fill)
 {
-	Symbol.AddItem(operation, point, fill);
+	Symbol.AddItem(operation, point, value, fill);
 }
 
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
 	\param point		Item position.
-	\param text			Item text string.
+	\param value		Item value.
+	\param fill			Item area fill.
+	\return				Reference to item.
+*/
+void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, bool fill)
+{
+	Symbol.AddItem(operation, point, value, fill);
+}
+
+//! Add symbol item.
+/*!
+	\param operation	Item operation.
+	\param point		Item position.
+	\param value		Item text value.
 	\param align		Item text alignment.
 	\return				Reference to item.
 */
-void SymEditManager::addText(int operation, QPoint point, QString text, int align)
+void SymEditManager::addTextItem(int operation, QPoint point, QString value, int align)
 {
-	Symbol.AddItem(operation, point, text, align);
+	Symbol.AddItem(operation, point, value, align);
 }
 
 //! Remove active item.
@@ -189,18 +203,44 @@ int SymEditManager::getItemOperation(int index) const
 	\param index		Item index.
 	\return				Item position.
 */
-QPoint SymEditManager::getItemPoint(int index) const
+QPoint SymEditManager::getItemPosition(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
+	if ( item.Operation == 'B' )	// normalize to upper left
+		return QPoint(std::min(item.Value.x(), item.Point.x()), std::max(item.Value.y(), item.Point.y()));
 	return item.Point;
 }
 
-//! Get item string.
+//! Get item int value.
 /*!
 	\param index		Item index.
-	\return				Item string.
+	\return				Item value.
 */
-QString SymEditManager::getItemString(int index) const
+int SymEditManager::getItemValue(int index) const
+{
+	const auto& item = Symbol.GetItem(index);
+	return item.Value.x();
+}
+
+//! Get item point value.
+/*!
+	\param index		Item index.
+	\return				Item value.
+*/
+QPoint SymEditManager::getItemPoint(int index) const
+{
+	const auto& item = Symbol.GetItem(index);
+	if ( item.Operation == 'B' )	// normalize to lower right
+		return QPoint(std::max(item.Value.x(), item.Point.x()), std::min(item.Value.y(), item.Point.y()));
+	return item.Value;
+}
+
+//! Get item text value.
+/*!
+	\param index		Item index.
+	\return				Item value.
+*/
+QString SymEditManager::getItemText(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
 	return item.Text;
@@ -220,22 +260,39 @@ int SymEditManager::selectItem(QPoint point) const
 }
 
 //
+void SymEditManager::setActiveIndex(int index)
+{
+	Symbol.SetActiveIndex(index);
+}
+
+//
 int SymEditManager::getActiveIndex() const
 {
 	return Symbol.GetActiveIndex();
 }
 
-//! Read symbol from clipboard.
-void SymEditManager::readClipboard()
+//! Cut symbol to clipboard.
+void SymEditManager::cutClipboard()
+{
+	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
+	{
+		clipboard->setText(getSymbol());
+		Symbol.Clear();
+	}
+}
+
+//! Copy symbol to clipboard.
+void SymEditManager::copyClipboard() const
+{
+	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
+		clipboard->setText(getSymbol());
+}
+
+//! Paste symbol from clipboard.
+void SymEditManager::pasteClipboard()
 {
 	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
 		Symbol.Load(clipboard->text());
 }
 
-//! Write symbol to clipboard.
-void SymEditManager::writeClipboard() const
-{
-	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
-		clipboard->setText(getSymbol());
-}
 

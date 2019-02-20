@@ -34,4 +34,14 @@ HEADERS += \
     symbol.h
 
 DISTFILES += \
-	README.md
+	README.md \
+    image/circle_center.kra \
+    image/circle_corner.kra \
+    image/circle_radius.kra \
+    image/delete.kra \
+    image/polyline.kra \
+    image/rectangle_center.kra \
+    image/rectangle_corner.kra \
+    image/rotate_left.kra \
+    image/rotate_right.kra \
+    image/text.kra

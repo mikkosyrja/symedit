@@ -23,72 +23,49 @@ ApplicationWindow
 	{
 		Menu
 		{
-			title: qsTr("File")	//%%
+			title: qsTr("File")		//%%
 			MenuItem { text: qsTr("Open"); shortcut: "Ctrl+O"; onTriggered: open() }	//%%
 			MenuItem { text: qsTr("Save"); shortcut: "Ctrl+S"; onTriggered: save() }	//%%
-			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("From Clipboard")	//%%
-				shortcut: "Ctrl+Alt+V"
-				onTriggered: { manager.readClipboard() }
-			}
-			MenuItem
-			{
-				text: qsTr("To Clipboard")	//%%
-				shortcut: "Ctrl+Alt+C"
-				onTriggered: { manager.writeClipboard() }
-			}
 			MenuSeparator { }
 			MenuItem { text: qsTr("Exit"); shortcut: "F4"; onTriggered: Qt.quit() }		//%%
 		}
 		Menu
 		{
-			title: qsTr("Edit")	//%%
+			title: qsTr("Edit")		//%%
 			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cut() }		//%%
 			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copy() }	//%%
 			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: paste() }	//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("Raise"); shortcut: "Alt+Up"; onTriggered: raise() }		//%%
-			MenuItem { text: qsTr("Lower"); shortcut: "Alt+Down"; onTriggered: lower() }	//%%
+			MenuItem { text: qsTr("Rotate Right"); shortcut: "Alt+Right"; onTriggered: rotate(1) }	//%%
+			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotate(-1) }	//%%
 			MenuSeparator { }
 			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: remove() }	//%%
 		}
 		Menu
 		{
-			title: qsTr("Tool")	//%%
+			title: qsTr("Tool")		//%%
 			MenuTool { text: qsTr("Select"); tool: Editor.Tool.Select }		//%%
 			MenuSeparator { }
-			MenuTool { text: qsTr("Line"); tool: Editor.Tool.LineSingle }		//%%
-			MenuTool { text: qsTr("Polyline"); tool: Editor.Tool.LinePoly }		//%%
+			MenuTool { text: qsTr("Line"); tool: Editor.Tool.Line }		//%%
 			MenuSeparator { }
-			MenuTool { text: qsTr("Rectangle Corner"); tool: Editor.Tool.RectangleCorner }	//%%
-			MenuTool { text: qsTr("Rectangle Center"); tool: Editor.Tool.RectangleCenter }	//%%
+			MenuTool { text: qsTr("Rectangle Corner"); tool: Editor.Tool.RectCorner }	//%%
+			MenuTool { text: qsTr("Rectangle Center"); tool: Editor.Tool.RectCenter }	//%%
 			MenuSeparator { }
 			MenuTool { text: qsTr("Circle Corner"); tool: Editor.Tool.CircleCorner }	//%%
 			MenuTool { text: qsTr("Circle Radius"); tool: Editor.Tool.CircleRadius }	//%%
 			MenuTool { text: qsTr("Circle Center"); tool: Editor.Tool.CircleCenter }	//%%
 			MenuSeparator { }
-			MenuTool { text: qsTr("Semicircle"); tool: Editor.Tool.ArcSemicircle }		//%%
+			MenuTool { text: qsTr("Semicircle"); tool: Editor.Tool.ArcSemi }			//%%
 			MenuTool { text: qsTr("Quarter circle"); tool: Editor.Tool.ArcQuarter }		//%%
 			MenuSeparator { }
 			MenuTool { text: qsTr("Text"); tool: Editor.Tool.Text }		//%%
 		}
 		Menu
 		{
-			title: qsTr("Help")	//%%
-			MenuItem
-			{
-				text: qsTr("Help")	//%%
-				shortcut: "F1"
-				onTriggered: { help() }
-			}
+			title: qsTr("Help")		//%%
+			MenuItem { text: qsTr("Help"); shortcut: "F1"; onTriggered: help() }	//%%
 			MenuSeparator { }
-			MenuItem
-			{
-				text: qsTr("About")	//%%
-				onTriggered: { about() }
-			}
+			MenuItem { text: qsTr("About"); onTriggered: about() }		//%%
 		}
 	}
 
@@ -105,17 +82,16 @@ ApplicationWindow
 				BarTool { image: "image/clipboard_cut_icon&48.png"; onClicked: cut() }
 				BarTool { image: "image/clipboard_copy_icon&48.png"; onClicked: copy() }
 				BarTool { image: "image/clipboard_past_icon&48.png"; onClicked: paste() }
-				BarTool { image: "image/br_up_icon&48.png"; onClicked: raise() }
-				BarTool { image: "image/br_down_icon&48.png"; onClicked: lower() }
+				BarTool { image: "image/rotate_right.png"; onClicked: rotate(1) }
+				BarTool { image: "image/rotate_left.png"; onClicked: rotate(-1) }
 				BarTool { image: "image/delete.png"; onClicked: remove() }
 				BarSeparator { }
 				BarTool { image: "image/cursor_arrow_icon&48.png"; tool: Editor.Tool.Select }
 				BarSeparator { }
-				BarTool { image: "image/line_single.png"; tool: Editor.Tool.LineSingle }
-				BarTool { image: "image/line_poly.png"; tool: Editor.Tool.LinePoly }
+				BarTool { image: "image/polyline.png"; tool: Editor.Tool.Line }
 				BarSeparator { }
-				BarTool { image: "image/rectangle_corner.png"; tool: Editor.Tool.RectangleCorner }
-				BarTool { image: "image/rectangle_center.png"; tool: Editor.Tool.RectangleCenter }
+				BarTool { image: "image/rectangle_corner.png"; tool: Editor.Tool.RectCorner }
+				BarTool { image: "image/rectangle_center.png"; tool: Editor.Tool.RectCenter }
 				BarSeparator { }
 				BarTool { image: "image/circle_corner.png"; tool: Editor.Tool.CircleCorner }
 				BarTool { image: "image/circle_radius.png"; tool: Editor.Tool.CircleRadius }
@@ -237,27 +213,34 @@ ApplicationWindow
 
 	function cut()
 	{
-
+		manager.cutClipboard();
+		symbol = manager.getSymbol()
+		editor.update()
 	}
 
 	function copy()
 	{
-
+		manager.copyClipboard();
 	}
 
 	function paste()
 	{
-
+		manager.pasteClipboard();
+		symbol = manager.getSymbol()
+		editor.update()
 	}
 
-	function raise()
+	function rotate(dir)
 	{
+		if ( dir > 0 )	// right
+		{
 
-	}
 
-	function lower()
-	{
+		}
+		else	// left
+		{
 
+		}
 	}
 
 	function remove()

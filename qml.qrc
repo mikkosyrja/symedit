@@ -5,20 +5,19 @@
 		<file>BarSeparator.qml</file>
 		<file>BarTool.qml</file>
         <file>Editor.qml</file>
-        <file>image/rectangle_center.png</file>
+		<file>image/polyline.png</file>
+		<file>image/rectangle_center.png</file>
         <file>image/rectangle_corner.png</file>
         <file>image/circle_corner.png</file>
 		<file>image/circle_radius.png</file>
 		<file>image/circle_center.png</file>
-        <file>image/line_single.png</file>
-        <file>image/line_poly.png</file>
         <file>image/clipboard_copy_icon&amp;48.png</file>
         <file>image/clipboard_cut_icon&amp;48.png</file>
         <file>image/clipboard_past_icon&amp;48.png</file>
-        <file>image/folder_open_icon&amp;48.png</file>
+		<file>image/rotate_left.png</file>
+		<file>image/rotate_right.png</file>
+		<file>image/folder_open_icon&amp;48.png</file>
         <file>image/save_icon&amp;48.png</file>
-        <file>image/br_down_icon&amp;48.png</file>
-        <file>image/br_up_icon&amp;48.png</file>
         <file>image/text.png</file>
         <file>image/delete.png</file>
         <file>image/cursor_arrow_icon&amp;48.png</file>
