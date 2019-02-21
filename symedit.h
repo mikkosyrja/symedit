@@ -82,6 +82,8 @@ public:
 	Q_INVOKABLE void copyClipboard() const;
 	Q_INVOKABLE void pasteClipboard();
 
+	Q_INVOKABLE void rotateSymbol(int dir);
+
 private:
 	bool Initialized = false;				//!< Initialization mutex.
 	SymEditSymbol Symbol;					//!< Current symbol.

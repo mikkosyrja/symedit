@@ -1,4 +1,4 @@
-var component = Qt.createComponent("ToolTip2.qml");
+var component = Qt.createComponent("ToolTip.qml");
 
 function create(text, parent, properties)
 {

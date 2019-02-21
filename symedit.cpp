@@ -58,7 +58,7 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 {
 	Settings.Load();
 
-	Symbol.Load("U00,00;R50;U-34,-34;D34,34;U-34,34;D34,-34;");		//##
+	Symbol.Load("U00,00;R50;U-35,-35;D35,35;U-35,35;D35,-35;");		//##
 }
 
 //! Set window initialized.
@@ -295,4 +295,9 @@ void SymEditManager::pasteClipboard()
 		Symbol.Load(clipboard->text());
 }
 
+//
+void SymEditManager::rotateSymbol(int dir)
+{
+	Symbol.RotateSymbol(dir);
+}
 

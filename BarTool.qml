@@ -7,7 +7,6 @@ ToolButton
 {
 	property string image
 	property int tool: 0
-	property var popup
 
 	implicitHeight: 32
 	implicitWidth: 32
@@ -17,37 +16,11 @@ ToolButton
 		source: image
 		anchors { fill: parent; margins: 4 }
 	}
-/*
-	ToolTip1
-	{
-		id: tooltip1
-		width: 200
-		target: parent
-		text: tooltip
-	}
-*/
 
-/*
-	MouseArea
-	{
-		anchors.fill: parent
-		hoverEnabled: true
-		propagateComposedEvents: true
-
-		onEntered:
-		{
-			popup = TooltipCreator.create(tooltip, this)
-			popup.show()
-		}
-		onExited:
-		{
-			if ( popup !== null )
-				popup.hide()
-		}
-	}
-*/
 	onHoveredChanged:
 	{
+		if ( popup !== null )
+			popup.hide()
 		popup = TooltipCreator.create(tooltip, this)
 		popup.show()
 	}

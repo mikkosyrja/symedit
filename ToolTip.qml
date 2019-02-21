@@ -14,13 +14,13 @@ Rectangle
 
 	function show()
 	{
-		state = "showing"
-		if ( hideTimer.running )
-			hideTimer.restart()
+		showTimer.start()
 	}
 
 	function hide()
 	{
+		if ( showTimer.running )
+			showTimer.stop()
 		if ( hideTimer.running )
 			hideTimer.stop()
 		state = "hidden"
@@ -51,8 +51,20 @@ Rectangle
 
 	Timer
 	{
+		id: showTimer
+		interval: 1000
+		onTriggered:
+		{
+			state = "showing"
+			if ( hideTimer.running )
+				hideTimer.restart()
+		}
+	}
+
+	Timer
+	{
 		id: hideTimer
-		interval: 3000
+		interval: 1000
 		onTriggered: hide()
 	}
 

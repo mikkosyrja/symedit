@@ -7,13 +7,18 @@ ApplicationWindow
 	property int mousex: 0
 	property int mousey: 0
 
+	property bool viewgrid: true
+	property real zoomscale: 1.0
+	property real zoomstep: 1.3
+
 	property bool fillitem: false
-	property int alignment: 1
 	property real linewidth: 1
+	property int alignment: 1
 	property int snapgrid: 1
 	property int tool: 0
 
 	property string symbol
+	property var popup: null
 
 	id: window
 	visible: false
@@ -32,6 +37,9 @@ ApplicationWindow
 		Menu
 		{
 			title: qsTr("Edit")		//%%
+			MenuItem { text: qsTr("Undo"); shortcut: "Ctrl+Z"; onTriggered: undo() }	//%%
+			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y"; onTriggered: redo() }	//%%
+			MenuSeparator { }
 			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cut() }		//%%
 			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copy() }	//%%
 			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: paste() }	//%%
@@ -40,6 +48,20 @@ ApplicationWindow
 			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotate(-1) }	//%%
 			MenuSeparator { }
 			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: remove() }	//%%
+		}
+		Menu
+		{
+			title: qsTr("View")		//%%
+			MenuItem { text: qsTr("Zoom In"); shortcut: "Ctrl++"; onTriggered: zoom(1) }	//%%
+			MenuItem { text: qsTr("Zoom Out"); shortcut: "Ctrl+-"; onTriggered: zoom(-1) }	//%%
+			MenuItem { text: qsTr("Zoom All"); shortcut: "Ctrl+0"; onTriggered: zoom(0) }	//%%
+			MenuSeparator { }
+			MenuItem
+			{
+				text: qsTr("Grid"); shortcut: "Ctrl+G"		//%%
+				checkable : true; checked: viewgrid
+				onTriggered: grid()
+			}
 		}
 		Menu
 		{
@@ -77,17 +99,20 @@ ApplicationWindow
 			{
 				height: 32
 				z: 10
-				BarTool { image: "image/folder_open_icon&48.png"; tooltip: "Open File"; onClicked: open() }		//%%
-				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }			//%%
+				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
+				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
 				BarSeparator { }
-				BarTool { image: "image/clipboard_cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }		//%%
-				BarTool { image: "image/clipboard_copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copy() }	//%%
-				BarTool { image: "image/clipboard_past_icon&48.png"; tooltip: "Paste symbol"; onClicked: paste() }	//%%
-				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotate(1) }			//%%
-				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotate(-1) }			//%%
-				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: remove() }					//%%
+				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo() }		//%%
+				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: redo() }		//%%
+				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }			//%%
+				BarTool { image: "image/copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copy() }		//%%
+				BarTool { image: "image/paste_icon&48.png"; tooltip: "Paste symbol"; onClicked: paste() }	//%%
 				BarSeparator { }
-				BarTool { image: "image/cursor_arrow_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
+				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotate(1) }	//%%
+				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotate(-1) }	//%%
+				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: remove() }			//%%
+				BarSeparator { }
+				BarTool { image: "image/cursor_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
 				BarSeparator { }
 				BarTool { image: "image/polyline.png"; tooltip: "Straight Line"; tool: Editor.Tool.Line }	//%%
 				BarSeparator { }
@@ -116,6 +141,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: snaplist
+					implicitWidth: 60
 					model: [ 1, 2, 5, 10 ]
 					onCurrentIndexChanged:
 					{
@@ -137,6 +163,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: widthlist
+					implicitWidth: 60
 					model: [ 1, 2, 3, 4, 5 ]
 					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
 					function setWidth() { currentIndex = linewidth - 1 }
@@ -146,9 +173,19 @@ ApplicationWindow
 				ComboBox
 				{
 					id: alignlist
+					implicitWidth: 60
 					model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 					onCurrentIndexChanged: { alignment = currentIndex + 1 }
 					function setAlign() { currentIndex = alignment - 1 }
+				}
+				BarSeparator { }
+				Label { text: qsTr("Text") }	//%%
+				TextField
+				{
+					id: textfield
+					implicitWidth: 120
+
+
 				}
 			}
 		}
@@ -212,6 +249,39 @@ ApplicationWindow
 
 	}
 
+	function zoom(dir)
+	{
+		if ( dir === 0 )	// all
+			zoomscale = 1.0
+		else if ( dir > 0 )		// in
+		{
+			if ( (zoomscale *= zoomstep) > 1.0 )
+				zoomscale = 1.0
+		}
+		else	// out
+		{
+			if ( (zoomscale /= zoomstep) < 0.1 )
+				zoomscale = 0.1
+		}
+		editor.update()
+	}
+
+	function grid()
+	{
+		viewgrid = !viewgrid
+		editor.update()
+	}
+
+	function undo()
+	{
+		//##
+	}
+
+	function redo()
+	{
+		//##
+	}
+
 	function cut()
 	{
 		manager.cutClipboard();
@@ -233,15 +303,9 @@ ApplicationWindow
 
 	function rotate(dir)
 	{
-		if ( dir > 0 )	// right
-		{
-
-
-		}
-		else	// left
-		{
-
-		}
+		manager.rotateSymbol(dir)
+		symbol = manager.getSymbol()
+		editor.update()
 	}
 
 	function remove()

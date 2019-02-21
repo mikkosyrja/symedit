@@ -10,3 +10,16 @@ krita:
 		transparent
 		line width: 6px
 		brush: basic-1
+
+Windows deployment:
+
+c:\Local\Qt\5.12.0\msvc2017_64\bin\windeployqt.exe
+	--release
+	--qmldir ../../symedit
+	--no-translations
+	--no-compiler-runtime
+	--no-webkit2
+	--no-angle
+	--no-opengl-sw
+	.
+

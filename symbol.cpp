@@ -232,3 +232,9 @@ const SymEditSymbol::Item& SymEditSymbol::GetItem(int index) const
 	return Items.at(static_cast<size_t>(index));
 }
 
+//
+void SymEditSymbol::RotateSymbol(int dir)
+{
+	//##
+}
+

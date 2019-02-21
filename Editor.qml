@@ -26,12 +26,11 @@ Rectangle
 	property int units: 100
 	property int max: units / 2
 	property int grid: 10
-	property int offset: 10
+	property int offset: 5
 	property int total: units + offset * 2
 
-	property int margin: 20
 	property bool horizontal: (height < width)
-	property real scalexy: (horizontal ? (height - margin * 2) / total : (width - margin * 2) / total)
+	property real scalexy: (horizontal ? height / total : width / total) * zoomscale
 
 	property int startx: 0
 	property int starty: 0
@@ -83,20 +82,49 @@ Rectangle
 			{
 				endx = mousex
 				endy = mousey
-				if ( tool === Editor.Tool.Line )
+				if ( startx != endx && starty != endy )
 				{
-					manager.addPointItem(Editor.Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
-					symbol = manager.getSymbol()
-				}
-				else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
-				{
-					if ( tool === Editor.Tool.RectCenter )
+					if ( tool === Editor.Tool.Line )
 					{
-						startx -= (endx - startx)
-						starty -= (endy - starty)
+						manager.addPointItem(Editor.Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
+						symbol = manager.getSymbol()
 					}
-					manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem)
-					symbol = manager.getSymbol()
+					else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
+					{
+						if ( tool === Editor.Tool.RectCenter )
+						{
+							startx -= (endx - startx)
+							starty -= (endy - starty)
+						}
+						manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem)
+						symbol = manager.getSymbol()
+					}
+					else if ( tool > 30 && tool < 40 )	// circle
+					{
+						var deltax = Math.abs(mousex - startx)
+						var deltay = Math.abs(mousey - starty)
+						var centerx, centery, radius
+						if ( tool === Editor.Tool.CircleCorner )
+						{
+							radius = (deltax < deltay ? deltax : deltay) / 2
+							centerx = (startx + endx) / 2
+							centery = (starty + endy) / 2
+						}
+						else if ( tool === Editor.Tool.CircleRadius )
+						{
+							radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
+							centerx = (startx + endx) / 2
+							centery = (starty + endy) / 2
+						}
+						else if ( tool === Editor.Tool.CircleCenter )
+						{
+							radius = Math.sqrt(deltax * deltax + deltay * deltay)
+							centerx = startx
+							centery = starty
+						}
+						manager.addValueItem(Editor.Operation.Circle, Qt.point(centerx, centery), radius, fillitem)
+						symbol = manager.getSymbol()
+					}
 				}
 			}
 			down = false
@@ -145,17 +173,20 @@ Rectangle
 
 			paintrect(context, Qt.point(-max - offset, max + offset), Qt.size(total, total), true)
 
-			var row, col;
-			for ( row = -max; row <= max; row += grid )
-				paintline(context, Qt.point(-max, row), Qt.point(max, row))
-			for ( col = -max; col <= max; col += grid )
-				paintline(context, Qt.point(col, -max), Qt.point(col, max))
+			if ( viewgrid )
+			{
+				var row, col;
+				for ( row = -max; row <= max; row += grid )
+					paintline(context, Qt.point(-max, row), Qt.point(max, row))
+				for ( col = -max; col <= max; col += grid )
+					paintline(context, Qt.point(col, -max), Qt.point(col, max))
 
-			context.lineWidth = 1
-			paintline(context, Qt.point(0, -max), Qt.point(0, max))
-			paintline(context, Qt.point(-max, 0), Qt.point(max, 0))
+				context.lineWidth = 1
+				paintline(context, Qt.point(0, -max), Qt.point(0, max))
+				paintline(context, Qt.point(-max, 0), Qt.point(max, 0))
 
-			paintrect(context, Qt.point(-max, max), Qt.size(units, units), false)
+				paintrect(context, Qt.point(-max, max), Qt.size(units, units), false)
+			}
 		}
 
 		function paintsymbol(context)
@@ -166,10 +197,7 @@ Rectangle
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
 			{
-				if ( index === active )
-					context.strokeStyle = "red"
-				else
-					context.strokeStyle = "black"
+				context.strokeStyle = (index === active ? "red" : "black")
 
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
@@ -237,8 +265,8 @@ Rectangle
 					if ( tool === Editor.Tool.CircleCorner )
 					{
 						radius = (deltax < deltay ? deltax : deltay) / 2
-						centerx = cornerx + radius
-						centery = cornery - radius
+						centerx = (startx + mousex) / 2
+						centery = (starty + mousey) / 2
 					}
 					else if ( tool === Editor.Tool.CircleRadius )
 					{
