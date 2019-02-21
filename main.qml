@@ -76,28 +76,29 @@ ApplicationWindow
 			RowLayout
 			{
 				height: 32
-				BarTool { image: "image/folder_open_icon&48.png"; onClicked: open() }
-				BarTool { image: "image/save_icon&48.png"; onClicked: save() }
+				z: 10
+				BarTool { image: "image/folder_open_icon&48.png"; tooltip: "Open File"; onClicked: open() }		//%%
+				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }			//%%
 				BarSeparator { }
-				BarTool { image: "image/clipboard_cut_icon&48.png"; onClicked: cut() }
-				BarTool { image: "image/clipboard_copy_icon&48.png"; onClicked: copy() }
-				BarTool { image: "image/clipboard_past_icon&48.png"; onClicked: paste() }
-				BarTool { image: "image/rotate_right.png"; onClicked: rotate(1) }
-				BarTool { image: "image/rotate_left.png"; onClicked: rotate(-1) }
-				BarTool { image: "image/delete.png"; onClicked: remove() }
+				BarTool { image: "image/clipboard_cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }		//%%
+				BarTool { image: "image/clipboard_copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copy() }	//%%
+				BarTool { image: "image/clipboard_past_icon&48.png"; tooltip: "Paste symbol"; onClicked: paste() }	//%%
+				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotate(1) }			//%%
+				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotate(-1) }			//%%
+				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: remove() }					//%%
 				BarSeparator { }
-				BarTool { image: "image/cursor_arrow_icon&48.png"; tool: Editor.Tool.Select }
+				BarTool { image: "image/cursor_arrow_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
 				BarSeparator { }
-				BarTool { image: "image/polyline.png"; tool: Editor.Tool.Line }
+				BarTool { image: "image/polyline.png"; tooltip: "Straight Line"; tool: Editor.Tool.Line }	//%%
 				BarSeparator { }
-				BarTool { image: "image/rectangle_corner.png"; tool: Editor.Tool.RectCorner }
-				BarTool { image: "image/rectangle_center.png"; tool: Editor.Tool.RectCenter }
+				BarTool { image: "image/rectangle_corner.png"; tooltip: "Rectangle Corners"; tool: Editor.Tool.RectCorner }	//%%
+				BarTool { image: "image/rectangle_center.png"; tooltip: "Rectangle Center"; tool: Editor.Tool.RectCenter }	//%%
 				BarSeparator { }
-				BarTool { image: "image/circle_corner.png"; tool: Editor.Tool.CircleCorner }
-				BarTool { image: "image/circle_radius.png"; tool: Editor.Tool.CircleRadius }
-				BarTool { image: "image/circle_center.png"; tool: Editor.Tool.CircleCenter }
+				BarTool { image: "image/circle_corner.png"; tooltip: "Circle Corner"; tool: Editor.Tool.CircleCorner }	//%%
+				BarTool { image: "image/circle_radius.png"; tooltip: "Circle Radius"; tool: Editor.Tool.CircleRadius }	//%%
+				BarTool { image: "image/circle_center.png"; tooltip: "Circle Center"; tool: Editor.Tool.CircleCenter }	//%%
 				BarSeparator { }
-				BarTool { image: "image/text.png"; tool: Editor.Tool.Text }
+				BarTool { image: "image/text.png"; tooltip: "Text String"; tool: Editor.Tool.Text }		//%%
 			}
 			RowLayout
 			{

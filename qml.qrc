@@ -1,25 +1,28 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-		<file>MenuTool.qml</file>
-		<file>BarSeparator.qml</file>
-		<file>BarTool.qml</file>
+        <file>MenuTool.qml</file>
+        <file>BarSeparator.qml</file>
+        <file>BarTool.qml</file>
         <file>Editor.qml</file>
-		<file>image/polyline.png</file>
-		<file>image/rectangle_center.png</file>
+        <file>image/polyline.png</file>
+        <file>image/rectangle_center.png</file>
         <file>image/rectangle_corner.png</file>
         <file>image/circle_corner.png</file>
-		<file>image/circle_radius.png</file>
-		<file>image/circle_center.png</file>
+        <file>image/circle_radius.png</file>
+        <file>image/circle_center.png</file>
         <file>image/clipboard_copy_icon&amp;48.png</file>
         <file>image/clipboard_cut_icon&amp;48.png</file>
         <file>image/clipboard_past_icon&amp;48.png</file>
-		<file>image/rotate_left.png</file>
-		<file>image/rotate_right.png</file>
-		<file>image/folder_open_icon&amp;48.png</file>
+        <file>image/rotate_left.png</file>
+        <file>image/rotate_right.png</file>
+        <file>image/folder_open_icon&amp;48.png</file>
         <file>image/save_icon&amp;48.png</file>
         <file>image/text.png</file>
         <file>image/delete.png</file>
         <file>image/cursor_arrow_icon&amp;48.png</file>
+        <file>ToolTip1.qml</file>
+        <file>ToolTip2.qml</file>
+        <file>TooltipCreator.js</file>
     </qresource>
 </RCC>
