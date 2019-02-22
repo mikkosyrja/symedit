@@ -15,18 +15,18 @@
 	\param value		Item value.
 	\param fill			Item area fill.
 */
-SymEditSymbol::Item::Item(int operation, QPoint point, int value, bool fill)
+SymEditSymbol::Item::Item(int operation, QPoint point, int value, int fill)
 	: Operation(operation), Point(point), Value(value, value), Fill(fill), Align(9)
 {
 
 }
-SymEditSymbol::Item::Item(int operation, QPoint point, QPoint value, bool fill)
+SymEditSymbol::Item::Item(int operation, QPoint point, QPoint value, int fill)
 	: Operation(operation), Point(point), Value(value), Fill(fill), Align(0)
 {
 
 }
 SymEditSymbol::Item::Item(int operation, QPoint point, QString value, int align)
-	: Operation(operation), Point(point), Text(value), Fill(false), Align(align)
+	: Operation(operation), Point(point), Text(value), Fill(0), Align(align)
 {
 
 }
@@ -129,14 +129,14 @@ void SymEditSymbol::Clear()
 	\param fill			Item area fill.
 	\return				Reference to item.
 */
-SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, int value, bool fill)
+SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, int value, int fill)
 {
 	Item item(operation, point, value, fill);
 	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
-SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QPoint value, bool fill)
+SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QPoint value, int fill)
 {
 	Item item(operation, point, value, fill);
 	ActiveIndex = static_cast<int>(Items.size());
@@ -232,9 +232,11 @@ const SymEditSymbol::Item& SymEditSymbol::GetItem(int index) const
 	return Items.at(static_cast<size_t>(index));
 }
 
-//
+//! Rotate symbol.
+/*!
+	\param dir			Positive value rotates right, negative left
+*/
 void SymEditSymbol::RotateSymbol(int dir)
 {
 	//##
 }
-

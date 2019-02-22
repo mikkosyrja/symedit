@@ -6,6 +6,8 @@
 #include <QPoint>
 #include <QSize>
 
+#include <deque>
+
 #include "symbol.h"
 
 //! Settings class.
@@ -23,9 +25,10 @@ private:
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
-	bool FillItem;							//!< Fill object.
+	int FillItem;							//!< Fill object.
 	int Alignment;							//!< Text alignment.
 	int LineWidth;							//!< Line width.
+	int TextSize;							//!< Text size.
 	int SnapGrid;							//!< Snap granularity.
 	int Tool;								//!< Current tool.
 };
@@ -47,22 +50,24 @@ public:
 	Q_INVOKABLE QPoint getWindowPos() const;
 	Q_INVOKABLE QSize getWindowSize() const;
 
-	Q_INVOKABLE void setFillItem(bool fill);
+	Q_INVOKABLE void setFillItem(int fill);
 	Q_INVOKABLE void setAlignment(int align);
 	Q_INVOKABLE void setLineWidth(int align);
+	Q_INVOKABLE void setTextSize(int size);
 	Q_INVOKABLE void setSnapGrid(int snap);
 	Q_INVOKABLE void setTool(int tool);
 
-	Q_INVOKABLE bool getFillItem() const;
+	Q_INVOKABLE int getFillItem() const;
 	Q_INVOKABLE int getAlignment() const;
 	Q_INVOKABLE int getLineWidth() const;
+	Q_INVOKABLE int getTextSize() const;
 	Q_INVOKABLE int getSnapGrid() const;
 	Q_INVOKABLE int getTool() const;
 
 	Q_INVOKABLE QString getSymbol() const;
 
-	Q_INVOKABLE void addValueItem(int operation, QPoint point, int value, bool fill);
-	Q_INVOKABLE void addPointItem(int operation, QPoint point, QPoint value, bool fill);
+	Q_INVOKABLE void addValueItem(int operation, QPoint point, int value, int fill);
+	Q_INVOKABLE void addPointItem(int operation, QPoint point, QPoint value, int fill);
 	Q_INVOKABLE void addTextItem(int operation, QPoint point, QString value, int align);
 	Q_INVOKABLE void removeItem();
 
@@ -72,7 +77,7 @@ public:
 	Q_INVOKABLE int getItemValue(int index) const;
 	Q_INVOKABLE QPoint getItemPoint(int index) const;
 	Q_INVOKABLE QString getItemText(int index ) const;
-	Q_INVOKABLE bool getItemFill(int index) const;
+	Q_INVOKABLE int getItemFill(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
 	Q_INVOKABLE void setActiveIndex(int index);
@@ -84,10 +89,17 @@ public:
 
 	Q_INVOKABLE void rotateSymbol(int dir);
 
+	Q_INVOKABLE bool undo(bool undo);
+
 private:
+	void undosave();
+
 	bool Initialized = false;				//!< Initialization mutex.
 	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.
+
+	std::deque<QString> UndoStack;			//!< Undo stack.
+	std::deque<QString> RedoStack;			//!< Redo stack.
 };
 
 #endif

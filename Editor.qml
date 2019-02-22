@@ -150,7 +150,10 @@ Rectangle
 			context.beginPath().rect((start.x + max + offset) * scalexy, (max - start.y + offset) * scalexy,
 				size.width * scalexy, size.height * scalexy)
 			if ( fill )
+			{
+				context.fillStyle = (fill === 1 ? "black" : "white")
 				context.fill()
+			}
 			else
 				context.stroke()
 		}
@@ -160,7 +163,10 @@ Rectangle
 			context.beginPath().ellipse((center.x + max - radius + offset) * scalexy,
 				(max - center.y - radius + offset) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
 			if ( fill )
+			{
+				context.fillStyle = (fill === 1 ? "black" : "white")
 				context.fill()
+			}
 			else
 				context.stroke()
 		}
@@ -229,7 +235,7 @@ Rectangle
 			paintgrid(context)
 
 			context.strokeStyle = "black"
-			context.fillStyle = "black"
+//			context.fillStyle = "black"
 
 			paintsymbol(context)
 

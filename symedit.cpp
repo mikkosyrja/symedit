@@ -8,7 +8,7 @@
 //	settings functions
 //
 //! Constructor.
-SymEditSettings::SymEditSettings() : FillItem(false), Alignment(9), LineWidth(1), SnapGrid(5), Tool(1)
+SymEditSettings::SymEditSettings() : FillItem(0), Alignment(9), LineWidth(1), TextSize(1), SnapGrid(5), Tool(1)
 {
 
 }
@@ -23,9 +23,10 @@ void SymEditSettings::Load()
 	Size.setWidth(settings.value("window/width", 500).toInt());
 	Size.setHeight(settings.value("window/height", 500).toInt());
 
-	FillItem = settings.value("editor/fill", false).toBool();
+	FillItem = settings.value("editor/fill", 0).toInt();
 	Alignment = settings.value("editor/align", 9).toInt();
 	LineWidth = settings.value("editor/width", 1).toInt();
+	TextSize = settings.value("editor/size", 1).toInt();
 	SnapGrid = settings.value("editor/snap", 5).toInt();
 	Tool = settings.value("editor/tool", 1).toInt();
 }
@@ -43,6 +44,7 @@ void SymEditSettings::Save() const
 	settings.setValue("editor/fill", FillItem);
 	settings.setValue("editor/align", Alignment);
 	settings.setValue("editor/width", LineWidth);
+	settings.setValue("editor/size", TextSize);
 	settings.setValue("editor/snap", SnapGrid);
 	settings.setValue("editor/tool", Tool);
 }
@@ -104,9 +106,10 @@ QSize SymEditManager::getWindowSize() const
 /*!
 	\param value		Setting value.
 */
-void SymEditManager::setFillItem(bool value) { Settings.FillItem = value; }
+void SymEditManager::setFillItem(int value) { Settings.FillItem = value; }
 void SymEditManager::setAlignment(int value) { Settings.Alignment = value; }
 void SymEditManager::setLineWidth(int value) { Settings.LineWidth = value; }
+void SymEditManager::setTextSize(int value) { Settings.TextSize = value; }
 void SymEditManager::setSnapGrid(int value) { Settings.SnapGrid = value; }
 void SymEditManager::setTool(int value) { Settings.Tool = value; }
 //@}
@@ -116,9 +119,10 @@ void SymEditManager::setTool(int value) { Settings.Tool = value; }
 /*!
 	\return				Setting value.
 */
-bool SymEditManager::getFillItem() const { return Settings.FillItem; }
+int SymEditManager::getFillItem() const { return Settings.FillItem; }
 int SymEditManager::getAlignment() const { return Settings.Alignment; }
 int SymEditManager::getLineWidth() const { return Settings.LineWidth; }
+int SymEditManager::getTextSize() const { return Settings.TextSize; }
 int SymEditManager::getSnapGrid() const { return Settings.SnapGrid; }
 int SymEditManager::getTool() const { return Settings.Tool; }
 //@}
@@ -141,8 +145,9 @@ QString SymEditManager::getSymbol() const
 	\param fill			Item area fill.
 	\return				Reference to item.
 */
-void SymEditManager::addValueItem(int operation, QPoint point, int value, bool fill)
+void SymEditManager::addValueItem(int operation, QPoint point, int value, int fill)
 {
+	undosave();
 	Symbol.AddItem(operation, point, value, fill);
 }
 
@@ -154,8 +159,9 @@ void SymEditManager::addValueItem(int operation, QPoint point, int value, bool f
 	\param fill			Item area fill.
 	\return				Reference to item.
 */
-void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, bool fill)
+void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int fill)
 {
+	undosave();
 	Symbol.AddItem(operation, point, value, fill);
 }
 
@@ -169,12 +175,14 @@ void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, boo
 */
 void SymEditManager::addTextItem(int operation, QPoint point, QString value, int align)
 {
+	undosave();
 	Symbol.AddItem(operation, point, value, align);
 }
 
 //! Remove active item.
 void SymEditManager::removeItem()
 {
+	undosave();
 	Symbol.RemoveItem(Symbol.GetActiveIndex());
 }
 
@@ -247,7 +255,7 @@ QString SymEditManager::getItemText(int index) const
 }
 
 //
-bool SymEditManager::getItemFill(int index) const
+int SymEditManager::getItemFill(int index) const
 {
 	const auto& item = Symbol.GetItem(index);
 	return item.Fill;
@@ -276,6 +284,7 @@ void SymEditManager::cutClipboard()
 {
 	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
 	{
+		undosave();
 		clipboard->setText(getSymbol());
 		Symbol.Clear();
 	}
@@ -292,12 +301,59 @@ void SymEditManager::copyClipboard() const
 void SymEditManager::pasteClipboard()
 {
 	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
+	{
+		undosave();
 		Symbol.Load(clipboard->text());
+	}
 }
 
-//
+//! Rotate symbol.
+/*!
+	\param dir			Positive value rotates right, negative left
+*/
 void SymEditManager::rotateSymbol(int dir)
 {
+	undosave();
 	Symbol.RotateSymbol(dir);
 }
 
+//! Undo edit operation.
+/*!
+	\param undo			True undoes, false redoes.
+	\return				True for success.
+*/
+bool SymEditManager::undo(bool undo)
+{
+	if ( undo )
+	{
+		if ( UndoStack.empty() )
+			return false;
+
+		QString buffer;
+		Symbol.Save(buffer);
+		RedoStack.push_back(buffer);
+
+		Symbol.Load(UndoStack.back());
+		UndoStack.pop_back();
+		return true;
+	}
+	if ( RedoStack.empty() )
+		return false;
+
+	QString buffer;
+	Symbol.Save(buffer);
+	UndoStack.push_back(buffer);
+
+	Symbol.Load(RedoStack.back());
+	RedoStack.pop_back();
+	return true;
+}
+
+//! Save item to undo stack.
+void SymEditManager::undosave()
+{
+	QString buffer;
+	Symbol.Save(buffer);
+	UndoStack.push_back(buffer);
+	RedoStack.clear();
+}

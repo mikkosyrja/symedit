@@ -15,8 +15,8 @@ public:
 	class Item								//!< Symbol item.
 	{
 	public:
-		Item(int operation, QPoint point, int value, bool fill);
-		Item(int operation, QPoint point, QPoint value, bool fill);
+		Item(int operation, QPoint point, int value, int fill);
+		Item(int operation, QPoint point, QPoint value, int fill);
 		Item(int operation, QPoint point, QString value, int align);
 
 		int Operation;						//!< Item operation.
@@ -31,8 +31,8 @@ public:
 	QString& Save(QString& buffer) const;
 	void Clear();
 
-	Item& AddItem(int operation, QPoint point, int value, bool fill);
-	Item& AddItem(int operation, QPoint point, QPoint end, bool fill);
+	Item& AddItem(int operation, QPoint point, int value, int fill);
+	Item& AddItem(int operation, QPoint point, QPoint end, int fill);
 	Item& AddItem(int operation, QPoint point, QString text, int align);
 	void RemoveItem(int index);
 

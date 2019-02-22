@@ -11,9 +11,10 @@ ApplicationWindow
 	property real zoomscale: 1.0
 	property real zoomstep: 1.3
 
-	property bool fillitem: false
+	property int fillitem: 0
 	property real linewidth: 1
 	property int alignment: 1
+	property int textsize: 1
 	property int snapgrid: 1
 	property int tool: 0
 
@@ -37,8 +38,9 @@ ApplicationWindow
 		Menu
 		{
 			title: qsTr("Edit")		//%%
-			MenuItem { text: qsTr("Undo"); shortcut: "Ctrl+Z"; onTriggered: undo() }	//%%
-			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y"; onTriggered: redo() }	//%%
+			MenuItem { text: qsTr("Undo"); shortcut: "Ctrl+Z"; onTriggered: undo(true) }	//%%
+			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y"; onTriggered: undo(false) }	//%%
+//			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y,Ctrl+Shift+Z"; onTriggered: undo(false) }	//%%
 			MenuSeparator { }
 			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cut() }		//%%
 			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copy() }	//%%
@@ -102,8 +104,8 @@ ApplicationWindow
 				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
 				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
 				BarSeparator { }
-				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo() }		//%%
-				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: redo() }		//%%
+				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo(true) }	//%%
+				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: undo(false) }	//%%
 				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }			//%%
 				BarTool { image: "image/copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copy() }		//%%
 				BarTool { image: "image/paste_icon&48.png"; tooltip: "Paste symbol"; onClicked: paste() }	//%%
@@ -129,12 +131,14 @@ ApplicationWindow
 			{
 				height: 32
 				Item { Layout.fillWidth: true }
-				CheckBox
+				Label { text: qsTr("Fill") }	//%%
+				ComboBox
 				{
-					id: fillcheck
-					checked: fillitem
-					text: qsTr("Fill")	//%%
-					onClicked: { fillitem = !fillitem }
+					id: filllist
+					implicitWidth: 60
+					model: [ 0, 1, 2 ]
+					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
+					function setFill() { currentIndex = fillitem }
 				}
 				BarSeparator { }
 				Label { text: qsTr("Snap") }	//%%
@@ -167,6 +171,16 @@ ApplicationWindow
 					model: [ 1, 2, 3, 4, 5 ]
 					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
 					function setWidth() { currentIndex = linewidth - 1 }
+				}
+				BarSeparator { }
+				Label { text: qsTr("Text size") }	//%%
+				ComboBox
+				{
+					id: sizelist
+					implicitWidth: 60
+					model: [ 1, 2, 3, 4, 5 ]
+					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
+					function setSize() { currentIndex = textsize - 1 }
 				}
 				BarSeparator { }
 				Label { text: qsTr("Alignment") }	//%%
@@ -213,6 +227,7 @@ ApplicationWindow
 	onFillitemChanged: { manager.setFillItem(fillitem); }
 	onAlignmentChanged: { manager.setAlignment(alignment); }
 	onLinewidthChanged: { manager.setLineWidth(linewidth); }
+	onTextsizeChanged: { manager.setTextSize(textsize); }
 	onSnapgridChanged: { manager.setSnapGrid(snapgrid); }
 	onToolChanged: { manager.setTool(tool); }
 
@@ -226,10 +241,13 @@ ApplicationWindow
 		fillitem = manager.getFillItem()
 		alignment = manager.getAlignment()
 		linewidth = manager.getLineWidth()
+		textsize = manager.getTextSize()
 		snapgrid = manager.getSnapGrid()
 		tool = manager.getTool()
 
+		filllist.setFill()
 		snaplist.setSnap()
+		sizelist.setSize()
 		widthlist.setWidth()
 		alignlist.setAlign()
 
@@ -272,14 +290,13 @@ ApplicationWindow
 		editor.update()
 	}
 
-	function undo()
+	function undo(undo)
 	{
-		//##
-	}
-
-	function redo()
-	{
-		//##
+		if ( manager.undo(undo) )
+		{
+			symbol = manager.getSymbol()
+			editor.update()
+		}
 	}
 
 	function cut()
