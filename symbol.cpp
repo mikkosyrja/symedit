@@ -238,5 +238,20 @@ const SymEditSymbol::Item& SymEditSymbol::GetItem(int index) const
 */
 void SymEditSymbol::RotateSymbol(int dir)
 {
-	//##
+	auto rotate = [](QPoint& point, int dir)
+	{
+		double length = sqrt(point.x() * point.x() + point.y() * point.y());
+		double angle = atan2(point.y(), point.x());
+		angle += (dir > 0 ? -M_PI / 2.0 : M_PI / 2.0);
+		double x = cos(angle) * length, y = sin(angle) * length;
+		point.setX(static_cast<int>(x + (x > 0.0 ? 0.5 : -0.5)));
+		point.setY(static_cast<int>(y + (y > 0.0 ? 0.5 : -0.5)));
+	};
+
+	for ( auto& item : Items )
+	{
+		rotate(item.Point, dir);
+		if ( item.Operation != 'R' )
+			rotate(item.Value, dir);
+	}
 }

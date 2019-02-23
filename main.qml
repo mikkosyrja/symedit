@@ -130,6 +130,26 @@ ApplicationWindow
 			RowLayout
 			{
 				height: 32
+				Label { text: qsTr("Snap") }	//%%
+				ComboBox
+				{
+					id: snaplist
+					implicitWidth: 60
+					model: [ 1, 5, 10 ]
+					onCurrentIndexChanged:
+					{
+						if ( currentIndex == 0 ) { snapgrid = 1 }
+						else if ( currentIndex == 1 ) { snapgrid = 5 }
+						else if ( currentIndex == 2 ) { snapgrid = 10 }
+					}
+					function setSnap()
+					{
+						if ( snapgrid == 1 ) { currentIndex = 0 }
+						else if ( snapgrid == 10 ) { currentIndex = 2 }
+						else { currentIndex = 1 }	// default 5
+					}
+				}
+				BarSeparator { }
 				Item { Layout.fillWidth: true }
 				Label { text: qsTr("Fill") }	//%%
 				ComboBox
@@ -139,28 +159,6 @@ ApplicationWindow
 					model: [ 0, 1, 2 ]
 					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
 					function setFill() { currentIndex = fillitem }
-				}
-				BarSeparator { }
-				Label { text: qsTr("Snap") }	//%%
-				ComboBox
-				{
-					id: snaplist
-					implicitWidth: 60
-					model: [ 1, 2, 5, 10 ]
-					onCurrentIndexChanged:
-					{
-						if ( currentIndex == 0 ) { snapgrid = 1 }
-						else if ( currentIndex == 1 ) { snapgrid = 2 }
-						else if ( currentIndex == 2 ) { snapgrid = 5 }
-						else if ( currentIndex == 3 ) { snapgrid = 10 }
-					}
-					function setSnap()
-					{
-						if ( snapgrid == 1 ) { currentIndex = 0 }
-						else if ( snapgrid == 2 ) { currentIndex = 1 }
-						else if ( snapgrid == 10 ) { currentIndex = 3 }
-						else { currentIndex = 2 }	// default 5
-					}
 				}
 				BarSeparator { }
 				Label { text: qsTr("Line width") }	//%%
