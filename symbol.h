@@ -44,6 +44,7 @@ public:
 	const Item& GetItem(int index) const;
 
 	void RotateSymbol(int dir);
+	bool RaiseItem(int dir);
 
 private:
 	std::vector<Item> Items;				//!< Symbol items.

@@ -25,12 +25,7 @@ private:
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
-	int FillItem;							//!< Fill object.
-	int Alignment;							//!< Text alignment.
-	int LineWidth;							//!< Line width.
-	int TextSize;							//!< Text size.
-	int SnapGrid;							//!< Snap granularity.
-	int Tool;								//!< Current tool.
+	std::map<QString, int> Values;			//!< Setting values.
 };
 
 //! Manager class.
@@ -50,19 +45,8 @@ public:
 	Q_INVOKABLE QPoint getWindowPos() const;
 	Q_INVOKABLE QSize getWindowSize() const;
 
-	Q_INVOKABLE void setFillItem(int fill);
-	Q_INVOKABLE void setAlignment(int align);
-	Q_INVOKABLE void setLineWidth(int align);
-	Q_INVOKABLE void setTextSize(int size);
-	Q_INVOKABLE void setSnapGrid(int snap);
-	Q_INVOKABLE void setTool(int tool);
-
-	Q_INVOKABLE int getFillItem() const;
-	Q_INVOKABLE int getAlignment() const;
-	Q_INVOKABLE int getLineWidth() const;
-	Q_INVOKABLE int getTextSize() const;
-	Q_INVOKABLE int getSnapGrid() const;
-	Q_INVOKABLE int getTool() const;
+	Q_INVOKABLE void setIntSetting(QString name, int value);
+	Q_INVOKABLE int getIntSetting(QString name) const;
 
 	Q_INVOKABLE QString getSymbol() const;
 
@@ -88,6 +72,7 @@ public:
 	Q_INVOKABLE void pasteClipboard();
 
 	Q_INVOKABLE void rotateSymbol(int dir);
+	Q_INVOKABLE bool raiseItem(int dir);
 
 	Q_INVOKABLE bool undo(bool undo);
 

@@ -49,6 +49,9 @@ ApplicationWindow
 			MenuItem { text: qsTr("Rotate Right"); shortcut: "Alt+Right"; onTriggered: rotate(1) }	//%%
 			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotate(-1) }	//%%
 			MenuSeparator { }
+			MenuItem { text: qsTr("Raise Item"); shortcut: "Alt+Up"; onTriggered: raise(1) }		//%%
+			MenuItem { text: qsTr("Lower Item"); shortcut: "Alt+Down"; onTriggered: raise(-1) }		//%%
+			MenuSeparator { }
 			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: remove() }	//%%
 		}
 		Menu
@@ -101,9 +104,9 @@ ApplicationWindow
 			{
 				height: 32
 				z: 10
-				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
-				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
-				BarSeparator { }
+//				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
+//				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
+//				BarSeparator { }
 				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo(true) }	//%%
 				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: undo(false) }	//%%
 				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }			//%%
@@ -112,6 +115,8 @@ ApplicationWindow
 				BarSeparator { }
 				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotate(1) }	//%%
 				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotate(-1) }	//%%
+				BarTool { image: "image/up_icon&48.png"; tooltip: "Raise item"; onClicked: raise(1) }		//%%
+				BarTool { image: "image/down_icon&48.png"; tooltip: "Lower item"; onClicked: raise(-1) }	//%%
 				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: remove() }			//%%
 				BarSeparator { }
 				BarTool { image: "image/cursor_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
@@ -222,12 +227,12 @@ ApplicationWindow
 	onWidthChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 	onHeightChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 
-	onFillitemChanged: { manager.setFillItem(fillitem); }
-	onAlignmentChanged: { manager.setAlignment(alignment); }
-	onLinewidthChanged: { manager.setLineWidth(linewidth); }
-	onTextsizeChanged: { manager.setTextSize(textsize); }
-	onSnapgridChanged: { manager.setSnapGrid(snapgrid); }
-	onToolChanged: { manager.setTool(tool); }
+	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem); }
+	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment); }
+	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth); }
+	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize); }
+	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); }
+	onToolChanged: { manager.setIntSetting("Tool", tool); }
 
 	Component.onCompleted:
 	{
@@ -236,12 +241,12 @@ ApplicationWindow
 		width = manager.getWindowSize().width
 		height = manager.getWindowSize().height
 
-		fillitem = manager.getFillItem()
-		alignment = manager.getAlignment()
-		linewidth = manager.getLineWidth()
-		textsize = manager.getTextSize()
-		snapgrid = manager.getSnapGrid()
-		tool = manager.getTool()
+		fillitem = manager.getIntSetting("FillItem")
+		alignment = manager.getIntSetting("Alignment")
+		linewidth = manager.getIntSetting("LineWidth")
+		textsize = manager.getIntSetting("TextSize")
+		snapgrid = manager.getIntSetting("SnapGrid")
+		tool = manager.getIntSetting("Tool")
 
 		filllist.setFill()
 		snaplist.setSnap()
@@ -319,6 +324,13 @@ ApplicationWindow
 	function rotate(dir)
 	{
 		manager.rotateSymbol(dir)
+		symbol = manager.getSymbol()
+		editor.update()
+	}
+
+	function raise(dir)
+	{
+		manager.raiseItem(dir)
 		symbol = manager.getSymbol()
 		editor.update()
 	}

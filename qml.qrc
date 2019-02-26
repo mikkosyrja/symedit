@@ -25,5 +25,7 @@
         <file>image/cut_icon&amp;48.png</file>
         <file>image/paste_icon&amp;48.png</file>
         <file>image/open_icon&amp;48.png</file>
+        <file>image/down_icon&amp;48.png</file>
+        <file>image/up_icon&amp;48.png</file>
     </qresource>
 </RCC>

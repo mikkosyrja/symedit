@@ -8,9 +8,14 @@
 //	settings functions
 //
 //! Constructor.
-SymEditSettings::SymEditSettings() : FillItem(0), Alignment(9), LineWidth(1), TextSize(1), SnapGrid(5), Tool(1)
+SymEditSettings::SymEditSettings()
 {
-
+	Values.emplace("FillItem", 0);
+	Values.emplace("Alignment", 9);
+	Values.emplace("LineWidth", 1);
+	Values.emplace("TextSize", 1);
+	Values.emplace("SnapGrid", 5);
+	Values.emplace("Tool", 1);
 }
 
 //! Load settings.
@@ -23,12 +28,12 @@ void SymEditSettings::Load()
 	Size.setWidth(settings.value("window/width", 500).toInt());
 	Size.setHeight(settings.value("window/height", 500).toInt());
 
-	FillItem = settings.value("editor/fill", 0).toInt();
-	Alignment = settings.value("editor/align", 9).toInt();
-	LineWidth = settings.value("editor/width", 1).toInt();
-	TextSize = settings.value("editor/size", 1).toInt();
-	SnapGrid = settings.value("editor/snap", 5).toInt();
-	Tool = settings.value("editor/tool", 1).toInt();
+	Values.at("FillItem") = settings.value("editor/fill", 0).toInt();
+	Values.at("Alignment") = settings.value("editor/align", 9).toInt();
+	Values.at("LineWidth") = settings.value("editor/width", 1).toInt();
+	Values.at("TextSize") = settings.value("editor/size", 1).toInt();
+	Values.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
+	Values.at("Tool") = settings.value("editor/tool", 1).toInt();
 }
 
 //! Save settings.
@@ -41,12 +46,12 @@ void SymEditSettings::Save() const
 	settings.setValue("window/width", Size.width());
 	settings.setValue("window/height", Size.height());
 
-	settings.setValue("editor/fill", FillItem);
-	settings.setValue("editor/align", Alignment);
-	settings.setValue("editor/width", LineWidth);
-	settings.setValue("editor/size", TextSize);
-	settings.setValue("editor/snap", SnapGrid);
-	settings.setValue("editor/tool", Tool);
+	settings.setValue("editor/fill", Values.at("FillItem"));
+	settings.setValue("editor/align", Values.at("Alignment"));
+	settings.setValue("editor/width", Values.at("LineWidth"));
+	settings.setValue("editor/size", Values.at("TextSize"));
+	settings.setValue("editor/snap", Values.at("SnapGrid"));
+	settings.setValue("editor/tool", Values.at("Tool"));
 }
 
 //
@@ -101,31 +106,28 @@ QSize SymEditManager::getWindowSize() const
 	return Settings.Size;
 }
 
-//@{
 //! Set setting value.
 /*!
+	\param name			Setting name.
 	\param value		Setting value.
 */
-void SymEditManager::setFillItem(int value) { Settings.FillItem = value; }
-void SymEditManager::setAlignment(int value) { Settings.Alignment = value; }
-void SymEditManager::setLineWidth(int value) { Settings.LineWidth = value; }
-void SymEditManager::setTextSize(int value) { Settings.TextSize = value; }
-void SymEditManager::setSnapGrid(int value) { Settings.SnapGrid = value; }
-void SymEditManager::setTool(int value) { Settings.Tool = value; }
-//@}
+void SymEditManager::setIntSetting(QString name, int value)
+{
+	if ( Settings.Values.find(name) != Settings.Values.end() )
+		Settings.Values.at(name) = value;
+}
 
-//@{
 //! Get setting value.
 /*!
+	\param name			Setting name.
 	\return				Setting value.
 */
-int SymEditManager::getFillItem() const { return Settings.FillItem; }
-int SymEditManager::getAlignment() const { return Settings.Alignment; }
-int SymEditManager::getLineWidth() const { return Settings.LineWidth; }
-int SymEditManager::getTextSize() const { return Settings.TextSize; }
-int SymEditManager::getSnapGrid() const { return Settings.SnapGrid; }
-int SymEditManager::getTool() const { return Settings.Tool; }
-//@}
+int SymEditManager::getIntSetting(QString name) const
+{
+	if ( Settings.Values.find(name) != Settings.Values.end() )
+		return Settings.Values.at(name);
+	return 0;
+}
 
 //! Get symbol as string.
 /*!
@@ -350,12 +352,27 @@ void SymEditManager::pasteClipboard()
 
 //! Rotate symbol.
 /*!
-	\param dir			Positive value rotates right, negative left
+	\param dir			Positive value rotates right, negative left.
 */
 void SymEditManager::rotateSymbol(int dir)
 {
 	undosave();
 	Symbol.RotateSymbol(dir);
+}
+
+//! Raise or lower item.
+/*!
+	\param dir			Positive value raises, negative lowers.
+	\return				True for success.
+*/
+bool SymEditManager::raiseItem(int dir)
+{
+	if ( Symbol.GetItemCount() )
+	{
+		undosave();
+		return Symbol.RaiseItem(dir);
+	}
+	return false;
 }
 
 //! Undo edit operation.

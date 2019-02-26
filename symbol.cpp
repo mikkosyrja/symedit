@@ -291,3 +291,29 @@ void SymEditSymbol::RotateSymbol(int dir)
 			rotate(item.Value, dir);
 	}
 }
+
+//! Raise or lower item.
+/*!
+	\param dir			Positive value raises, negative lowers.
+	\return				True for success.
+*/
+bool SymEditSymbol::RaiseItem(int dir)
+{
+	if ( !Items.empty() )
+	{
+		size_t index = static_cast<size_t>(ActiveIndex);
+		if ( dir > 0 && index < Items.size() - 1 )	// raise
+		{
+			std::swap(Items[index], Items[index + 1]);
+			++ActiveIndex;
+			return true;
+		}
+		if ( dir < 0 && index > 0 )		// lower
+		{
+			std::swap(Items[index - 1], Items[index]);
+			--ActiveIndex;
+			return true;
+		}
+	}
+	return false;
+}
