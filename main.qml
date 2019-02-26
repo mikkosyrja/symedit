@@ -139,7 +139,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: snaplist
-					implicitWidth: 60
+					implicitWidth: 50
 					model: [ 1, 5, 10 ]
 					onCurrentIndexChanged:
 					{
@@ -160,8 +160,9 @@ ApplicationWindow
 				ComboBox
 				{
 					id: filllist
-					implicitWidth: 60
-					model: [ 0, 1, 2 ]
+					implicitWidth: 100
+					model: [ "No fill", "Area fill", "Backgroud" ]	//%%
+//					model: [ "Ei täyttöä", "Aluetäyttö", "Taustaväri" ]	//%%
 					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
 					function setFill() { currentIndex = fillitem }
 				}
@@ -170,7 +171,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: widthlist
-					implicitWidth: 60
+					implicitWidth: 50
 					model: [ 1, 2, 3, 4, 5 ]
 					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
 					function setWidth() { currentIndex = linewidth - 1 }
@@ -180,7 +181,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: sizelist
-					implicitWidth: 60
+					implicitWidth: 50
 					model: [ 1, 2, 3, 4, 5 ]
 					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
 					function setSize() { currentIndex = textsize - 1 }
@@ -190,7 +191,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: alignlist
-					implicitWidth: 60
+					implicitWidth: 50
 					model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 					onCurrentIndexChanged: { alignment = currentIndex + 1 }
 					function setAlign() { currentIndex = alignment - 1 }

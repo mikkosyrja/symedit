@@ -48,6 +48,7 @@ SymEditSymbol::SymEditSymbol() : ActiveIndex(-1)
 void SymEditSymbol::Load(const QString& buffer)
 {
 	Items.clear();
+	int fill = 0;
 	QPoint position(0, 0);
 	for ( const auto& string : buffer.split(';', QString::SkipEmptyParts) )
 	{
@@ -58,13 +59,15 @@ void SymEditSymbol::Load(const QString& buffer)
 			int x = string.mid(1, comma - 1).toInt();
 			int y = string.mid(comma + 1).toInt();
 			if ( operation != 'U' )
-				Items.push_back(Item(operation, position, QPoint(x, y), false));
+				Items.push_back(Item(operation, position, QPoint(x, y), fill));
 			position = QPoint(x, y);
 		}
+		else if ( operation == 'F' )
+			fill = string.mid(1).toInt();
 		else	// single parameter
 		{
 			int value = string.mid(1).toInt();
-			Items.push_back(Item(operation, position, value, false));
+			Items.push_back(Item(operation, position, value, fill));
 		}
 	}
 	ActiveIndex = static_cast<int>(Items.size()) - 1;
@@ -85,7 +88,14 @@ QString& SymEditSymbol::Save(QString& buffer) const
 			buffer.append(',').append(value.setNum(point.y()));
 		buffer.append(';');
 	};
+	auto appendfill = [](QString& buffer, int fill)
+	{
+		QString value;
+		buffer.append('F').append(value.setNum(fill)).append(';');
+		return fill;
+	};
 
+	int fill = 0;
 	buffer.clear();
 	QPoint position(0, 0);
 	for ( const auto& item : Items ) switch ( item.Operation )
@@ -93,6 +103,8 @@ QString& SymEditSymbol::Save(QString& buffer) const
 		case 'D':	// line
 		case 'B':	// rectangle
 		{
+			if ( item.Fill != fill )
+				fill = appendfill(buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
 			appendvalue(buffer.append(item.Operation), item.Value, 2);
@@ -101,6 +113,8 @@ QString& SymEditSymbol::Save(QString& buffer) const
 		}
 		case 'R':	// circle
 		{
+			if ( item.Fill != fill )
+				fill = appendfill(buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
 			appendvalue(buffer.append(item.Operation), item.Value, 1);

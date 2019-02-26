@@ -23,7 +23,7 @@ public:
 		QPoint Point;						//!< Item coordinates.
 		QPoint Value;						//!< Item value.
 		QString Text;						//!< Text string.
-		bool Fill;							//!< Fill area.
+		int Fill;							//!< Fill area.
 		int Align;							//!< Text alignment.
 	};
 

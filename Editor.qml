@@ -18,6 +18,7 @@ Rectangle
 
 	enum Operation
 	{
+		Fill = 70,		// F
 		Line = 68,		// D
 		Rectangle = 66,	// B
 		Circle = 82		// R
