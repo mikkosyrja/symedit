@@ -10,12 +10,14 @@
 //! Constructor.
 SymEditSettings::SymEditSettings()
 {
-	Values.emplace("FillItem", 0);
-	Values.emplace("Alignment", 9);
-	Values.emplace("LineWidth", 1);
-	Values.emplace("TextSize", 1);
-	Values.emplace("SnapGrid", 5);
-	Values.emplace("Tool", 1);
+	IntValues.emplace("FillItem", 0);
+	IntValues.emplace("Alignment", 9);
+	IntValues.emplace("LineWidth", 1);
+	IntValues.emplace("TextSize", 1);
+	IntValues.emplace("SnapGrid", 5);
+	IntValues.emplace("Tool", 1);
+
+	TextValues.emplace("TextValue", "");
 }
 
 //! Load settings.
@@ -28,12 +30,14 @@ void SymEditSettings::Load()
 	Size.setWidth(settings.value("window/width", 500).toInt());
 	Size.setHeight(settings.value("window/height", 500).toInt());
 
-	Values.at("FillItem") = settings.value("editor/fill", 0).toInt();
-	Values.at("Alignment") = settings.value("editor/align", 9).toInt();
-	Values.at("LineWidth") = settings.value("editor/width", 1).toInt();
-	Values.at("TextSize") = settings.value("editor/size", 1).toInt();
-	Values.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
-	Values.at("Tool") = settings.value("editor/tool", 1).toInt();
+	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
+	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
+	IntValues.at("LineWidth") = settings.value("editor/width", 1).toInt();
+	IntValues.at("TextSize") = settings.value("editor/size", 1).toInt();
+	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
+	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
+
+	TextValues.at("TextValue") = settings.value("editor/text").toString();
 }
 
 //! Save settings.
@@ -46,12 +50,14 @@ void SymEditSettings::Save() const
 	settings.setValue("window/width", Size.width());
 	settings.setValue("window/height", Size.height());
 
-	settings.setValue("editor/fill", Values.at("FillItem"));
-	settings.setValue("editor/align", Values.at("Alignment"));
-	settings.setValue("editor/width", Values.at("LineWidth"));
-	settings.setValue("editor/size", Values.at("TextSize"));
-	settings.setValue("editor/snap", Values.at("SnapGrid"));
-	settings.setValue("editor/tool", Values.at("Tool"));
+	settings.setValue("editor/fill", IntValues.at("FillItem"));
+	settings.setValue("editor/align", IntValues.at("Alignment"));
+	settings.setValue("editor/width", IntValues.at("LineWidth"));
+	settings.setValue("editor/size", IntValues.at("TextSize"));
+	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
+	settings.setValue("editor/tool", IntValues.at("Tool"));
+
+	settings.setValue("editor/text", TextValues.at("TextValue"));
 }
 
 //
@@ -106,6 +112,7 @@ QSize SymEditManager::getWindowSize() const
 	return Settings.Size;
 }
 
+//@{
 //! Set setting value.
 /*!
 	\param name			Setting name.
@@ -113,10 +120,17 @@ QSize SymEditManager::getWindowSize() const
 */
 void SymEditManager::setIntSetting(QString name, int value)
 {
-	if ( Settings.Values.find(name) != Settings.Values.end() )
-		Settings.Values.at(name) = value;
+	if ( Settings.IntValues.find(name) != Settings.IntValues.end() )
+		Settings.IntValues.at(name) = value;
 }
+void SymEditManager::setTextSetting(QString name, QString value)
+{
+	if ( Settings.TextValues.find(name) != Settings.TextValues.end() )
+		Settings.TextValues.at(name) = value;
+}
+//@}
 
+//@{
 //! Get setting value.
 /*!
 	\param name			Setting name.
@@ -124,10 +138,17 @@ void SymEditManager::setIntSetting(QString name, int value)
 */
 int SymEditManager::getIntSetting(QString name) const
 {
-	if ( Settings.Values.find(name) != Settings.Values.end() )
-		return Settings.Values.at(name);
+	if ( Settings.IntValues.find(name) != Settings.IntValues.end() )
+		return Settings.IntValues.at(name);
 	return 0;
 }
+QString SymEditManager::getTextSetting(QString name) const
+{
+	if ( Settings.TextValues.find(name) != Settings.TextValues.end() )
+		return Settings.TextValues.at(name);
+	return QString();
+}
+//@}
 
 //! Get symbol as string.
 /*!

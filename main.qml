@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.0
+import QtQuick.Dialogs 1.2
 
 ApplicationWindow
 {
@@ -17,6 +18,7 @@ ApplicationWindow
 	property int alignment: 1
 	property int textsize: 1
 	property int snapgrid: 1
+	property string textvalue: textfield.text
 	property int tool: 0
 
 	property string symbol
@@ -99,7 +101,7 @@ ApplicationWindow
 			title: qsTr("Help")		//%%
 			MenuItem { text: qsTr("Help"); shortcut: "F1"; onTriggered: help() }	//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("About"); onTriggered: about() }		//%%
+			MenuItem { text: qsTr("About"); onTriggered: aboutDialog.open() }		//%%
 		}
 	}
 
@@ -171,9 +173,8 @@ ApplicationWindow
 				ComboBox
 				{
 					id: filllist
-					implicitWidth: 100
-					model: [ "No fill", "Area fill", "Backgroud" ]	//%%
-//					model: [ "Ei täyttöä", "Aluetäyttö", "Taustaväri" ]	//%%
+					implicitWidth: 50
+					model: [ "0    No fill", "1    Area fill", "2    Backgroud" ]	//%%
 					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
 					function setFill() { currentIndex = fillitem }
 				}
@@ -203,7 +204,18 @@ ApplicationWindow
 				{
 					id: alignlist
 					implicitWidth: 50
-					model: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+					model:
+					[
+						"1     Top Right",			//%%
+						"2     Top Center",			//%%
+						"3     Top Left",			//%%
+						"4     Base Right",			//%%
+						"5     Base Center",		//%%
+						"6     Base Left",			//%%
+						"7     Bottom Right",		//%%
+						"8     Bottom Center",		//%%
+						"9     Bottom Left"			//%%
+					]
 					onCurrentIndexChanged: { alignment = currentIndex + 1 }
 					function setAlign() { currentIndex = alignment - 1 }
 				}
@@ -213,8 +225,6 @@ ApplicationWindow
 				{
 					id: textfield
 					implicitWidth: 120
-
-
 				}
 			}
 		}
@@ -234,6 +244,20 @@ ApplicationWindow
 		}
 	}
 
+	Dialog
+	{
+		id: aboutDialog
+		title: qsTr("About")
+		Label
+		{
+			anchors.fill: parent
+			text: qsTr("Symbol Editor for 3D-Win\n\nhttp://www.3d-system.fi\n")		//%%
+			horizontalAlignment: Text.AlignHCenter
+		}
+
+		standardButtons: StandardButton.Ok
+	}
+
 	onXChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 	onYChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 	onWidthChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
@@ -244,6 +268,8 @@ ApplicationWindow
 	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth); }
 	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize); }
 	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); }
+
+	onTextvalueChanged: { manager.setTextSetting("TextValue", textvalue); }
 	onToolChanged: { manager.setIntSetting("Tool", tool); }
 
 	Component.onCompleted:
@@ -258,6 +284,8 @@ ApplicationWindow
 		linewidth = manager.getIntSetting("LineWidth")
 		textsize = manager.getIntSetting("TextSize")
 		snapgrid = manager.getIntSetting("SnapGrid")
+
+		textfield.text = manager.getTextSetting("TextValue")
 		tool = manager.getIntSetting("Tool")
 
 		filllist.setFill()
@@ -361,11 +389,6 @@ ApplicationWindow
 	}
 
 	function help()
-	{
-
-	}
-
-	function about()
 	{
 
 	}

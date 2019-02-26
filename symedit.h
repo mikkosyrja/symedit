@@ -25,7 +25,8 @@ private:
 	QPoint Position;						//!< Window position.
 	QSize Size;								//!< Window size.
 
-	std::map<QString, int> Values;			//!< Setting values.
+	std::map<QString, int> IntValues;		//!< Integer setting values.
+	std::map<QString, QString> TextValues;	//!< String setting values.
 };
 
 //! Manager class.
@@ -47,6 +48,8 @@ public:
 
 	Q_INVOKABLE void setIntSetting(QString name, int value);
 	Q_INVOKABLE int getIntSetting(QString name) const;
+	Q_INVOKABLE void setTextSetting(QString name, QString value);
+	Q_INVOKABLE QString getTextSetting(QString name) const;
 
 	Q_INVOKABLE QString getSymbol() const;
 
