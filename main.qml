@@ -7,6 +7,7 @@ ApplicationWindow
 	property int mousex: 0
 	property int mousey: 0
 
+	property bool preview: false
 	property bool viewgrid: true
 	property real zoomscale: 1.0
 	property real zoomstep: 1.3
@@ -42,17 +43,17 @@ ApplicationWindow
 			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y"; onTriggered: undo(false) }	//%%
 //			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y,Ctrl+Shift+Z"; onTriggered: undo(false) }	//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cut() }		//%%
-			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copy() }	//%%
-			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: paste() }	//%%
+			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cutsymbol() }		//%%
+			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copysymbol() }		//%%
+			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: pastesymbol() }	//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("Rotate Right"); shortcut: "Alt+Right"; onTriggered: rotate(1) }	//%%
-			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotate(-1) }	//%%
+			MenuItem { text: qsTr("Rotate Right"); shortcut: "Alt+Right"; onTriggered: rotatesymbol(1) }	//%%
+			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotatesymbol(-1) }	//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("Raise Item"); shortcut: "Alt+Up"; onTriggered: raise(1) }		//%%
-			MenuItem { text: qsTr("Lower Item"); shortcut: "Alt+Down"; onTriggered: raise(-1) }		//%%
+			MenuItem { text: qsTr("Raise Item"); shortcut: "Alt+Up"; onTriggered: raiseitem(1) }		//%%
+			MenuItem { text: qsTr("Lower Item"); shortcut: "Alt+Down"; onTriggered: raiseitem(-1) }		//%%
 			MenuSeparator { }
-			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: remove() }	//%%
+			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: removeitem() }	//%%
 		}
 		Menu
 		{
@@ -66,6 +67,12 @@ ApplicationWindow
 				text: qsTr("Grid"); shortcut: "Ctrl+G"		//%%
 				checkable : true; checked: viewgrid
 				onTriggered: grid()
+			}
+			MenuItem
+			{
+				text: qsTr("Preview"); shortcut: "Ctrl+P"	//%%
+				checkable : true; checked: preview
+				onTriggered: previewsymbol()
 			}
 		}
 		Menu
@@ -102,22 +109,26 @@ ApplicationWindow
 		{
 			RowLayout
 			{
-				height: 32
+				height: 30
 				z: 10
 //				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
 //				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
 //				BarSeparator { }
 				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo(true) }	//%%
 				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: undo(false) }	//%%
-				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cut() }			//%%
-				BarTool { image: "image/copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copy() }		//%%
-				BarTool { image: "image/paste_icon&48.png"; tooltip: "Paste symbol"; onClicked: paste() }	//%%
+				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cutsymbol() }		//%%
+				BarTool { image: "image/copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copysymbol() }	//%%
+				BarTool { image: "image/paste_icon&48.png"; tooltip: "Paste symbol"; onClicked: pastesymbol() }	//%%
 				BarSeparator { }
-				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotate(1) }	//%%
-				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotate(-1) }	//%%
-				BarTool { image: "image/up_icon&48.png"; tooltip: "Raise item"; onClicked: raise(1) }		//%%
-				BarTool { image: "image/down_icon&48.png"; tooltip: "Lower item"; onClicked: raise(-1) }	//%%
-				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: remove() }			//%%
+				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotatesymbol(1) }	//%%
+				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotatesymbol(-1) }	//%%
+				BarTool { image: "image/up_icon&48.png"; tooltip: "Raise item"; onClicked: raiseitem(1) }		//%%
+				BarTool { image: "image/down_icon&48.png"; tooltip: "Lower item"; onClicked: raiseitem(-1) }	//%%
+				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: removeitem() }			//%%
+				BarSeparator { }
+//				BarTool { image: "image/plus_icon&48.png"; tooltip: "Zoom in"; onClicked: zoom(1) }			//%%
+//				BarTool { image: "image/minus_icon&48.png"; tooltip: "Zoom out"; onClicked: zoom(-1) }		//%%
+				BarTool { image: "image/eye_icon&48.png"; tooltip: "Preview"; onClicked: previewsymbol() }	//%%
 				BarSeparator { }
 				BarTool { image: "image/cursor_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
 				BarSeparator { }
@@ -294,6 +305,12 @@ ApplicationWindow
 		editor.update()
 	}
 
+	function previewsymbol()
+	{
+		preview = !preview
+		editor.update()
+	}
+
 	function undo(undo)
 	{
 		if ( manager.undo(undo) )
@@ -303,40 +320,40 @@ ApplicationWindow
 		}
 	}
 
-	function cut()
+	function cutsymbol()
 	{
 		manager.cutClipboard();
 		symbol = manager.getSymbol()
 		editor.update()
 	}
 
-	function copy()
+	function copysymbol()
 	{
 		manager.copyClipboard();
 	}
 
-	function paste()
+	function pastesymbol()
 	{
 		manager.pasteClipboard();
 		symbol = manager.getSymbol()
 		editor.update()
 	}
 
-	function rotate(dir)
+	function rotatesymbol(dir)
 	{
 		manager.rotateSymbol(dir)
 		symbol = manager.getSymbol()
 		editor.update()
 	}
 
-	function raise(dir)
+	function raiseitem(dir)
 	{
 		manager.raiseItem(dir)
 		symbol = manager.getSymbol()
 		editor.update()
 	}
 
-	function remove()
+	function removeitem()
 	{
 		manager.removeItem()
 		symbol = manager.getSymbol()

@@ -8,13 +8,13 @@ ToolButton
 	property string image
 	property int tool: 0
 
-	implicitHeight: 32
-	implicitWidth: 32
+	implicitHeight: parent.height - 2
+	implicitWidth: parent.height - 2
 	z: 20
 	Image
 	{
 		source: image
-		anchors { fill: parent; margins: 4 }
+		anchors { fill: parent; margins: 2 }
 	}
 
 	onHoveredChanged:

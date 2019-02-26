@@ -31,7 +31,7 @@ Rectangle
 	property int total: units + offset * 2
 
 	property bool horizontal: (height < width)
-	property real scalexy: (horizontal ? height / total : width / total) * zoomscale
+	property real scalexy: (horizontal ? height / total : width / total) * (preview ? 0.1 : zoomscale)
 
 	property int startx: 0
 	property int starty: 0
@@ -86,7 +86,7 @@ Rectangle
 				manager.selectItem(Qt.point(mousex, mousey))
 				canvas.requestPaint()
 			}
-			else
+			else if ( !preview )
 			{
 				endx = mousex
 				endy = mousey
@@ -187,7 +187,7 @@ Rectangle
 
 			paintrect(context, Qt.point(-max - offset, max + offset), Qt.size(total, total), true)
 
-			if ( viewgrid )
+			if ( viewgrid && !preview )
 			{
 				var row, col;
 				for ( row = -max; row <= max; row += grid )
@@ -211,7 +211,8 @@ Rectangle
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
 			{
-				context.strokeStyle = (index === active ? "red" : "black")
+				if ( !preview )
+					context.strokeStyle = (index === active ? "red" : "black")
 
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
@@ -227,11 +228,15 @@ Rectangle
 					var deltax = point.x - position.x
 					var deltay = position.y - point.y
 					paintrect(context, position, Qt.size(deltax, deltay), fill)
+					if ( !preview && fill && index === active )
+						paintrect(context, position, Qt.size(deltax, deltay), false)
 				}
 				else if ( operation === Editor.Operation.Circle )
 				{
 					var radius = manager.getItemValue(index)
 					paintcircle(context, position, radius, fill)
+					if ( !preview && fill && index === active )
+						paintcircle(context, position, radius, false)
 				}
 			}
 		}
@@ -272,6 +277,8 @@ Rectangle
 						deltax *= 2; deltay *= 2
 					}
 					paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), fillitem)
+					if ( fillitem )
+						paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), false)
 				}
 				else if ( tool > 30 && tool < 40 )	// circle
 				{
@@ -298,6 +305,8 @@ Rectangle
 					{
 						var center = Qt.point(centerx, centery)
 						paintcircle(context, center, radius, fillitem)
+						if ( fillitem )
+							paintcircle(context, center, radius, false)
 					}
 				}
 				else if ( tool > 40 && tool < 50 )	// text
