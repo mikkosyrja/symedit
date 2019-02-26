@@ -47,20 +47,27 @@ Rectangle
 
 		onPositionChanged:
 		{
-			mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offset
-			mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offset
+			if ( tool === Editor.Tool.Select )
+			{
+				mousex = Math.round((mouse.x - canvas.x) / scalexy) - max - offset
+				mousey = max - Math.round((mouse.y - canvas.y) / scalexy) + offset
+			}
+			else	// snap and clip
+			{
+				mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offset
+				mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offset
+				if ( mousex < -max)
+					mousex = -max
+				else if ( mousex > max )
+					mousex = max
+				if ( mousey < -max )
+					mousey = -max
+				else if ( mousey > max )
+					mousey = max
 
-			if ( mousex < -max)
-				mousex = -max
-			else if ( mousex > max )
-				mousex = max
-			if ( mousey < -max )
-				mousey = -max
-			else if ( mousey > max )
-				mousey = max
-
-			if ( down )
-				canvas.requestPaint()
+				if ( down )
+					canvas.requestPaint()
+			}
 		}
 
 		onPressed:
@@ -82,7 +89,7 @@ Rectangle
 			{
 				endx = mousex
 				endy = mousey
-				if ( startx != endx && starty != endy )
+				if ( startx != endx || starty != endy )
 				{
 					if ( tool === Editor.Tool.Line )
 					{

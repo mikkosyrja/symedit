@@ -180,10 +180,17 @@ void SymEditManager::addTextItem(int operation, QPoint point, QString value, int
 }
 
 //! Remove active item.
-void SymEditManager::removeItem()
+/*!
+	\return				True for success.
+*/
+bool SymEditManager::removeItem()
 {
-	undosave();
-	Symbol.RemoveItem(Symbol.GetActiveIndex());
+	if ( Symbol.GetItemCount() )
+	{
+		undosave();
+		return Symbol.RemoveItem(Symbol.GetActiveIndex());
+	}
+	return false;
 }
 
 //! Get item count.
@@ -202,8 +209,12 @@ int SymEditManager::getItemCount() const
 */
 int SymEditManager::getItemOperation(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	return item.Operation;
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Operation;
+	}
+	return 0;
 }
 
 //! Get item position.
@@ -213,10 +224,14 @@ int SymEditManager::getItemOperation(int index) const
 */
 QPoint SymEditManager::getItemPosition(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	if ( item.Operation == 'B' )	// normalize to upper left
-		return QPoint(std::min(item.Value.x(), item.Point.x()), std::max(item.Value.y(), item.Point.y()));
-	return item.Point;
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		if ( item.Operation == 'B' )	// normalize to upper left
+			return QPoint(std::min(item.Value.x(), item.Point.x()), std::max(item.Value.y(), item.Point.y()));
+		return item.Point;
+	}
+	return QPoint(0, 0);
 }
 
 //! Get item int value.
@@ -226,8 +241,12 @@ QPoint SymEditManager::getItemPosition(int index) const
 */
 int SymEditManager::getItemValue(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	return item.Value.x();
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Value.x();
+	}
+	return 0;
 }
 
 //! Get item point value.
@@ -237,10 +256,14 @@ int SymEditManager::getItemValue(int index) const
 */
 QPoint SymEditManager::getItemPoint(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	if ( item.Operation == 'B' )	// normalize to lower right
-		return QPoint(std::max(item.Value.x(), item.Point.x()), std::min(item.Value.y(), item.Point.y()));
-	return item.Value;
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		if ( item.Operation == 'B' )	// normalize to lower right
+			return QPoint(std::max(item.Value.x(), item.Point.x()), std::min(item.Value.y(), item.Point.y()));
+		return item.Value;
+	}
+	return QPoint(0, 0);
 }
 
 //! Get item text value.
@@ -250,30 +273,48 @@ QPoint SymEditManager::getItemPoint(int index) const
 */
 QString SymEditManager::getItemText(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	return item.Text;
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Text;
+	}
+	return "";
 }
 
 //
 int SymEditManager::getItemFill(int index) const
 {
-	const auto& item = Symbol.GetItem(index);
-	return item.Fill;
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Fill;
+	}
+	return 0;
 }
 
-//
+//! Select item nearest to point.
+/*!
+	\param point		Point coordinates.
+	\return				Nearest item index.
+*/
 int SymEditManager::selectItem(QPoint point) const
 {
 	return Symbol.SelectItem(point);
 }
 
-//
+//! Set active item index.
+/*!
+	\param index		Active item index.
+*/
 void SymEditManager::setActiveIndex(int index)
 {
 	Symbol.SetActiveIndex(index);
 }
 
-//
+//! Get active item index.
+/*!
+	\return				Active item index.
+*/
 int SymEditManager::getActiveIndex() const
 {
 	return Symbol.GetActiveIndex();

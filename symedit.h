@@ -69,7 +69,7 @@ public:
 	Q_INVOKABLE void addValueItem(int operation, QPoint point, int value, int fill);
 	Q_INVOKABLE void addPointItem(int operation, QPoint point, QPoint value, int fill);
 	Q_INVOKABLE void addTextItem(int operation, QPoint point, QString value, int align);
-	Q_INVOKABLE void removeItem();
+	Q_INVOKABLE bool removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
 	Q_INVOKABLE int getItemOperation(int index) const;

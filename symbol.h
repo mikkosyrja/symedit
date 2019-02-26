@@ -34,7 +34,7 @@ public:
 	Item& AddItem(int operation, QPoint point, int value, int fill);
 	Item& AddItem(int operation, QPoint point, QPoint end, int fill);
 	Item& AddItem(int operation, QPoint point, QString text, int align);
-	void RemoveItem(int index);
+	bool RemoveItem(int index);
 
 	int SelectItem(QPoint point) const;
 	void SetActiveIndex(int index);

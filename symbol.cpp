@@ -99,7 +99,7 @@ QString& SymEditSymbol::Save(QString& buffer) const
 			position = item.Value;
 			break;
 		}
-		case 'R':
+		case 'R':	// circle
 		{
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
@@ -155,63 +155,99 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QString
 //! Remove item.
 /*!
 	\param index		Item index.
+	\return				True for success.
 */
-void SymEditSymbol::RemoveItem(int index)
+bool SymEditSymbol::RemoveItem(int index)
 {
 	if ( static_cast<size_t>(index) < Items.size() )
 	{
 		Items.erase(Items.begin() + index);
 		ActiveIndex = index - 1;
+		return true;
 	}
+	return false;
 }
 
-//
+//! Select item nearest to point.
+/*!
+	\param point		Point coordinates.
+	\return				Nearest item index.
+*/
 int SymEditSymbol::SelectItem(QPoint point) const
 {
 	ActiveIndex = -1;
 	int index = 0;
-	QPoint previous(0, 0);
 	double minimum = 100.0;
+
+	auto difference = [](const QPoint& start, const QPoint& end) { return QPoint(end.x() - start.x(), end.y() - start.y()); };
+	auto length = [](const QPoint& point) { return sqrt(point.x() * point.x() + point.y() * point.y()); };
+	auto scalar = [](const QPoint& start, const QPoint& end) { return static_cast<double>(start.x() * end.x() + start.y() * end.y()); };
+	auto cross = [](const QPoint& start, const QPoint& end) { return static_cast<double>(start.x() * end.y() - start.y() * end.x()); };
+	auto projection = [&](const QPoint& point, const QPoint& start, const QPoint& end)
+	{
+		QPoint line = difference(start, end);
+		return scalar(difference(start, point), line) / length(line);
+	};
+	auto check = [&](double distance)
+	{
+		if ( ActiveIndex < 0 || distance < minimum )
+		{
+			ActiveIndex = index;
+			minimum = distance;
+		}
+	};
+
+	auto distance = [&](const QPoint& point, const QPoint& start, const QPoint& end)
+	{
+		QPoint line = difference(start, end);
+		double len = length(line), a = projection(point, start, end);
+		if ( a > 0.0 && a < len )
+			check(fabs(cross(difference(start, point), line) / len));
+		check(length(difference(point, start)));
+		check(length(difference(point, end)));
+	};
+
 	for ( const auto& item : Items )
 	{
 		switch ( item.Operation )
 		{
 			case 'D':	// line
 			{
-				//##
+				distance(point, item.Point, item.Value);
 				break;
 			}
 			case 'B':	// rectangle
 			{
-				//##
+				distance(point, item.Point, QPoint(item.Point.x(), item.Value.y()));
+				distance(point, QPoint(item.Point.x(), item.Value.y()), item.Value);
+				distance(point, item.Value, QPoint(item.Value.x(), item.Point.y()));
+				distance(point, QPoint(item.Value.x(), item.Point.y()), item.Point);
 				break;
 			}
 			case 'R':	// circle
 			{
-				double dx = point.x() - previous.x();
-				double dy = point.y() - previous.y();
-				double distance = sqrt(dx * dx + dy * dy);
-				distance = abs(distance - item.Point.x());
-				if ( ActiveIndex < 0 || distance < minimum )
-				{
-					ActiveIndex = index;
-					minimum = distance;
-				}
+				check(fabs(length(difference(point, item.Point)) - item.Value.x()));
 				break;
 			}
 		}
 		++index;
 	}
-	return static_cast<int>(ActiveIndex);
+	return ActiveIndex;
 }
 
-//
+//! Set active item index.
+/*!
+	\param index		Active item index.
+*/
 void SymEditSymbol::SetActiveIndex(int index)
 {
 	ActiveIndex = index;
 }
 
-//
+//! Get active item index.
+/*!
+	\return				Active item index.
+*/
 int SymEditSymbol::GetActiveIndex() const
 {
 	return static_cast<int>(ActiveIndex);
