@@ -10,7 +10,6 @@ function create(text, parent, properties)
 			{
 				left: parent.horizontalCenter,
 				top: parent.bottom,
-//				topMargin: parent.height / 8
 			}
 		};
 	}

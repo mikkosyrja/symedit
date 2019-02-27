@@ -4,6 +4,11 @@
 
 #include "symbol.h"
 
+const double ConstPi = 3.14159265358979323846;	//!< Constant for PI.
+const double Const2Pi = 2.0 * ConstPi;			//!< Constant for PI * 2.
+const double ConstPi2 = ConstPi / 2.0;			//!< Constant for PI / 2.
+const double ConstPi4 = ConstPi / 4.0;			//!< Constant for PI / 4.
+
 //
 //	symbol item functions
 //
@@ -292,7 +297,7 @@ void SymEditSymbol::RotateSymbol(int dir)
 	{
 		double length = sqrt(point.x() * point.x() + point.y() * point.y());
 		double angle = atan2(point.y(), point.x());
-		angle += (dir > 0 ? -M_PI / 2.0 : M_PI / 2.0);
+		angle += (dir > 0 ? -ConstPi2 : ConstPi2);
 		double x = cos(angle) * length, y = sin(angle) * length;
 		point.setX(static_cast<int>(x + (x > 0.0 ? 0.5 : -0.5)));
 		point.setY(static_cast<int>(y + (y > 0.0 ? 0.5 : -0.5)));

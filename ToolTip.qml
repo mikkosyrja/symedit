@@ -29,7 +29,7 @@ Rectangle
 	width: tooltipText.width + 20
 	height: tooltipText.height + 10
 	color: "#dd000000"
-	radius: 6
+	radius: 5
 	opacity: 0
 	z: 30
 

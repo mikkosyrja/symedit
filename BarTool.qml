@@ -11,23 +11,39 @@ ToolButton
 	implicitHeight: parent.height - 2
 	implicitWidth: parent.height - 2
 	z: 20
+
 	Image
 	{
 		source: image
-		anchors { fill: parent; margins: 2 }
+		anchors { fill: parent; margins: 4 }
 	}
+
+	checkable: (tool !== 0)
+	checked: (window.tool === tool)
 
 	onHoveredChanged:
 	{
 		if ( popup !== null )
 			popup.hide()
-		popup = TooltipCreator.create(tooltip, this)
-		popup.show()
+		if ( hovered )
+		{
+			popup = TooltipCreator.create(tooltip, this)
+			popup.show()
+		}
+	}
+
+	onPressedChanged:
+	{
+		if ( popup !== null )
+			popup.hide()
 	}
 
 	onClicked:
 	{
 		if ( tool )
-			window.tool = tool
+		{
+			window.tool = tool	// clicking button seems to break binding
+			checked = Qt.binding(function() { return (window.tool === tool) })
+		}
 	}
 }
