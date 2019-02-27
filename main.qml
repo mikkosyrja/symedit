@@ -174,7 +174,7 @@ ApplicationWindow
 				{
 					id: filllist
 					implicitWidth: 50
-					model: [ "0    No fill", "1    Area fill", "2    Backgroud" ]	//%%
+					model: [ "0    No fill", "1    Backgroud", "2    Area fill" ]	//%%
 					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
 					function setFill() { currentIndex = fillitem }
 				}
@@ -214,7 +214,10 @@ ApplicationWindow
 						"6     Base Left",			//%%
 						"7     Bottom Right",		//%%
 						"8     Bottom Center",		//%%
-						"9     Bottom Left"			//%%
+						"9     Bottom Left",		//%%
+						"10    Middle Right",		//%%
+						"11    Middle Center",		//%%
+						"12    Middle Left"			//%%
 					]
 					onCurrentIndexChanged: { alignment = currentIndex + 1 }
 					function setAlign() { currentIndex = alignment - 1 }

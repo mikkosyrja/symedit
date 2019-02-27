@@ -18,10 +18,10 @@ Rectangle
 
 	enum Operation
 	{
-		Fill = 70,		// F
 		Line = 68,		// D
 		Rectangle = 66,	// B
-		Circle = 82		// R
+		Circle = 82,	// R
+		Text = 33		// !
 	}
 
 	property int units: 100
@@ -104,8 +104,8 @@ Rectangle
 							startx -= (endx - startx)
 							starty -= (endy - starty)
 						}
-						manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem)
-						symbol = manager.getSymbol()
+						if ( manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem) )
+							symbol = manager.getSymbol()
 					}
 					else if ( tool > 30 && tool < 40 )	// circle
 					{
@@ -130,8 +130,17 @@ Rectangle
 							centerx = startx
 							centery = starty
 						}
-						manager.addValueItem(Editor.Operation.Circle, Qt.point(centerx, centery), radius, fillitem)
-						symbol = manager.getSymbol()
+						if ( manager.addValueItem(Editor.Operation.Circle, Qt.point(centerx, centery), radius, fillitem) )
+							symbol = manager.getSymbol()
+					}
+					else if ( tool > 40 && tool < 50 )	// arc
+					{
+
+					}
+					else if ( tool > 50 && tool < 60 )	// text
+					{
+						if ( manager.addTextItem(Editor.Operation.Text, Qt.point(endx, endy), textvalue, alignment) )
+							symbol = manager.getSymbol()
 					}
 				}
 			}
@@ -159,7 +168,7 @@ Rectangle
 				size.width * scalexy, size.height * scalexy)
 			if ( fill )
 			{
-				context.fillStyle = (fill === 1 ? "black" : "white")
+				context.fillStyle = (fill === 2 ? "black" : "white")
 				context.fill()
 			}
 			else
@@ -172,11 +181,40 @@ Rectangle
 				(max - center.y - radius + offset) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
 			if ( fill )
 			{
-				context.fillStyle = (fill === 1 ? "black" : "white")
+				context.fillStyle = (fill === 2 ? "black" : "white")
 				context.fill()
 			}
 			else
 				context.stroke()
+		}
+
+		function setalignment(context, align)
+		{
+			switch ( align )
+			{
+				case 1:		context.textAlign = "right"; context.textBaseline = "top"; break
+				case 2:		context.textAlign = "center"; context.textBaseline = "top"; break
+				case 3:		context.textAlign = "left"; context.textBaseline = "top"; break
+				case 4:		context.textAlign = "right"; context.textBaseline = "alphabetic"; break
+				case 5:		context.textAlign = "center"; context.textBaseline = "alphabetic"; break
+				case 6:		context.textAlign = "left"; context.textBaseline = "alphabetic"; break
+				case 7:		context.textAlign = "right"; context.textBaseline = "bottom"; break
+				case 8:		context.textAlign = "center"; context.textBaseline = "bottom"; break
+				case 9:		context.textAlign = "left"; context.textBaseline = "bottom"; break
+				case 10:	context.textAlign = "right"; context.textBaseline = "middle"; break
+				case 11:	context.textAlign = "center"; context.textBaseline = "middle"; break
+				case 12:	context.textAlign = "left"; context.textBaseline = "middle"; break
+			}
+		}
+
+		function painttext(context, string, point)
+		{
+			var fontsize = 20 * textsize
+			context.font = fontsize.toString() + "px sans-serif"
+			var position = Qt.point((point.x + max + offset) * scalexy, (max - point.y + offset) * scalexy)
+			context.fillText(string, position.x, position.y)
+			if ( !preview )
+				context.beginPath().ellipse(position.x - 5, position.y - 5, 10, 10).fill()
 		}
 
 		function paintgrid(context)
@@ -238,6 +276,11 @@ Rectangle
 					if ( !preview && fill && index === active )
 						paintcircle(context, position, radius, false)
 				}
+				else if ( operation === Editor.Operation.Text )
+				{
+					setalignment(context, manager.getItemAlign(index))
+					painttext(context, manager.getItemText(index), position)
+				}
 			}
 		}
 
@@ -248,7 +291,7 @@ Rectangle
 			paintgrid(context)
 
 			context.strokeStyle = "black"
-//			context.fillStyle = "black"
+			context.fillStyle = "black"
 
 			paintsymbol(context)
 
@@ -309,11 +352,16 @@ Rectangle
 							paintcircle(context, center, radius, false)
 					}
 				}
-				else if ( tool > 40 && tool < 50 )	// text
+				else if ( tool > 40 && tool < 50 )	// arcs
 				{
-					if ( tool === Editor.Tool.Texts )
+
+				}
+				else if ( tool > 50 && tool < 60 )	// text
+				{
+					if ( tool === Editor.Tool.Text )
 					{
-						//##
+						setalignment(context, alignment)
+						painttext(context, textvalue, Qt.point(mousex, mousey))
 					}
 				}
 			}

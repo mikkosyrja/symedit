@@ -166,12 +166,13 @@ QString SymEditManager::getSymbol() const
 	\param point		Item position.
 	\param value		Item value.
 	\param fill			Item area fill.
-	\return				Reference to item.
+	\return				True for success.
 */
-void SymEditManager::addValueItem(int operation, QPoint point, int value, int fill)
+bool SymEditManager::addValueItem(int operation, QPoint point, int value, int fill)
 {
 	undosave();
 	Symbol.AddItem(operation, point, value, fill);
+	return true;
 }
 
 //! Add symbol item.
@@ -180,12 +181,13 @@ void SymEditManager::addValueItem(int operation, QPoint point, int value, int fi
 	\param point		Item position.
 	\param value		Item value.
 	\param fill			Item area fill.
-	\return				Reference to item.
+	\return				True for success.
 */
-void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int fill)
+bool SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int fill)
 {
 	undosave();
 	Symbol.AddItem(operation, point, value, fill);
+	return true;
 }
 
 //! Add symbol item.
@@ -194,12 +196,17 @@ void SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int
 	\param point		Item position.
 	\param value		Item text value.
 	\param align		Item text alignment.
-	\return				Reference to item.
+	\return				True for success.
 */
-void SymEditManager::addTextItem(int operation, QPoint point, QString value, int align)
+bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int align)
 {
-	undosave();
-	Symbol.AddItem(operation, point, value, align);
+	if ( !value.isEmpty() )
+	{
+		undosave();
+		Symbol.AddItem(operation, point, value, align);
+		return true;
+	}
+	return false;
 }
 
 //! Remove active item.
@@ -311,6 +318,17 @@ int SymEditManager::getItemFill(int index) const
 	{
 		const auto& item = Symbol.GetItem(index);
 		return item.Fill;
+	}
+	return 0;
+}
+
+//
+int SymEditManager::getItemAlign(int index) const
+{
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Align;
 	}
 	return 0;
 }

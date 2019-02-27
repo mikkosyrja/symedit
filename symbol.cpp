@@ -53,7 +53,7 @@ SymEditSymbol::SymEditSymbol() : ActiveIndex(-1)
 void SymEditSymbol::Load(const QString& buffer)
 {
 	Items.clear();
-	int fill = 0;
+	int fill = 0, align = 9;
 	QPoint position(0, 0);
 	for ( const auto& string : buffer.split(';', QString::SkipEmptyParts) )
 	{
@@ -69,6 +69,12 @@ void SymEditSymbol::Load(const QString& buffer)
 		}
 		else if ( operation == 'F' )
 			fill = string.mid(1).toInt();
+		else if ( operation == 'J' )
+			align = string.mid(1).toInt();
+		else if ( operation == '!' )
+			Items.push_back(Item(operation, position, string.mid(1), align));
+		else if ( operation == '$' || operation == '#' )
+			Items.push_back(Item(operation, position, string, align));
 		else	// single parameter
 		{
 			int value = string.mid(1).toInt();
@@ -93,15 +99,15 @@ QString& SymEditSymbol::Save(QString& buffer) const
 			buffer.append(',').append(value.setNum(point.y()));
 		buffer.append(';');
 	};
-	auto appendfill = [](QString& buffer, int fill)
+	auto appendoption = [](QChar option, QString& buffer, int index)
 	{
 		QString value;
-		buffer.append('F').append(value.setNum(fill)).append(';');
-		return fill;
+		buffer.append(option).append(value.setNum(index)).append(';');
+		return index;
 	};
 
-	int fill = 0;
 	buffer.clear();
+	int fill = 0, align = 9;
 	QPoint position(0, 0);
 	for ( const auto& item : Items ) switch ( item.Operation )
 	{
@@ -109,7 +115,7 @@ QString& SymEditSymbol::Save(QString& buffer) const
 		case 'B':	// rectangle
 		{
 			if ( item.Fill != fill )
-				fill = appendfill(buffer, item.Fill);
+				fill = appendoption('F', buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
 			appendvalue(buffer.append(item.Operation), item.Value, 2);
@@ -119,12 +125,22 @@ QString& SymEditSymbol::Save(QString& buffer) const
 		case 'R':	// circle
 		{
 			if ( item.Fill != fill )
-				fill = appendfill(buffer, item.Fill);
+				fill = appendoption('F', buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
 			appendvalue(buffer.append(item.Operation), item.Value, 1);
 			position = item.Point;
 			break;
+		}
+		case '!':	// text
+		{
+			if ( item.Align != align )
+				align = appendoption('J', buffer, item.Align);
+			if ( item.Point != position )
+				appendvalue(buffer.append('U'), item.Point, 2);
+			if ( item.Text.front() != '$' && item.Text.front() != '#' )
+				buffer.append('!');		// constant text
+			buffer.append(item.Text).append(';');
 		}
 	}
 	if ( !buffer.isEmpty() && buffer.back() == ';' )
