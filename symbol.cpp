@@ -5,9 +5,12 @@
 #include "symbol.h"
 
 const double ConstPi = 3.14159265358979323846;	//!< Constant for PI.
-const double Const2Pi = 2.0 * ConstPi;			//!< Constant for PI * 2.
 const double ConstPi2 = ConstPi / 2.0;			//!< Constant for PI / 2.
-const double ConstPi4 = ConstPi / 4.0;			//!< Constant for PI / 4.
+
+namespace Operation
+{
+	Q_NAMESPACE
+}
 
 //
 //	symbol item functions
@@ -20,17 +23,17 @@ const double ConstPi4 = ConstPi / 4.0;			//!< Constant for PI / 4.
 	\param value		Item value.
 	\param fill			Item area fill.
 */
-SymEditSymbol::Item::Item(int operation, QPoint point, int value, int fill)
+SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, int value, int fill)
 	: Operation(operation), Point(point), Value(value, value), Fill(fill), Align(9)
 {
 
 }
-SymEditSymbol::Item::Item(int operation, QPoint point, QPoint value, int fill)
+SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint value, int fill)
 	: Operation(operation), Point(point), Value(value), Fill(fill), Align(0)
 {
 
 }
-SymEditSymbol::Item::Item(int operation, QPoint point, QString value, int align)
+SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QString value, int align)
 	: Operation(operation), Point(point), Text(value), Fill(0), Align(align)
 {
 
@@ -57,28 +60,31 @@ void SymEditSymbol::Load(const QString& buffer)
 	QPoint position(0, 0);
 	for ( const auto& string : buffer.split(';', QString::SkipEmptyParts) )
 	{
-		int operation = string.at(0).toLatin1();
+		int type = string.at(0).toLatin1();
 		int comma = string.indexOf(',');
 		if ( comma >= 0 )
 		{
 			int x = string.mid(1, comma - 1).toInt();
 			int y = string.mid(comma + 1).toInt();
-			if ( operation != 'U' )
-				Items.push_back(Item(operation, position, QPoint(x, y), fill));
+			if ( type == 'D' )
+				Items.push_back(Item(Operation::Line, position, QPoint(x, y), fill));
+			else if ( type == 'B' )
+				Items.push_back(Item(Operation::Rectangle, position, QPoint(x, y), fill));
 			position = QPoint(x, y);
 		}
-		else if ( operation == 'F' )
-			fill = string.mid(1).toInt();
-		else if ( operation == 'J' )
-			align = string.mid(1).toInt();
-		else if ( operation == '!' )
-			Items.push_back(Item(operation, position, string.mid(1), align));
-		else if ( operation == '$' || operation == '#' )
-			Items.push_back(Item(operation, position, string, align));
 		else	// single parameter
 		{
 			int value = string.mid(1).toInt();
-			Items.push_back(Item(operation, position, value, fill));
+			if ( type == 'F' )
+				fill = value;
+			else if ( type == 'J' )
+				align = value;
+			else if ( type == 'R' )
+				Items.push_back(Item(Operation::Circle, position, value, fill));
+			else if ( type == '!' )
+				Items.push_back(Item(Operation::Text, position, string.mid(1), align));
+			else if ( type == '$' || type == '#' )
+				Items.push_back(Item(Operation::Text, position, string, align));
 		}
 	}
 	ActiveIndex = static_cast<int>(Items.size()) - 1;
@@ -111,28 +117,28 @@ QString& SymEditSymbol::Save(QString& buffer) const
 	QPoint position(0, 0);
 	for ( const auto& item : Items ) switch ( item.Operation )
 	{
-		case 'D':	// line
-		case 'B':	// rectangle
+		case Operation::Line:
+		case Operation::Rectangle:
 		{
 			if ( item.Fill != fill )
 				fill = appendoption('F', buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
-			appendvalue(buffer.append(item.Operation), item.Value, 2);
+			appendvalue(buffer.append(item.Operation == Operation::Line ? 'D' : 'B'), item.Value, 2);
 			position = item.Value;
 			break;
 		}
-		case 'R':	// circle
+		case Operation::Circle:
 		{
 			if ( item.Fill != fill )
 				fill = appendoption('F', buffer, item.Fill);
 			if ( item.Point != position )
 				appendvalue(buffer.append('U'), item.Point, 2);
-			appendvalue(buffer.append(item.Operation), item.Value, 1);
+			appendvalue(buffer.append('R'), item.Value, 1);
 			position = item.Point;
 			break;
 		}
-		case '!':	// text
+		case Operation::Text:
 		{
 			if ( item.Align != align )
 				align = appendoption('J', buffer, item.Align);
@@ -141,7 +147,14 @@ QString& SymEditSymbol::Save(QString& buffer) const
 			if ( item.Text.front() != '$' && item.Text.front() != '#' )
 				buffer.append('!');		// constant text
 			buffer.append(item.Text).append(';');
+			break;
 		}
+		case Operation::Arc:
+		{
+			//##
+			break;
+		}
+		default:		assert(0);
 	}
 	if ( !buffer.isEmpty() && buffer.back() == ';' )
 		buffer.chop(1);
@@ -164,21 +177,21 @@ void SymEditSymbol::Clear()
 	\param fill			Item area fill.
 	\return				Reference to item.
 */
-SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, int value, int fill)
+SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, int value, int fill)
 {
 	Item item(operation, point, value, fill);
 	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
-SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QPoint value, int fill)
+SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QPoint value, int fill)
 {
 	Item item(operation, point, value, fill);
 	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
-SymEditSymbol::Item& SymEditSymbol::AddItem(int operation, QPoint point, QString value, int align)
+SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QString value, int align)
 {
 	Item item(operation, point, value, align);
 	ActiveIndex = static_cast<int>(Items.size());
@@ -246,12 +259,12 @@ int SymEditSymbol::SelectItem(QPoint point) const
 	{
 		switch ( item.Operation )
 		{
-			case 'D':	// line
+			case Operation::Line:
 			{
 				distance(point, item.Point, item.Value);
 				break;
 			}
-			case 'B':	// rectangle
+			case Operation::Rectangle:
 			{
 				distance(point, item.Point, QPoint(item.Point.x(), item.Value.y()));
 				distance(point, QPoint(item.Point.x(), item.Value.y()), item.Value);
@@ -259,11 +272,22 @@ int SymEditSymbol::SelectItem(QPoint point) const
 				distance(point, QPoint(item.Value.x(), item.Point.y()), item.Point);
 				break;
 			}
-			case 'R':	// circle
+			case Operation::Circle:
 			{
 				check(fabs(length(difference(point, item.Point)) - item.Value.x()));
 				break;
 			}
+			case Operation::Text:
+			{
+				check(fabs(length(difference(point, item.Point))));
+				break;
+			}
+			case Operation::Arc:
+			{
+				//##
+				break;
+			}
+			default:		assert(0);
 		}
 		++index;
 	}
@@ -322,7 +346,7 @@ void SymEditSymbol::RotateSymbol(int dir)
 	for ( auto& item : Items )
 	{
 		rotate(item.Point, dir);
-		if ( item.Operation != 'R' )
+		if ( item.Operation == Operation::Line || item.Operation == Operation::Rectangle )
 			rotate(item.Value, dir);
 	}
 }

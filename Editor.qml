@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import Org.Syrja.Symbol.Operation 1.0
 
 Rectangle
 {
@@ -14,14 +15,6 @@ Rectangle
 		ArcSemi = 41,
 		ArcQuarter = 42,
 		Text = 51
-	}
-
-	enum Operation
-	{
-		Line = 68,		// D
-		Rectangle = 66,	// B
-		Circle = 82,	// R
-		Text = 33		// !
 	}
 
 	property int units: 100
@@ -81,20 +74,21 @@ Rectangle
 
 		onReleased:
 		{
+			down = false
+			endx = mousex
+			endy = mousey
 			if ( tool === Editor.Tool.Select )
 			{
-				manager.selectItem(Qt.point(mousex, mousey))
+				manager.selectItem(Qt.point(endx, endy))
 				canvas.requestPaint()
 			}
 			else if ( !preview )
 			{
-				endx = mousex
-				endy = mousey
 				if ( startx != endx || starty != endy )
 				{
 					if ( tool === Editor.Tool.Line )
 					{
-						manager.addPointItem(Editor.Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
+						manager.addPointItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
 						symbol = manager.getSymbol()
 					}
 					else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
@@ -104,7 +98,7 @@ Rectangle
 							startx -= (endx - startx)
 							starty -= (endy - starty)
 						}
-						if ( manager.addPointItem(Editor.Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem) )
+						if ( manager.addPointItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem) )
 							symbol = manager.getSymbol()
 					}
 					else if ( tool > 30 && tool < 40 )	// circle
@@ -130,7 +124,7 @@ Rectangle
 							centerx = startx
 							centery = starty
 						}
-						if ( manager.addValueItem(Editor.Operation.Circle, Qt.point(centerx, centery), radius, fillitem) )
+						if ( manager.addValueItem(Operation.Circle, Qt.point(centerx, centery), radius, fillitem) )
 							symbol = manager.getSymbol()
 					}
 					else if ( tool > 40 && tool < 50 )	// arc
@@ -139,12 +133,11 @@ Rectangle
 					}
 					else if ( tool > 50 && tool < 60 )	// text
 					{
-						if ( manager.addTextItem(Editor.Operation.Text, Qt.point(endx, endy), textvalue, alignment) )
+						if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, alignment) )
 							symbol = manager.getSymbol()
 					}
 				}
 			}
-			down = false
 		}
 	}
 
@@ -207,14 +200,23 @@ Rectangle
 			}
 		}
 
-		function painttext(context, string, point)
+		function painttext(context, string, point, active)
 		{
-			var fontsize = 20 * textsize
+			context.lineWidth = textsize * zoomscale / 2
+			var fontsize = 20 * textsize * zoomscale
 			context.font = fontsize.toString() + "px sans-serif"
 			var position = Qt.point((point.x + max + offset) * scalexy, (max - point.y + offset) * scalexy)
 			context.fillText(string, position.x, position.y)
+			context.strokeText(string, position.x, position.y)
 			if ( !preview )
+			{
+				if ( active )
+					context.fillStyle = "red"
 				context.beginPath().ellipse(position.x - 5, position.y - 5, 10, 10).fill()
+				if ( active )
+					context.fillStyle = "black"
+			}
+			context.lineWidth = linewidth
 		}
 
 		function paintgrid(context)
@@ -255,12 +257,12 @@ Rectangle
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
 				var fill = manager.getItemFill(index)
-				if ( operation === Editor.Operation.Line )
+				if ( operation === Operation.Line )
 				{
 					point = manager.getItemPoint(index)
 					paintline(context, position, point)
 				}
-				else if ( operation === Editor.Operation.Rectangle )
+				else if ( operation === Operation.Rectangle )
 				{
 					point = manager.getItemPoint(index)
 					var deltax = point.x - position.x
@@ -269,17 +271,17 @@ Rectangle
 					if ( !preview && fill && index === active )
 						paintrect(context, position, Qt.size(deltax, deltay), false)
 				}
-				else if ( operation === Editor.Operation.Circle )
+				else if ( operation === Operation.Circle )
 				{
 					var radius = manager.getItemValue(index)
 					paintcircle(context, position, radius, fill)
 					if ( !preview && fill && index === active )
 						paintcircle(context, position, radius, false)
 				}
-				else if ( operation === Editor.Operation.Text )
+				else if ( operation === Operation.Text )
 				{
 					setalignment(context, manager.getItemAlign(index))
-					painttext(context, manager.getItemText(index), position)
+					painttext(context, manager.getItemText(index), position, index === active)
 				}
 			}
 		}
@@ -298,7 +300,7 @@ Rectangle
 			if ( down )
 			{
 				context.strokeStyle = "red"
-				context.fillStyle = "red"
+//				context.fillStyle = "red"
 
 				var cornerx = (mousex < startx ? mousex : startx)
 				var cornery = (mousey > starty ? mousey : starty)
@@ -361,7 +363,7 @@ Rectangle
 					if ( tool === Editor.Tool.Text )
 					{
 						setalignment(context, alignment)
-						painttext(context, textvalue, Qt.point(mousex, mousey))
+						painttext(context, textvalue, Qt.point(mousex, mousey), true)
 					}
 				}
 			}

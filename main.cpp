@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
+	qmlRegisterUncreatableMetaObject(Operation::staticMetaObject,
+		"Org.Syrja.Symbol.Operation", 1, 0, "Operation", "Error: only enums" );
+
 	SymEditManager manager;
 
 	QQmlApplicationEngine engine;

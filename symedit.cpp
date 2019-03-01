@@ -171,7 +171,7 @@ QString SymEditManager::getSymbol() const
 bool SymEditManager::addValueItem(int operation, QPoint point, int value, int fill)
 {
 	undosave();
-	Symbol.AddItem(operation, point, value, fill);
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, fill);
 	return true;
 }
 
@@ -186,7 +186,7 @@ bool SymEditManager::addValueItem(int operation, QPoint point, int value, int fi
 bool SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int fill)
 {
 	undosave();
-	Symbol.AddItem(operation, point, value, fill);
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, fill);
 	return true;
 }
 
@@ -203,7 +203,7 @@ bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int
 	if ( !value.isEmpty() )
 	{
 		undosave();
-		Symbol.AddItem(operation, point, value, align);
+		Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, align);
 		return true;
 	}
 	return false;
@@ -244,7 +244,7 @@ int SymEditManager::getItemOperation(int index) const
 		const auto& item = Symbol.GetItem(index);
 		return item.Operation;
 	}
-	return 0;
+	return Operation::None;
 }
 
 //! Get item position.
@@ -257,7 +257,7 @@ QPoint SymEditManager::getItemPosition(int index) const
 	if ( Symbol.GetItemCount() )
 	{
 		const auto& item = Symbol.GetItem(index);
-		if ( item.Operation == 'B' )	// normalize to upper left
+		if ( item.Operation == Operation::Rectangle )	// normalize to upper left
 			return QPoint(std::min(item.Value.x(), item.Point.x()), std::max(item.Value.y(), item.Point.y()));
 		return item.Point;
 	}
@@ -289,7 +289,7 @@ QPoint SymEditManager::getItemPoint(int index) const
 	if ( Symbol.GetItemCount() )
 	{
 		const auto& item = Symbol.GetItem(index);
-		if ( item.Operation == 'B' )	// normalize to lower right
+		if ( item.Operation == Operation::Rectangle )	// normalize to lower right
 			return QPoint(std::max(item.Value.x(), item.Point.x()), std::min(item.Value.y(), item.Point.y()));
 		return item.Value;
 	}
