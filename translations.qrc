@@ -1,0 +1,6 @@
+<RCC>
+	<qresource prefix="/">
+		<file>locale/symedit.fi_FI.qm</file>
+		<file>locale/symedit.en_GB.qm</file>
+	</qresource>
+</RCC>

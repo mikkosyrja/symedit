@@ -1,3 +1,5 @@
+// original code from https://wiki.qt.io/QtQuick_ToolTip_Component
+
 var component = Qt.createComponent("ToolTip.qml");
 
 function create(text, parent, properties)

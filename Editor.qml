@@ -32,6 +32,11 @@ Rectangle
 	property int endx: 0
 	property int endy: 0
 
+	property string paintcolor: "black"
+	property string editcolor: "red"
+	property string gridcolor: "gray"
+	property string backcolor: "white"
+
 	anchors.fill: parent
 
 	MouseArea
@@ -161,7 +166,7 @@ Rectangle
 				size.width * scalexy, size.height * scalexy)
 			if ( fill )
 			{
-				context.fillStyle = (fill === 2 ? "black" : "white")
+				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
 				context.fill()
 			}
 			else
@@ -174,7 +179,7 @@ Rectangle
 				(max - center.y - radius + offset) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
 			if ( fill )
 			{
-				context.fillStyle = (fill === 2 ? "black" : "white")
+				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
 				context.fill()
 			}
 			else
@@ -202,8 +207,8 @@ Rectangle
 
 		function painttext(context, string, point, active)
 		{
-			context.lineWidth = textsize * zoomscale / 2
-			var fontsize = 20 * textsize * zoomscale
+			context.lineWidth = (preview ? 1 : textsize * zoomscale / 2)
+			var fontsize = 20 * textsize * (preview ? 0.1 : zoomscale)
 			context.font = fontsize.toString() + "px sans-serif"
 			var position = Qt.point((point.x + max + offset) * scalexy, (max - point.y + offset) * scalexy)
 			context.fillText(string, position.x, position.y)
@@ -211,10 +216,10 @@ Rectangle
 			if ( !preview )
 			{
 				if ( active )
-					context.fillStyle = "red"
+					context.fillStyle = editcolor
 				context.beginPath().ellipse(position.x - 5, position.y - 5, 10, 10).fill()
 				if ( active )
-					context.fillStyle = "black"
+					context.fillStyle = paintcolor
 			}
 			context.lineWidth = linewidth
 		}
@@ -222,8 +227,8 @@ Rectangle
 		function paintgrid(context)
 		{
 			context.lineWidth = 0.2
-			context.strokeStyle = "gray"
-			context.fillStyle = "white"
+			context.strokeStyle = gridcolor
+			context.fillStyle = backcolor
 
 			paintrect(context, Qt.point(-max - offset, max + offset), Qt.size(total, total), true)
 
@@ -252,7 +257,7 @@ Rectangle
 			for ( index = 0; index < count; index++ )
 			{
 				if ( !preview )
-					context.strokeStyle = (index === active ? "red" : "black")
+					context.strokeStyle = (index === active ? editcolor : paintcolor)
 
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
@@ -292,15 +297,15 @@ Rectangle
 
 			paintgrid(context)
 
-			context.strokeStyle = "black"
-			context.fillStyle = "black"
+			context.strokeStyle = paintcolor
+			context.fillStyle = paintcolor
 
 			paintsymbol(context)
 
 			if ( down )
 			{
-				context.strokeStyle = "red"
-//				context.fillStyle = "red"
+				context.strokeStyle = editcolor
+//				context.fillStyle = editcolor
 
 				var cornerx = (mousex < startx ? mousex : startx)
 				var cornery = (mousey > starty ? mousey : starty)

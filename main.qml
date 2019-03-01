@@ -26,82 +26,82 @@ ApplicationWindow
 
 	id: window
 	visible: false
-	title: qsTr("Symbol editor")	//%%
+	title: qsTrId("Symbol editor")
 
 	menuBar: MenuBar
 	{
 		Menu
 		{
-			title: qsTr("File")		//%%
-			MenuItem { text: qsTr("Open"); shortcut: "Ctrl+O"; onTriggered: open() }	//%%
-			MenuItem { text: qsTr("Save"); shortcut: "Ctrl+S"; onTriggered: save() }	//%%
+			title: qsTrId("id_menu_file")
+			MenuItem { text: qsTrId("id_menu_file_open"); shortcut: "Ctrl+O"; onTriggered: open() }
+			MenuItem { text: qsTrId("id_menu_file_save"); shortcut: "Ctrl+S"; onTriggered: save() }
 			MenuSeparator { }
-			MenuItem { text: qsTr("Exit"); shortcut: "F4"; onTriggered: Qt.quit() }		//%%
+			MenuItem { text: qsTrId("id_menu_file_exit"); shortcut: "F4"; onTriggered: Qt.quit() }
 		}
 		Menu
 		{
-			title: qsTr("Edit")		//%%
-			MenuItem { text: qsTr("Undo"); shortcut: "Ctrl+Z"; onTriggered: undo(true) }	//%%
-			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y"; onTriggered: undo(false) }	//%%
-//			MenuItem { text: qsTr("Redo"); shortcut: "Ctrl+Y,Ctrl+Shift+Z"; onTriggered: undo(false) }	//%%
+			title: qsTrId("id_menu_edit")
+			MenuItem { text: qsTrId("id_menu_edit_undo"); shortcut: "Ctrl+Z"; onTriggered: undo(true) }
+			MenuItem { text: qsTrId("id_menu_edit_redo"); shortcut: "Ctrl+Y"; onTriggered: undo(false) }
+//			MenuItem { text: qsTrId("id_menu_edit_redo"); shortcut: "Ctrl+Y,Ctrl+Shift+Z"; onTriggered: undo(false) }
 			MenuSeparator { }
-			MenuItem { text: qsTr("Cut"); shortcut: "Ctrl+X"; onTriggered: cutsymbol() }		//%%
-			MenuItem { text: qsTr("Copy"); shortcut: "Ctrl+C"; onTriggered: copysymbol() }		//%%
-			MenuItem { text: qsTr("Paste"); shortcut: "Ctrl+V"; onTriggered: pastesymbol() }	//%%
+			MenuItem { text: qsTrId("id_menu_edit_cut"); shortcut: "Ctrl+X"; onTriggered: cutsymbol() }
+			MenuItem { text: qsTrId("id_menu_edit_copy"); shortcut: "Ctrl+C"; onTriggered: copysymbol() }
+			MenuItem { text: qsTrId("id_menu_edit_paste"); shortcut: "Ctrl+V"; onTriggered: pastesymbol() }
 			MenuSeparator { }
-			MenuItem { text: qsTr("Rotate Right"); shortcut: "Alt+Right"; onTriggered: rotatesymbol(1) }	//%%
-			MenuItem { text: qsTr("Rotate Left"); shortcut: "Alt+Left"; onTriggered: rotatesymbol(-1) }	//%%
+			MenuItem { text: qsTrId("id_menu_edit_rotate_right"); shortcut: "Alt+Right"; onTriggered: rotatesymbol(1) }
+			MenuItem { text: qsTrId("id_menu_edit_rotate_left"); shortcut: "Alt+Left"; onTriggered: rotatesymbol(-1) }
 			MenuSeparator { }
-			MenuItem { text: qsTr("Raise Item"); shortcut: "Alt+Up"; onTriggered: raiseitem(1) }		//%%
-			MenuItem { text: qsTr("Lower Item"); shortcut: "Alt+Down"; onTriggered: raiseitem(-1) }		//%%
+			MenuItem { text: qsTrId("id_menu_edit_raise_item"); shortcut: "Alt+Up"; onTriggered: raiseitem(1) }
+			MenuItem { text: qsTrId("id_menu_edit_lower_item"); shortcut: "Alt+Down"; onTriggered: raiseitem(-1) }
 			MenuSeparator { }
-			MenuItem { text: qsTr("Delete"); shortcut: "Delete"; onTriggered: removeitem() }	//%%
+			MenuItem { text: qsTrId("id_menu_edit_delete_item"); shortcut: "Delete"; onTriggered: removeitem() }
 		}
 		Menu
 		{
-			title: qsTr("View")		//%%
-			MenuItem { text: qsTr("Zoom In"); shortcut: "Ctrl++"; onTriggered: zoom(1) }	//%%
-			MenuItem { text: qsTr("Zoom Out"); shortcut: "Ctrl+-"; onTriggered: zoom(-1) }	//%%
-			MenuItem { text: qsTr("Zoom All"); shortcut: "Ctrl+0"; onTriggered: zoom(0) }	//%%
+			title: qsTrId("id_menu_view")
+			MenuItem { text: qsTrId("id_menu_view_zoom_in"); shortcut: "Ctrl++"; onTriggered: zoom(1) }
+			MenuItem { text: qsTrId("id_menu_view_zoom_out"); shortcut: "Ctrl+-"; onTriggered: zoom(-1) }
+			MenuItem { text: qsTrId("id_menu_view_zoom_all"); shortcut: "Ctrl+0"; onTriggered: zoom(0) }
 			MenuSeparator { }
 			MenuItem
 			{
-				text: qsTr("Grid"); shortcut: "Ctrl+G"		//%%
+				text: qsTrId("id_menu_view_grid"); shortcut: "Ctrl+G"
 				checkable : true; checked: viewgrid
 				onTriggered: grid()
 			}
 			MenuItem
 			{
-				text: qsTr("Preview"); shortcut: "Ctrl+P"	//%%
+				text: qsTrId("id_menu_view_preview"); shortcut: "Ctrl+P"
 				checkable : true; checked: preview
 				onTriggered: previewsymbol()
 			}
 		}
 		Menu
 		{
-			title: qsTr("Tool")		//%%
-			MenuTool { text: qsTr("Select"); tool: Editor.Tool.Select }		//%%
+			title: qsTrId("id_menu_tool")
+			MenuTool { text: qsTrId("Select"); tool: Editor.Tool.Select }
 			MenuSeparator { }
-			MenuTool { text: qsTr("Line"); tool: Editor.Tool.Line }		//%%
+			MenuTool { text: qsTrId("Line"); tool: Editor.Tool.Line }
 			MenuSeparator { }
-			MenuTool { text: qsTr("Rectangle Corner"); tool: Editor.Tool.RectCorner }	//%%
-			MenuTool { text: qsTr("Rectangle Center"); tool: Editor.Tool.RectCenter }	//%%
+			MenuTool { text: qsTrId("Rectangle Corner"); tool: Editor.Tool.RectCorner }
+			MenuTool { text: qsTrId("Rectangle Center"); tool: Editor.Tool.RectCenter }
 			MenuSeparator { }
-			MenuTool { text: qsTr("Circle Corner"); tool: Editor.Tool.CircleCorner }	//%%
-			MenuTool { text: qsTr("Circle Radius"); tool: Editor.Tool.CircleRadius }	//%%
-			MenuTool { text: qsTr("Circle Center"); tool: Editor.Tool.CircleCenter }	//%%
+			MenuTool { text: qsTrId("Circle Corner"); tool: Editor.Tool.CircleCorner }
+			MenuTool { text: qsTrId("Circle Radius"); tool: Editor.Tool.CircleRadius }
+			MenuTool { text: qsTrId("Circle Center"); tool: Editor.Tool.CircleCenter }
 			MenuSeparator { }
-			MenuTool { text: qsTr("Semicircle"); tool: Editor.Tool.ArcSemi }			//%%
-			MenuTool { text: qsTr("Quarter circle"); tool: Editor.Tool.ArcQuarter }		//%%
+			MenuTool { text: qsTrId("Semicircle"); tool: Editor.Tool.ArcSemi }
+			MenuTool { text: qsTrId("Quarter circle"); tool: Editor.Tool.ArcQuarter }
 			MenuSeparator { }
-			MenuTool { text: qsTr("Text"); tool: Editor.Tool.Text }		//%%
+			MenuTool { text: qsTrId("Text"); tool: Editor.Tool.Text }
 		}
 		Menu
 		{
-			title: qsTr("Help")		//%%
-			MenuItem { text: qsTr("Help"); shortcut: "F1"; onTriggered: help() }	//%%
+			title: qsTrId("Help")
+			MenuItem { text: qsTrId("Help"); shortcut: "F1"; onTriggered: help() }
 			MenuSeparator { }
-			MenuItem { text: qsTr("About"); onTriggered: aboutDialog.open() }		//%%
+			MenuItem { text: qsTrId("About"); onTriggered: aboutDialog.open() }
 		}
 	}
 
@@ -113,42 +113,42 @@ ApplicationWindow
 			{
 				height: 30
 				z: 10
-//				BarTool { image: "image/open_icon&48.png"; tooltip: "Open File"; onClicked: open() }	//%%
-//				BarTool { image: "image/save_icon&48.png"; tooltip: "Save File"; onClicked: save() }	//%%
+//				BarTool { image: "image/open_icon&48.png"; tooltip: qsTrId("Open File"); onClicked: open() }
+//				BarTool { image: "image/save_icon&48.png"; tooltip: qsTrId("Save File"); onClicked: save() }
 //				BarSeparator { }
-				BarTool { image: "image/undo_icon&48.png"; tooltip: "Undo Edit"; onClicked: undo(true) }	//%%
-				BarTool { image: "image/redo_icon&48.png"; tooltip: "Redo Edit"; onClicked: undo(false) }	//%%
-				BarTool { image: "image/cut_icon&48.png"; tooltip: "Cut Symbol"; onClicked: cutsymbol() }		//%%
-				BarTool { image: "image/copy_icon&48.png"; tooltip: "Copy Symbol"; onClicked: copysymbol() }	//%%
-				BarTool { image: "image/paste_icon&48.png"; tooltip: "Paste symbol"; onClicked: pastesymbol() }	//%%
+				BarTool { image: "image/undo_icon&48.png"; tooltip: qsTrId("Undo Edit"); onClicked: undo(true) }
+				BarTool { image: "image/redo_icon&48.png"; tooltip: qsTrId("Redo Edit"); onClicked: undo(false) }
+				BarTool { image: "image/cut_icon&48.png"; tooltip: qsTrId("Cut Symbol"); onClicked: cutsymbol() }
+				BarTool { image: "image/copy_icon&48.png"; tooltip: qsTrId("Copy Symbol"); onClicked: copysymbol() }
+				BarTool { image: "image/paste_icon&48.png"; tooltip: qsTrId("Paste symbol"); onClicked: pastesymbol() }
 				BarSeparator { }
-				BarTool { image: "image/rotate_right.png"; tooltip: "Rotate right"; onClicked: rotatesymbol(1) }	//%%
-				BarTool { image: "image/rotate_left.png"; tooltip: "Rotate left"; onClicked: rotatesymbol(-1) }	//%%
-				BarTool { image: "image/up_icon&48.png"; tooltip: "Raise item"; onClicked: raiseitem(1) }		//%%
-				BarTool { image: "image/down_icon&48.png"; tooltip: "Lower item"; onClicked: raiseitem(-1) }	//%%
-				BarTool { image: "image/delete.png"; tooltip: "Delete item"; onClicked: removeitem() }			//%%
+				BarTool { image: "image/rotate_right.png"; tooltip: qsTrId("Rotate right"); onClicked: rotatesymbol(1) }
+				BarTool { image: "image/rotate_left.png"; tooltip: qsTrId("Rotate left"); onClicked: rotatesymbol(-1) }
+				BarTool { image: "image/up_icon&48.png"; tooltip: qsTrId("Raise item"); onClicked: raiseitem(1) }
+				BarTool { image: "image/down_icon&48.png"; tooltip: qsTrId("Lower item"); onClicked: raiseitem(-1) }
+				BarTool { image: "image/delete.png"; tooltip: qsTrId("Delete item"); onClicked: removeitem() }
 				BarSeparator { }
-//				BarTool { image: "image/plus_icon&48.png"; tooltip: "Zoom in"; onClicked: zoom(1) }			//%%
-//				BarTool { image: "image/minus_icon&48.png"; tooltip: "Zoom out"; onClicked: zoom(-1) }		//%%
-				BarTool { image: "image/eye_icon&48.png"; tooltip: "Preview"; onClicked: previewsymbol() }	//%%
+//				BarTool { image: "image/plus_icon&48.png"; tooltip: qsTrId("Zoom in"); onClicked: zoom(1) }
+//				BarTool { image: "image/minus_icon&48.png"; tooltip: qsTrId("Zoom out"); onClicked: zoom(-1) }
+				BarTool { image: "image/eye_icon&48.png"; tooltip: qsTrId("Preview"); onClicked: previewsymbol() }
 				BarSeparator { }
-				BarTool { image: "image/cursor_icon&48.png"; tooltip: "Select item"; tool: Editor.Tool.Select }	//%%
+				BarTool { image: "image/cursor_icon&48.png"; tooltip: qsTrId("Select item"); tool: Editor.Tool.Select }
 				BarSeparator { }
-				BarTool { image: "image/polyline.png"; tooltip: "Straight Line"; tool: Editor.Tool.Line }	//%%
+				BarTool { image: "image/polyline.png"; tooltip: qsTrId("Straight Line"); tool: Editor.Tool.Line }
 				BarSeparator { }
-				BarTool { image: "image/rectangle_corner.png"; tooltip: "Rectangle Corners"; tool: Editor.Tool.RectCorner }	//%%
-				BarTool { image: "image/rectangle_center.png"; tooltip: "Rectangle Center"; tool: Editor.Tool.RectCenter }	//%%
+				BarTool { image: "image/rectangle_corner.png"; tooltip: qsTrId("Rectangle Corners"); tool: Editor.Tool.RectCorner }
+				BarTool { image: "image/rectangle_center.png"; tooltip: qsTrId("Rectangle Center"); tool: Editor.Tool.RectCenter }
 				BarSeparator { }
-				BarTool { image: "image/circle_corner.png"; tooltip: "Circle Corner"; tool: Editor.Tool.CircleCorner }	//%%
-				BarTool { image: "image/circle_radius.png"; tooltip: "Circle Radius"; tool: Editor.Tool.CircleRadius }	//%%
-				BarTool { image: "image/circle_center.png"; tooltip: "Circle Center"; tool: Editor.Tool.CircleCenter }	//%%
+				BarTool { image: "image/circle_corner.png"; tooltip: qsTrId("Circle Corner"); tool: Editor.Tool.CircleCorner }
+				BarTool { image: "image/circle_radius.png"; tooltip: qsTrId("Circle Radius"); tool: Editor.Tool.CircleRadius }
+				BarTool { image: "image/circle_center.png"; tooltip: qsTrId("Circle Center"); tool: Editor.Tool.CircleCenter }
 				BarSeparator { }
-				BarTool { image: "image/text.png"; tooltip: "Text String"; tool: Editor.Tool.Text }		//%%
+				BarTool { image: "image/text.png"; tooltip: qsTrId("Text String"); tool: Editor.Tool.Text }
 			}
 			RowLayout
 			{
 				height: 32
-				Label { text: qsTr("Snap") }	//%%
+				Label { text: qsTrId("Snap") }
 				ComboBox
 				{
 					id: snaplist
@@ -169,17 +169,17 @@ ApplicationWindow
 				}
 				BarSeparator { }
 				Item { Layout.fillWidth: true }
-				Label { text: qsTr("Fill") }	//%%
+				Label { text: qsTrId("Fill") }
 				ComboBox
 				{
 					id: filllist
 					implicitWidth: 50
-					model: [ "0    No fill", "1    Backgroud", "2    Area fill" ]	//%%
+					model: [ qsTrId("0    No fill"), qsTrId("1    Backgroud"), qsTrId("2    Area fill") ]
 					onCurrentIndexChanged: { fillitem = currentIndex; editor.update() }
 					function setFill() { currentIndex = fillitem }
 				}
 				BarSeparator { }
-				Label { text: qsTr("Line width") }	//%%
+				Label { text: qsTrId("Line width") }
 				ComboBox
 				{
 					id: widthlist
@@ -189,7 +189,7 @@ ApplicationWindow
 					function setWidth() { currentIndex = linewidth - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTr("Text size") }	//%%
+				Label { text: qsTrId("Text size") }
 				ComboBox
 				{
 					id: sizelist
@@ -199,31 +199,31 @@ ApplicationWindow
 					function setSize() { currentIndex = textsize - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTr("Alignment") }	//%%
+				Label { text: qsTrId("Alignment") }
 				ComboBox
 				{
 					id: alignlist
 					implicitWidth: 50
 					model:
 					[
-						"1     Top Right",			//%%
-						"2     Top Center",			//%%
-						"3     Top Left",			//%%
-						"4     Base Right",			//%%
-						"5     Base Center",		//%%
-						"6     Base Left",			//%%
-						"7     Bottom Right",		//%%
-						"8     Bottom Center",		//%%
-						"9     Bottom Left",		//%%
-						"10    Middle Right",		//%%
-						"11    Middle Center",		//%%
-						"12    Middle Left"			//%%
+						qsTrId("1     Top Right"),
+						qsTrId("2     Top Center"),
+						qsTrId("3     Top Left"),
+						qsTrId("4     Base Right"),
+						qsTrId("5     Base Center"),
+						qsTrId("6     Base Left"),
+						qsTrId("7     Bottom Right"),
+						qsTrId("8     Bottom Center"),
+						qsTrId("9     Bottom Left"),
+						qsTrId("10    Middle Right"),
+						qsTrId("11    Middle Center"),
+						qsTrId("12    Middle Left")
 					]
 					onCurrentIndexChanged: { alignment = currentIndex + 1 }
 					function setAlign() { currentIndex = alignment - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTr("Text") }	//%%
+				Label { text: qsTrId("id-toolbar-text") }
 				TextField
 				{
 					id: textfield
@@ -250,11 +250,11 @@ ApplicationWindow
 	Dialog
 	{
 		id: aboutDialog
-		title: qsTr("About")
+		title: qsTrId("About")
 		Label
 		{
 			anchors.fill: parent
-			text: qsTr("Symbol Editor for 3D-Win\n\nhttp://www.3d-system.fi\n")		//%%
+			text: qsTrId("id-help-about-text")
 			horizontalAlignment: Text.AlignHCenter
 		}
 
@@ -317,7 +317,7 @@ ApplicationWindow
 	{
 		if ( dir === 0 )	// all
 			zoomscale = 1.0
-		else if ( dir > 0 )		// in
+		else if ( dir > 0 )	// in
 		{
 			if ( (zoomscale *= zoomstep) > 1.0 )
 				zoomscale = 1.0

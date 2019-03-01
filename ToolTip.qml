@@ -1,3 +1,5 @@
+// original code from https://wiki.qt.io/QtQuick_ToolTip_Component
+
 import QtQuick 2.2
 
 Rectangle

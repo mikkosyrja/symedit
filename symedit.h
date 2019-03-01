@@ -5,6 +5,7 @@
 #include <QString>
 #include <QPoint>
 #include <QSize>
+#include <QTranslator>
 
 #include <deque>
 
@@ -89,6 +90,8 @@ private:
 
 	std::deque<QString> UndoStack;			//!< Undo stack.
 	std::deque<QString> RedoStack;			//!< Redo stack.
-};
 
+	QTranslator BackupTranslator;			//!< UI backup translator.
+	QTranslator LocaleTranslator;			//!< UI locale translator.
+};
 #endif

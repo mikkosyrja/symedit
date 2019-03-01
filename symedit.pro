@@ -17,7 +17,9 @@ SOURCES += main.cpp \
     symbol.cpp
 
 RESOURCES += \
-    qml.qrc
+    qml.qrc \
+    translations.qrc \
+    translations.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -45,4 +47,11 @@ DISTFILES += \
     image/rectangle_corner.kra \
     image/rotate_left.kra \
     image/rotate_right.kra \
-    image/text.kra
+    image/text.kra \
+    .editorconfig \
+    lrelease.sh \
+    lupdate.sh \
+    locale/symedit.ts \
+    locale/symedit.fi_FI.ts \
+    locale/symedit.en_GB.ts \
+    .gitignore

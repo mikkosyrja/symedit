@@ -71,6 +71,12 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 {
 	Settings.Load();
 
+	QLocale locale;
+	if ( BackupTranslator.load(":/locale/symedit.en_GB.qm") )
+		QGuiApplication::installTranslator(&BackupTranslator);
+	if ( LocaleTranslator.load(locale, ":/locale/symedit.") )
+		QGuiApplication::installTranslator(&LocaleTranslator);
+
 	Symbol.Load("U00,00;R50;U-35,-35;D35,35;U-35,35;D35,-35;");		//##
 }
 
