@@ -3,291 +3,315 @@
 <TS version="2.1" language="en_GB">
 <context>
     <name></name>
-    <message id="Symbol editor">
+    <message id="id_application_title">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Symbol Editor</translation>
     </message>
     <message id="id_menu_file">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>File</translation>
     </message>
     <message id="id_menu_file_open">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Open...</translation>
     </message>
     <message id="id_menu_file_save">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Save...</translation>
     </message>
     <message id="id_menu_file_exit">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Exit</translation>
     </message>
     <message id="id_menu_edit">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Edit</translation>
     </message>
     <message id="id_menu_edit_undo">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Undo</translation>
     </message>
     <message id="id_menu_edit_redo">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Redo</translation>
     </message>
     <message id="id_menu_edit_cut">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Cut</translation>
     </message>
     <message id="id_menu_edit_copy">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Copy</translation>
     </message>
     <message id="id_menu_edit_paste">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Paste</translation>
     </message>
     <message id="id_menu_edit_rotate_right">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Rotate Right</translation>
     </message>
     <message id="id_menu_edit_rotate_left">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Rotate Left</translation>
     </message>
     <message id="id_menu_edit_raise_item">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Raise Item</translation>
     </message>
     <message id="id_menu_edit_lower_item">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Lower Item</translation>
     </message>
     <message id="id_menu_edit_delete_item">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Delete Item</translation>
     </message>
     <message id="id_menu_view">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>View</translation>
     </message>
     <message id="id_menu_view_zoom_in">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Zoom In</translation>
     </message>
     <message id="id_menu_view_zoom_out">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Zoom Out</translation>
     </message>
     <message id="id_menu_view_zoom_all">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Zoom Out</translation>
     </message>
     <message id="id_menu_view_grid">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Show Grid</translation>
     </message>
     <message id="id_menu_view_preview">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Preview</translation>
     </message>
     <message id="id_menu_tool">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Tool</translation>
     </message>
-    <message id="Select">
+    <message id="id_menu_tool_select">
+        <source></source>
+		<translation>Select</translation>
+    </message>
+    <message id="id_menu_tool_line">
+        <source></source>
+		<translation>Line</translation>
+    </message>
+    <message id="id_menu_tool_rect_corner">
+        <source></source>
+		<translation>Rectangle Corner</translation>
+    </message>
+    <message id="id_menu_tool_rect_center">
+        <source></source>
+		<translation>Rectangle Center</translation>
+    </message>
+    <message id="id_menu_tool_circle_corner">
+        <source></source>
+		<translation>Circle Corner</translation>
+    </message>
+    <message id="id_menu_tool_circle_radius">
+        <source></source>
+		<translation>Circle Radius</translation>
+    </message>
+    <message id="id_menu_tool_circle_center">
+        <source></source>
+		<translation>Circle Center</translation>
+    </message>
+    <message id="id_menu_tool_arc_semi">
+        <source></source>
+		<translation>Semicircle</translation>
+    </message>
+    <message id="id_menu_tool_arc_quarter">
+        <source></source>
+		<translation>Quarter Circle</translation>
+    </message>
+    <message id="id_menu_tool_text">
+        <source></source>
+		<translation>Text</translation>
+    </message>
+    <message id="id_menu_help">
+        <source></source>
+		<translation>Help</translation>
+    </message>
+    <message id="id_menu_help_help">
+        <source></source>
+		<translation>Help</translation>
+    </message>
+    <message id="id_menu_about">
+        <source></source>
+		<translation>About</translation>
+    </message>
+    <message id="id_tooltip_edit_undo">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Line">
+    <message id="id_tooltip_edit_redo">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Rectangle Corner">
+    <message id="id_tooltip_edit_cut">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Rectangle Center">
+    <message id="id_tooltip_edit_copyl">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Circle Corner">
+    <message id="id_tooltip_edit_paste">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Circle Radius">
+    <message id="id_tooltip_edit_rotate_right">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Circle Center">
+    <message id="id_tooltip_edit_rotate_left">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Semicircle">
+    <message id="id_tooltip_edit_raise_item">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Quarter circle">
+    <message id="id_tooltip_edit_lower_item">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Text">
+    <message id="id_tooltip_delete_raise_item">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Help">
+    <message id="id_tooltip_zoom_preview">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="About">
+    <message id="id_tooltip_tool_select">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Undo Edit">
+    <message id="id_tooltip_tool_line">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Redo Edit">
+    <message id="id_tooltip_tool_rect_corner">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Cut Symbol">
+    <message id="id_tooltip_tool_rect_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Copy Symbol">
+    <message id="id_tooltip_tool_circle_corner">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Paste symbol">
+    <message id="id_tooltip_tool_circle_radius">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Rotate right">
+    <message id="id_tooltip_tool_circle_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Rotate left">
+    <message id="id_tooltip_tool_text">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Raise item">
+    <message id="id_toolbar_snap_grid">
+        <source></source>
+		<translation>Snap Grid</translation>
+    </message>
+    <message id="id_toolbar_fill_item">
+        <source></source>
+		<translation>Fill Item</translation>
+    </message>
+    <message id="id_toolbar_fill_none">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Lower item">
+    <message id="id_toolbar_fill_back">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Delete item">
+    <message id="id_toolbar_fill_area">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Preview">
+    <message id="id_toolbar_line_width">
+        <source></source>
+		<translation>Line Width</translation>
+    </message>
+    <message id="id_toolbar_text_size">
+        <source></source>
+		<translation>Text Size</translation>
+    </message>
+    <message id="id_toolbar_alignment">
+        <source></source>
+		<translation>Alignment</translation>
+    </message>
+    <message id="id_toolbar_align_top_right">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Select item">
+    <message id="id_toolbar_align_top_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Straight Line">
+    <message id="id_toolbar_align_top_left">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Rectangle Corners">
+    <message id="id_toolbar_align_base_right">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Text String">
+    <message id="id_toolbar_align_base_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Snap">
+    <message id="id_toolbar_align_base_left">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Fill">
+    <message id="id_toolbar_align_bottom_right">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="0    No fill">
+    <message id="id_toolbar_align_bottom_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="1    Backgroud">
+    <message id="id_toolbar_align_bottom_left">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="2    Area fill">
+    <message id="id_toolbar_align_middle_right">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Line width">
+    <message id="id_toolbar_align_middle_center">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Text size">
+    <message id="id_toolbar_align_middle_left">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Alignment">
+    <message id="id_toolbar_text_field">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>Text</translation>
     </message>
-    <message id="1     Top Right">
+    <message id="id_dialog_about">
         <source></source>
-        <translation type="unfinished"></translation>
+		<translation>About Symbol Editor</translation>
     </message>
-    <message id="2     Top Center">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="3     Top Left">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="4     Base Right">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="5     Base Center">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="6     Base Left">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="7     Bottom Right">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="8     Bottom Center">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="9     Bottom Left">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="10    Middle Right">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="11    Middle Center">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="12    Middle Left">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id-toolbar-text">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id-help-about-text">
+    <message id="id_dialog_about_text">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

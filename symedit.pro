@@ -18,8 +18,7 @@ SOURCES += main.cpp \
 
 RESOURCES += \
     qml.qrc \
-    translations.qrc \
-    translations.qrc
+    locale.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
