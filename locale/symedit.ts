@@ -155,7 +155,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_edit_copyl">
+	<message id="id_tooltip_edit_copy">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,7 +179,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_delete_raise_item">
+	<message id="id_tooltip_delete_item">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

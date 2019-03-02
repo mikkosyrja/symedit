@@ -72,7 +72,8 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	Settings.Load();
 
 	QLocale locale;
-	if ( BackupTranslator.load(":/locale/symedit.en_GB.qm") )
+//	if ( BackupTranslator.load(":/locale/symedit.en_GB.qm") )
+	if ( BackupTranslator.load(":/locale/symedit.fi_FI.qm") )
 		QGuiApplication::installTranslator(&BackupTranslator);
 	if ( LocaleTranslator.load(locale, ":/locale/symedit.") )
 		QGuiApplication::installTranslator(&LocaleTranslator);

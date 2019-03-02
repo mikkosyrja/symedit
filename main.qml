@@ -99,9 +99,9 @@ ApplicationWindow
 		Menu
 		{
 			title: qsTrId("id_menu_help")
-			MenuItem { text: qsTrId("id_menu_help_help"); shortcut: "F1"; onTriggered: help() }
+			MenuItem { text: qsTrId("id_menu_help_contents"); shortcut: "F1"; onTriggered: help() }
 			MenuSeparator { }
-			MenuItem { text: qsTrId("id_menu_about"); onTriggered: aboutDialog.open() }
+			MenuItem { text: qsTrId("id_menu_help_about"); onTriggered: aboutDialog.open() }
 		}
 	}
 
@@ -119,14 +119,14 @@ ApplicationWindow
 				BarTool { image: "image/undo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
 				BarTool { image: "image/redo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }
 				BarTool { image: "image/cut_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_cut"); onClicked: cutsymbol() }
-				BarTool { image: "image/copy_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_copyl"); onClicked: copysymbol() }
+				BarTool { image: "image/copy_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_copy"); onClicked: copysymbol() }
 				BarTool { image: "image/paste_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_paste"); onClicked: pastesymbol() }
 				BarSeparator { }
 				BarTool { image: "image/rotate_right.png"; tooltip: qsTrId("id_tooltip_edit_rotate_right"); onClicked: rotatesymbol(1) }
 				BarTool { image: "image/rotate_left.png"; tooltip: qsTrId("id_tooltip_edit_rotate_left"); onClicked: rotatesymbol(-1) }
 				BarTool { image: "image/up_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_raise_item"); onClicked: raiseitem(1) }
 				BarTool { image: "image/down_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_lower_item"); onClicked: raiseitem(-1) }
-				BarTool { image: "image/delete.png"; tooltip: qsTrId("id_tooltip_delete_raise_item"); onClicked: removeitem() }
+				BarTool { image: "image/delete.png"; tooltip: qsTrId("id_tooltip_delete_item"); onClicked: removeitem() }
 				BarSeparator { }
 //				BarTool { image: "image/plus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_in"); onClicked: zoom(1) }
 //				BarTool { image: "image/minus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_out"); onClicked: zoom(-1) }

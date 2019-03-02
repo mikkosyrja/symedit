@@ -15,11 +15,12 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
+	// register enumerations
 	qmlRegisterUncreatableMetaObject(Operation::staticMetaObject,
 		"Org.Syrja.Symbol.Operation", 1, 0, "Operation", "Error: only enums" );
 
+	// register manager
 	SymEditManager manager;
-
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("manager", &manager);
 
