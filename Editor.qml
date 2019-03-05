@@ -20,15 +20,17 @@ Rectangle
 	property int units: 100
 	property int max: units / 2
 	property int grid: 10
-	property int offset: 5
-	property int total: units + offset * 2
+	property int offsetx: 100
+	property int offsety: 50
+	property int totalx: units + offsetx * 2	// 300
+	property int totaly: units + offsety * 2	// 200
 
-	property bool horizontal: (height < width)
-	property real scalexy: (horizontal ? height / total : width / total) * (preview ? 0.1 : zoomscale)
+	property bool horizontal: (height / 2 < width / 3)
+	property real scalexy: (horizontal ? height / totaly : width / totalx) * (preview ? zoommin : zoomscale)
 
+	property bool down: false
 	property int startx: 0
 	property int starty: 0
-	property bool down: false
 	property int endx: 0
 	property int endy: 0
 
@@ -48,13 +50,13 @@ Rectangle
 		{
 			if ( tool === Editor.Tool.Select )
 			{
-				mousex = Math.round((mouse.x - canvas.x) / scalexy) - max - offset
-				mousey = max - Math.round((mouse.y - canvas.y) / scalexy) + offset
+				mousex = Math.round((mouse.x - canvas.x) / scalexy) - max - offsetx
+				mousey = max - Math.round((mouse.y - canvas.y) / scalexy) + offsety
 			}
 			else	// snap and clip
 			{
-				mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offset
-				mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offset
+				mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offsetx
+				mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offsety
 				if ( mousex < -max)
 					mousex = -max
 				else if ( mousex > max )
@@ -150,19 +152,19 @@ Rectangle
 	{
 		id: canvas
 
-		width: total * scalexy; height: total * scalexy
+		width: totalx * scalexy; height: totaly * scalexy
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 
 		function paintline(context, start, end)
 		{
-			context.beginPath().moveTo((start.x + max + offset) * scalexy, (max - start.y + offset) * scalexy)
-			context.lineTo((end.x + max + offset) * scalexy, (max - end.y + offset) * scalexy).stroke()
+			context.beginPath().moveTo((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy)
+			context.lineTo((end.x + max + offsetx) * scalexy, (max - end.y + offsety) * scalexy).stroke()
 		}
 
 		function paintrect(context, start, size, fill)
 		{
-			context.beginPath().rect((start.x + max + offset) * scalexy, (max - start.y + offset) * scalexy,
+			context.beginPath().rect((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy,
 				size.width * scalexy, size.height * scalexy)
 			if ( fill )
 			{
@@ -175,8 +177,8 @@ Rectangle
 
 		function paintcircle(context, center, radius, fill)
 		{
-			context.beginPath().ellipse((center.x + max - radius + offset) * scalexy,
-				(max - center.y - radius + offset) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
+			context.beginPath().ellipse((center.x + max - radius + offsetx) * scalexy,
+				(max - center.y - radius + offsety) * scalexy, radius * 2 * scalexy, radius * 2 * scalexy)
 			if ( fill )
 			{
 				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
@@ -207,21 +209,21 @@ Rectangle
 
 		function painttext(context, string, point, active)
 		{
-			context.lineWidth = (preview ? 1 : textsize * zoomscale / 2)
-			var fontsize = 20 * textsize * (preview ? 0.1 : zoomscale)
+			context.lineWidth = textsize * (preview ? zoommin : zoomscale) / 2
+			var fontsize = 20 * textsize * (preview ? zoommin : zoomscale)
 			context.font = fontsize.toString() + "px sans-serif"
-			var position = Qt.point((point.x + max + offset) * scalexy, (max - point.y + offset) * scalexy)
+			var position = Qt.point((point.x + max + offsetx) * scalexy, (max - point.y + offsety) * scalexy)
 			context.fillText(string, position.x, position.y)
 			context.strokeText(string, position.x, position.y)
 			if ( !preview )
 			{
 				if ( active )
 					context.fillStyle = editcolor
-				context.beginPath().ellipse(position.x - 5, position.y - 5, 10, 10).fill()
+				context.beginPath().ellipse(position.x - 5, position.y - 5, zoomscale * 10, zoomscale * 10).fill()
 				if ( active )
 					context.fillStyle = paintcolor
 			}
-			context.lineWidth = linewidth
+			context.lineWidth = linewidth * zoomscale * 2
 		}
 
 		function paintgrid(context)
@@ -230,7 +232,7 @@ Rectangle
 			context.strokeStyle = gridcolor
 			context.fillStyle = backcolor
 
-			paintrect(context, Qt.point(-max - offset, max + offset), Qt.size(total, total), true)
+			paintrect(context, Qt.point(-max - offsetx, max + offsety), Qt.size(totalx, totaly), true)
 
 			if ( viewgrid && !preview )
 			{
@@ -250,7 +252,7 @@ Rectangle
 
 		function paintsymbol(context)
 		{
-			context.lineWidth = linewidth
+			context.lineWidth = linewidth * (preview ? zoommin * 2 : zoomscale) * 2
 
 			var active = manager.getActiveIndex();
 			var index, count = manager.getItemCount()
@@ -299,6 +301,7 @@ Rectangle
 
 			context.strokeStyle = paintcolor
 			context.fillStyle = paintcolor
+			context.lineCap = "round"
 
 			paintsymbol(context)
 

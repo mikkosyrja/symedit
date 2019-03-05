@@ -10,7 +10,9 @@ ApplicationWindow
 
 	property bool preview: false
 	property bool viewgrid: true
-	property real zoomscale: 1.0
+	property real zoommax: 1.5
+	property real zoommin: 0.1
+	property real zoomscale: 1.5
 	property real zoomstep: 1.3
 
 	property int fillitem: 0
@@ -321,16 +323,16 @@ ApplicationWindow
 	function zoom(dir)
 	{
 		if ( dir === 0 )	// all
-			zoomscale = 1.0
+			zoomscale = zoommax
 		else if ( dir > 0 )	// in
 		{
-			if ( (zoomscale *= zoomstep) > 1.0 )
-				zoomscale = 1.0
+			if ( (zoomscale *= zoomstep) > zoommax )
+				zoomscale = zoommax
 		}
 		else	// out
 		{
-			if ( (zoomscale /= zoomstep) < 0.1 )
-				zoomscale = 0.1
+			if ( (zoomscale /= zoomstep) < zoommin )
+				zoomscale = zoommin
 		}
 		editor.update()
 	}
