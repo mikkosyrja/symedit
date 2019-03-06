@@ -26,7 +26,7 @@ xxx
 |exit image| Exit
 ^^^^^^^^^^^^^^^^^
 
-Lopettaa ohjelman.
+Exits application.
 
 Edit
 ----
@@ -39,12 +39,12 @@ Edit
 |undo image| Undo
 ^^^^^^^^^^^^^^^^^
 
-Kumoaa edellisen operaation.
+Undoes previous operation.
 
 |redo image| Redo
 ^^^^^^^^^^^^^^^^^
 
-Tekee uudellen kumotun operaation.
+Redoes previously undoed operation.
 
 .. |cut image| image:: ../../image/cut_icon&48.png
 	:scale: 50 %
@@ -56,53 +56,53 @@ Tekee uudellen kumotun operaation.
 |cut image| Cut
 ^^^^^^^^^^^^^^^
 
-Leikkaa koko symbolin tekstinä leikepöydälle.
+Cuts whole symbol to clipboard as text.
 
 |copy image| Copy
 ^^^^^^^^^^^^^^^^^
 
-Kopioi koko symbolin tekstinä leikepöydälle.
+Copies whole symbol to clipboard as text.
 
 |paste image| Paste
 ^^^^^^^^^^^^^^^^^^^
 
-Liittää koko symbolin tekstinä leikepöydältä.
+Pastes whole symbol from clipboard as text.
 
 .. |right image| image:: ../../image/rotate_right.png
 	:scale: 50 %
 .. |left image| image:: ../../image/rotate_left.png
 	:scale: 50 %
 
-|right image| Käännä oikealle
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|right image| Rotate Right
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta oikealle.
+Rotates symbol 90 degrees clockwise.
 
-|left image| Käännä vasemmalle
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|left image| Käännä Left
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta vasemmalle.
+Rotates symbol 90 degrees counterclockwise.
 
 .. |raise image| image:: ../../image/up_icon&48.png
 	:scale: 50 %
 .. |lower image| image:: ../../image/down_icon&48.png
 	:scale: 50 %
 
-|raise image| Nosta kohdetta
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|raise image| Raise Item
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Nostaa aktiivista kohdetta piirtojärjestyksessä ylemmäs.
 
-|lower image| Alenna kohdetta
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|lower image| Lower Item
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Laskee aktiivista kohdetta piirtojärjestyksessä alemmas.
 
 .. |remove image| image:: ../../image/delete.png
 	:scale: 50 %
 
-|remove image| Poista kohde
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|remove image| Remove Item
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Poistaa aktiivisen kohteen ja aktivoi piirtojärjestyksessä edellisen kohteen.
 
@@ -116,12 +116,12 @@ View
 .. |all image| image:: ../../image/zoom_icon&48.png
 	:scale: 50 %
 
-|in image| Zoom in
+|in image| Zoom In
 ^^^^^^^^^^^^^^^^^^
 
 Zoomaa näyttöä lähemmäs.
 
-|out image| Zoom out
+|out image| Zoom Out
 ^^^^^^^^^^^^^^^^^^^^
 
 Zoomaa näyttöä kauemmas.
@@ -136,7 +136,7 @@ Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
 .. |preview image| image:: ../../image/eye_icon&48.png
 	:scale: 50 %
 
-|grid image| Show grid
+|grid image| Show Grid
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Näyttää 10x10 ruudukon symbolin taustalla.

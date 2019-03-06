@@ -76,12 +76,12 @@ Liittää koko symbolin tekstinä leikepöydältä.
 |right image| Käännä oikealle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta oikealle.
+Kääntää symbolia 90 astetta myötäpäivään.
 
 |left image| Käännä vasemmalle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta vasemmalle.
+Kääntää symbolia 90 astetta vastapäivään.
 
 .. |raise image| image:: ../../image/up_icon&48.png
 	:scale: 50 %

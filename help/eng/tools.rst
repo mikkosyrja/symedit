@@ -1,10 +1,10 @@
-Piirtotyökalut
-==============
+Drawing tools
+=============
 
 xxx
 
-Piirtotavat
------------
+Drawing methods
+---------------
 
 Kaikki piirtotavat toimivat samalla tavalla. Hiiren painikkeen painaminen määrittää kohteen alkupisteen. Hiiren siirto painike pohjassa siirtää loppupistettä ja piirtää kohdetta reaaliajassa. Painikkeen vapauttaminen luo symboliin uuden kohteen ja aktivoi sen aktiiviseksi kohteeksi.
 
@@ -13,16 +13,16 @@ Kohteen alku- ja loppupisteen on oltava eri paikoissa eli hiiren painikkeen vapa
 .. |select image| image:: ../../image/cursor_icon&48.png
 	:scale: 50 %
 
-|select image| Valitse
-^^^^^^^^^^^^^^^^^^^^^^
+|select image| Select
+^^^^^^^^^^^^^^^^^^^^^
 
 Valitsee hiirellä osoitetun kohteen aktiiviseksi. Alueet valitaan osoittamalla reunaviivaa ja tekstit osoittamalla kiinnityspistettä.
 
 .. |line image| image:: ../../image/polyline.png
 	:scale: 50 %
 
-|line image| Viiva
-^^^^^^^^^^^^^^^^^^
+|line image| Line
+^^^^^^^^^^^^^^^^^
 
 Piirtää kahden pisteen viivan
 
@@ -76,8 +76,8 @@ Neljännesympyrä
 
 xxx
 
-|text image| Teksti
-^^^^^^^^^^^^^^^^^^^
+|text image| Text
+^^^^^^^^^^^^^^^^^
 
 xxx
 

@@ -80,8 +80,15 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 		QGuiApplication::installTranslator(&BackupTranslator);
 	if ( LocaleTranslator.load(locale, ":/locale/symedit.") )
 		QGuiApplication::installTranslator(&LocaleTranslator);
+}
 
-	Symbol.Load("U00,00;R50;U-35,-35;D35,35;U-35,35;D35,-35;");		//##
+//! Constructor.
+/*!
+	\param symbol		Symbol string from command line.
+*/
+SymEditManager::SymEditManager(const QString& symbol) : SymEditManager(nullptr)
+{
+	Symbol.Load(symbol);
 }
 
 //! Set window initialized.

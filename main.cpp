@@ -1,6 +1,7 @@
 #include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QCommandLineParser>
 #include <QSettings>
 
 #include "symedit.h"
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationName("Syrja");
 	QCoreApplication::setOrganizationDomain("syrja.org");
 	QCoreApplication::setApplicationName("SymEdit");
+	QCoreApplication::setApplicationVersion("1.0");
 	QSettings::setDefaultFormat(QSettings::IniFormat);
 
 	QGuiApplication app(argc, argv);
@@ -19,8 +21,16 @@ int main(int argc, char *argv[])
 	qmlRegisterUncreatableMetaObject(Operation::staticMetaObject,
 		"Org.Syrja.Symbol.Operation", 1, 0, "Operation", "Error: only enums" );
 
+	QCommandLineParser parser;
+	parser.process(app);
+
+	QString symbol;
+	const QStringList arguments = parser.positionalArguments();
+	if ( arguments.size() )
+		symbol = arguments.at(0);
+
 	// register manager
-	SymEditManager manager;
+	SymEditManager manager(symbol);
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("manager", &manager);
 

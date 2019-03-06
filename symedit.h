@@ -37,6 +37,7 @@ class SymEditManager : public QObject
 
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
+	explicit SymEditManager(const QString& symbol);
 
 	//! Save settings.
 	void SaveSettings() const { Settings.Save(); }
