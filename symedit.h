@@ -80,6 +80,7 @@ public:
 	Q_INVOKABLE bool raiseItem(int dir);
 
 	Q_INVOKABLE bool undo(bool undo);
+	Q_INVOKABLE void help(QString topic) const;
 
 private:
 	void undosave();

@@ -53,4 +53,17 @@ DISTFILES += \
     locale/symedit.ts \
     locale/symedit.fi_FI.ts \
     locale/symedit.en_GB.ts \
-    .gitignore
+    .gitignore \
+    help/Makefile \
+    help/fin/index.rst \
+    help/fin/menu.rst \
+    help/fin/tools.rst \
+    help/fin/usage.rst \
+    help/fin/Makefile \
+    help/fin/conf.py \
+    help/eng/index.rst \
+    help/eng/menu.rst \
+    help/eng/tools.rst \
+    help/eng/usage.rst \
+    help/eng/Makefile \
+    help/eng/conf.py

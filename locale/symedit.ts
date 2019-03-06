@@ -175,7 +175,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_zoom_preview">
+	<message id="id_tooltip_zoom_all">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_tooltip_zoom_preview">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -312,10 +316,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_menu_help_about">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_zoom_all">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

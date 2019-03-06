@@ -2,6 +2,9 @@
 #include <QClipboard>
 #include <QSettings>
 
+#include <QDesktopServices>
+#include <QUrl>
+
 #include "symedit.h"
 
 //
@@ -460,4 +463,16 @@ void SymEditManager::undosave()
 	Symbol.Save(buffer);
 	UndoStack.push_back(buffer);
 	RedoStack.clear();
+}
+
+//! Open help.
+/*!
+	\param topic		Help topic.
+*/
+void SymEditManager::help(QString topic) const
+{
+	QString path = QCoreApplication::applicationDirPath();
+	path.append("/help/fin/index.html");
+	QDesktopServices::openUrl(QUrl(path));
+//	QDesktopServices::openUrl(QUrl("https://qt.io/"));
 }

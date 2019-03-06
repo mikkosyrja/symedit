@@ -415,6 +415,6 @@ ApplicationWindow
 
 	function help()
 	{
-
+		manager.help("main")
 	}
 }
