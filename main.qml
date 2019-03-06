@@ -132,7 +132,19 @@ ApplicationWindow
 				BarSeparator { }
 //				BarTool { image: "image/plus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_in"); onClicked: zoom(1) }
 //				BarTool { image: "image/minus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_out"); onClicked: zoom(-1) }
-				BarTool { image: "image/eye_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_preview"); onClicked: previewsymbol() }
+				BarTool { image: "image/zoom_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_all"); onClicked: zoom(0) }
+				BarTool
+				{
+					image: "image/eye_icon&48.png";
+					tooltip: qsTrId("id_tooltip_zoom_preview");
+					checkable: true
+					checked: preview
+					onClicked:
+					{
+						previewsymbol()	// clicking button seems to break binding
+						checked = Qt.binding(function() { return preview })
+					}
+				}
 				BarSeparator { }
 				BarTool { image: "image/cursor_icon&48.png"; tooltip: qsTrId("id_tooltip_tool_select"); tool: Editor.Tool.Select }
 				BarSeparator { }
@@ -323,7 +335,10 @@ ApplicationWindow
 	function zoom(dir)
 	{
 		if ( dir === 0 )	// all
+		{
+			preview = false
 			zoomscale = zoommax
+		}
 		else if ( dir > 0 )	// in
 		{
 			if ( (zoomscale *= zoomstep) > zoommax )

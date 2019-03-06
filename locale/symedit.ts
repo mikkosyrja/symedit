@@ -135,14 +135,6 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_menu_help_help">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_menu_about">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
     <message id="id_tooltip_edit_undo">
         <source></source>
         <translation type="unfinished"></translation>
@@ -155,7 +147,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_tooltip_edit_copy">
+    <message id="id_tooltip_edit_copy">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,7 +171,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_tooltip_delete_item">
+    <message id="id_tooltip_delete_item">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -312,6 +304,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_toolbar_align_middle_left">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_menu_help_contents">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_menu_help_about">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_zoom_all">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

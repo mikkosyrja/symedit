@@ -76,6 +76,7 @@ Rectangle
 			startx = mousex
 			starty = mousey
 			manager.setActiveIndex(-1);
+			focus = true
 			down = true
 		}
 
@@ -210,7 +211,7 @@ Rectangle
 		function painttext(context, string, point, active)
 		{
 			context.lineWidth = textsize * (preview ? zoommin : zoomscale) / 2
-			var fontsize = 20 * textsize * (preview ? zoommin : zoomscale)
+			var fontsize = 30 * textsize * (preview ? zoommin : zoomscale)
 			context.font = fontsize.toString() + "px sans-serif"
 			var position = Qt.point((point.x + max + offsetx) * scalexy, (max - point.y + offsety) * scalexy)
 			context.fillText(string, position.x, position.y)

@@ -30,5 +30,9 @@
         <file>image/minus_icon&amp;48.png</file>
         <file>image/plus_icon&amp;48.png</file>
         <file>image/eye_icon&amp;48.png</file>
+        <file>image/exit_icon&amp;48.png</file>
+        <file>image/grid_icon&amp;48.png</file>
+        <file>image/info_icon&amp;48.png</file>
+        <file>image/zoom_icon&amp;48.png</file>
     </qresource>
 </RCC>
