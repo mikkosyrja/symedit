@@ -14,5 +14,7 @@ SymEdit is symbol editor for symbols used by `3D-Win`_ survey application.
    menu
    tools
 
-Some toolbar button images are taken from Gentleface icon set: https://gentleface.com/free_icon_set.html
+.. _Gentleface: https://gentleface.com/free_icon_set.html
+
+Some toolbar button images are taken from `Gentleface`_ icon set.
 

@@ -70,6 +70,8 @@ void SymEditSymbol::Load(const QString& buffer)
 				Items.push_back(Item(Operation::Line, position, QPoint(x, y), fill));
 			else if ( type == 'B' )
 				Items.push_back(Item(Operation::Rectangle, position, QPoint(x, y), fill));
+			else if ( type == 'H' )
+				Items.push_back(Item(Operation::Arc, position, QPoint(x, y), fill));
 			position = QPoint(x, y);
 		}
 		else	// single parameter
@@ -151,7 +153,12 @@ QString& SymEditSymbol::Save(QString& buffer) const
 		}
 		case Operation::Arc:
 		{
-			//##
+			if ( item.Fill != fill )
+				fill = appendoption('F', buffer, item.Fill);
+			if ( item.Point != position )
+				appendvalue(buffer.append('U'), item.Point, 2);
+			appendvalue(buffer.append('H'), item.Value, 1);
+			position = item.Point;
 			break;
 		}
 		default:		assert(0);

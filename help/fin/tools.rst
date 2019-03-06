@@ -63,13 +63,18 @@ Piirtää ympyrän kahden vastakkaisen kehäpisteen välille.
 
 Piirtää ympyrän keskipisteestä kehälle.
 
-Puoliympyrä
-^^^^^^^^^^^
+.. |arc semi image| image:: ../../image/semi_radius.png
+	:scale: 50 %
+.. |arc quarter image| image:: ../../image/quarter_radius.png
+	:scale: 50 %
+
+|arc semi image| Puoliympyrä
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 xxx
 
-Neljännesympyrä
-^^^^^^^^^^^^^^^
+|arc quarter image| Neljännesympyrä
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. |text image| image:: ../../image/text.png
 	:scale: 50 %

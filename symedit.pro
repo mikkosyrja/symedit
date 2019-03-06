@@ -36,8 +36,12 @@ HEADERS += \
     symbol.h
 
 DISTFILES += \
+	.gitignore \
+	.editorconfig \
 	README.md \
-    image/circle_center.kra \
+	lrelease.sh \
+	lupdate.sh \
+	image/circle_center.kra \
     image/circle_corner.kra \
     image/circle_radius.kra \
     image/delete.kra \
@@ -47,13 +51,9 @@ DISTFILES += \
     image/rotate_left.kra \
     image/rotate_right.kra \
     image/text.kra \
-    .editorconfig \
-    lrelease.sh \
-    lupdate.sh \
     locale/symedit.ts \
     locale/symedit.fi_FI.ts \
     locale/symedit.en_GB.ts \
-    .gitignore \
     help/Makefile \
     help/fin/index.rst \
     help/fin/menu.rst \

@@ -189,6 +189,27 @@ Rectangle
 				context.stroke()
 		}
 
+		function paintsemicircle(context, center, start, end, radius, fill)
+		{
+/*
+//			context.beginPath().moveTo((center.x + max + offsetx) * scalexy, (max - center.y + offsety) * scalexy)
+			context.beginPath().moveTo((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy)
+			context.arcTo(
+				(start.x + max - radius + offsetx) * scalexy,
+				(max - start.y - radius + offsety) * scalexy,
+				(end.x + max - radius + offsetx) * scalexy,
+				(max - end.y - radius + offsety) * scalexy,
+				radius * scalexy)
+			if ( fill )
+			{
+				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
+				context.fill()
+			}
+			else
+				context.stroke()
+*/
+		}
+
 		function setalignment(context, align)
 		{
 			switch ( align )
@@ -264,7 +285,7 @@ Rectangle
 
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
-				var fill = manager.getItemFill(index)
+				var radius, fill = manager.getItemFill(index)
 				if ( operation === Operation.Line )
 				{
 					point = manager.getItemPoint(index)
@@ -281,10 +302,20 @@ Rectangle
 				}
 				else if ( operation === Operation.Circle )
 				{
-					var radius = manager.getItemValue(index)
+					radius = manager.getItemValue(index)
 					paintcircle(context, position, radius, fill)
 					if ( !preview && fill && index === active )
 						paintcircle(context, position, radius, false)
+				}
+				else if ( operation === Operation.Arc )
+				{
+/*
+					point = manager.getItemPoint(index)
+					radius = manager.getItemValue(index)
+					paintsemicircle(context, position, radius, fill)
+					if ( !preview && fill && index === active )
+						paintsemicircle(context, position, radius, false)
+*/
 				}
 				else if ( operation === Operation.Text )
 				{
@@ -334,7 +365,7 @@ Rectangle
 					if ( fillitem )
 						paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), false)
 				}
-				else if ( tool > 30 && tool < 40 )	// circle
+				else if ( tool > 30 && tool < 50 )	// circle or arc
 				{
 					var centerx, centery, radius
 					if ( tool === Editor.Tool.CircleCorner )
@@ -355,17 +386,28 @@ Rectangle
 						centerx = startx
 						centery = starty
 					}
+					else if ( tool === Editor.Tool.ArcSemi )
+					{
+						radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
+						centerx = (startx + mousex) / 2
+						centery = (starty + mousey) / 2
+					}
 					if ( radius )
 					{
 						var center = Qt.point(centerx, centery)
-						paintcircle(context, center, radius, fillitem)
-						if ( fillitem )
-							paintcircle(context, center, radius, false)
+						if ( tool > 40 )
+						{
+							paintsemicircle(context, center, start, end, radius, fillitem)
+//							if ( fillitem )
+//								paintsemicircle(context, center, radius, false)
+						}
+						else
+						{
+							paintcircle(context, center, radius, fillitem)
+							if ( fillitem )
+								paintcircle(context, center, radius, false)
+						}
 					}
-				}
-				else if ( tool > 40 && tool < 50 )	// arcs
-				{
-
 				}
 				else if ( tool > 50 && tool < 60 )	// text
 				{

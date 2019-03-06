@@ -157,6 +157,9 @@ ApplicationWindow
 				BarTool { image: "image/circle_radius.png"; tooltip: qsTrId("id_tooltip_tool_circle_radius"); tool: Editor.Tool.CircleRadius }
 				BarTool { image: "image/circle_center.png"; tooltip: qsTrId("id_tooltip_tool_circle_center"); tool: Editor.Tool.CircleCenter }
 				BarSeparator { }
+				BarTool { image: "image/semi_radius.png"; tooltip: qsTrId("id_tooltip_tool_semi_radius"); tool: Editor.Tool.ArcSemi }
+				BarTool { image: "image/quarter_radius.png"; tooltip: qsTrId("id_tooltip_tool_quarter_radius"); tool: Editor.Tool.ArcQuarter }
+				BarSeparator { }
 				BarTool { image: "image/text.png"; tooltip: qsTrId("id_tooltip_tool_text"); tool: Editor.Tool.Text }
 			}
 			RowLayout

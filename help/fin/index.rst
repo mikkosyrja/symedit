@@ -14,5 +14,7 @@ SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symbole
    menu
    tools
 
-Osa työkalupalkin kuvakkeista on otettu Gentleface ikonisetistä: https://gentleface.com/free_icon_set.html
+.. _Gentleface: https://gentleface.com/free_icon_set.html
+
+Osa työkalupalkin kuvakkeista on otettu `Gentleface`_ ikonisetistä.
 

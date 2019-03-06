@@ -119,12 +119,12 @@ View
 |in image| Zoom In
 ^^^^^^^^^^^^^^^^^^
 
-Zoomaa näyttöä lähemmäs.
+Zooms view closer.
 
 |out image| Zoom Out
 ^^^^^^^^^^^^^^^^^^^^
 
-Zoomaa näyttöä kauemmas.
+Zooms view farther.
 
 |all image| Maximum
 ^^^^^^^^^^^^^^^^^^^
@@ -139,7 +139,7 @@ Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
 |grid image| Show Grid
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Näyttää 10x10 ruudukon symbolin taustalla.
+Shows 10x10 grid behind the symbol.
 
 |preview image| Preview
 ^^^^^^^^^^^^^^^^^^^^^^^
