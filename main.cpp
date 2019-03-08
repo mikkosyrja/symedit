@@ -68,9 +68,7 @@ int main(int argc, char *argv[])
 	int result = app.exec();
 
 	if ( transfer )
-	{
-		//## save file
-	}
+		manager.save(filename);
 	manager.SaveSettings();
 
 	return result;

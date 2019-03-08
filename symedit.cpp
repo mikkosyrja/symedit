@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QSettings>
-
+//#include <QFileDialog>
 #include <QDesktopServices>
 #include <QUrl>
 
@@ -81,9 +81,11 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	\param symbol		Symbol string from command line.
 */
 SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
-	: SymEditManager(nullptr)
+	: QObject(nullptr), FileName(filename)
 {
-	if ( !filename.isEmpty() )
+	Settings.Load();
+
+	if ( !FileName.isEmpty() )
 	{
 		//## load file
 	}
@@ -433,14 +435,14 @@ bool SymEditManager::raiseItem(int dir)
 }
 
 //! Open symbol file.
-bool SymEditManager::open()
+bool SymEditManager::open(QString filename)
 {
 	//##
 	return false;
 }
 
 //! Save symbol file.
-bool SymEditManager::save()
+bool SymEditManager::save(QString filename)
 {
 	//##
 	return false;
@@ -493,8 +495,8 @@ void SymEditManager::undosave()
 */
 void SymEditManager::help(QString topic) const
 {
+	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
 	path.append("/help/fin/index.html");
 	QDesktopServices::openUrl(QUrl(path));
-//	QDesktopServices::openUrl(QUrl("https://qt.io/"));
 }

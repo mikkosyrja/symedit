@@ -80,8 +80,8 @@ public:
 	Q_INVOKABLE void rotateSymbol(int dir);
 	Q_INVOKABLE bool raiseItem(int dir);
 
-	Q_INVOKABLE bool open();
-	Q_INVOKABLE bool save();
+	Q_INVOKABLE bool open(QString filename);
+	Q_INVOKABLE bool save(QString filename);
 
 	Q_INVOKABLE bool undo(bool undo);
 	Q_INVOKABLE void help(QString topic) const;
@@ -90,7 +90,7 @@ private:
 	void undosave();
 
 	bool Initialized = false;				//!< Initialization mutex.
-	QString SymbolFile;						//!< Symbol file name.
+	QString FileName;						//!< Symbol file name.
 
 	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.

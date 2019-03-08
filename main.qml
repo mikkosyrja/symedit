@@ -103,7 +103,7 @@ ApplicationWindow
 			title: qsTrId("id_menu_help")
 			MenuItem { text: qsTrId("id_menu_help_contents"); shortcut: "F1"; onTriggered: help() }
 			MenuSeparator { }
-			MenuItem { text: qsTrId("id_menu_help_about"); onTriggered: aboutDialog.open() }
+			MenuItem { text: qsTrId("id_menu_help_about"); onTriggered: aboutdialog.open() }
 		}
 	}
 
@@ -269,9 +269,27 @@ ApplicationWindow
 		}
 	}
 
+	FileDialog
+	{
+		id: filedialog
+		title: "Please choose a file"
+		folder: shortcuts.home
+		onAccepted:
+		{
+//			console.log("You chose: " + fileDialog.fileUrls)
+//			Qt.quit()
+		}
+		onRejected:
+		{
+//			console.log("Canceled")
+//			Qt.quit()
+		}
+//		Component.onCompleted: visible = true
+	}
+
 	Dialog
 	{
-		id: aboutDialog
+		id: aboutdialog
 		title: qsTrId("id_dialog_about")
 		Label
 		{
@@ -327,13 +345,14 @@ ApplicationWindow
 
 	function open()
 	{
-		manager.open();
+		filedialog.open()
+//		manager.open(true);
 		editor.update()
 	}
 
 	function save()
 	{
-		manager.save();
+		//##
 	}
 
 	function zoom(dir)
