@@ -175,11 +175,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_tooltip_zoom_all">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_tooltip_zoom_preview">
+    <message id="id_tooltip_zoom_all">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_zoom_preview">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -316,6 +316,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_menu_help_about">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_tool_semi_radius">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_tool_quarter_radius">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_cli_symbol">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_cli_language">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_cli_symbol_description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_cli_language_description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+	<message id="id_cli_transfer_file">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_cli_symbol_file_name">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

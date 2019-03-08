@@ -73,22 +73,23 @@ void SymEditSettings::Save() const
 SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 {
 	Settings.Load();
-
-	QLocale locale;
-//	if ( BackupTranslator.load(":/locale/symedit.en_GB.qm") )
-	if ( BackupTranslator.load(":/locale/symedit.fi_FI.qm") )
-		QGuiApplication::installTranslator(&BackupTranslator);
-	if ( LocaleTranslator.load(locale, ":/locale/symedit.") )
-		QGuiApplication::installTranslator(&LocaleTranslator);
 }
 
 //! Constructor.
 /*!
+	\param filename		Symbol file name from command line.
 	\param symbol		Symbol string from command line.
 */
-SymEditManager::SymEditManager(const QString& symbol) : SymEditManager(nullptr)
+SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
+	: SymEditManager(nullptr)
 {
-	Symbol.Load(symbol);
+	if ( !filename.isEmpty() )
+	{
+		//## load file
+	}
+
+	if ( !symbol.isEmpty() )
+		Symbol.Load(symbol);
 }
 
 //! Set window initialized.
@@ -428,6 +429,20 @@ bool SymEditManager::raiseItem(int dir)
 		undosave();
 		return Symbol.RaiseItem(dir);
 	}
+	return false;
+}
+
+//! Open symbol file.
+bool SymEditManager::open()
+{
+	//##
+	return false;
+}
+
+//! Save symbol file.
+bool SymEditManager::save()
+{
+	//##
 	return false;
 }
 

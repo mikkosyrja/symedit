@@ -66,4 +66,5 @@ DISTFILES += \
     help/eng/tools.rst \
     help/eng/usage.rst \
     help/eng/Makefile \
-    help/eng/conf.py
+    help/eng/conf.py \
+    LICENSE

@@ -37,7 +37,7 @@ class SymEditManager : public QObject
 
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
-	explicit SymEditManager(const QString& symbol);
+	explicit SymEditManager(const QString& filename, const QString& symbol);
 
 	//! Save settings.
 	void SaveSettings() const { Settings.Save(); }
@@ -80,6 +80,9 @@ public:
 	Q_INVOKABLE void rotateSymbol(int dir);
 	Q_INVOKABLE bool raiseItem(int dir);
 
+	Q_INVOKABLE bool open();
+	Q_INVOKABLE bool save();
+
 	Q_INVOKABLE bool undo(bool undo);
 	Q_INVOKABLE void help(QString topic) const;
 
@@ -87,13 +90,12 @@ private:
 	void undosave();
 
 	bool Initialized = false;				//!< Initialization mutex.
+	QString SymbolFile;						//!< Symbol file name.
+
 	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.
 
 	std::deque<QString> UndoStack;			//!< Undo stack.
 	std::deque<QString> RedoStack;			//!< Redo stack.
-
-	QTranslator BackupTranslator;			//!< UI backup translator.
-	QTranslator LocaleTranslator;			//!< UI locale translator.
 };
 #endif

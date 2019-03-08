@@ -8,6 +8,22 @@ Installation
 
 xxx
 
+Command line
+------------
+
+Command line parameters::
+
+	Usage: ./symedit [options] file
+
+	Options:
+	  -t, --transfer             Symbol file is transfer file.
+	  -s, --symbol <symbol>      Read symbol data from parameter <symbol>.
+	  -l, --language <language>  Application language abbreviation <language>.
+	  -h, --help                 Displays this help.
+
+	Arguments:
+	  file                       Symbol file name.
+
 Usage
 -----
 

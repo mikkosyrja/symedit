@@ -327,12 +327,13 @@ ApplicationWindow
 
 	function open()
 	{
-
+		manager.open();
+		editor.update()
 	}
 
 	function save()
 	{
-
+		manager.save();
 	}
 
 	function zoom(dir)
