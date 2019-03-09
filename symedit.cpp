@@ -1,9 +1,9 @@
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QSettings>
-//#include <QFileDialog>
 #include <QDesktopServices>
-#include <QUrl>
+#include <QTextStream>
+#include <QFile>
 
 #include "symedit.h"
 
@@ -21,6 +21,7 @@ SymEditSettings::SymEditSettings()
 	IntValues.emplace("Tool", 1);
 
 	TextValues.emplace("TextValue", "");
+	TextValues.emplace("Directory", "");
 }
 
 //! Load settings.
@@ -33,13 +34,14 @@ void SymEditSettings::Load()
 	Size.setWidth(settings.value("window/width", 500).toInt());
 	Size.setHeight(settings.value("window/height", 500).toInt());
 
+	TextValues.at("Directory") = settings.value("application/directory").toString();
+
 	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
 	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
 	IntValues.at("LineWidth") = settings.value("editor/width", 1).toInt();
 	IntValues.at("TextSize") = settings.value("editor/size", 1).toInt();
 	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
 	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
-
 	TextValues.at("TextValue") = settings.value("editor/text").toString();
 }
 
@@ -53,13 +55,14 @@ void SymEditSettings::Save() const
 	settings.setValue("window/width", Size.width());
 	settings.setValue("window/height", Size.height());
 
+	settings.setValue("application/directory", TextValues.at("Directory"));
+
 	settings.setValue("editor/fill", IntValues.at("FillItem"));
 	settings.setValue("editor/align", IntValues.at("Alignment"));
 	settings.setValue("editor/width", IntValues.at("LineWidth"));
 	settings.setValue("editor/size", IntValues.at("TextSize"));
 	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
 	settings.setValue("editor/tool", IntValues.at("Tool"));
-
 	settings.setValue("editor/text", TextValues.at("TextValue"));
 }
 
@@ -87,7 +90,9 @@ SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
 
 	if ( !FileName.isEmpty() )
 	{
-		//## load file
+		QUrl fileurl;
+		fileurl.fromLocalFile(FileName);
+		open(fileurl);
 	}
 
 	if ( !symbol.isEmpty() )
@@ -435,16 +440,54 @@ bool SymEditManager::raiseItem(int dir)
 }
 
 //! Open symbol file.
-bool SymEditManager::open(QString filename)
+/*!
+	\param fileurl		File name as URL.
+	\return				True for success.
+*/
+bool SymEditManager::open(QUrl fileurl)
 {
-	//##
+	QString filestring = fileurl.toString();
+	int index = filestring.lastIndexOf('/') + 1;
+	QString directory = filestring.left(index);
+	setTextSetting("Directory", directory);
+
+	QString filename = fileurl.toLocalFile();
+	QFile file(filename);
+	if ( file.open(QIODevice::ReadOnly | QIODevice::Text) )
+	{
+		QTextStream input(&file);
+		Symbol.Load(input.readLine());
+		FileName = filename;
+		return true;
+	}
 	return false;
 }
 
 //! Save symbol file.
-bool SymEditManager::save(QString filename)
+/*!
+	\param fileurl		File name as URL.
+	\return				True for success.
+*/
+bool SymEditManager::save(QUrl fileurl)
 {
-	//##
+	QString filename = FileName;
+	if ( !fileurl.isEmpty() )
+	{
+		QString filestring = fileurl.toString();
+		int index = filestring.lastIndexOf('/') + 1;
+		QString directory = filestring.left(index);
+		setTextSetting("Directory", directory);
+		filename = fileurl.toLocalFile();
+	}
+
+	QFile file(filename);
+	if ( file.open(QIODevice::WriteOnly | QIODevice::Text) )
+	{
+		QTextStream output(&file);
+		output << getSymbol();
+		FileName = filename;
+		return true;
+	}
 	return false;
 }
 

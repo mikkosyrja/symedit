@@ -15,6 +15,10 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="id_menu_file_save_as">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="id_menu_file_exit">
         <source></source>
         <translation type="unfinished"></translation>
@@ -235,7 +239,23 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_dialog_about">
+	<message id="id_dialog_open_file">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_dialog_save_file">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_dialog_symbol_files">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_dialog_all_files">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_dialog_about">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -343,11 +363,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_cli_transfer_file">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_cli_symbol_file_name">
+    <message id="id_cli_transfer_file">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_cli_symbol_file_name">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

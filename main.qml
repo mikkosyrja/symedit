@@ -36,7 +36,8 @@ ApplicationWindow
 		{
 			title: qsTrId("id_menu_file")
 			MenuItem { text: qsTrId("id_menu_file_open"); shortcut: "Ctrl+O"; onTriggered: open() }
-			MenuItem { text: qsTrId("id_menu_file_save"); shortcut: "Ctrl+S"; onTriggered: save() }
+			MenuItem { text: qsTrId("id_menu_file_save"); shortcut: "Ctrl+S"; onTriggered: save(false) }
+			MenuItem { text: qsTrId("id_menu_file_save_as"); shortcut: "Ctrl+Shift+S"; onTriggered: save(true) }
 			MenuSeparator { }
 			MenuItem { text: qsTrId("id_menu_file_exit"); shortcut: "F4"; onTriggered: Qt.quit() }
 		}
@@ -272,19 +273,19 @@ ApplicationWindow
 	FileDialog
 	{
 		id: filedialog
-		title: "Please choose a file"
-		folder: shortcuts.home
+		title: (selectExisting ? qsTrId("id_dialog_open_file") : qsTrId("id_dialog_save_file"))
+		nameFilters: [ qsTrId("id_dialog_symbol_files"), qsTrId("id_dialog_all_files") ]
 		onAccepted:
 		{
-//			console.log("You chose: " + fileDialog.fileUrls)
-//			Qt.quit()
+			if ( selectExisting )
+			{
+				manager.open(fileUrl)
+				symbol = manager.getSymbol()
+			}
+			else	// save
+				manager.save(fileUrl)
+			editor.update()
 		}
-		onRejected:
-		{
-//			console.log("Canceled")
-//			Qt.quit()
-		}
-//		Component.onCompleted: visible = true
 	}
 
 	Dialog
@@ -297,7 +298,6 @@ ApplicationWindow
 			text: qsTrId("id_dialog_about_text")
 			horizontalAlignment: Text.AlignHCenter
 		}
-
 		standardButtons: StandardButton.Ok
 	}
 
@@ -345,14 +345,21 @@ ApplicationWindow
 
 	function open()
 	{
+		filedialog.selectExisting = true
+		filedialog.folder = manager.getTextSetting("Directory")
 		filedialog.open()
-//		manager.open(true);
-		editor.update()
 	}
 
-	function save()
+	function save(ask)
 	{
-		//##
+		if ( ask )
+		{
+			filedialog.selectExisting = false
+			filedialog.folder = manager.getTextSetting("Directory")
+			filedialog.open()
+		}
+		else
+			manager.save("")
 	}
 
 	function zoom(dir)
