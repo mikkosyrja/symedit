@@ -38,8 +38,10 @@ Rectangle
 	property string editcolor: "red"
 	property string gridcolor: "gray"
 	property string backcolor: "white"
+	property string graycolor: "lightgray"
 
 	anchors.fill: parent
+	color: graycolor
 
 	MouseArea
 	{
@@ -169,7 +171,7 @@ Rectangle
 				size.width * scalexy, size.height * scalexy)
 			if ( fill )
 			{
-				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
+				context.fillStyle = (fill === 3 ? graycolor : (fill === 2 ? paintcolor : backcolor))
 				context.fill()
 			}
 			else
@@ -252,10 +254,6 @@ Rectangle
 		{
 			context.lineWidth = 0.2
 			context.strokeStyle = gridcolor
-			context.fillStyle = backcolor
-
-			paintrect(context, Qt.point(-max - offsetx, max + offsety), Qt.size(totalx, totaly), true)
-
 			if ( viewgrid && !preview )
 			{
 				var row, col;
@@ -268,7 +266,7 @@ Rectangle
 				paintline(context, Qt.point(0, -max), Qt.point(0, max))
 				paintline(context, Qt.point(-max, 0), Qt.point(max, 0))
 
-				paintrect(context, Qt.point(-max, max), Qt.size(units, units), false)
+				paintrect(context, Qt.point(-max, max), Qt.size(units, units), 0)
 			}
 		}
 
@@ -298,7 +296,7 @@ Rectangle
 					var deltay = position.y - point.y
 					paintrect(context, position, Qt.size(deltax, deltay), fill)
 					if ( !preview && fill && index === active )
-						paintrect(context, position, Qt.size(deltax, deltay), false)
+						paintrect(context, position, Qt.size(deltax, deltay), 0)
 				}
 				else if ( operation === Operation.Circle )
 				{
@@ -329,7 +327,7 @@ Rectangle
 		{
 			var context = getContext("2d")
 
-			paintgrid(context)
+			paintrect(context, Qt.point(-max - offsetx, max + offsety), Qt.size(totalx, totaly), 3)
 
 			context.strokeStyle = paintcolor
 			context.fillStyle = paintcolor
@@ -363,7 +361,7 @@ Rectangle
 					}
 					paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), fillitem)
 					if ( fillitem )
-						paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), false)
+						paintrect(context, Qt.point(cornerx, cornery), Qt.size(deltax, deltay), 0)
 				}
 				else if ( tool > 30 && tool < 50 )	// circle or arc
 				{
@@ -418,6 +416,8 @@ Rectangle
 					}
 				}
 			}
+
+			paintgrid(context)
 		}
 	}
 
