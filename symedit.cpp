@@ -89,11 +89,7 @@ SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
 	Settings.Load();
 
 	if ( !FileName.isEmpty() )
-	{
-		QUrl fileurl;
-		fileurl.fromLocalFile(FileName);
-		open(fileurl);
-	}
+		open(FileName);
 
 	if ( !symbol.isEmpty() )
 		Symbol.Load(symbol);
@@ -439,58 +435,6 @@ bool SymEditManager::raiseItem(int dir)
 	return false;
 }
 
-//! Open symbol file.
-/*!
-	\param fileurl		File name as URL.
-	\return				True for success.
-*/
-bool SymEditManager::open(QUrl fileurl)
-{
-	QString filestring = fileurl.toString();
-	int index = filestring.lastIndexOf('/') + 1;
-	QString directory = filestring.left(index);
-	setTextSetting("Directory", directory);
-
-	QString filename = fileurl.toLocalFile();
-	QFile file(filename);
-	if ( file.open(QIODevice::ReadOnly | QIODevice::Text) )
-	{
-		QTextStream input(&file);
-		Symbol.Load(input.readLine());
-		FileName = filename;
-		return true;
-	}
-	return false;
-}
-
-//! Save symbol file.
-/*!
-	\param fileurl		File name as URL.
-	\return				True for success.
-*/
-bool SymEditManager::save(QUrl fileurl)
-{
-	QString filename = FileName;
-	if ( !fileurl.isEmpty() )
-	{
-		QString filestring = fileurl.toString();
-		int index = filestring.lastIndexOf('/') + 1;
-		QString directory = filestring.left(index);
-		setTextSetting("Directory", directory);
-		filename = fileurl.toLocalFile();
-	}
-
-	QFile file(filename);
-	if ( file.open(QIODevice::WriteOnly | QIODevice::Text) )
-	{
-		QTextStream output(&file);
-		output << getSymbol();
-		FileName = filename;
-		return true;
-	}
-	return false;
-}
-
 //! Undo edit operation.
 /*!
 	\param undo			True undoes, false redoes.
@@ -542,4 +486,73 @@ void SymEditManager::help(QString topic) const
 	QString path = QCoreApplication::applicationDirPath();
 	path.append("/help/fin/index.html");
 	QDesktopServices::openUrl(QUrl(path));
+}
+
+//! Open symbol file.
+/*!
+	\param fileurl		File name as URL.
+	\return				True for success.
+*/
+bool SymEditManager::open(QUrl fileurl)
+{
+	QString filestring = fileurl.toString();
+	int index = filestring.lastIndexOf('/') + 1;
+	QString directory = filestring.left(index);
+	setTextSetting("Directory", directory);
+	return open(fileurl.toLocalFile());
+}
+
+//! Save symbol file.
+/*!
+	\param fileurl		File name as URL.
+	\return				True for success.
+*/
+bool SymEditManager::save(QUrl fileurl)
+{
+	QString filename = FileName;
+	if ( !fileurl.isEmpty() )
+	{
+		QString filestring = fileurl.toString();
+		int index = filestring.lastIndexOf('/') + 1;
+		QString directory = filestring.left(index);
+		setTextSetting("Directory", directory);
+		filename = fileurl.toLocalFile();
+	}
+	return save(filename);
+}
+
+//! Open symbol file.
+/*!
+	\param filename		Full file path.
+	\return				True for success.
+*/
+bool SymEditManager::open(const QString& filename)
+{
+	QFile file(filename);
+	if ( file.open(QIODevice::ReadOnly | QIODevice::Text) )
+	{
+		QTextStream input(&file);
+		Symbol.Load(input.readLine());
+		FileName = filename;
+		return true;
+	}
+	return false;
+}
+
+//! Save symbol file.
+/*!
+	\param filename		Full file path.
+	\return				True for success.
+*/
+bool SymEditManager::save(const QString& filename)
+{
+	QFile file(filename);
+	if ( file.open(QIODevice::WriteOnly | QIODevice::Text) )
+	{
+		QTextStream output(&file);
+		output << getSymbol();
+		FileName = filename;
+		return true;
+	}
+	return false;
 }

@@ -9,7 +9,6 @@
         <file>image/rectangle_center.png</file>
         <file>image/rectangle_corner.png</file>
         <file>image/circle_corner.png</file>
-        <file>image/circle_radius.png</file>
         <file>image/circle_center.png</file>
         <file>image/rotate_left.png</file>
         <file>image/rotate_right.png</file>
@@ -35,7 +34,8 @@
         <file>image/info_icon&amp;48.png</file>
         <file>image/zoom_icon&amp;48.png</file>
         <file>image/bubble_icon&amp;48.png</file>
-        <file>image/semi_radius.png</file>
         <file>image/quarter_radius.png</file>
+        <file>image/circle_diameter.png</file>
+        <file>image/semi_diameter.png</file>
     </qresource>
 </RCC>

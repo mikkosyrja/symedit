@@ -43,7 +43,6 @@ DISTFILES += \
 	lupdate.sh \
 	image/circle_center.kra \
     image/circle_corner.kra \
-    image/circle_radius.kra \
     image/delete.kra \
     image/polyline.kra \
     image/rectangle_center.kra \
@@ -67,4 +66,7 @@ DISTFILES += \
     help/eng/usage.rst \
     help/eng/Makefile \
     help/eng/conf.py \
-    LICENSE
+    LICENSE \
+    image/circle_diameter.kra \
+    image/semi_diameter.kra \
+    image/quarter_radius.kra

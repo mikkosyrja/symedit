@@ -3,6 +3,7 @@
 #include <QQmlApplicationEngine>
 #include <QCommandLineParser>
 #include <QSettings>
+#include <QDir>
 
 #include "symedit.h"
 
@@ -43,7 +44,10 @@ int main(int argc, char *argv[])
 	QString filename;
 	const QStringList arguments = parser.positionalArguments();
 	if ( arguments.size() )
-		filename = arguments.at(0);
+	{
+		if ( !QDir::isAbsolutePath(filename = arguments.at(0)) )
+			filename.insert(0, '/').insert(0, QDir::currentPath());
+	}
 	bool transfer = parser.isSet(transferoption);
 	QString symbol = parser.value(symboloption);
 	QString language = parser.value(languageoption);

@@ -10,7 +10,7 @@ Rectangle
 		RectCenter = 21,
 		RectCorner = 22,
 		CircleCorner = 31,
-		CircleRadius = 32,
+		CircleDiameter = 32,
 		CircleCenter = 33,
 		ArcSemi = 41,
 		ArcQuarter = 42,
@@ -35,7 +35,7 @@ Rectangle
 	property int endy: 0
 
 	property string paintcolor: "black"
-	property string editcolor: "red"
+	property string editcolor: "brown"
 	property string gridcolor: "gray"
 	property string backcolor: "white"
 	property string graycolor: "lightgray"
@@ -122,7 +122,7 @@ Rectangle
 							centerx = (startx + endx) / 2
 							centery = (starty + endy) / 2
 						}
-						else if ( tool === Editor.Tool.CircleRadius )
+						else if ( tool === Editor.Tool.CircleDiameter )
 						{
 							radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
 							centerx = (startx + endx) / 2
@@ -252,7 +252,7 @@ Rectangle
 
 		function paintgrid(context)
 		{
-			context.lineWidth = 0.2
+			context.lineWidth = 0.4
 			context.strokeStyle = gridcolor
 			if ( viewgrid && !preview )
 			{
@@ -372,7 +372,7 @@ Rectangle
 						centerx = (startx + mousex) / 2
 						centery = (starty + mousey) / 2
 					}
-					else if ( tool === Editor.Tool.CircleRadius )
+					else if ( tool === Editor.Tool.CircleDiameter )
 					{
 						radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
 						centerx = (startx + mousex) / 2

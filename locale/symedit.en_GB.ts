@@ -119,9 +119,9 @@
         <source></source>
         <translation>Circle Corner</translation>
     </message>
-    <message id="id_menu_tool_circle_radius">
+	<message id="id_menu_tool_circle_diameter">
         <source></source>
-        <translation>Circle Radius</translation>
+		<translation>Circle Diameter</translation>
     </message>
     <message id="id_menu_tool_circle_center">
         <source></source>
@@ -219,15 +219,23 @@
         <source></source>
         <translation>Circle corner</translation>
     </message>
-    <message id="id_tooltip_tool_circle_radius">
+	<message id="id_tooltip_tool_circle_diameter">
         <source></source>
-        <translation>Circle radius</translation>
+		<translation>Circle diameter</translation>
     </message>
     <message id="id_tooltip_tool_circle_center">
         <source></source>
         <translation>Circle center</translation>
     </message>
-    <message id="id_tooltip_tool_text">
+	<message id="id_tooltip_tool_semi_diameter">
+		<source></source>
+		<translation>Semicircle diameter</translation>
+	</message>
+	<message id="id_tooltip_tool_quarter_radius">
+		<source></source>
+		<translation>Quarter circle radius</translation>
+	</message>
+	<message id="id_tooltip_tool_text">
         <source></source>
         <translation>Draw text</translation>
     </message>
@@ -339,14 +347,6 @@
         <source></source>
         <translation>Symbol editor for 3D-Win</translation>
     </message>
-    <message id="id_tooltip_tool_semi_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_tool_quarter_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
     <message id="id_cli_symbol">
         <source></source>
         <translation>symbol</translation>
@@ -357,11 +357,11 @@
     </message>
     <message id="id_cli_language">
         <source></source>
-        <translation>language</translation>
+		<translation>lang</translation>
     </message>
     <message id="id_cli_language_description">
         <source></source>
-        <translation>Application language abbreviation &lt;language&gt;.</translation>
+		<translation>Application language abbreviation &lt;lang&gt;.</translation>
     </message>
     <message id="id_cli_transfer_file">
         <source></source>

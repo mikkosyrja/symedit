@@ -91,7 +91,7 @@ ApplicationWindow
 			MenuTool { text: qsTrId("id_menu_tool_rect_center"); tool: Editor.Tool.RectCenter }
 			MenuSeparator { }
 			MenuTool { text: qsTrId("id_menu_tool_circle_corner"); tool: Editor.Tool.CircleCorner }
-			MenuTool { text: qsTrId("id_menu_tool_circle_radius"); tool: Editor.Tool.CircleRadius }
+			MenuTool { text: qsTrId("id_menu_tool_circle_diameter"); tool: Editor.Tool.CircleDiameter }
 			MenuTool { text: qsTrId("id_menu_tool_circle_center"); tool: Editor.Tool.CircleCenter }
 			MenuSeparator { }
 			MenuTool { text: qsTrId("id_menu_tool_arc_semi"); tool: Editor.Tool.ArcSemi }
@@ -155,10 +155,10 @@ ApplicationWindow
 				BarTool { image: "image/rectangle_center.png"; tooltip: qsTrId("id_tooltip_tool_rect_center"); tool: Editor.Tool.RectCenter }
 				BarSeparator { }
 				BarTool { image: "image/circle_corner.png"; tooltip: qsTrId("id_tooltip_tool_circle_corner"); tool: Editor.Tool.CircleCorner }
-				BarTool { image: "image/circle_radius.png"; tooltip: qsTrId("id_tooltip_tool_circle_radius"); tool: Editor.Tool.CircleRadius }
+				BarTool { image: "image/circle_diameter.png"; tooltip: qsTrId("id_tooltip_tool_circle_diameter"); tool: Editor.Tool.CircleDiameter }
 				BarTool { image: "image/circle_center.png"; tooltip: qsTrId("id_tooltip_tool_circle_center"); tool: Editor.Tool.CircleCenter }
 				BarSeparator { }
-				BarTool { image: "image/semi_radius.png"; tooltip: qsTrId("id_tooltip_tool_semi_radius"); tool: Editor.Tool.ArcSemi }
+				BarTool { image: "image/semi_diameter.png"; tooltip: qsTrId("id_tooltip_tool_semi_diameter"); tool: Editor.Tool.ArcSemi }
 				BarTool { image: "image/quarter_radius.png"; tooltip: qsTrId("id_tooltip_tool_quarter_radius"); tool: Editor.Tool.ArcQuarter }
 				BarSeparator { }
 				BarTool { image: "image/text.png"; tooltip: qsTrId("id_tooltip_tool_text"); tool: Editor.Tool.Text }

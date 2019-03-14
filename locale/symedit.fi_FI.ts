@@ -119,7 +119,7 @@
         <source></source>
         <translation>Ympyrä kulmista</translation>
     </message>
-    <message id="id_menu_tool_circle_radius">
+	<message id="id_menu_tool_circle_diameter">
         <source></source>
         <translation>Ympyrä halkaisija</translation>
     </message>
@@ -219,15 +219,23 @@
         <source></source>
         <translation>Ympyrä kulmista</translation>
     </message>
-    <message id="id_tooltip_tool_circle_radius">
+	<message id="id_tooltip_tool_circle_diameter">
         <source></source>
-        <translation>Ympyrä halkasija</translation>
+		<translation>Ympyrä halkasija</translation>
     </message>
     <message id="id_tooltip_tool_circle_center">
         <source></source>
         <translation>Ympyrä keskeltä</translation>
     </message>
-    <message id="id_tooltip_tool_text">
+	<message id="id_tooltip_tool_semi_diameter">
+		<source></source>
+		<translation>Puoliympyrä halkaisija</translation>
+	</message>
+	<message id="id_tooltip_tool_quarter_radius">
+		<source></source>
+		<translation>Neljännesympyrä säde</translation>
+	</message>
+	<message id="id_tooltip_tool_text">
         <source></source>
         <translation>Piirrä teksti</translation>
     </message>
@@ -338,14 +346,6 @@
     <message id="id_dialog_about_text">
         <source></source>
         <translation>3D-Win symbolieditori</translation>
-    </message>
-    <message id="id_tooltip_tool_semi_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_tool_quarter_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
     </message>
     <message id="id_cli_symbol">
         <source></source>

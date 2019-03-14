@@ -81,11 +81,14 @@ public:
 	Q_INVOKABLE void rotateSymbol(int dir);
 	Q_INVOKABLE bool raiseItem(int dir);
 
+	Q_INVOKABLE bool undo(bool undo);
+	Q_INVOKABLE void help(QString topic) const;
+
 	Q_INVOKABLE bool open(QUrl fileurl);
 	Q_INVOKABLE bool save(QUrl fileurl);
 
-	Q_INVOKABLE bool undo(bool undo);
-	Q_INVOKABLE void help(QString topic) const;
+	bool open(const QString& filename);
+	bool save(const QString& filename);
 
 private:
 	void undosave();
