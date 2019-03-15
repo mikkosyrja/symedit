@@ -20,4 +20,3 @@ SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symbole
 Lähdekoodi saatavilla `Github`_ -palvelussa.
 
 Osa työkalupalkin kuvakkeista otettu `Gentleface`_ ikonisetistä.
-

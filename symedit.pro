@@ -20,6 +20,8 @@ RESOURCES += \
     qml.qrc \
     locale.qrc
 
+RC_ICONS = image/icon.ico
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -69,4 +71,10 @@ DISTFILES += \
     help/eng/tools.rst \
     help/eng/usage.rst \
     help/eng/Makefile \
-	help/eng/conf.py
+	help/eng/conf.py \
+    image/icon16.png \
+    image/icon24.png \
+    image/icon32.png \
+    image/icon48.png \
+    image/icon256.png \
+    image/icon.ico

@@ -20,4 +20,3 @@ SymEdit is symbol editor for symbols used by `3D-Win`_ survey application.
 Source code available in `Github`_ service.
 
 Some toolbar button images taken from `Gentleface`_ icon set.
-

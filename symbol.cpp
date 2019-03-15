@@ -219,13 +219,15 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint po
 /*!
 	\param index		Item index.
 	\return				True for success.
+
+	Activates previous or first item.
 */
 bool SymEditSymbol::RemoveItem(int index)
 {
 	if ( static_cast<size_t>(index) < Items.size() )
 	{
 		Items.erase(Items.begin() + index);
-		ActiveIndex = index - 1;
+		ActiveIndex = (index == 0 && !Items.empty() ? 0 : index - 1);
 		return true;
 	}
 	return false;

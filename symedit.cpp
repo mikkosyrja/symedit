@@ -233,6 +233,8 @@ bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int
 //! Remove active item.
 /*!
 	\return				True for success.
+
+	Activates previous or first item.
 */
 bool SymEditManager::removeItem()
 {
