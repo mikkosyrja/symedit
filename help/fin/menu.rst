@@ -1,7 +1,7 @@
 Valikkotoiminnot
 ================
 
-xxx
+Sovelluksen valikossa saatavilla olevat toiminnot.
 
 Tiedosto
 --------
@@ -16,22 +16,22 @@ Tiedosto
 |open image| Avaa
 ^^^^^^^^^^^^^^^^^
 
-xxx
+Avaa symbolin tekstitiedostosta. Pikanäppäin Ctrl+O.
 
 |save image| Tallenna
 ^^^^^^^^^^^^^^^^^^^^^
 
-xxx
+Tallentaa symbolin tekstitiedostoon. Pikanäppäin Ctrl+S.
 
 Tallenna nimellä
 ^^^^^^^^^^^^^^^^
 
-xxx
+Tallentaa symbolin tekstitiedostoon uudella nimellä. Pikanäppäin Ctrl+Shift+S.
 
 |exit image| Lopeta
 ^^^^^^^^^^^^^^^^^^^
 
-Lopettaa ohjelman.
+Lopettaa ohjelman. Pikanäppäin Alt+F4.
 
 Muokkaa
 -------
@@ -44,12 +44,12 @@ Muokkaa
 |undo image| Kumoa
 ^^^^^^^^^^^^^^^^^^
 
-Kumoaa edellisen operaation.
+Kumoaa edellisen operaation. Pikanäppäin Ctrl+Z.
 
 |redo image| Tee uudelleen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Tekee uudellen kumotun operaation.
+Tekee uudellen kumotun operaation. Pikanäppäin Ctrl+Y tai Ctrl+Shift+Z.
 
 .. |cut image| image:: ../../image/cut_icon&48.png
 	:scale: 50 %
@@ -61,17 +61,17 @@ Tekee uudellen kumotun operaation.
 |cut image| Leikkaa
 ^^^^^^^^^^^^^^^^^^^
 
-Leikkaa koko symbolin tekstinä leikepöydälle.
+Leikkaa koko symbolin tekstinä leikepöydälle. Pikanäppäin Ctrl+C.
 
 |copy image| Kopioi
 ^^^^^^^^^^^^^^^^^^^
 
-Kopioi koko symbolin tekstinä leikepöydälle.
+Kopioi koko symbolin tekstinä leikepöydälle. Pikanäppäin Ctrl+X.
 
 |paste image| Liitä
 ^^^^^^^^^^^^^^^^^^^
 
-Liittää koko symbolin tekstinä leikepöydältä.
+Liittää koko symbolin tekstinä leikepöydältä. Pikanäppäin Ctrl+V.
 
 .. |right image| image:: ../../image/rotate_right.png
 	:scale: 50 %
@@ -81,12 +81,12 @@ Liittää koko symbolin tekstinä leikepöydältä.
 |right image| Käännä oikealle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta myötäpäivään.
+Kääntää symbolia 90 astetta myötäpäivään. Pikanäppäin Alt+Right.
 
 |left image| Käännä vasemmalle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Kääntää symbolia 90 astetta vastapäivään.
+Kääntää symbolia 90 astetta vastapäivään. Pikanäppäin Alt+Left.
 
 .. |raise image| image:: ../../image/up_icon&48.png
 	:scale: 50 %
@@ -96,12 +96,12 @@ Kääntää symbolia 90 astetta vastapäivään.
 |raise image| Nosta kohdetta
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Nostaa aktiivista kohdetta piirtojärjestyksessä ylemmäs.
+Nostaa aktiivista kohdetta piirtojärjestyksessä ylemmäs. Pikanäppäin Alt+Up.
 
 |lower image| Alenna kohdetta
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Laskee aktiivista kohdetta piirtojärjestyksessä alemmas.
+Laskee aktiivista kohdetta piirtojärjestyksessä alemmas. Pikanäppäin Alt+Down.
 
 .. |remove image| image:: ../../image/delete.png
 	:scale: 50 %
@@ -109,7 +109,7 @@ Laskee aktiivista kohdetta piirtojärjestyksessä alemmas.
 |remove image| Poista kohde
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Poistaa aktiivisen kohteen ja aktivoi piirtojärjestyksessä edellisen kohteen.
+Poistaa aktiivisen kohteen ja aktivoi piirtojärjestyksessä edellisen kohteen. Pikanäppäin Del.
 
 Näytä
 -----
@@ -124,17 +124,17 @@ Näytä
 |in image| Lähennä
 ^^^^^^^^^^^^^^^^^^
 
-Zoomaa näyttöä lähemmäs.
+Zoomaa näyttöä lähemmäs. Pikanäppäin Ctrl++.
 
 |out image| Loitonna
 ^^^^^^^^^^^^^^^^^^^^
 
-Zoomaa näyttöä kauemmas.
+Zoomaa näyttöä kauemmas. Pikanäppäin Ctrl+-.
 
 |all image| Maksimi
 ^^^^^^^^^^^^^^^^^^^
 
-Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
+Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan. Pikanäppäin Ctrl+0.
 
 .. |grid image| image:: ../../image/grid_icon&48.png
 	:scale: 50 %
@@ -144,12 +144,12 @@ Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
 |grid image| Ruudukko
 ^^^^^^^^^^^^^^^^^^^^^
 
-Näyttää 10x10 ruudukon symbolin taustalla.
+Näyttää 10x10 ruudukon symbolin taustalla. Pikanäppäin Ctrl+G.
 
 |preview image| Esikatselu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Näyttää symbolin esikatselutilassa: minimikokoisena ja ilman ruudukkoa.
+Näyttää symbolin esikatselutilassa: minimikokoisena ja ilman ruudukkoa. Pikanäppäin Ctrl+P.
 
 Työkalut
 --------
@@ -167,7 +167,7 @@ Ohje
 |help image| Ohje
 ^^^^^^^^^^^^^^^^^
 
-Avaa tämän ohjeen selaimessa.
+Avaa tämän ohjeen selaimessa. Pikanäppäin F1.
 
 |info image| Tietoja
 ^^^^^^^^^^^^^^^^^^^^

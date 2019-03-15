@@ -83,8 +83,8 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	\param filename		Symbol file name from command line.
 	\param symbol		Symbol string from command line.
 */
-SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
-	: QObject(nullptr), FileName(filename)
+SymEditManager::SymEditManager(const QString& filename, const QString& symbol, const QString& language)
+	: QObject(nullptr), FileName(filename), Language(language)
 {
 	Settings.Load();
 
@@ -367,10 +367,11 @@ int SymEditManager::selectItem(QPoint point) const
 //! Set active item index.
 /*!
 	\param index		Active item index.
+	\return				True for success.
 */
-void SymEditManager::setActiveIndex(int index)
+bool SymEditManager::setActiveIndex(int index)
 {
-	Symbol.SetActiveIndex(index);
+	return Symbol.SetActiveIndex(index);
 }
 
 //! Get active item index.
@@ -484,7 +485,7 @@ void SymEditManager::help(QString topic) const
 {
 	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
-	path.append("/help/fin/index.html");
+	path.append("/help/").append(Language).append("/index.html");
 	QDesktopServices::openUrl(QUrl(path));
 }
 

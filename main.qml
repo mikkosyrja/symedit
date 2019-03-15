@@ -34,15 +34,17 @@ ApplicationWindow
 	{
 		Menu
 		{
+			//: file menu
 			title: qsTrId("id_menu_file")
 			MenuItem { text: qsTrId("id_menu_file_open"); shortcut: "Ctrl+O"; onTriggered: open() }
 			MenuItem { text: qsTrId("id_menu_file_save"); shortcut: "Ctrl+S"; onTriggered: save(false) }
 			MenuItem { text: qsTrId("id_menu_file_save_as"); shortcut: "Ctrl+Shift+S"; onTriggered: save(true) }
 			MenuSeparator { }
-			MenuItem { text: qsTrId("id_menu_file_exit"); shortcut: "F4"; onTriggered: Qt.quit() }
+			MenuItem { text: qsTrId("id_menu_file_exit"); shortcut: "Alt+F4"; onTriggered: Qt.quit() }
 		}
 		Menu
 		{
+			//: edit menu
 			title: qsTrId("id_menu_edit")
 			MenuItem { text: qsTrId("id_menu_edit_undo"); shortcut: "Ctrl+Z"; onTriggered: undo(true) }
 			MenuItem { text: qsTrId("id_menu_edit_redo"); shortcut: "Ctrl+Y"; onTriggered: undo(false) }
@@ -295,7 +297,7 @@ ApplicationWindow
 		Label
 		{
 			anchors.fill: parent
-			text: qsTrId("id_dialog_about_text")
+			text: qsTrId("id_dialog_about_text") + "\n\n© 2019 Mikko Syrjä"
 			horizontalAlignment: Text.AlignHCenter
 		}
 		standardButtons: StandardButton.Ok

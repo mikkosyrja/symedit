@@ -1,7 +1,7 @@
 Piirtotyökalut
 ==============
 
-xxx
+Käytetettävissä olevat piirtptyökalut.
 
 Piirtotavat
 -----------
@@ -24,7 +24,7 @@ Valitsee hiirellä osoitetun kohteen aktiiviseksi. Alueet valitaan osoittamalla 
 |line image| Viiva
 ^^^^^^^^^^^^^^^^^^
 
-Piirtää kahden pisteen viivan
+Piirtää kahden pisteen viivan. Peräkkäiset kahden pisteen viivat muodostavat murtoviivan ja sulkeminen alkupisteeseen muodosta alueen.
 
 .. |rect corner image| image:: ../../image/rectangle_corner.png
 	:scale: 50 %
@@ -43,7 +43,7 @@ Piirtää suorakulmion keskipisteestä kulmaan.
 
 .. |circle corner image| image:: ../../image/circle_corner.png
 	:scale: 50 %
-.. |circle radius image| image:: ../../image/circle_radius.png
+.. |circle diameter image| image:: ../../image/circle_diameter.png
 	:scale: 50 %
 .. |circle center image| image:: ../../image/circle_center.png
 	:scale: 50 %
@@ -51,10 +51,10 @@ Piirtää suorakulmion keskipisteestä kulmaan.
 |circle corner image| Ympyrä kulmista
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää ympyrä vastakkaisilla kulmilla annetun suorakulmion sisään.
+Piirtää ympyrän vastakkaisilla kulmilla annetun suorakulmion sisään.
 
-|circle radius image| Ympyrä halkaisija
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|circle diameter image| Ympyrä halkaisija
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Piirtää ympyrän kahden vastakkaisen kehäpisteen välille.
 
@@ -63,7 +63,7 @@ Piirtää ympyrän kahden vastakkaisen kehäpisteen välille.
 
 Piirtää ympyrän keskipisteestä kehälle.
 
-.. |arc semi image| image:: ../../image/semi_radius.png
+.. |arc semi image| image:: ../../image/semi_diameter.png
 	:scale: 50 %
 .. |arc quarter image| image:: ../../image/quarter_radius.png
 	:scale: 50 %
@@ -71,20 +71,20 @@ Piirtää ympyrän keskipisteestä kehälle.
 |arc semi image| Puoliympyrä
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-xxx
+Piirtää puoliympyrän kahden vastakkaisen kehäpisteen välille.
 
 |arc quarter image| Neljännesympyrä
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Piirtää neljännesympyrän keskipisteestä kehälle.
+
 .. |text image| image:: ../../image/text.png
 	:scale: 50 %
-
-xxx
 
 |text image| Teksti
 ^^^^^^^^^^^^^^^^^^^
 
-xxx
+Piirtää tekstin annettuun kohtaan.
 
 Asetukset
 ---------
@@ -118,7 +118,7 @@ Tekstin koko editoinnissa. Ei tallennu symbolin mukana.
 Asemointi
 ^^^^^^^^^
 
-xxx
+Tekstin asemointi 1-12.
 
 Teksti
 ^^^^^^

@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	// set base language translators
 	QLocale locale;
 	QTranslator backuptranslator, localetranslator, currenttranslator;
+//	if ( backuptranslator.load(":/locale/symedit.fi_FI.qm") )
 	if ( backuptranslator.load(":/locale/symedit.en_GB.qm") )
 		QCoreApplication::installTranslator(&backuptranslator);
 	if ( localetranslator.load(locale, ":/locale/symedit.") )
@@ -51,6 +52,8 @@ int main(int argc, char *argv[])
 	bool transfer = parser.isSet(transferoption);
 	QString symbol = parser.value(symboloption);
 	QString language = parser.value(languageoption);
+	if ( language.isEmpty() )
+		language = "eng";
 
 	// set current translator
 	if ( currenttranslator.load(language == "fin" ? ":/locale/symedit.fi_FI.qm" : "") )
@@ -62,7 +65,7 @@ int main(int argc, char *argv[])
 
 	// register manager
 	QQmlApplicationEngine engine;
-	SymEditManager manager(filename, symbol);
+	SymEditManager manager(filename, symbol, language);
 	engine.rootContext()->setContextProperty("manager", &manager);
 
 	// start application

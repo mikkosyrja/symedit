@@ -9,7 +9,7 @@
     </message>
     <message id="id_menu_file">
         <source></source>
-        <translation>File</translation>
+        <translation>&amp;File</translation>
     </message>
     <message id="id_menu_file_open">
         <source></source>
@@ -29,7 +29,7 @@
     </message>
     <message id="id_menu_edit">
         <source></source>
-        <translation>Edit</translation>
+        <translation>&amp;Edit</translation>
     </message>
     <message id="id_menu_edit_undo">
         <source></source>
@@ -73,7 +73,7 @@
     </message>
     <message id="id_menu_view">
         <source></source>
-        <translation>View</translation>
+        <translation>&amp;View</translation>
     </message>
     <message id="id_menu_view_zoom_in">
         <source></source>
@@ -97,7 +97,7 @@
     </message>
     <message id="id_menu_tool">
         <source></source>
-        <translation>Tool</translation>
+        <translation>&amp;Tool</translation>
     </message>
     <message id="id_menu_tool_select">
         <source></source>
@@ -119,9 +119,9 @@
         <source></source>
         <translation>Circle Corner</translation>
     </message>
-	<message id="id_menu_tool_circle_diameter">
+    <message id="id_menu_tool_circle_diameter">
         <source></source>
-		<translation>Circle Diameter</translation>
+        <translation>Circle Diameter</translation>
     </message>
     <message id="id_menu_tool_circle_center">
         <source></source>
@@ -141,7 +141,7 @@
     </message>
     <message id="id_menu_help">
         <source></source>
-        <translation>Help</translation>
+        <translation>&amp;Help</translation>
     </message>
     <message id="id_menu_help_contents">
         <source></source>
@@ -219,23 +219,23 @@
         <source></source>
         <translation>Circle corner</translation>
     </message>
-	<message id="id_tooltip_tool_circle_diameter">
+    <message id="id_tooltip_tool_circle_diameter">
         <source></source>
-		<translation>Circle diameter</translation>
+        <translation>Circle diameter</translation>
     </message>
     <message id="id_tooltip_tool_circle_center">
         <source></source>
         <translation>Circle center</translation>
     </message>
-	<message id="id_tooltip_tool_semi_diameter">
-		<source></source>
-		<translation>Semicircle diameter</translation>
-	</message>
-	<message id="id_tooltip_tool_quarter_radius">
-		<source></source>
-		<translation>Quarter circle radius</translation>
-	</message>
-	<message id="id_tooltip_tool_text">
+    <message id="id_tooltip_tool_semi_diameter">
+        <source></source>
+        <translation>Semicircle diameter</translation>
+    </message>
+    <message id="id_tooltip_tool_quarter_radius">
+        <source></source>
+        <translation>Quarter circle radius</translation>
+    </message>
+    <message id="id_tooltip_tool_text">
         <source></source>
         <translation>Draw text</translation>
     </message>
@@ -323,23 +323,23 @@
         <source></source>
         <translation>Text</translation>
     </message>
-	<message id="id_dialog_open_file">
-		<source></source>
-		<translation>Open File</translation>
-	</message>
-	<message id="id_dialog_save_file">
-		<source></source>
-		<translation>Save File</translation>
-	</message>
-	<message id="id_dialog_symbol_files">
-		<source></source>
-		<translation>Symbol files (*.txt)</translation>
-	</message>
-	<message id="id_dialog_all_files">
-		<source></source>
-		<translation>All files (*)</translation>
-	</message>
-	<message id="id_dialog_about">
+    <message id="id_dialog_open_file">
+        <source></source>
+        <translation>Open File</translation>
+    </message>
+    <message id="id_dialog_save_file">
+        <source></source>
+        <translation>Save File</translation>
+    </message>
+    <message id="id_dialog_symbol_files">
+        <source></source>
+        <translation>Symbol files (*.txt)</translation>
+    </message>
+    <message id="id_dialog_all_files">
+        <source></source>
+        <translation>All files (*)</translation>
+    </message>
+    <message id="id_dialog_about">
         <source></source>
         <translation>About Program</translation>
     </message>
@@ -357,11 +357,11 @@
     </message>
     <message id="id_cli_language">
         <source></source>
-		<translation>lang</translation>
+        <translation>lang</translation>
     </message>
     <message id="id_cli_language_description">
         <source></source>
-		<translation>Application language abbreviation &lt;lang&gt;.</translation>
+        <translation>Application language abbreviation &lt;lang&gt;.</translation>
     </message>
     <message id="id_cli_transfer_file">
         <source></source>

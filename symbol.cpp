@@ -15,6 +15,14 @@ namespace Operation
 //
 //	symbol item functions
 //
+const SymEditSymbol::Item gDefaultItem;		//!< Empty default item.
+
+//! Constructor.
+SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9)
+{
+
+}
+
 //@{
 //! Constructor.
 /*!
@@ -303,11 +311,17 @@ int SymEditSymbol::SelectItem(QPoint point) const
 
 //! Set active item index.
 /*!
-	\param index		Active item index.
+	\param index		Active item index or -1 for deactivation.
+	\return				True for success.
 */
-void SymEditSymbol::SetActiveIndex(int index)
+bool SymEditSymbol::SetActiveIndex(int index)
 {
-	ActiveIndex = index;
+	if ( index >= -1 && index < static_cast<int>(Items.size()) )
+	{
+		ActiveIndex = index;
+		return true;
+	}
+	return false;
 }
 
 //! Get active item index.
@@ -328,10 +342,16 @@ int SymEditSymbol::GetItemCount() const
 	return static_cast<int>(Items.size());
 }
 
-//
+//! Get item from index.
+/*!
+	\param index		Item index.
+	\return				Item from index.
+*/
 const SymEditSymbol::Item& SymEditSymbol::GetItem(int index) const
 {
-	return Items.at(static_cast<size_t>(index));
+	if ( index >= 0 && index < static_cast<int>(Items.size()) )
+		return Items.at(static_cast<size_t>(index));
+	return gDefaultItem;
 }
 
 //! Rotate symbol.

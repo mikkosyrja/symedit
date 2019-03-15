@@ -115,7 +115,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_menu_tool_circle_radius">
+    <message id="id_menu_tool_circle_diameter">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,11 +207,19 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_tool_circle_radius">
+    <message id="id_tooltip_tool_circle_diameter">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
     <message id="id_tooltip_tool_circle_center">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_tool_semi_diameter">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_tooltip_tool_quarter_radius">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -239,23 +247,23 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_dialog_open_file">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_dialog_save_file">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_dialog_symbol_files">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_dialog_all_files">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_dialog_about">
+    <message id="id_dialog_open_file">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_save_file">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_symbol_files">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_all_files">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_about">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -336,14 +344,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_menu_help_about">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_tool_semi_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_tool_quarter_radius">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

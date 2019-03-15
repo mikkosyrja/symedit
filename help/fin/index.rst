@@ -3,6 +3,7 @@ SymEdit
 =======
 
 .. _3D-Win: http://www.3d-system.fi/
+.. _Github: https://github.com/mikkosyrja/symedit/
 
 SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symboleille.
 
@@ -16,5 +17,7 @@ SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symbole
 
 .. _Gentleface: https://gentleface.com/free_icon_set.html
 
-Osa työkalupalkin kuvakkeista on otettu `Gentleface`_ ikonisetistä.
+Lähdekoodi saatavilla `Github`_ -palvelussa.
+
+Osa työkalupalkin kuvakkeista otettu `Gentleface`_ ikonisetistä.
 

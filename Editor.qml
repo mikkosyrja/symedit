@@ -147,6 +147,11 @@ Rectangle
 							symbol = manager.getSymbol()
 					}
 				}
+				else	// activate last
+				{
+					manager.setActiveIndex(manager.getItemCount() - 1);
+					canvas.requestPaint()
+				}
 			}
 		}
 	}

@@ -31,6 +31,7 @@ public:
 	class Item								//!< Symbol item.
 	{
 	public:
+		Item();
 		Item(Operation::Type operation, QPoint point, int value, int fill);
 		Item(Operation::Type operation, QPoint point, QPoint value, int fill);
 		Item(Operation::Type operation, QPoint point, QString value, int align);
@@ -53,7 +54,7 @@ public:
 	bool RemoveItem(int index);
 
 	int SelectItem(QPoint point) const;
-	void SetActiveIndex(int index);
+	bool SetActiveIndex(int index);
 	int GetActiveIndex() const;
 
 	int GetItemCount() const;

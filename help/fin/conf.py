@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'SymEdit'
-copyright = '2019, Mikko Syrjä'
+copyright = '2019 Mikko Syrjä'
 author = 'Mikko Syrjä'
 
 # The version info for the project you're documenting, acts as replacement for

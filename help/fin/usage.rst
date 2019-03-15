@@ -13,11 +13,11 @@ Komentorivi
 
 Komentoriviparametrit::
 
-	Usage: ./symedit [options] file
+	Usage: symedit [options] file
 
 	Options:
 	  -t, --transfer          Symbolitiedosto on siirtotiedosto.
-	  -s, --symbol <symboli>  Lue symbolin data parametrista <symboli>.
+	  -s, --symbol <symboli>  Lue symboli parametrista <symboli>.
 	  -l, --language <kieli>  Sovelluksen kielen lyhenne <kieli>.
 	  -h, --help              Displays this help.
 
@@ -50,5 +50,5 @@ xxx
 Tilarivi
 ^^^^^^^^
 
-Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen.
+Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen. Muoto on sama, jossa symboli tallentuu tekstitiedostoon.
 

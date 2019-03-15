@@ -1,7 +1,7 @@
 Valikkotoiminnot
 ================
 
-xxx
+Operations available in application menu.
 
 File
 ----
@@ -16,22 +16,22 @@ File
 |open image| Open
 ^^^^^^^^^^^^^^^^^
 
-xxx
+Opens symbol from text file. Shortcut key Ctrl+O.
 
 |save image| Save
 ^^^^^^^^^^^^^^^^^
 
-xxx
+Saves symbol to text file. Shortcut key Ctrl+S.
 
 Save as
 ^^^^^^^
 
-xxx
+Saves symbol to text file with new name. Shortcut key Ctrl+Shift+S.
 
 |exit image| Exit
 ^^^^^^^^^^^^^^^^^
 
-Exits application.
+Exits application. Shortcut key Alt+F4.
 
 Edit
 ----
@@ -44,12 +44,12 @@ Edit
 |undo image| Undo
 ^^^^^^^^^^^^^^^^^
 
-Undoes previous operation.
+Undoes previous operation. Shortcut key Ctrl+Z.
 
 |redo image| Redo
 ^^^^^^^^^^^^^^^^^
 
-Redoes previously undoed operation.
+Redoes previously undoed operation. Shortcut key Ctrl+Y or Ctrl+Shift+Z.
 
 .. |cut image| image:: ../../image/cut_icon&48.png
 	:scale: 50 %
@@ -61,17 +61,17 @@ Redoes previously undoed operation.
 |cut image| Cut
 ^^^^^^^^^^^^^^^
 
-Cuts whole symbol to clipboard as text.
+Cuts whole symbol to clipboard as text. Shortcut key Ctrl+X.
 
 |copy image| Copy
 ^^^^^^^^^^^^^^^^^
 
-Copies whole symbol to clipboard as text.
+Copies whole symbol to clipboard as text. Shortcut key Ctrl+C.
 
 |paste image| Paste
 ^^^^^^^^^^^^^^^^^^^
 
-Pastes whole symbol from clipboard as text.
+Pastes whole symbol from clipboard as text. Shortcut key Ctrl+V.
 
 .. |right image| image:: ../../image/rotate_right.png
 	:scale: 50 %
@@ -81,12 +81,12 @@ Pastes whole symbol from clipboard as text.
 |right image| Rotate Right
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rotates symbol 90 degrees clockwise.
+Rotates symbol 90 degrees clockwise. Shortcut key Alt+Right.
 
 |left image| Käännä Left
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rotates symbol 90 degrees counterclockwise.
+Rotates symbol 90 degrees counterclockwise. Shortcut key Alt+Left.
 
 .. |raise image| image:: ../../image/up_icon&48.png
 	:scale: 50 %
@@ -96,12 +96,12 @@ Rotates symbol 90 degrees counterclockwise.
 |raise image| Raise Item
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Nostaa aktiivista kohdetta piirtojärjestyksessä ylemmäs.
+Raises active item higher in drawing order. Shortcut key Alt+Up.
 
 |lower image| Lower Item
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Laskee aktiivista kohdetta piirtojärjestyksessä alemmas.
+Lowers active item lower in drawing order. Shortcut key Alt+Down.
 
 .. |remove image| image:: ../../image/delete.png
 	:scale: 50 %
@@ -109,7 +109,7 @@ Laskee aktiivista kohdetta piirtojärjestyksessä alemmas.
 |remove image| Remove Item
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Poistaa aktiivisen kohteen ja aktivoi piirtojärjestyksessä edellisen kohteen.
+Removes active item and activates previous item in drawing order. Shortcut key Del.
 
 View
 ----
@@ -124,17 +124,17 @@ View
 |in image| Zoom In
 ^^^^^^^^^^^^^^^^^^
 
-Zooms view closer.
+Zooms view closer. Shortcut key Ctrl++.
 
 |out image| Zoom Out
 ^^^^^^^^^^^^^^^^^^^^
 
-Zooms view farther.
+Zooms view farther. Shortcut key Ctrl+-.
 
 |all image| Maximum
 ^^^^^^^^^^^^^^^^^^^
 
-Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
+Zooms view to a maximum size and quits possible preview mode. Shortcut key Ctrl+0.
 
 .. |grid image| image:: ../../image/grid_icon&48.png
 	:scale: 50 %
@@ -144,12 +144,12 @@ Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan.
 |grid image| Show Grid
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Shows 10x10 grid behind the symbol.
+Shows 10x10 grid behind the symbol. Shortcut key Ctrl+G.
 
 |preview image| Preview
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Näyttää symbolin esikatselutilassa: minimikokoisena ja ilman ruudukkoa.
+Shows symbol in preview mode: minimum size and without grid. Shortcut key Ctrl+P.
 
 Tools
 -----
@@ -167,7 +167,7 @@ Help
 |help image| Help
 ^^^^^^^^^^^^^^^^^
 
-Opens this help in browser.
+Opens this help in browser. Shortcut key F1.
 
 |info image| About
 ^^^^^^^^^^^^^^^^^^

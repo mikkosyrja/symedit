@@ -38,7 +38,7 @@ class SymEditManager : public QObject
 
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
-	explicit SymEditManager(const QString& filename, const QString& symbol);
+	explicit SymEditManager(const QString& filename, const QString& symbol, const QString& language);
 
 	//! Save settings.
 	void SaveSettings() const { Settings.Save(); }
@@ -71,7 +71,7 @@ public:
 	Q_INVOKABLE int getItemAlign(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
-	Q_INVOKABLE void setActiveIndex(int index);
+	Q_INVOKABLE bool setActiveIndex(int index);
 	Q_INVOKABLE int getActiveIndex() const;
 
 	Q_INVOKABLE void cutClipboard();
@@ -95,6 +95,7 @@ private:
 
 	bool Initialized = false;				//!< Initialization mutex.
 	QString FileName;						//!< Symbol file name.
+	QString Language;						//!< Language id.
 
 	SymEditSymbol Symbol;					//!< Current symbol.
 	SymEditSettings Settings;				//!< Editor settings.

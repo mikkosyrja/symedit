@@ -13,16 +13,16 @@ Command line
 
 Command line parameters::
 
-	Usage: ./symedit [options] file
+	Usage: symedit [options] file
 
 	Options:
-	  -t, --transfer             Symbol file is transfer file.
-	  -s, --symbol <symbol>      Read symbol data from parameter <symbol>.
-	  -l, --language <language>  Application language abbreviation <language>.
-	  -h, --help                 Displays this help.
+	  -t, --transfer         Symbol file is transfer file.
+	  -s, --symbol <symbol>  Read symbol from parameter <symbol>.
+	  -l, --language <lang>  Application language abbreviation <lang>.
+	  -h, --help             Displays this help.
 
 	Arguments:
-	  file                       Symbol file name.
+	  file                   Symbol file name.
 
 Usage
 -----
@@ -38,9 +38,9 @@ See :doc:`menu`.
 Toolbar
 ^^^^^^^
 
-Työkalupalkin ylemmällä rivillä ovat painikkeet valikon toiminnoille ja toisella rivillä piirron asetuksille.
+Toolbar upper line contains buttons for menu functions. Second line contains drawing setting items.
 
-Katso :doc:`tools`.
+See :doc:`tools`.
 
 Editor
 ^^^^^^
@@ -50,5 +50,4 @@ xxx
 Statusbar
 ^^^^^^^^^
 
-Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen.
-
+Bottom status bar shows mouse coordinates at left and symbol textual representation at right. Representation is same as format used for saving symbol to text file.

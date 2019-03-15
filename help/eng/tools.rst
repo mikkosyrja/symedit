@@ -1,7 +1,7 @@
 Drawing tools
 =============
 
-xxx
+Available drawing tools.
 
 Drawing methods
 ---------------
@@ -24,46 +24,46 @@ Valitsee hiirellä osoitetun kohteen aktiiviseksi. Alueet valitaan osoittamalla 
 |line image| Line
 ^^^^^^^^^^^^^^^^^
 
-Piirtää kahden pisteen viivan
+Draws two point line. Successive two point lines form polyline and closing polyline to the starting point forms polygon.
 
 .. |rect corner image| image:: ../../image/rectangle_corner.png
 	:scale: 50 %
 .. |rect center image| image:: ../../image/rectangle_center.png
 	:scale: 50 %
 
-|rect corner image| Suorakulmio kulmista
+|rect corner image| Rectangle corner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää suorakulmion kahden vastakkaisen kulman välille.
+Draws rectangle between two diagonal corners.
 
-|rect center image| Suorakulmio keskeltä
+|rect center image| Rectangle center
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää suorakulmion keskipisteestä kulmaan.
+Draws rectangle from center to corner.
 
 .. |circle corner image| image:: ../../image/circle_corner.png
 	:scale: 50 %
-.. |circle radius image| image:: ../../image/circle_radius.png
+.. |circle diameter image| image:: ../../image/circle_diameter.png
 	:scale: 50 %
 .. |circle center image| image:: ../../image/circle_center.png
 	:scale: 50 %
 
-|circle corner image| Ympyrä kulmista
+|circle corner image| Circle corner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää ympyrä vastakkaisilla kulmilla annetun suorakulmion sisään.
+Draws circle inside rectangle given with two diagonal corners.
 
-|circle radius image| Ympyrä halkaisija
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|circle diameter image| Circle diameter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää ympyrän kahden vastakkaisen kehäpisteen välille.
+Draws circle between two diameter endpoints.
 
-|circle center image| Ympyrä keskeltä
+|circle center image| Circle center
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää ympyrän keskipisteestä kehälle.
+Draws circle with center and radius.
 
-.. |arc semi image| image:: ../../image/semi_radius.png
+.. |arc semi image| image:: ../../image/semi_diameter.png
 	:scale: 50 %
 .. |arc quarter image| image:: ../../image/quarter_radius.png
 	:scale: 50 %
@@ -71,57 +71,57 @@ Piirtää ympyrän keskipisteestä kehälle.
 |arc semi image| Semicircle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-xxx
+Draws semicircle between two diameter endpoints.
 
 |arc quarter image| Quarter circle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Draws quarter circle with center and radius.
+
 .. |text image| image:: ../../image/text.png
 	:scale: 50 %
-
-xxx
 
 |text image| Text
 ^^^^^^^^^^^^^^^^^
 
-xxx
+Draws text to given position.
 
-Asetukset
----------
-
-xxx
-
-Tartunta
-^^^^^^^^
+Settings
+--------
 
 xxx
 
-Täyttö
-^^^^^^
+Snap
+^^^^
 
 xxx
 
-1. Ei täyttöä
-2. Taustaväri
-3. Alueen täyttö
+Fill
+^^^^
 
-Viivan leveys
-^^^^^^^^^^^^^
+xxx
 
-Viivan leveys editoinnissa. Ei tallennu symbolin mukana.
+1. No fill
+2. Backgroud
+3. Area fill
 
-Tekstin koko
-^^^^^^^^^^^^
+Line width
+^^^^^^^^^^
 
-Tekstin koko editoinnissa. Ei tallennu symbolin mukana.
+Line width in editing. Does not save with symbol.
 
-Asemointi
+Text size
 ^^^^^^^^^
 
-xxx
+Text size in editing. Does not save with symbol.
 
-Teksti
-^^^^^^
+Alignment
+^^^^^^^^^
+
+Text alignment value 1-12.
+
+Text
+^^^^
 
 xxx
 

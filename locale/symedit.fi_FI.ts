@@ -9,7 +9,7 @@
     </message>
     <message id="id_menu_file">
         <source></source>
-        <translation>Tiedosto</translation>
+        <translation>&amp;Tiedosto</translation>
     </message>
     <message id="id_menu_file_open">
         <source></source>
@@ -29,7 +29,7 @@
     </message>
     <message id="id_menu_edit">
         <source></source>
-        <translation>Muokkaa</translation>
+        <translation>&amp;Muokkaa</translation>
     </message>
     <message id="id_menu_edit_undo">
         <source></source>
@@ -73,7 +73,7 @@
     </message>
     <message id="id_menu_view">
         <source></source>
-        <translation>Näytä</translation>
+        <translation>&amp;Näytä</translation>
     </message>
     <message id="id_menu_view_zoom_in">
         <source></source>
@@ -97,7 +97,7 @@
     </message>
     <message id="id_menu_tool">
         <source></source>
-        <translation>Työkalut</translation>
+        <translation>Työ&amp;kalut</translation>
     </message>
     <message id="id_menu_tool_select">
         <source></source>
@@ -119,7 +119,7 @@
         <source></source>
         <translation>Ympyrä kulmista</translation>
     </message>
-	<message id="id_menu_tool_circle_diameter">
+    <message id="id_menu_tool_circle_diameter">
         <source></source>
         <translation>Ympyrä halkaisija</translation>
     </message>
@@ -141,7 +141,7 @@
     </message>
     <message id="id_menu_help">
         <source></source>
-        <translation>Ohje</translation>
+        <translation>&amp;Ohje</translation>
     </message>
     <message id="id_menu_help_contents">
         <source></source>
@@ -219,23 +219,23 @@
         <source></source>
         <translation>Ympyrä kulmista</translation>
     </message>
-	<message id="id_tooltip_tool_circle_diameter">
+    <message id="id_tooltip_tool_circle_diameter">
         <source></source>
-		<translation>Ympyrä halkasija</translation>
+        <translation>Ympyrä halkasija</translation>
     </message>
     <message id="id_tooltip_tool_circle_center">
         <source></source>
         <translation>Ympyrä keskeltä</translation>
     </message>
-	<message id="id_tooltip_tool_semi_diameter">
-		<source></source>
-		<translation>Puoliympyrä halkaisija</translation>
-	</message>
-	<message id="id_tooltip_tool_quarter_radius">
-		<source></source>
-		<translation>Neljännesympyrä säde</translation>
-	</message>
-	<message id="id_tooltip_tool_text">
+    <message id="id_tooltip_tool_semi_diameter">
+        <source></source>
+        <translation>Puoliympyrä halkaisija</translation>
+    </message>
+    <message id="id_tooltip_tool_quarter_radius">
+        <source></source>
+        <translation>Neljännesympyrä säde</translation>
+    </message>
+    <message id="id_tooltip_tool_text">
         <source></source>
         <translation>Piirrä teksti</translation>
     </message>
@@ -323,23 +323,23 @@
         <source></source>
         <translation>Teksti</translation>
     </message>
-	<message id="id_dialog_open_file">
-		<source></source>
-		<translation>Avaa tiedosto</translation>
-	</message>
-	<message id="id_dialog_save_file">
-		<source></source>
-		<translation>Tallenna tiedosto</translation>
-	</message>
-	<message id="id_dialog_symbol_files">
-		<source></source>
-		<translation>Symbolitiedostot (*.txt)</translation>
-	</message>
-	<message id="id_dialog_all_files">
-		<source></source>
-		<translation>Kaikki tiedostot (*)</translation>
-	</message>
-	<message id="id_dialog_about">
+    <message id="id_dialog_open_file">
+        <source></source>
+        <translation>Avaa tiedosto</translation>
+    </message>
+    <message id="id_dialog_save_file">
+        <source></source>
+        <translation>Tallenna tiedosto</translation>
+    </message>
+    <message id="id_dialog_symbol_files">
+        <source></source>
+        <translation>Symbolitiedostot (*.txt)</translation>
+    </message>
+    <message id="id_dialog_all_files">
+        <source></source>
+        <translation>Kaikki tiedostot (*)</translation>
+    </message>
+    <message id="id_dialog_about">
         <source></source>
         <translation>Tietoja ohjelmasta</translation>
     </message>
