@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 	QString symbol = parser.value(symboloption);
 	QString language = parser.value(languageoption);
 	if ( language.isEmpty() )
-		language = "eng";
+		language = "eng";		//## use fi_FI and en_GB?
 
 	// set current translator
 	if ( currenttranslator.load(language == "fin" ? ":/locale/symedit.fi_FI.qm" : "") )

@@ -39,17 +39,21 @@ DISTFILES += \
 	.gitignore \
 	.editorconfig \
 	README.md \
+	LICENSE \
 	lrelease.sh \
 	lupdate.sh \
+	image/delete.kra \
+	image/polyline.kra \
+	image/rotate_left.kra \
+	image/rotate_right.kra \
 	image/circle_center.kra \
-    image/circle_corner.kra \
-    image/delete.kra \
-    image/polyline.kra \
+	image/circle_diameter.kra \
+	image/circle_corner.kra \
     image/rectangle_center.kra \
     image/rectangle_corner.kra \
-    image/rotate_left.kra \
-    image/rotate_right.kra \
-    image/text.kra \
+	image/semi_diameter.kra \
+	image/quarter_radius.kra \
+	image/text.kra \
     locale/symedit.ts \
     locale/symedit.fi_FI.ts \
     locale/symedit.en_GB.ts \
@@ -65,8 +69,4 @@ DISTFILES += \
     help/eng/tools.rst \
     help/eng/usage.rst \
     help/eng/Makefile \
-    help/eng/conf.py \
-    LICENSE \
-    image/circle_diameter.kra \
-    image/semi_diameter.kra \
-    image/quarter_radius.kra
+	help/eng/conf.py

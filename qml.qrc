@@ -37,5 +37,6 @@
         <file>image/quarter_radius.png</file>
         <file>image/circle_diameter.png</file>
         <file>image/semi_diameter.png</file>
+        <file>image/save_as.png</file>
     </qresource>
 </RCC>

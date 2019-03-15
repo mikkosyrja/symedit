@@ -119,7 +119,8 @@ ApplicationWindow
 				height: 30
 				z: 10
 //				BarTool { image: "image/open_icon&48.png"; tooltip: qsTrId("id_tooltip_file_open"); onClicked: open() }
-//				BarTool { image: "image/save_icon&48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save() }
+//				BarTool { image: "image/save_icon&48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save(false) }
+//				BarTool { image: "image/save_as.png"; tooltip: qsTrId("id_tooltip_file_save_as"); onClicked: save(true) }
 //				BarSeparator { }
 				BarTool { image: "image/undo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
 				BarTool { image: "image/redo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }

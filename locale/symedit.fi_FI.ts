@@ -9,6 +9,7 @@
     </message>
     <message id="id_menu_file">
         <source></source>
+        <extracomment>file menu</extracomment>
         <translation>&amp;Tiedosto</translation>
     </message>
     <message id="id_menu_file_open">
@@ -29,6 +30,7 @@
     </message>
     <message id="id_menu_edit">
         <source></source>
+        <extracomment>edit menu</extracomment>
         <translation>&amp;Muokkaa</translation>
     </message>
     <message id="id_menu_edit_undo">
@@ -151,7 +153,19 @@
         <source></source>
         <translation>Tietoja</translation>
     </message>
-    <message id="id_tooltip_edit_undo">
+	<message id="id_tooltip_file_open">
+		<source></source>
+		<translation>Avaa tiedosto</translation>
+	</message>
+	<message id="id_tooltip_file_save">
+		<source></source>
+		<translation>Tallenna tiedosto</translation>
+	</message>
+	<message id="id_tooltip_file_save_as">
+		<source></source>
+		<translation>Tallenna tiedosto nimellä</translation>
+	</message>
+	<message id="id_tooltip_edit_undo">
         <source></source>
         <translation>Kumoa toiminto</translation>
     </message>

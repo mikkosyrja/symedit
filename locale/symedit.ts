@@ -5,6 +5,7 @@
     <name></name>
     <message id="id_menu_file">
         <source></source>
+        <extracomment>file menu</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="id_menu_file_open">
@@ -25,6 +26,7 @@
     </message>
     <message id="id_menu_edit">
         <source></source>
+        <extracomment>edit menu</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="id_menu_edit_undo">
@@ -139,7 +141,19 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_edit_undo">
+	<message id="id_tooltip_file_open">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_tooltip_file_save">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_tooltip_file_save_as">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_tooltip_edit_undo">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

@@ -10,6 +10,8 @@ Tiedosto
 	:scale: 50 %
 .. |save image| image:: ../../image/save_icon&48.png
 	:scale: 50 %
+.. |save as image| image:: ../../image/save_as.png
+	:scale: 50 %
 .. |exit image| image:: ../../image/exit_icon&48.png
 	:scale: 50 %
 
@@ -23,8 +25,8 @@ Avaa symbolin tekstitiedostosta. Pikanäppäin Ctrl+O.
 
 Tallentaa symbolin tekstitiedostoon. Pikanäppäin Ctrl+S.
 
-Tallenna nimellä
-^^^^^^^^^^^^^^^^
+|save as image| Tallenna nimellä
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Tallentaa symbolin tekstitiedostoon uudella nimellä. Pikanäppäin Ctrl+Shift+S.
 

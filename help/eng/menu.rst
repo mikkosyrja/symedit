@@ -1,5 +1,5 @@
-Valikkotoiminnot
-================
+Menu functions
+==============
 
 Operations available in application menu.
 
@@ -9,6 +9,8 @@ File
 .. |open image| image:: ../../image/open_icon&48.png
 	:scale: 50 %
 .. |save image| image:: ../../image/save_icon&48.png
+	:scale: 50 %
+.. |save as image| image:: ../../image/save_as.png
 	:scale: 50 %
 .. |exit image| image:: ../../image/exit_icon&48.png
 	:scale: 50 %
@@ -23,8 +25,8 @@ Opens symbol from text file. Shortcut key Ctrl+O.
 
 Saves symbol to text file. Shortcut key Ctrl+S.
 
-Save as
-^^^^^^^
+|save as image| Save as
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Saves symbol to text file with new name. Shortcut key Ctrl+Shift+S.
 
