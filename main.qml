@@ -15,11 +15,13 @@ ApplicationWindow
 	property real zoomscale: 1.5
 	property real zoomstep: 1.3
 
-	property int fillitem: 0
-	property real linewidth: 1
-	property int alignment: 1
-	property int textsize: 1
 	property int snapgrid: 1
+	property real linewidth: 1
+	property int textsize: 1
+	property int colorindex: 1
+	property int fillitem: 0
+	property int alignment: 1
+
 	property string textvalue: textfield.text
 	property int tool: 0
 
@@ -116,7 +118,7 @@ ApplicationWindow
 		{
 			RowLayout
 			{
-				height: 30
+				height: 32
 				z: 10
 //				BarTool { image: "image/open_icon&48.png"; tooltip: qsTrId("id_tooltip_file_open"); onClicked: open() }
 //				BarTool { image: "image/save_icon&48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save(false) }
@@ -173,20 +175,58 @@ ApplicationWindow
 				ComboBox
 				{
 					id: snaplist
-					implicitWidth: 50
-					model: [ 1, 5, 10 ]
+					implicitWidth: 60
+					model: [ 1, 2, 5, 10 ]
 					onCurrentIndexChanged:
 					{
 						if ( currentIndex == 0 ) { snapgrid = 1 }
-						else if ( currentIndex == 1 ) { snapgrid = 5 }
-						else if ( currentIndex == 2 ) { snapgrid = 10 }
+						else if ( currentIndex == 1 ) { snapgrid = 2 }
+						else if ( currentIndex == 2 ) { snapgrid = 5 }
+						else if ( currentIndex == 3 ) { snapgrid = 10 }
 					}
 					function setSnap()
 					{
 						if ( snapgrid == 1 ) { currentIndex = 0 }
-						else if ( snapgrid == 10 ) { currentIndex = 2 }
-						else { currentIndex = 1 }	// default 5
+						else if ( snapgrid == 2 ) { currentIndex = 1 }
+						else if ( snapgrid == 10 ) { currentIndex = 3 }
+						else { currentIndex = 2 }	// default 5
 					}
+				}
+				BarSeparator { }
+				Label { text: qsTrId("id_toolbar_line_width") }
+				ComboBox
+				{
+					id: widthlist
+					implicitWidth: 60
+					model: [ 1, 2, 3, 4, 5 ]
+					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
+					function setWidth() { currentIndex = linewidth - 1 }
+				}
+				BarSeparator { }
+				Label { text: qsTrId("id_toolbar_text_size") }
+				ComboBox
+				{
+					id: sizelist
+					implicitWidth: 60
+					model: [ 1, 2, 3, 4, 5 ]
+					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
+					function setSize() { currentIndex = textsize - 1 }
+				}
+			}
+			RowLayout
+			{
+				height: 32
+				Label { text: qsTrId("id_toolbar_color_index") }
+				ComboBox
+				{
+					id: colorlist
+					implicitWidth: 60
+					model: [ qsTrId("id_toolbar_color_white"), qsTrId("id_toolbar_color_black"),
+						qsTrId("id_toolbar_color_blue"), qsTrId("id_toolbar_color_red"),
+						qsTrId("id_toolbar_color_green"), qsTrId("id_toolbar_color_yellow"),
+						"6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ]
+					onCurrentIndexChanged: { colorindex = currentIndex; editor.update() }
+					function setColor() { currentIndex = colorindex }
 				}
 				BarSeparator { }
 				Item { Layout.fillWidth: true }
@@ -194,7 +234,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: filllist
-					implicitWidth: 50
+					implicitWidth: 60
 					model:
 					[
 						qsTrId("id_toolbar_fill_none"),
@@ -205,31 +245,11 @@ ApplicationWindow
 					function setFill() { currentIndex = fillitem }
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_line_width") }
-				ComboBox
-				{
-					id: widthlist
-					implicitWidth: 50
-					model: [ 1, 2, 3, 4, 5 ]
-					onCurrentIndexChanged: { linewidth = currentIndex + 1; editor.update() }
-					function setWidth() { currentIndex = linewidth - 1 }
-				}
-				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_text_size") }
-				ComboBox
-				{
-					id: sizelist
-					implicitWidth: 50
-					model: [ 1, 2, 3, 4, 5 ]
-					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
-					function setSize() { currentIndex = textsize - 1 }
-				}
-				BarSeparator { }
 				Label { text: qsTrId("id_toolbar_alignment") }
 				ComboBox
 				{
 					id: alignlist
-					implicitWidth: 50
+					implicitWidth: 60
 					model:
 					[
 						qsTrId("id_toolbar_align_top_right"),
@@ -253,7 +273,7 @@ ApplicationWindow
 				TextField
 				{
 					id: textfield
-					implicitWidth: 120
+					implicitWidth: 160
 				}
 			}
 		}
@@ -309,14 +329,15 @@ ApplicationWindow
 	onWidthChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 	onHeightChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
 
-	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem); }
-	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment); }
-	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth); }
-	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize); }
-	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); }
+	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); editor.update() }
+	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth) }
+	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize) }
+	onColorindexChanged: { manager.setIntSetting("ColorIndex", colorindex) }
+	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem) }
+	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment) }
 
-	onTextvalueChanged: { manager.setTextSetting("TextValue", textvalue); }
-	onToolChanged: { manager.setIntSetting("Tool", tool); }
+	onTextvalueChanged: { manager.setTextSetting("TextValue", textvalue) }
+	onToolChanged: { manager.setIntSetting("Tool", tool) }
 
 	Component.onCompleted:
 	{
@@ -325,11 +346,12 @@ ApplicationWindow
 		width = manager.getWindowSize().width
 		height = manager.getWindowSize().height
 
-		fillitem = manager.getIntSetting("FillItem")
-		alignment = manager.getIntSetting("Alignment")
+		snapgrid = manager.getIntSetting("SnapGrid")
 		linewidth = manager.getIntSetting("LineWidth")
 		textsize = manager.getIntSetting("TextSize")
-		snapgrid = manager.getIntSetting("SnapGrid")
+		colorindex = manager.getIntSetting("ColorIndex")
+		fillitem = manager.getIntSetting("FillItem")
+		alignment = manager.getIntSetting("Alignment")
 
 		textfield.text = manager.getTextSetting("TextValue")
 		tool = manager.getIntSetting("Tool")
@@ -339,6 +361,7 @@ ApplicationWindow
 		sizelist.setSize()
 		widthlist.setWidth()
 		alignlist.setAlign()
+		colorlist.setColor()
 
 		symbol = manager.getSymbol()
 

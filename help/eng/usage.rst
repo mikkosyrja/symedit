@@ -38,7 +38,7 @@ See :doc:`menu`.
 Toolbar
 ^^^^^^^
 
-Toolbar upper line contains buttons for menu functions. Second line contains drawing setting items.
+Toolbar upper line contains buttons for menu functions. Other lines contain drawing setting items.
 
 See :doc:`tools`.
 

@@ -6,9 +6,9 @@ Available drawing tools.
 Drawing methods
 ---------------
 
-Kaikki piirtotavat toimivat samalla tavalla. Hiiren painikkeen painaminen määrittää kohteen alkupisteen. Hiiren siirto painike pohjassa siirtää loppupistettä ja piirtää kohdetta reaaliajassa. Painikkeen vapauttaminen luo symboliin uuden kohteen ja aktivoi sen aktiiviseksi kohteeksi.
+All drawing methods behave same way. Pressing the mouse button defines starting point. Moving mouse while pressing the button changes end point and draws item in real time. Releasing the button creates new item to the symbol and makes it active item.
 
-Kohteen alku- ja loppupisteen on oltava eri paikoissa eli hiiren painikkeen vapauttaminen alkupisteessä ei luo uutta kohdetta.
+Item start and end points must be different. Releasing the mouse button at start point does not create new item.
 
 .. |select image| image:: ../../image/cursor_icon&48.png
 	:scale: 50 %
@@ -16,7 +16,7 @@ Kohteen alku- ja loppupisteen on oltava eri paikoissa eli hiiren painikkeen vapa
 |select image| Select
 ^^^^^^^^^^^^^^^^^^^^^
 
-Valitsee hiirellä osoitetun kohteen aktiiviseksi. Alueet valitaan osoittamalla reunaviivaa ja tekstit osoittamalla kiinnityspistettä.
+Activates nearest pointed item. Areas are selected by pointing the perimeter and texts are selected by pointing the anchor point.
 
 .. |line image| image:: ../../image/polyline.png
 	:scale: 50 %
@@ -89,39 +89,44 @@ Draws text to given position.
 Settings
 --------
 
-xxx
+Upper line settings affect only symbol editor. Lower line settings are stored with symbol.
 
-Snap
-^^^^
+Grid Snap
+^^^^^^^^^
 
-xxx
+Grid snap in editing.
 
-Fill
-^^^^
+Line width
+^^^^^^^^^^
 
-xxx
+Line width in editing.
+
+Text size
+^^^^^^^^^
+
+Text size in editing.
+
+Color index
+^^^^^^^^^^^
+
+3D-Win code file color index.
+
+Item Fill
+^^^^^^^^^
+
+Item fill mode.
 
 1. No fill
 2. Backgroud
 3. Area fill
 
-Line width
-^^^^^^^^^^
-
-Line width in editing. Does not save with symbol.
-
-Text size
-^^^^^^^^^
-
-Text size in editing. Does not save with symbol.
-
-Alignment
-^^^^^^^^^
+Text Alignment
+^^^^^^^^^^^^^^
 
 Text alignment value 1-12.
 
 Text
 ^^^^
 
-xxx
+Symbol text.
 

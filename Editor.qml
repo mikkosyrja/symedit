@@ -19,7 +19,6 @@ Rectangle
 
 	property int units: 100
 	property int max: units / 2
-	property int grid: 10
 	property int offsetx: 100
 	property int offsety: 50
 	property int totalx: units + offsetx * 2	// 300
@@ -98,7 +97,7 @@ Rectangle
 				{
 					if ( tool === Editor.Tool.Line )
 					{
-						manager.addPointItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), false)
+						manager.addPointItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, 0)
 						symbol = manager.getSymbol()
 					}
 					else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
@@ -108,7 +107,7 @@ Rectangle
 							startx -= (endx - startx)
 							starty -= (endy - starty)
 						}
-						if ( manager.addPointItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), fillitem) )
+						if ( manager.addPointItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, fillitem) )
 							symbol = manager.getSymbol()
 					}
 					else if ( tool > 30 && tool < 40 )	// circle
@@ -134,7 +133,7 @@ Rectangle
 							centerx = startx
 							centery = starty
 						}
-						if ( manager.addValueItem(Operation.Circle, Qt.point(centerx, centery), radius, fillitem) )
+						if ( manager.addValueItem(Operation.Circle, Qt.point(centerx, centery), radius, colorindex, fillitem) )
 							symbol = manager.getSymbol()
 					}
 					else if ( tool > 40 && tool < 50 )	// arc
@@ -143,7 +142,7 @@ Rectangle
 					}
 					else if ( tool > 50 && tool < 60 )	// text
 					{
-						if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, alignment) )
+						if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
 							symbol = manager.getSymbol()
 					}
 				}
@@ -236,8 +235,23 @@ Rectangle
 			}
 		}
 
+		function setcolorindex(context, color)
+		{
+			switch ( color )
+			{
+				case 0:		paintcolor = "white"; break
+				case 1:		paintcolor = "black"; break
+				case 2:		paintcolor = "blue"; break
+				case 3:		paintcolor = "red"; break
+				case 4:		paintcolor = "green"; break
+				case 5:		paintcolor = "yellow"; break
+				default:	paintcolor = "black"; break
+			}
+		}
+
 		function painttext(context, string, point, active)
 		{
+			var currentwidth = context.lineWidth
 			context.lineWidth = textsize * (preview ? zoommin : zoomscale) / 2
 			var fontsize = 30 * textsize * (preview ? zoommin : zoomscale)
 			context.font = fontsize.toString() + "px sans-serif"
@@ -252,7 +266,7 @@ Rectangle
 				if ( active )
 					context.fillStyle = paintcolor
 			}
-			context.lineWidth = linewidth * zoomscale * 2
+			context.lineWidth = currentwidth
 		}
 
 		function paintgrid(context)
@@ -262,9 +276,9 @@ Rectangle
 			if ( viewgrid && !preview )
 			{
 				var row, col;
-				for ( row = -max; row <= max; row += grid )
+				for ( row = -max; row <= max; row += snapgrid )
 					paintline(context, Qt.point(-max, row), Qt.point(max, row))
-				for ( col = -max; col <= max; col += grid )
+				for ( col = -max; col <= max; col += snapgrid )
 					paintline(context, Qt.point(col, -max), Qt.point(col, max))
 
 				context.lineWidth = 1
@@ -277,18 +291,27 @@ Rectangle
 
 		function paintsymbol(context)
 		{
+			setcolorindex(context, 1)
 			context.lineWidth = linewidth * (preview ? zoommin * 2 : zoomscale) * 2
 
-			var active = manager.getActiveIndex();
+			var currentcolor = 1
+			var active = manager.getActiveIndex()
 			var index, count = manager.getItemCount()
 			for ( index = 0; index < count; index++ )
 			{
-				if ( !preview )
-					context.strokeStyle = (index === active ? editcolor : paintcolor)
-
 				var operation = manager.getItemOperation(index)
 				var point, position = manager.getItemPosition(index)
 				var radius, fill = manager.getItemFill(index)
+
+				var color = manager.getItemColor(index)
+				if ( color !== currentcolor )
+				{
+					setcolorindex(context, color)
+					currentcolor = color
+				}
+				context.strokeStyle = (index === active && !preview ? editcolor : paintcolor)
+				context.fillStyle = paintcolor
+
 				if ( operation === Operation.Line )
 				{
 					point = manager.getItemPoint(index)
@@ -331,19 +354,16 @@ Rectangle
 		onPaint:
 		{
 			var context = getContext("2d")
-
-			paintrect(context, Qt.point(-max - offsetx, max + offsety), Qt.size(totalx, totaly), 3)
-
-			context.strokeStyle = paintcolor
-			context.fillStyle = paintcolor
 			context.lineCap = "round"
 
+			paintrect(context, Qt.point(-max - offsetx, max + offsety), Qt.size(totalx, totaly), 3)
 			paintsymbol(context)
 
 			if ( down )
 			{
+				setcolorindex(context, colorindex)
 				context.strokeStyle = editcolor
-//				context.fillStyle = editcolor
+				context.fillStyle = paintcolor
 
 				var cornerx = (mousex < startx ? mousex : startx)
 				var cornery = (mousey > starty ? mousey : starty)

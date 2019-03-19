@@ -153,19 +153,19 @@
         <source></source>
         <translation>Tietoja</translation>
     </message>
-	<message id="id_tooltip_file_open">
-		<source></source>
-		<translation>Avaa tiedosto</translation>
-	</message>
-	<message id="id_tooltip_file_save">
-		<source></source>
-		<translation>Tallenna tiedosto</translation>
-	</message>
-	<message id="id_tooltip_file_save_as">
-		<source></source>
-		<translation>Tallenna tiedosto nimellä</translation>
-	</message>
-	<message id="id_tooltip_edit_undo">
+    <message id="id_tooltip_file_open">
+        <source></source>
+        <translation type="vanished">Avaa tiedosto</translation>
+    </message>
+    <message id="id_tooltip_file_save">
+        <source></source>
+        <translation type="vanished">Tallenna tiedosto</translation>
+    </message>
+    <message id="id_tooltip_file_save_as">
+        <source></source>
+        <translation type="vanished">Tallenna tiedosto nimellä</translation>
+    </message>
+    <message id="id_tooltip_edit_undo">
         <source></source>
         <translation>Kumoa toiminto</translation>
     </message>
@@ -255,35 +255,63 @@
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
-        <translation>Tartunta</translation>
+        <translation>Ruudukon tartunta</translation>
     </message>
-    <message id="id_toolbar_fill_item">
+	<message id="id_toolbar_line_width">
+		<source></source>
+		<translation>Viivan leveys</translation>
+	</message>
+	<message id="id_toolbar_text_size">
+		<source></source>
+		<translation>Tekstin koko</translation>
+	</message>
+    <message id="id_toolbar_color_index">
         <source></source>
-        <translation>Täyttö</translation>
+        <translation>Värin indeksi</translation>
     </message>
-    <message id="id_toolbar_fill_none">
+	<message id="id_toolbar_color_white">
+		<source></source>
+		<translation>0    Valkoinen</translation>
+	</message>
+	<message id="id_toolbar_color_black">
+		<source></source>
+		<translation>1    Musta</translation>
+	</message>
+	<message id="id_toolbar_color_blue">
+		<source></source>
+		<translation>2    Sininen</translation>
+	</message>
+	<message id="id_toolbar_color_red">
+		<source></source>
+		<translation>3    Punainen</translation>
+	</message>
+	<message id="id_toolbar_color_green">
+		<source></source>
+		<translation>4    Vihreä</translation>
+	</message>
+	<message id="id_toolbar_color_yellow">
+		<source></source>
+		<translation>5    Keltainen</translation>
+	</message>
+	<message id="id_toolbar_fill_item">
+		<source></source>
+		<translation>Kohteen täyttö</translation>
+	</message>
+	<message id="id_toolbar_fill_none">
+		<source></source>
+		<translation>0    Ei täyttöä</translation>
+	</message>
+	<message id="id_toolbar_fill_back">
+		<source></source>
+		<translation>1    Taustaväri</translation>
+	</message>
+	<message id="id_toolbar_fill_area">
+		<source></source>
+		<translation>2    Alueen täyttö</translation>
+	</message>
+	<message id="id_toolbar_alignment">
         <source></source>
-        <translation>0    Ei täyttöä</translation>
-    </message>
-    <message id="id_toolbar_fill_back">
-        <source></source>
-        <translation>1    Taustaväri</translation>
-    </message>
-    <message id="id_toolbar_fill_area">
-        <source></source>
-        <translation>2    Alueen täyttö</translation>
-    </message>
-    <message id="id_toolbar_line_width">
-        <source></source>
-        <translation>Viivan leveys</translation>
-    </message>
-    <message id="id_toolbar_text_size">
-        <source></source>
-        <translation>Tekstin koko</translation>
-    </message>
-    <message id="id_toolbar_alignment">
-        <source></source>
-        <translation>Asemointi</translation>
+        <translation>Tekstin asemointi</translation>
     </message>
     <message id="id_toolbar_align_top_right">
         <source></source>

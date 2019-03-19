@@ -38,7 +38,7 @@ Katso :doc:`menu`.
 Työkalupalkki
 ^^^^^^^^^^^^^
 
-Työkalupalkin ylemmällä rivillä ovat painikkeet valikon toiminnoille ja toisella rivillä piirron asetuksille.
+Työkalupalkin ylemmällä rivillä ovat painikkeet valikon toiminnoille. Muilla riveillä ovat piirron asetukset.
 
 Katso :doc:`tools`.
 

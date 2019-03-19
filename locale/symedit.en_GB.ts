@@ -153,19 +153,19 @@
         <source></source>
         <translation>About</translation>
     </message>
-	<message id="id_tooltip_file_open">
-		<source></source>
-		<translation>Open file</translation>
-	</message>
-	<message id="id_tooltip_file_save">
-		<source></source>
-		<translation>Save file</translation>
-	</message>
-	<message id="id_tooltip_file_save_as">
-		<source></source>
-		<translation>Save file with other name</translation>
-	</message>
-	<message id="id_tooltip_edit_undo">
+    <message id="id_tooltip_file_open">
+        <source></source>
+        <translation type="vanished">Open file</translation>
+    </message>
+    <message id="id_tooltip_file_save">
+        <source></source>
+        <translation type="vanished">Save file</translation>
+    </message>
+    <message id="id_tooltip_file_save_as">
+        <source></source>
+        <translation type="vanished">Save file with other name</translation>
+    </message>
+    <message id="id_tooltip_edit_undo">
         <source></source>
         <translation>Undo edit</translation>
     </message>
@@ -255,33 +255,61 @@
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
-        <translation>Snap Grid</translation>
+        <translation>Grid Snap</translation>
     </message>
-    <message id="id_toolbar_fill_item">
+	<message id="id_toolbar_line_width">
+		<source></source>
+		<translation>Line Width</translation>
+	</message>
+	<message id="id_toolbar_text_size">
+		<source></source>
+		<translation>Text Size</translation>
+	</message>
+    <message id="id_toolbar_color_index">
         <source></source>
-        <translation>Fill Item</translation>
+        <translation>Color Index</translation>
     </message>
-    <message id="id_toolbar_fill_none">
-        <source></source>
-        <translation>0    No fill</translation>
-    </message>
-    <message id="id_toolbar_fill_back">
-        <source></source>
-        <translation>1    Background</translation>
-    </message>
-    <message id="id_toolbar_fill_area">
-        <source></source>
-        <translation>2    Fill area</translation>
-    </message>
-    <message id="id_toolbar_line_width">
-        <source></source>
-        <translation>Line Width</translation>
-    </message>
-    <message id="id_toolbar_text_size">
-        <source></source>
-        <translation>Text Size</translation>
-    </message>
-    <message id="id_toolbar_alignment">
+	<message id="id_toolbar_color_white">
+		<source></source>
+		<translation>0    White</translation>
+	</message>
+	<message id="id_toolbar_color_black">
+		<source></source>
+		<translation>1    Black</translation>
+	</message>
+	<message id="id_toolbar_color_blue">
+		<source></source>
+		<translation>2    Blue</translation>
+	</message>
+	<message id="id_toolbar_color_red">
+		<source></source>
+		<translation>3    Red</translation>
+	</message>
+	<message id="id_toolbar_color_green">
+		<source></source>
+		<translation>4    Green</translation>
+	</message>
+	<message id="id_toolbar_color_yellow">
+		<source></source>
+		<translation>5    Yellow</translation>
+	</message>
+	<message id="id_toolbar_fill_item">
+		<source></source>
+		<translation>Item Fill</translation>
+	</message>
+	<message id="id_toolbar_fill_none">
+		<source></source>
+		<translation>0    No fill</translation>
+	</message>
+	<message id="id_toolbar_fill_back">
+		<source></source>
+		<translation>1    Background</translation>
+	</message>
+	<message id="id_toolbar_fill_area">
+		<source></source>
+		<translation>2    Fill area</translation>
+	</message>
+	<message id="id_toolbar_alignment">
         <source></source>
         <translation>Alignment</translation>
     </message>

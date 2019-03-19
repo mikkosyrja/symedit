@@ -141,19 +141,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_tooltip_file_open">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_tooltip_file_save">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_tooltip_file_save_as">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_tooltip_edit_undo">
+    <message id="id_tooltip_edit_undo">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -241,67 +229,63 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_toolbar_fill_item">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_line_width">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_text_size">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_alignment">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_text_field">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_open_file">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_save_file">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_symbol_files">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_all_files">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_about">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_dialog_about_text">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_application_title">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_toolbar_fill_none">
+	<message id="id_toolbar_line_width">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_text_size">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+    <message id="id_toolbar_color_index">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_toolbar_fill_back">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_fill_area">
+	<message id="id_toolbar_color_white">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_color_black">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_color_blue">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_color_red">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_color_green">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_color_yellow">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_fill_item">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_fill_none">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_fill_back">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_fill_area">
+		<source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_toolbar_alignment">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -350,6 +334,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_toolbar_align_middle_left">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_text_field">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_open_file">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_save_file">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_symbol_files">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_all_files">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_about">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_dialog_about_text">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_application_title">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

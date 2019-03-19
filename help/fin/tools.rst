@@ -1,7 +1,7 @@
 Piirtotyökalut
 ==============
 
-Käytetettävissä olevat piirtptyökalut.
+Käytetettävissä olevat piirtotyökalut.
 
 Piirtotavat
 -----------
@@ -89,39 +89,44 @@ Piirtää tekstin annettuun kohtaan.
 Asetukset
 ---------
 
-xxx
+Ylemmän rivin asetukset vaikuttavat vain symbolieditoriin. Alemman rivin asetukset tallentuvat symbolin mukana.
 
-Tartunta
-^^^^^^^^
+Ruudukon tartunta
+^^^^^^^^^^^^^^^^^
 
-xxx
+Ruudukon tartunta editoinnissa.
 
-Täyttö
-^^^^^^
+Viivan leveys
+^^^^^^^^^^^^^
 
-xxx
+Viivan leveys editoinnissa.
+
+Tekstin koko
+^^^^^^^^^^^^
+
+Tekstin koko editoinnissa.
+
+Värin indeksi
+^^^^^^^^^^^^^
+
+Värin indeksi 3D-Win kooditaulukon mukaan.
+
+Kohteen täyttö
+^^^^^^^^^^^^^^
+
+Kohteen täyttömoodi.
 
 1. Ei täyttöä
 2. Taustaväri
 3. Alueen täyttö
 
-Viivan leveys
-^^^^^^^^^^^^^
-
-Viivan leveys editoinnissa. Ei tallennu symbolin mukana.
-
-Tekstin koko
-^^^^^^^^^^^^
-
-Tekstin koko editoinnissa. Ei tallennu symbolin mukana.
-
-Asemointi
-^^^^^^^^^
+Tekstin asemointi
+^^^^^^^^^^^^^^^^^
 
 Tekstin asemointi 1-12.
 
 Teksti
 ^^^^^^
 
-xxx
+Symbolin teksti.
 

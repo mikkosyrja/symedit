@@ -77,4 +77,5 @@ DISTFILES += \
     image/icon32.png \
     image/icon48.png \
     image/icon256.png \
-    image/icon.ico
+    image/icon.ico \
+    image/icon.kra

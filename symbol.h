@@ -32,14 +32,15 @@ public:
 	{
 	public:
 		Item();
-		Item(Operation::Type operation, QPoint point, int value, int fill);
-		Item(Operation::Type operation, QPoint point, QPoint value, int fill);
-		Item(Operation::Type operation, QPoint point, QString value, int align);
+		Item(Operation::Type operation, QPoint point, int value, int color, int fill);
+		Item(Operation::Type operation, QPoint point, QPoint value, int color, int fill);
+		Item(Operation::Type operation, QPoint point, QString value, int color, int align);
 
 		Operation::Type Operation;			//!< Item operation.
 		QPoint Point;						//!< Item coordinates.
 		QPoint Value;						//!< Item value.
 		QString Text;						//!< Text string.
+		int Color;							//!< Color index.
 		int Fill;							//!< Fill area.
 		int Align;							//!< Text alignment.
 	};
@@ -48,9 +49,9 @@ public:
 	QString& Save(QString& buffer) const;
 	void Clear();
 
-	Item& AddItem(Operation::Type operation, QPoint point, int value, int fill);
-	Item& AddItem(Operation::Type operation, QPoint point, QPoint end, int fill);
-	Item& AddItem(Operation::Type operation, QPoint point, QString text, int align);
+	Item& AddItem(Operation::Type operation, QPoint point, int value, int color, int fill);
+	Item& AddItem(Operation::Type operation, QPoint point, QPoint end, int color, int fill);
+	Item& AddItem(Operation::Type operation, QPoint point, QString text, int color, int align);
 	bool RemoveItem(int index);
 
 	int SelectItem(QPoint point) const;

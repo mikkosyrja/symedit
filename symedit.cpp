@@ -18,6 +18,7 @@ SymEditSettings::SymEditSettings()
 	IntValues.emplace("LineWidth", 1);
 	IntValues.emplace("TextSize", 1);
 	IntValues.emplace("SnapGrid", 5);
+	IntValues.emplace("ColorIndex", 1);
 	IntValues.emplace("Tool", 1);
 
 	TextValues.emplace("TextValue", "");
@@ -36,11 +37,12 @@ void SymEditSettings::Load()
 
 	TextValues.at("Directory") = settings.value("application/directory").toString();
 
-	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
-	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
+	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
 	IntValues.at("LineWidth") = settings.value("editor/width", 1).toInt();
 	IntValues.at("TextSize") = settings.value("editor/size", 1).toInt();
-	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
+//	IntValues.at("ColorIndex") = settings.value("editor/color", 1).toInt();
+//	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
+	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
 	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
 	TextValues.at("TextValue") = settings.value("editor/text").toString();
 }
@@ -57,11 +59,12 @@ void SymEditSettings::Save() const
 
 	settings.setValue("application/directory", TextValues.at("Directory"));
 
-	settings.setValue("editor/fill", IntValues.at("FillItem"));
-	settings.setValue("editor/align", IntValues.at("Alignment"));
+	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
 	settings.setValue("editor/width", IntValues.at("LineWidth"));
 	settings.setValue("editor/size", IntValues.at("TextSize"));
-	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
+	settings.setValue("editor/color", IntValues.at("ColorIndex"));
+	settings.setValue("editor/fill", IntValues.at("FillItem"));
+	settings.setValue("editor/align", IntValues.at("Alignment"));
 	settings.setValue("editor/tool", IntValues.at("Tool"));
 	settings.setValue("editor/text", TextValues.at("TextValue"));
 }
@@ -181,50 +184,45 @@ QString SymEditManager::getSymbol() const
 	return Symbol.Save(buffer);
 }
 
+//@{
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
 	\param point		Item position.
 	\param value		Item value.
+	\param color		Item color index.
 	\param fill			Item area fill.
 	\return				True for success.
 */
-bool SymEditManager::addValueItem(int operation, QPoint point, int value, int fill)
+bool SymEditManager::addValueItem(int operation, QPoint point, int value, int color, int fill)
 {
 	undosave();
-	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, fill);
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, fill);
 	return true;
 }
-
-//! Add symbol item.
-/*!
-	\param operation	Item operation.
-	\param point		Item position.
-	\param value		Item value.
-	\param fill			Item area fill.
-	\return				True for success.
-*/
-bool SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int fill)
+bool SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int color, int fill)
 {
 	undosave();
-	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, fill);
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, fill);
 	return true;
 }
+//@}
 
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
 	\param point		Item position.
 	\param value		Item text value.
+	\param color		Item color index.
 	\param align		Item text alignment.
 	\return				True for success.
 */
-bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int align)
+bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int color, int align)
 {
 	if ( !value.isEmpty() )
 	{
 		undosave();
-		Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, align);
+		Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, align);
 		return true;
 	}
 	return false;
@@ -332,6 +330,17 @@ QString SymEditManager::getItemText(int index) const
 		return item.Text;
 	}
 	return "";
+}
+
+//
+int SymEditManager::getItemColor(int index) const
+{
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Color;
+	}
+	return 1;
 }
 
 //

@@ -56,9 +56,9 @@ public:
 
 	Q_INVOKABLE QString getSymbol() const;
 
-	Q_INVOKABLE bool addValueItem(int operation, QPoint point, int value, int fill);
-	Q_INVOKABLE bool addPointItem(int operation, QPoint point, QPoint value, int fill);
-	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QString value, int align);
+	Q_INVOKABLE bool addValueItem(int operation, QPoint point, int value, int color, int fill);
+	Q_INVOKABLE bool addPointItem(int operation, QPoint point, QPoint value, int color, int fill);
+	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QString value, int color, int align);
 	Q_INVOKABLE bool removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
@@ -67,6 +67,7 @@ public:
 	Q_INVOKABLE int getItemValue(int index) const;
 	Q_INVOKABLE QPoint getItemPoint(int index) const;
 	Q_INVOKABLE QString getItemText(int index ) const;
+	Q_INVOKABLE int getItemColor(int index) const;
 	Q_INVOKABLE int getItemFill(int index) const;
 	Q_INVOKABLE int getItemAlign(int index) const;
 
