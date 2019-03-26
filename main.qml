@@ -18,6 +18,8 @@ ApplicationWindow
 	property int snapgrid: 1
 	property real linewidth: 1
 	property int textsize: 1
+	property string language: "eng"
+
 	property int colorindex: 1
 	property int fillitem: 0
 	property int alignment: 1
@@ -171,6 +173,8 @@ ApplicationWindow
 			RowLayout
 			{
 				height: 32
+				Label { text: qsTrId("id_toolbar_application_settings") }
+				BarSeparator { }
 				Label { text: qsTrId("id_toolbar_snap_grid") }
 				ComboBox
 				{
@@ -212,10 +216,22 @@ ApplicationWindow
 					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
 					function setSize() { currentIndex = textsize - 1 }
 				}
+				BarSeparator { }
+				Label { text: qsTrId("id_toolbar_language") }
+				ComboBox
+				{
+					id: langlist
+					implicitWidth: 60
+					model: [ "eng", "fin" ]
+					onCurrentIndexChanged: { language = (currentIndex ? "fin" : "eng") }
+					function setLang() { currentIndex = (language === "eng" ? 0 : 1) }
+				}
 			}
 			RowLayout
 			{
 				height: 32
+				Label { text: qsTrId("id_toolbar_symbol_settings") }
+				BarSeparator { }
 				Label { text: qsTrId("id_toolbar_color_index") }
 				ComboBox
 				{
@@ -303,7 +319,7 @@ ApplicationWindow
 			if ( selectExisting )
 			{
 				manager.open(fileUrl)
-				symbol = manager.getSymbol()
+				symbol = manager.getSymbol(true)
 			}
 			else	// save
 				manager.save(fileUrl)
@@ -332,6 +348,8 @@ ApplicationWindow
 	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); editor.update() }
 	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth) }
 	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize) }
+	onLanguageChanged: { manager.setTextSetting("Language", language) }
+
 	onColorindexChanged: { manager.setIntSetting("ColorIndex", colorindex) }
 	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem) }
 	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment) }
@@ -349,6 +367,8 @@ ApplicationWindow
 		snapgrid = manager.getIntSetting("SnapGrid")
 		linewidth = manager.getIntSetting("LineWidth")
 		textsize = manager.getIntSetting("TextSize")
+		language = manager.getTextSetting("Language")
+
 		colorindex = manager.getIntSetting("ColorIndex")
 		fillitem = manager.getIntSetting("FillItem")
 		alignment = manager.getIntSetting("Alignment")
@@ -356,14 +376,16 @@ ApplicationWindow
 		textfield.text = manager.getTextSetting("TextValue")
 		tool = manager.getIntSetting("Tool")
 
-		filllist.setFill()
 		snaplist.setSnap()
-		sizelist.setSize()
 		widthlist.setWidth()
-		alignlist.setAlign()
-		colorlist.setColor()
+		sizelist.setSize()
+		langlist.setLang()
 
-		symbol = manager.getSymbol()
+		colorlist.setColor()
+		filllist.setFill()
+		alignlist.setAlign()
+
+		symbol = manager.getSymbol(true)
 
 		visible = true
 		manager.setInitialized()
@@ -424,7 +446,7 @@ ApplicationWindow
 	{
 		if ( manager.undo(undo) )
 		{
-			symbol = manager.getSymbol()
+			symbol = manager.getSymbol(true)
 			editor.update()
 		}
 	}
@@ -432,7 +454,7 @@ ApplicationWindow
 	function cutsymbol()
 	{
 		manager.cutClipboard();
-		symbol = manager.getSymbol()
+		symbol = manager.getSymbol(true)
 		editor.update()
 	}
 
@@ -444,28 +466,28 @@ ApplicationWindow
 	function pastesymbol()
 	{
 		manager.pasteClipboard();
-		symbol = manager.getSymbol()
+		symbol = manager.getSymbol(true)
 		editor.update()
 	}
 
 	function rotatesymbol(dir)
 	{
 		manager.rotateSymbol(dir)
-		symbol = manager.getSymbol()
+		symbol = manager.getSymbol(true)
 		editor.update()
 	}
 
 	function raiseitem(dir)
 	{
 		manager.raiseItem(dir)
-		symbol = manager.getSymbol()
+		symbol = manager.getSymbol(true)
 		editor.update()
 	}
 
 	function removeitem()
 	{
 		manager.removeItem()
-		symbol = manager.getSymbol()
+		symbol = manager.getSymbol(true)
 		editor.update()
 	}
 

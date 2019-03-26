@@ -51,13 +51,6 @@ int main(int argc, char *argv[])
 	}
 	bool transfer = parser.isSet(transferoption);
 	QString symbol = parser.value(symboloption);
-	QString language = parser.value(languageoption);
-	if ( language.isEmpty() )
-		language = "eng";		//## use fi_FI and en_GB?
-
-	// set current translator
-	if ( currenttranslator.load(language == "fin" ? ":/locale/symedit.fi_FI.qm" : "") )
-		QCoreApplication::installTranslator(&currenttranslator);
 
 	// register enumerations
 	qmlRegisterUncreatableMetaObject(Operation::staticMetaObject,
@@ -65,8 +58,17 @@ int main(int argc, char *argv[])
 
 	// register manager
 	QQmlApplicationEngine engine;
-	SymEditManager manager(filename, symbol, language);
+	SymEditManager manager(filename, symbol);
 	engine.rootContext()->setContextProperty("manager", &manager);
+
+	// set current translator
+	QString language = manager.getTextSetting("Language");
+	QString lang = parser.value(languageoption);
+	if ( lang == "eng" || lang == "fin" )	//## use fi_FI and en_GB?
+		language = lang;
+	if ( currenttranslator.load(language == "fin" ? ":/locale/symedit.fi_FI.qm" : "") )
+		QCoreApplication::installTranslator(&currenttranslator);
+	manager.setLanguage(language);
 
 	// start application
 	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

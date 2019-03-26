@@ -38,7 +38,7 @@ class SymEditManager : public QObject
 
 public:
 	explicit SymEditManager(QObject* parent = nullptr);
-	explicit SymEditManager(const QString& filename, const QString& symbol, const QString& language);
+	explicit SymEditManager(const QString& filename, const QString& symbol);
 
 	//! Save settings.
 	void SaveSettings() const { Settings.Save(); }
@@ -54,7 +54,7 @@ public:
 	Q_INVOKABLE void setTextSetting(QString name, QString value);
 	Q_INVOKABLE QString getTextSetting(QString name) const;
 
-	Q_INVOKABLE QString getSymbol() const;
+	Q_INVOKABLE QString getSymbol(bool rich) const;
 
 	Q_INVOKABLE bool addValueItem(int operation, QPoint point, int value, int color, int fill);
 	Q_INVOKABLE bool addPointItem(int operation, QPoint point, QPoint value, int color, int fill);
@@ -90,6 +90,7 @@ public:
 
 	bool open(const QString& filename);
 	bool save(const QString& filename);
+	void setLanguage(QString lang);
 
 private:
 	void undosave();

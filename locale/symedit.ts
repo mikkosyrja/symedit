@@ -229,63 +229,75 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="id_toolbar_application_settings">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_toolbar_line_width">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_text_size">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
+    <message id="id_toolbar_line_width">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_text_size">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_language">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_symbol_settings">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="id_toolbar_color_index">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-	<message id="id_toolbar_color_white">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_color_black">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_color_blue">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_color_red">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_color_green">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_color_yellow">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_fill_item">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_fill_none">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_fill_back">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_fill_area">
-		<source></source>
-		<translation type="unfinished"></translation>
-	</message>
-	<message id="id_toolbar_alignment">
+    <message id="id_toolbar_color_white">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_color_black">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_color_blue">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_color_red">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_color_green">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_color_yellow">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_fill_item">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_fill_none">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_fill_back">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_fill_area">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_alignment">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

@@ -13,14 +13,15 @@
 //! Constructor.
 SymEditSettings::SymEditSettings()
 {
-	IntValues.emplace("FillItem", 0);
-	IntValues.emplace("Alignment", 9);
+	IntValues.emplace("SnapGrid", 5);
 	IntValues.emplace("LineWidth", 1);
 	IntValues.emplace("TextSize", 1);
-	IntValues.emplace("SnapGrid", 5);
 	IntValues.emplace("ColorIndex", 1);
+	IntValues.emplace("FillItem", 0);
+	IntValues.emplace("Alignment", 9);
 	IntValues.emplace("Tool", 1);
 
+	TextValues.emplace("Language", "");
 	TextValues.emplace("TextValue", "");
 	TextValues.emplace("Directory", "");
 }
@@ -40,6 +41,8 @@ void SymEditSettings::Load()
 	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
 	IntValues.at("LineWidth") = settings.value("editor/width", 1).toInt();
 	IntValues.at("TextSize") = settings.value("editor/size", 1).toInt();
+	TextValues.at("Language") = settings.value("editor/lang").toString();
+
 //	IntValues.at("ColorIndex") = settings.value("editor/color", 1).toInt();
 //	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
 	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
@@ -62,6 +65,8 @@ void SymEditSettings::Save() const
 	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
 	settings.setValue("editor/width", IntValues.at("LineWidth"));
 	settings.setValue("editor/size", IntValues.at("TextSize"));
+	settings.setValue("editor/lang", TextValues.at("Language"));
+
 	settings.setValue("editor/color", IntValues.at("ColorIndex"));
 	settings.setValue("editor/fill", IntValues.at("FillItem"));
 	settings.setValue("editor/align", IntValues.at("Alignment"));
@@ -86,8 +91,8 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	\param filename		Symbol file name from command line.
 	\param symbol		Symbol string from command line.
 */
-SymEditManager::SymEditManager(const QString& filename, const QString& symbol, const QString& language)
-	: QObject(nullptr), FileName(filename), Language(language)
+SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
+	: QObject(nullptr), FileName(filename)
 {
 	Settings.Load();
 
@@ -176,12 +181,13 @@ QString SymEditManager::getTextSetting(QString name) const
 
 //! Get symbol as string.
 /*!
+	\param rich			Rich text with layout.
 	\return				Symbol as string.
 */
-QString SymEditManager::getSymbol() const
+QString SymEditManager::getSymbol(bool rich) const
 {
 	QString buffer;
-	return Symbol.Save(buffer);
+	return Symbol.Save(buffer, rich);
 }
 
 //@{
@@ -400,7 +406,7 @@ void SymEditManager::cutClipboard()
 	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
 	{
 		undosave();
-		clipboard->setText(getSymbol());
+		clipboard->setText(getSymbol(false));
 		Symbol.Clear();
 	}
 }
@@ -409,7 +415,7 @@ void SymEditManager::cutClipboard()
 void SymEditManager::copyClipboard() const
 {
 	if ( QClipboard* clipboard = QGuiApplication::clipboard() )
-		clipboard->setText(getSymbol());
+		clipboard->setText(getSymbol(false));
 }
 
 //! Paste symbol from clipboard.
@@ -562,9 +568,18 @@ bool SymEditManager::save(const QString& filename)
 	if ( file.open(QIODevice::WriteOnly | QIODevice::Text) )
 	{
 		QTextStream output(&file);
-		output << getSymbol();
+		output << getSymbol(false);
 		FileName = filename;
 		return true;
 	}
 	return false;
+}
+
+//! Set language.
+/*!
+	\param lang			Language abbreviation.
+*/
+void SymEditManager::setLanguage(QString lang)
+{
+	Language = lang;
 }

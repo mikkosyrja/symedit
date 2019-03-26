@@ -106,9 +106,10 @@ void SymEditSymbol::Load(const QString& buffer)
 //! Save symbol to string.
 /*!
 	\param buffer		String buffer.
+	\param rich			Rich text with layout.
 	\return				Reference to buffer.
 */
-QString& SymEditSymbol::Save(QString& buffer) const
+QString& SymEditSymbol::Save(QString& buffer, bool rich) const
 {
 	auto appendvalue = [](QString& buffer, const QPoint& point, int count)
 	{
@@ -127,60 +128,68 @@ QString& SymEditSymbol::Save(QString& buffer) const
 
 	buffer.clear();
 	QPoint position(0, 0);
-	int color = 1, fill = 0, align = 9;
-	for ( const auto& item : Items ) switch ( item.Operation )
+	int index = 0, color = 1, fill = 0, align = 9;
+	for ( const auto& item : Items )
 	{
-		case Operation::Line:
-		case Operation::Rectangle:
+		if ( rich && index == ActiveIndex )
+			buffer.append("<b>");
+		switch ( item.Operation )
 		{
-			if ( item.Color != color )
-				color = appendoption('C', buffer, item.Color);
-			if ( item.Fill != fill )
-				fill = appendoption('F', buffer, item.Fill);
-			if ( item.Point != position )
-				appendvalue(buffer.append('U'), item.Point, 2);
-			appendvalue(buffer.append(item.Operation == Operation::Line ? 'D' : 'B'), item.Value, 2);
-			position = item.Value;
-			break;
+			case Operation::Line:
+			case Operation::Rectangle:
+			{
+				if ( item.Color != color )
+					color = appendoption('C', buffer, item.Color);
+				if ( item.Fill != fill )
+					fill = appendoption('F', buffer, item.Fill);
+				if ( item.Point != position )
+					appendvalue(buffer.append('U'), item.Point, 2);
+				appendvalue(buffer.append(item.Operation == Operation::Line ? 'D' : 'B'), item.Value, 2);
+				position = item.Value;
+				break;
+			}
+			case Operation::Circle:
+			{
+				if ( item.Color != color )
+					color = appendoption('C', buffer, item.Color);
+				if ( item.Fill != fill )
+					fill = appendoption('F', buffer, item.Fill);
+				if ( item.Point != position )
+					appendvalue(buffer.append('U'), item.Point, 2);
+				appendvalue(buffer.append('R'), item.Value, 1);
+				position = item.Point;
+				break;
+			}
+			case Operation::Text:
+			{
+				if ( item.Color != color )
+					color = appendoption('C', buffer, item.Color);
+				if ( item.Align != align )
+					align = appendoption('J', buffer, item.Align);
+				if ( item.Point != position )
+					appendvalue(buffer.append('U'), item.Point, 2);
+				if ( item.Text.front() != '$' && item.Text.front() != '#' )
+					buffer.append('!');		// constant text
+				buffer.append(item.Text).append(';');
+				break;
+			}
+			case Operation::Arc:
+			{
+				if ( item.Color != color )
+					color = appendoption('C', buffer, item.Color);
+				if ( item.Fill != fill )
+					fill = appendoption('F', buffer, item.Fill);
+				if ( item.Point != position )
+					appendvalue(buffer.append('U'), item.Point, 2);
+				appendvalue(buffer.append('H'), item.Value, 1);
+				position = item.Point;
+				break;
+			}
+			default:		assert(0);
 		}
-		case Operation::Circle:
-		{
-			if ( item.Color != color )
-				color = appendoption('C', buffer, item.Color);
-			if ( item.Fill != fill )
-				fill = appendoption('F', buffer, item.Fill);
-			if ( item.Point != position )
-				appendvalue(buffer.append('U'), item.Point, 2);
-			appendvalue(buffer.append('R'), item.Value, 1);
-			position = item.Point;
-			break;
-		}
-		case Operation::Text:
-		{
-			if ( item.Color != color )
-				color = appendoption('C', buffer, item.Color);
-			if ( item.Align != align )
-				align = appendoption('J', buffer, item.Align);
-			if ( item.Point != position )
-				appendvalue(buffer.append('U'), item.Point, 2);
-			if ( item.Text.front() != '$' && item.Text.front() != '#' )
-				buffer.append('!');		// constant text
-			buffer.append(item.Text).append(';');
-			break;
-		}
-		case Operation::Arc:
-		{
-			if ( item.Color != color )
-				color = appendoption('C', buffer, item.Color);
-			if ( item.Fill != fill )
-				fill = appendoption('F', buffer, item.Fill);
-			if ( item.Point != position )
-				appendvalue(buffer.append('U'), item.Point, 2);
-			appendvalue(buffer.append('H'), item.Value, 1);
-			position = item.Point;
-			break;
-		}
-		default:		assert(0);
+		if ( rich && index == ActiveIndex )
+			buffer.append("</b>");
+		++index;
 	}
 	if ( !buffer.isEmpty() && buffer.back() == ';' )
 		buffer.chop(1);

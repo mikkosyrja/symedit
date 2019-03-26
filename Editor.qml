@@ -89,6 +89,7 @@ Rectangle
 			if ( tool === Editor.Tool.Select )
 			{
 				manager.selectItem(Qt.point(endx, endy))
+				symbol = manager.getSymbol(true)
 				canvas.requestPaint()
 			}
 			else if ( !preview )
@@ -98,7 +99,7 @@ Rectangle
 					if ( tool === Editor.Tool.Line )
 					{
 						manager.addPointItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, 0)
-						symbol = manager.getSymbol()
+						symbol = manager.getSymbol(true)
 					}
 					else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
 					{
@@ -108,7 +109,7 @@ Rectangle
 							starty -= (endy - starty)
 						}
 						if ( manager.addPointItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, fillitem) )
-							symbol = manager.getSymbol()
+							symbol = manager.getSymbol(true)
 					}
 					else if ( tool > 30 && tool < 40 )	// circle
 					{
@@ -134,7 +135,7 @@ Rectangle
 							centery = starty
 						}
 						if ( manager.addValueItem(Operation.Circle, Qt.point(centerx, centery), radius, colorindex, fillitem) )
-							symbol = manager.getSymbol()
+							symbol = manager.getSymbol(true)
 					}
 					else if ( tool > 40 && tool < 50 )	// arc
 					{
@@ -143,7 +144,7 @@ Rectangle
 					else if ( tool > 50 && tool < 60 )	// text
 					{
 						if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
-							symbol = manager.getSymbol()
+							symbol = manager.getSymbol(true)
 					}
 				}
 				else	// activate last

@@ -253,63 +253,75 @@
         <source></source>
         <translation>Piirrä teksti</translation>
     </message>
+    <message id="id_toolbar_application_settings">
+        <source></source>
+        <translation>Sovellus:</translation>
+    </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
         <translation>Ruudukon tartunta</translation>
     </message>
-	<message id="id_toolbar_line_width">
-		<source></source>
-		<translation>Viivan leveys</translation>
-	</message>
-	<message id="id_toolbar_text_size">
-		<source></source>
-		<translation>Tekstin koko</translation>
-	</message>
+    <message id="id_toolbar_line_width">
+        <source></source>
+        <translation>Viivan leveys</translation>
+    </message>
+    <message id="id_toolbar_text_size">
+        <source></source>
+        <translation>Tekstin koko</translation>
+    </message>
+    <message id="id_toolbar_language">
+        <source></source>
+        <translation>Kieli</translation>
+    </message>
+    <message id="id_toolbar_symbol_settings">
+        <source></source>
+        <translation>Symboli:</translation>
+    </message>
     <message id="id_toolbar_color_index">
         <source></source>
         <translation>Värin indeksi</translation>
     </message>
-	<message id="id_toolbar_color_white">
-		<source></source>
-		<translation>0    Valkoinen</translation>
-	</message>
-	<message id="id_toolbar_color_black">
-		<source></source>
-		<translation>1    Musta</translation>
-	</message>
-	<message id="id_toolbar_color_blue">
-		<source></source>
-		<translation>2    Sininen</translation>
-	</message>
-	<message id="id_toolbar_color_red">
-		<source></source>
-		<translation>3    Punainen</translation>
-	</message>
-	<message id="id_toolbar_color_green">
-		<source></source>
-		<translation>4    Vihreä</translation>
-	</message>
-	<message id="id_toolbar_color_yellow">
-		<source></source>
-		<translation>5    Keltainen</translation>
-	</message>
-	<message id="id_toolbar_fill_item">
-		<source></source>
-		<translation>Kohteen täyttö</translation>
-	</message>
-	<message id="id_toolbar_fill_none">
-		<source></source>
-		<translation>0    Ei täyttöä</translation>
-	</message>
-	<message id="id_toolbar_fill_back">
-		<source></source>
-		<translation>1    Taustaväri</translation>
-	</message>
-	<message id="id_toolbar_fill_area">
-		<source></source>
-		<translation>2    Alueen täyttö</translation>
-	</message>
-	<message id="id_toolbar_alignment">
+    <message id="id_toolbar_color_white">
+        <source></source>
+        <translation>0    Valkoinen (tausta)</translation>
+    </message>
+    <message id="id_toolbar_color_black">
+        <source></source>
+        <translation>1    Musta (oletus)</translation>
+    </message>
+    <message id="id_toolbar_color_blue">
+        <source></source>
+        <translation>2    Sininen</translation>
+    </message>
+    <message id="id_toolbar_color_red">
+        <source></source>
+        <translation>3    Punainen</translation>
+    </message>
+    <message id="id_toolbar_color_green">
+        <source></source>
+        <translation>4    Vihreä</translation>
+    </message>
+    <message id="id_toolbar_color_yellow">
+        <source></source>
+        <translation>5    Keltainen</translation>
+    </message>
+    <message id="id_toolbar_fill_item">
+        <source></source>
+        <translation>Kohteen täyttö</translation>
+    </message>
+    <message id="id_toolbar_fill_none">
+        <source></source>
+        <translation>0    Ei täyttöä</translation>
+    </message>
+    <message id="id_toolbar_fill_back">
+        <source></source>
+        <translation>1    Taustaväri</translation>
+    </message>
+    <message id="id_toolbar_fill_area">
+        <source></source>
+        <translation>2    Alueen täyttö</translation>
+    </message>
+    <message id="id_toolbar_alignment">
         <source></source>
         <translation>Tekstin asemointi</translation>
     </message>

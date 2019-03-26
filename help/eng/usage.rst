@@ -11,18 +11,32 @@ xxx
 Command line
 ------------
 
-Command line parameters::
+Usage: ``symedit [options] file``
 
-	Usage: symedit [options] file
+-t, --transfer
+^^^^^^^^^^^^^^
 
-	Options:
-	  -t, --transfer         Symbol file is transfer file.
-	  -s, --symbol <symbol>  Read symbol from parameter <symbol>.
-	  -l, --language <lang>  Application language abbreviation <lang>.
-	  -h, --help             Displays this help.
+Given argument file name is a transfer file. When application exits, current symbol is automatically saved to this file.
 
-	Arguments:
-	  file                   Symbol file name.
+-s, --symbol <symbol>
+^^^^^^^^^^^^^^^^^^^^^
+
+Reads symbol definition. For example: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``
+
+-l, --language <lang>
+^^^^^^^^^^^^^^^^^^^^^
+
+Selects application language. Supported languages are english (eng) and finnish (fin). For example: ``symedit -l fin``
+
+-h, --help
+^^^^^^^^^^
+
+Displays command line help.
+
+file
+^^^^
+
+Symbol file name. Symbol file is simple text file containing symbol definition.
 
 Usage
 -----
@@ -38,7 +52,7 @@ See :doc:`menu`.
 Toolbar
 ^^^^^^^
 
-Toolbar upper line contains buttons for menu functions. Other lines contain drawing setting items.
+Toolbar upper line contains buttons for menu functions. Second line contains application drawing and user interface settings. Third line contains settings stored with edited symbol.
 
 See :doc:`tools`.
 
@@ -50,4 +64,4 @@ xxx
 Statusbar
 ^^^^^^^^^
 
-Bottom status bar shows mouse coordinates at left and symbol textual representation at right. Representation is same as format used for saving symbol to text file.
+Bottom status bar shows mouse coordinates at left and symbol textual representation at right. Representation is same as format used for saving symbol to text file, but the active item definition is highlighted.

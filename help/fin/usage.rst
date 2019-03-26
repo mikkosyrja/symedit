@@ -11,18 +11,32 @@ xxx
 Komentorivi
 -----------
 
-Komentoriviparametrit::
+Käyttö: ``symedit [options] file``
 
-	Usage: symedit [options] file
+-t, --transfer
+^^^^^^^^^^^^^^
 
-	Options:
-	  -t, --transfer          Symbolitiedosto on siirtotiedosto.
-	  -s, --symbol <symboli>  Lue symboli parametrista <symboli>.
-	  -l, --language <kieli>  Sovelluksen kielen lyhenne <kieli>.
-	  -h, --help              Displays this help.
+Parametrina annettu tiedosto on siirtotiedosto. Kun ohjelma lopetetaan, editoitava symboli tallennetaan tähän tiedostoon automaattisesti.
 
-	Arguments:
-	  file                    Symbolitiedoston nimi.
+-s, --symbol <symbol>
+^^^^^^^^^^^^^^^^^^^^^
+
+Lukee symbolin määrittelyn. Esimerkiksi: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``
+
+-l, --language <lang>
+^^^^^^^^^^^^^^^^^^^^^
+
+Valitsee sovelluksen kielen. Tuettuja kieliä ovat englanti (eng) ja suomi (fin). Esimerkiksi: ``symedit -l fin``
+
+-h, --help
+^^^^^^^^^^
+
+Näyttää komentorivin ohjeen.
+
+file
+^^^^
+
+Symbolitiedoston nimi. Symbolitiedosto on tekstitiedosto, joka sisältää symbolin määrittelyn.
 
 Käyttö
 ------
@@ -38,7 +52,7 @@ Katso :doc:`menu`.
 Työkalupalkki
 ^^^^^^^^^^^^^
 
-Työkalupalkin ylemmällä rivillä ovat painikkeet valikon toiminnoille. Muilla riveillä ovat piirron asetukset.
+Työkalupalkin ylimmällä rivillä ovat painikkeet valikon toiminnoille. Toisella rivillä on ohjelman piirron ja käyttöliittymän asetuksia. Kolmannella rivillä on symbolin mukana tallentuvia asetuksia.
 
 Katso :doc:`tools`.
 
@@ -50,5 +64,5 @@ xxx
 Tilarivi
 ^^^^^^^^
 
-Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen. Muoto on sama, jossa symboli tallentuu tekstitiedostoon.
+Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen. Muoto on sama, jossa symboli tallentuu tekstitiedostoon, mutta lisäksi aktiivisen kohteen määritys on korostettu.
 

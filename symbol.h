@@ -46,7 +46,7 @@ public:
 	};
 
 	void Load(const QString& buffer);
-	QString& Save(QString& buffer) const;
+	QString& Save(QString& buffer, bool rich = false) const;
 	void Clear();
 
 	Item& AddItem(Operation::Type operation, QPoint point, int value, int color, int fill);
