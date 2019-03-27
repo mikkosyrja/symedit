@@ -1,5 +1,4 @@
 #include <QQmlContext>
-//#include <QGuiApplication>
 #include <QtWidgets/QApplication>
 #include <QQmlApplicationEngine>
 #include <QCommandLineParser>
@@ -22,7 +21,6 @@ int main(int argc, char *argv[])
 	// set base language translators
 	QLocale locale;
 	QTranslator backuptranslator, localetranslator, currenttranslator;
-//	if ( backuptranslator.load(":/locale/symedit.fi_FI.qm") )
 	if ( backuptranslator.load(":/locale/symedit.en_GB.qm") )
 		QCoreApplication::installTranslator(&backuptranslator);
 	if ( localetranslator.load(locale, ":/locale/symedit.") )
