@@ -1,5 +1,6 @@
 #include <QQmlContext>
-#include <QGuiApplication>
+//#include <QGuiApplication>
+#include <QtWidgets/QApplication>
 #include <QQmlApplicationEngine>
 #include <QCommandLineParser>
 #include <QSettings>
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setApplicationVersion("1.0");
 	QSettings::setDefaultFormat(QSettings::IniFormat);
 
-	QGuiApplication app(argc, argv);
+	QApplication app(argc, argv);
 
 	// set base language translators
 	QLocale locale;

@@ -3,6 +3,8 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.2
 
+import Qt.labs.platform 1.1 as Labs
+
 ApplicationWindow
 {
 	property int mousex: 0
@@ -326,7 +328,7 @@ ApplicationWindow
 			editor.update()
 		}
 	}
-
+/*
 	Dialog
 	{
 		id: aboutdialog
@@ -338,6 +340,14 @@ ApplicationWindow
 			horizontalAlignment: Text.AlignHCenter
 		}
 		standardButtons: StandardButton.Ok
+	}
+*/
+	Labs.MessageDialog
+	{
+		id: aboutdialog
+		title: qsTrId("id_dialog_about")
+		text: qsTrId("id_dialog_about_text") + "\n\n© 2019 Mikko Syrjä"
+		buttons: Labs.MessageDialog.Ok
 	}
 
 	onXChanged: { manager.setGeometry(Qt.point(x, y), Qt.size(width, height)) }
