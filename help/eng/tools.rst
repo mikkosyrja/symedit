@@ -106,6 +106,11 @@ Text size
 
 Text size in editing.
 
+Language
+^^^^^^^^
+
+Application language: english (eng) or finnish (fin).
+
 Color index
 ^^^^^^^^^^^
 

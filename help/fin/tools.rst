@@ -106,6 +106,11 @@ Tekstin koko
 
 Tekstin koko editoinnissa.
 
+Kieli
+^^^^^
+
+Sovelluksen kieli: englanti (eng) tai suomi (fin).
+
 Värin indeksi
 ^^^^^^^^^^^^^
 

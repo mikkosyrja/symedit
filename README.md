@@ -13,7 +13,7 @@ krita:
 
 Windows deployment:
 
-c:\Local\Qt\5.12.0\msvc2017_64\bin\windeployqt.exe
+C:\Users\Mikko\Code\Qt\5.12.2\msvc2017_64\bin\windeployqt.exe
 	--release
 	--qmldir ../../symedit
 	--no-translations

@@ -255,7 +255,7 @@
     </message>
     <message id="id_toolbar_application_settings">
         <source></source>
-		<translation>Application:</translation>
+		<translation>&lt;b&gt;Application:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
@@ -275,7 +275,7 @@
     </message>
     <message id="id_toolbar_symbol_settings">
         <source></source>
-		<translation>Symbol:</translation>
+		<translation>&lt;b&gt;Symbol:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_color_index">
         <source></source>
