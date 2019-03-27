@@ -502,7 +502,7 @@ void SymEditManager::help(QString topic) const
 {
 	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
-	path.append("/help/").append(Language).append("/index.html");
+	path.append("/help/").append(Language).append("/symedit/index.html");
 	QDesktopServices::openUrl(QUrl(path));
 }
 
