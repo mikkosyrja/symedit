@@ -1,7 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.2
 
 import Qt.labs.platform 1.1 as Labs
 
@@ -311,37 +310,24 @@ ApplicationWindow
 		}
 	}
 
-	FileDialog
+	Labs.FileDialog
 	{
 		id: filedialog
-		title: (selectExisting ? qsTrId("id_dialog_open_file") : qsTrId("id_dialog_save_file"))
+		title: (fileMode === Labs.FileDialog.OpenFile ? qsTrId("id_dialog_open_file") : qsTrId("id_dialog_save_file"))
 		nameFilters: [ qsTrId("id_dialog_symbol_files"), qsTrId("id_dialog_all_files") ]
 		onAccepted:
 		{
-			if ( selectExisting )
+			if ( fileMode === Labs.FileDialog.OpenFile )
 			{
-				manager.open(fileUrl)
+				manager.open(file)
 				symbol = manager.getSymbol(true)
 			}
 			else	// save
-				manager.save(fileUrl)
+				manager.save(file)
 			editor.update()
 		}
 	}
-/*
-	Dialog
-	{
-		id: aboutdialog
-		title: qsTrId("id_dialog_about")
-		Label
-		{
-			anchors.fill: parent
-			text: qsTrId("id_dialog_about_text") + "\n\n© 2019 Mikko Syrjä"
-			horizontalAlignment: Text.AlignHCenter
-		}
-		standardButtons: StandardButton.Ok
-	}
-*/
+
 	Labs.MessageDialog
 	{
 		id: aboutdialog
@@ -403,7 +389,7 @@ ApplicationWindow
 
 	function open()
 	{
-		filedialog.selectExisting = true
+		filedialog.fileMode = Labs.FileDialog.OpenFile
 		filedialog.folder = manager.getTextSetting("Directory")
 		filedialog.open()
 	}
@@ -412,7 +398,7 @@ ApplicationWindow
 	{
 		if ( ask )
 		{
-			filedialog.selectExisting = false
+			filedialog.fileMode = Labs.FileDialog.SaveFile
 			filedialog.folder = manager.getTextSetting("Directory")
 			filedialog.open()
 		}
