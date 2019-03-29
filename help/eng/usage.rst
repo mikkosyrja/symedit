@@ -3,11 +3,6 @@ Application usage
 
 xxx
 
-Installation
-------------
-
-xxx
-
 Command line
 ------------
 
@@ -21,12 +16,12 @@ Given argument file name is a transfer file. When application exits, current sym
 -s, --symbol <symbol>
 ^^^^^^^^^^^^^^^^^^^^^
 
-Reads symbol definition. For example: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``
+Reads symbol definition. For example: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``. See :ref:`symbol-format-label`.
 
 -l, --language <lang>
 ^^^^^^^^^^^^^^^^^^^^^
 
-Selects application language. Supported languages are english (eng) and finnish (fin). For example: ``symedit -l fin``
+Selects application language. Supported languages are english (eng) and finnish (fin). For example: ``symedit -l eng``
 
 -h, --help
 ^^^^^^^^^^
@@ -38,8 +33,8 @@ file
 
 Symbol file name. Symbol file is simple text file containing symbol definition.
 
-Usage
------
+User interface
+--------------
 
 xxx
 

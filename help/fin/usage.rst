@@ -3,11 +3,6 @@ Ohjelman käyttö
 
 xxx
 
-Asennus
--------
-
-xxx
-
 Komentorivi
 -----------
 
@@ -21,7 +16,7 @@ Parametrina annettu tiedosto on siirtotiedosto. Kun ohjelma lopetetaan, editoita
 -s, --symbol <symbol>
 ^^^^^^^^^^^^^^^^^^^^^
 
-Lukee symbolin määrittelyn. Esimerkiksi: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``
+Lukee symbolin määrittelyn. Esimerkiksi: ``symedit -s R50;U0,50;D0,-50;U-50,0;D50,0``. Katso :ref:`symbol-format-label`.
 
 -l, --language <lang>
 ^^^^^^^^^^^^^^^^^^^^^
@@ -38,8 +33,8 @@ file
 
 Symbolitiedoston nimi. Symbolitiedosto on tekstitiedosto, joka sisältää symbolin määrittelyn.
 
-Käyttö
-------
+Käyttöliitymä
+-------------
 
 xxx
 

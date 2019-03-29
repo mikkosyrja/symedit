@@ -1,11 +1,11 @@
-=======
-SymEdit
-=======
+==============
+Symbolieditori
+==============
 
 .. _3D-Win: http://www.3d-system.fi/
 .. _Github: https://github.com/mikkosyrja/symedit/
 
-SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symboleille.
+Symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symboleille.
 
 .. toctree::
    :maxdepth: 2
@@ -14,6 +14,7 @@ SymEdit on symbolieditori `3D-Win`_ -maastomittausohjelman käyttämille symbole
    usage
    menu
    tools
+   format
 
 .. _Gentleface: https://gentleface.com/free_icon_set.html
 

@@ -255,7 +255,7 @@
     </message>
     <message id="id_toolbar_application_settings">
         <source></source>
-		<translation>&lt;b&gt;Application:&lt;/b&gt;</translation>
+		<translation>&lt;b&gt;Editor:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>

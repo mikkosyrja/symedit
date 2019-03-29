@@ -78,4 +78,8 @@ DISTFILES += \
     image/icon48.png \
     image/icon256.png \
     image/icon.ico \
-    image/icon.kra
+    image/icon.kra \
+    help/eng/_static/icon256.png \
+    help/fin/_static/icon256.png \
+    help/eng/format.rst \
+    help/fin/format.rst
