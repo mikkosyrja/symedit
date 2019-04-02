@@ -33,12 +33,13 @@ public:
 	public:
 		Item();
 		Item(Operation::Type operation, QPoint point, int value, int color, int fill);
-		Item(Operation::Type operation, QPoint point, QPoint value, int color, int fill);
+		Item(Operation::Type operation, QPoint point, QPoint end, int value, int color, int fill);
 		Item(Operation::Type operation, QPoint point, QString value, int color, int align);
 
 		Operation::Type Operation;			//!< Item operation.
 		QPoint Point;						//!< Item coordinates.
-		QPoint Value;						//!< Item value.
+		QPoint End;							//!< End coordinates.
+		int Value;							//!< Item value.
 		QString Text;						//!< Text string.
 		int Color;							//!< Color index.
 		int Fill;							//!< Fill area.
@@ -50,7 +51,7 @@ public:
 	void Clear();
 
 	Item& AddItem(Operation::Type operation, QPoint point, int value, int color, int fill);
-	Item& AddItem(Operation::Type operation, QPoint point, QPoint end, int color, int fill);
+	Item& AddItem(Operation::Type operation, QPoint point, QPoint end, int value, int color, int fill);
 	Item& AddItem(Operation::Type operation, QPoint point, QString text, int color, int align);
 	bool RemoveItem(int index);
 

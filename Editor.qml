@@ -98,7 +98,7 @@ Rectangle
 				{
 					if ( tool === Editor.Tool.Line )
 					{
-						manager.addPointItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, 0)
+						manager.addLineItem(Operation.Line, Qt.point(startx, starty), Qt.point(endx, endy), 0, colorindex, 0)
 						symbol = manager.getSymbol(true)
 					}
 					else if ( tool === Editor.Tool.RectCenter || tool === Editor.Tool.RectCorner )
@@ -108,10 +108,10 @@ Rectangle
 							startx -= (endx - startx)
 							starty -= (endy - starty)
 						}
-						if ( manager.addPointItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), colorindex, fillitem) )
+						if ( manager.addLineItem(Operation.Rectangle, Qt.point(startx, starty), Qt.point(endx, endy), 0, colorindex, fillitem) )
 							symbol = manager.getSymbol(true)
 					}
-					else if ( tool > 30 && tool < 40 )	// circle
+					else if ( tool > 30 && tool < 50 )	// circle or arc
 					{
 						var deltax = Math.abs(mousex - startx)
 						var deltay = Math.abs(mousey - starty)
@@ -121,25 +121,34 @@ Rectangle
 							radius = (deltax < deltay ? deltax : deltay) / 2
 							centerx = (startx + endx) / 2
 							centery = (starty + endy) / 2
+							if ( manager.addPointItem(Operation.Circle, Qt.point(centerx, centery), radius, colorindex, fillitem) )
+								symbol = manager.getSymbol(true)
 						}
 						else if ( tool === Editor.Tool.CircleDiameter )
 						{
 							radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
 							centerx = (startx + endx) / 2
 							centery = (starty + endy) / 2
+							if ( manager.addPointItem(Operation.Circle, Qt.point(centerx, centery), radius, colorindex, fillitem) )
+								symbol = manager.getSymbol(true)
 						}
 						else if ( tool === Editor.Tool.CircleCenter )
 						{
 							radius = Math.sqrt(deltax * deltax + deltay * deltay)
-							centerx = startx
-							centery = starty
+							if ( manager.addPointItem(Operation.Circle, Qt.point(startx, starty), radius, colorindex, fillitem) )
+								symbol = manager.getSymbol(true)
 						}
-						if ( manager.addValueItem(Operation.Circle, Qt.point(centerx, centery), radius, colorindex, fillitem) )
-							symbol = manager.getSymbol(true)
-					}
-					else if ( tool > 40 && tool < 50 )	// arc
-					{
-
+						else if ( tool === Editor.Tool.ArcSemi )
+						{
+							radius = Math.sqrt(deltax * deltax + deltay * deltay) / 2
+							if ( manager.addLineItem(Operation.Arc, Qt.point(startx, starty), Qt.point(endx, endy), radius, colorindex, fillitem) )
+								symbol = manager.getSymbol(true)
+						}
+						else if ( tool === Editor.Tool.ArcQuarter )
+						{
+							radius = Math.sqrt(deltax * deltax + deltay * deltay)
+							//##
+						}
 					}
 					else if ( tool > 50 && tool < 60 )	// text
 					{
@@ -196,17 +205,12 @@ Rectangle
 				context.stroke()
 		}
 
-		function paintsemicircle(context, center, start, end, radius, fill)
+		function paintsemicircle(context, start, end, radius, fill)
 		{
-/*
-//			context.beginPath().moveTo((center.x + max + offsetx) * scalexy, (max - center.y + offsety) * scalexy)
-			context.beginPath().moveTo((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy)
-			context.arcTo(
-				(start.x + max - radius + offsetx) * scalexy,
-				(max - start.y - radius + offsety) * scalexy,
-				(end.x + max - radius + offsetx) * scalexy,
-				(max - end.y - radius + offsety) * scalexy,
-				radius * scalexy)
+//			context.beginPath().moveTo((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy)
+			context.beginPath().moveTo((0 + max + offsetx) * scalexy, (max - 0 + offsety) * scalexy)
+			context.arcTo((start.x + max + offsetx) * scalexy, (max - start.y + offsety) * scalexy,
+				(end.x + max + offsetx) * scalexy, (max - end.y + offsety) * scalexy, radius)
 			if ( fill )
 			{
 				context.fillStyle = (fill === 2 ? paintcolor : backcolor)
@@ -214,7 +218,6 @@ Rectangle
 			}
 			else
 				context.stroke()
-*/
 		}
 
 		function setalignment(context, align)
@@ -297,14 +300,15 @@ Rectangle
 
 			var currentcolor = 1
 			var active = manager.getActiveIndex()
-			var index, count = manager.getItemCount()
+			var count = manager.getItemCount()
+			var operation, index, radius, fill, color
+			var point, position
 			for ( index = 0; index < count; index++ )
 			{
 				var operation = manager.getItemOperation(index)
-				var point, position = manager.getItemPosition(index)
-				var radius, fill = manager.getItemFill(index)
-
-				var color = manager.getItemColor(index)
+				position = manager.getItemPosition(index)
+				fill = manager.getItemFill(index)
+				color = manager.getItemColor(index)
 				if ( color !== currentcolor )
 				{
 					setcolorindex(context, color)
@@ -336,13 +340,11 @@ Rectangle
 				}
 				else if ( operation === Operation.Arc )
 				{
-/*
 					point = manager.getItemPoint(index)
 					radius = manager.getItemValue(index)
-					paintsemicircle(context, position, radius, fill)
+					paintsemicircle(context, position, point, radius, fill)
 					if ( !preview && fill && index === active )
-						paintsemicircle(context, position, radius, false)
-*/
+						paintsemicircle(context, position, point, radius, false)
 				}
 				else if ( operation === Operation.Text )
 				{

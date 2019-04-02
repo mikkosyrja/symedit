@@ -190,37 +190,46 @@ QString SymEditManager::getSymbol(bool rich) const
 	return Symbol.Save(buffer, rich);
 }
 
-//@{
-//! Add symbol item.
+//! Add point item.
 /*!
 	\param operation	Item operation.
-	\param point		Item position.
+	\param point		Point position.
 	\param value		Item value.
-	\param color		Item color index.
+	\param color		Color index.
 	\param fill			Item area fill.
 	\return				True for success.
 */
-bool SymEditManager::addValueItem(int operation, QPoint point, int value, int color, int fill)
+bool SymEditManager::addPointItem(int operation, QPoint point, int value, int color, int fill)
 {
 	undosave();
 	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, fill);
 	return true;
 }
-bool SymEditManager::addPointItem(int operation, QPoint point, QPoint value, int color, int fill)
-{
-	undosave();
-	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, fill);
-	return true;
-}
-//@}
 
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
-	\param point		Item position.
-	\param value		Item text value.
-	\param color		Item color index.
-	\param align		Item text alignment.
+	\param point		Start position.
+	\param end			End position.
+	\param value		Item value.
+	\param color		Color index.
+	\param fill			Item area fill.
+	\return				True for success.
+*/
+bool SymEditManager::addLineItem(int operation, QPoint point, QPoint end, int value, int color, int fill)
+{
+	undosave();
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, value, color, fill);
+	return true;
+}
+
+//! Add Text item.
+/*!
+	\param operation	Item operation.
+	\param point		Text position.
+	\param value		Text value.
+	\param color		Color index.
+	\param align		Text alignment.
 	\return				True for success.
 */
 bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int color, int align)
@@ -285,7 +294,7 @@ QPoint SymEditManager::getItemPosition(int index) const
 	{
 		const auto& item = Symbol.GetItem(index);
 		if ( item.Operation == Operation::Rectangle )	// normalize to upper left
-			return QPoint(std::min(item.Value.x(), item.Point.x()), std::max(item.Value.y(), item.Point.y()));
+			return QPoint(std::min(item.End.x(), item.Point.x()), std::max(item.End.y(), item.Point.y()));
 		return item.Point;
 	}
 	return QPoint(0, 0);
@@ -301,7 +310,7 @@ int SymEditManager::getItemValue(int index) const
 	if ( Symbol.GetItemCount() )
 	{
 		const auto& item = Symbol.GetItem(index);
-		return item.Value.x();
+		return item.Value;
 	}
 	return 0;
 }
@@ -317,8 +326,8 @@ QPoint SymEditManager::getItemPoint(int index) const
 	{
 		const auto& item = Symbol.GetItem(index);
 		if ( item.Operation == Operation::Rectangle )	// normalize to lower right
-			return QPoint(std::max(item.Value.x(), item.Point.x()), std::min(item.Value.y(), item.Point.y()));
-		return item.Value;
+			return QPoint(std::max(item.End.x(), item.Point.x()), std::min(item.End.y(), item.Point.y()));
+		return item.End;
 	}
 	return QPoint(0, 0);
 }
