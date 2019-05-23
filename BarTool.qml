@@ -23,6 +23,7 @@ ToolButton
 
 	onHoveredChanged:
 	{
+/*
 		if ( popup !== null )
 			popup.hide()
 		if ( hovered )
@@ -30,12 +31,15 @@ ToolButton
 			popup = TooltipCreator.create(tooltip, this)
 			popup.show()
 		}
+*/
 	}
 
 	onPressedChanged:
 	{
+/*
 		if ( popup !== null )
 			popup.hide()
+*/
 	}
 
 	onClicked:

@@ -173,13 +173,14 @@ ApplicationWindow
 			}
 			RowLayout
 			{
-				height: 32
-				Label { text: qsTrId("id_toolbar_application_settings") }
+				height: snaplist.height * 1.2
+				Text { text: qsTrId("id_toolbar_application_settings") }
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_snap_grid") }
+				Text { text: qsTrId("id_toolbar_snap_grid") }
 				ComboBox
 				{
 					id: snaplist
+//					width: 60
 					implicitWidth: 60
 					model: [ 1, 2, 5, 10 ]
 					onCurrentIndexChanged:
@@ -198,7 +199,7 @@ ApplicationWindow
 					}
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_line_width") }
+				Text { text: qsTrId("id_toolbar_line_width") }
 				ComboBox
 				{
 					id: widthlist
@@ -208,7 +209,7 @@ ApplicationWindow
 					function setWidth() { currentIndex = linewidth - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_text_size") }
+				Text { text: qsTrId("id_toolbar_text_size") }
 				ComboBox
 				{
 					id: sizelist
@@ -218,7 +219,7 @@ ApplicationWindow
 					function setSize() { currentIndex = textsize - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_language") }
+				Text { text: qsTrId("id_toolbar_language") }
 				ComboBox
 				{
 					id: langlist
@@ -230,10 +231,10 @@ ApplicationWindow
 			}
 			RowLayout
 			{
-				height: 32
-				Label { text: qsTrId("id_toolbar_symbol_settings") }
+				height: colorlist.height * 1.2
+				Text { text: qsTrId("id_toolbar_symbol_settings") }
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_color_index") }
+				Text { text: qsTrId("id_toolbar_color_index") }
 				ComboBox
 				{
 					id: colorlist
@@ -247,7 +248,7 @@ ApplicationWindow
 				}
 				BarSeparator { }
 				Item { Layout.fillWidth: true }
-				Label { text: qsTrId("id_toolbar_fill_item") }
+				Text { text: qsTrId("id_toolbar_fill_item") }
 				ComboBox
 				{
 					id: filllist
@@ -262,7 +263,7 @@ ApplicationWindow
 					function setFill() { currentIndex = fillitem }
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_alignment") }
+				Text { text: qsTrId("id_toolbar_alignment") }
 				ComboBox
 				{
 					id: alignlist
@@ -286,7 +287,7 @@ ApplicationWindow
 					function setAlign() { currentIndex = alignment - 1 }
 				}
 				BarSeparator { }
-				Label { text: qsTrId("id_toolbar_text_field") }
+				Text { text: qsTrId("id_toolbar_text_field") }
 				TextField
 				{
 					id: textfield
@@ -303,10 +304,10 @@ ApplicationWindow
 		RowLayout
 		{
 			anchors.fill: parent
-			Label { Layout.minimumWidth: 40; text: " X: " + mousex }
-			Label {	Layout.minimumWidth: 40; text: " Y: " + mousey }
+			Text { Layout.minimumWidth: 40; text: " X: " + mousex }
+			Text {	Layout.minimumWidth: 40; text: " Y: " + mousey }
 			Item { Layout.fillWidth: true }
-			Label {	Layout.minimumWidth: 40; text: symbol }
+			Text {	Layout.minimumWidth: 40; text: symbol }
 		}
 	}
 
