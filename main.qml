@@ -173,14 +173,13 @@ ApplicationWindow
 			}
 			RowLayout
 			{
-				height: snaplist.height * 1.2
+				height: snaplist.height * 1.5
 				Text { text: qsTrId("id_toolbar_application_settings") }
 				BarSeparator { }
 				Text { text: qsTrId("id_toolbar_snap_grid") }
 				ComboBox
 				{
 					id: snaplist
-//					width: 60
 					implicitWidth: 60
 					model: [ 1, 2, 5, 10 ]
 					onCurrentIndexChanged:
@@ -231,7 +230,7 @@ ApplicationWindow
 			}
 			RowLayout
 			{
-				height: colorlist.height * 1.2
+				height: colorlist.height * 1.5
 				Text { text: qsTrId("id_toolbar_symbol_settings") }
 				BarSeparator { }
 				Text { text: qsTrId("id_toolbar_color_index") }
