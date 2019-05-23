@@ -1,8 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 
-import "TooltipCreator.js" as TooltipCreator
-
 ToolButton
 {
 	property string image
@@ -20,27 +18,6 @@ ToolButton
 
 	checkable: (tool !== 0)
 	checked: (window.tool === tool)
-
-	onHoveredChanged:
-	{
-/*
-		if ( popup !== null )
-			popup.hide()
-		if ( hovered )
-		{
-			popup = TooltipCreator.create(tooltip, this)
-			popup.show()
-		}
-*/
-	}
-
-	onPressedChanged:
-	{
-/*
-		if ( popup !== null )
-			popup.hide()
-*/
-	}
 
 	onClicked:
 	{
