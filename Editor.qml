@@ -94,7 +94,12 @@ Rectangle
 			}
 			else if ( !preview )
 			{
-				if ( startx != endx || starty != endy )
+				if ( tool > 50 && tool < 60 )	// text
+				{
+					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
+						symbol = manager.getSymbol(true)
+				}
+				else if ( startx != endx || starty != endy )
 				{
 					if ( tool === Editor.Tool.Line )
 					{
@@ -149,11 +154,6 @@ Rectangle
 							radius = Math.sqrt(deltax * deltax + deltay * deltay)
 							//##
 						}
-					}
-					else if ( tool > 50 && tool < 60 )	// text
-					{
-						if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
-							symbol = manager.getSymbol(true)
 					}
 				}
 				else	// activate last
