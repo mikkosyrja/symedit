@@ -10,7 +10,7 @@ Kaikki piirtotavat toimivat samalla tavalla. Hiiren painikkeen painaminen määr
 
 Kohteen alku- ja loppupisteen on oltava eri paikoissa eli hiiren painikkeen vapauttaminen alkupisteessä ei luo uutta kohdetta.
 
-.. |select image| image:: ../../image/cursor_icon&48.png
+.. |select image| image:: ../../image/cursor_icon48.png
 	:scale: 50 %
 
 |select image| Valitse

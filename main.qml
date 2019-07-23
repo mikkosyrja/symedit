@@ -123,28 +123,28 @@ ApplicationWindow
 			{
 				height: 32
 				z: 10
-//				BarTool { image: "image/open_icon&48.png"; tooltip: qsTrId("id_tooltip_file_open"); onClicked: open() }
-//				BarTool { image: "image/save_icon&48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save(false) }
+//				BarTool { image: "image/open_icon48.png"; tooltip: qsTrId("id_tooltip_file_open"); onClicked: open() }
+//				BarTool { image: "image/save_icon48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save(false) }
 //				BarTool { image: "image/save_as.png"; tooltip: qsTrId("id_tooltip_file_save_as"); onClicked: save(true) }
 //				BarSeparator { }
-				BarTool { image: "image/undo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
-				BarTool { image: "image/redo_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }
-				BarTool { image: "image/cut_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_cut"); onClicked: cutsymbol() }
-				BarTool { image: "image/copy_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_copy"); onClicked: copysymbol() }
-				BarTool { image: "image/paste_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_paste"); onClicked: pastesymbol() }
+                BarTool { image: "image/undo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
+                BarTool { image: "image/redo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }
+                BarTool { image: "image/cut_icon48.png"; tooltip: qsTrId("id_tooltip_edit_cut"); onClicked: cutsymbol() }
+                BarTool { image: "image/copy_icon48.png"; tooltip: qsTrId("id_tooltip_edit_copy"); onClicked: copysymbol() }
+                BarTool { image: "image/paste_icon48.png"; tooltip: qsTrId("id_tooltip_edit_paste"); onClicked: pastesymbol() }
 				BarSeparator { }
 				BarTool { image: "image/rotate_right.png"; tooltip: qsTrId("id_tooltip_edit_rotate_right"); onClicked: rotatesymbol(1) }
 				BarTool { image: "image/rotate_left.png"; tooltip: qsTrId("id_tooltip_edit_rotate_left"); onClicked: rotatesymbol(-1) }
-				BarTool { image: "image/up_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_raise_item"); onClicked: raiseitem(1) }
-				BarTool { image: "image/down_icon&48.png"; tooltip: qsTrId("id_tooltip_edit_lower_item"); onClicked: raiseitem(-1) }
+                BarTool { image: "image/up_icon48.png"; tooltip: qsTrId("id_tooltip_edit_raise_item"); onClicked: raiseitem(1) }
+                BarTool { image: "image/down_icon48.png"; tooltip: qsTrId("id_tooltip_edit_lower_item"); onClicked: raiseitem(-1) }
 				BarTool { image: "image/delete.png"; tooltip: qsTrId("id_tooltip_delete_item"); onClicked: removeitem() }
 				BarSeparator { }
-//				BarTool { image: "image/plus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_in"); onClicked: zoom(1) }
-//				BarTool { image: "image/minus_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_out"); onClicked: zoom(-1) }
-				BarTool { image: "image/zoom_icon&48.png"; tooltip: qsTrId("id_tooltip_zoom_all"); onClicked: zoom(0) }
+//				BarTool { image: "image/plus_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_in"); onClicked: zoom(1) }
+//				BarTool { image: "image/minus_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_out"); onClicked: zoom(-1) }
+                BarTool { image: "image/zoom_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_all"); onClicked: zoom(0) }
 				BarTool
 				{
-					image: "image/eye_icon&48.png";
+                    image: "image/eye_icon48.png";
 					tooltip: qsTrId("id_tooltip_zoom_preview");
 					checkable: true
 					checked: preview
@@ -155,7 +155,7 @@ ApplicationWindow
 					}
 				}
 				BarSeparator { }
-				BarTool { image: "image/cursor_icon&48.png"; tooltip: qsTrId("id_tooltip_tool_select"); tool: Editor.Tool.Select }
+                BarTool { image: "image/cursor_icon48.png"; tooltip: qsTrId("id_tooltip_tool_select"); tool: Editor.Tool.Select }
 				BarSeparator { }
 				BarTool { image: "image/polyline.png"; tooltip: qsTrId("id_tooltip_tool_line"); tool: Editor.Tool.Line }
 				BarSeparator { }

@@ -6,13 +6,13 @@ Sovelluksen valikossa saatavilla olevat toiminnot.
 Tiedosto
 --------
 
-.. |open image| image:: ../../image/open_icon&48.png
+.. |open image| image:: ../../image/open_icon48.png
 	:scale: 50 %
-.. |save image| image:: ../../image/save_icon&48.png
+.. |save image| image:: ../../image/save_icon48.png
 	:scale: 50 %
 .. |save as image| image:: ../../image/save_as.png
 	:scale: 50 %
-.. |exit image| image:: ../../image/exit_icon&48.png
+.. |exit image| image:: ../../image/exit_icon48.png
 	:scale: 50 %
 
 |open image| Avaa
@@ -38,9 +38,9 @@ Lopettaa ohjelman. Pikanäppäin Alt+F4.
 Muokkaa
 -------
 
-.. |undo image| image:: ../../image/undo_icon&48.png
+.. |undo image| image:: ../../image/undo_icon48.png
 	:scale: 50 %
-.. |redo image| image:: ../../image/redo_icon&48.png
+.. |redo image| image:: ../../image/redo_icon48.png
 	:scale: 50 %
 
 |undo image| Kumoa
@@ -53,11 +53,11 @@ Kumoaa edellisen operaation. Pikanäppäin Ctrl+Z.
 
 Tekee uudellen kumotun operaation. Pikanäppäin Ctrl+Y tai Ctrl+Shift+Z.
 
-.. |cut image| image:: ../../image/cut_icon&48.png
+.. |cut image| image:: ../../image/cut_icon48.png
 	:scale: 50 %
-.. |copy image| image:: ../../image/copy_icon&48.png
+.. |copy image| image:: ../../image/copy_icon48.png
 	:scale: 50 %
-.. |paste image| image:: ../../image/paste_icon&48.png
+.. |paste image| image:: ../../image/paste_icon48.png
 	:scale: 50 %
 
 |cut image| Leikkaa
@@ -90,9 +90,9 @@ Kääntää symbolia 90 astetta myötäpäivään. Pikanäppäin Alt+Right.
 
 Kääntää symbolia 90 astetta vastapäivään. Pikanäppäin Alt+Left.
 
-.. |raise image| image:: ../../image/up_icon&48.png
+.. |raise image| image:: ../../image/up_icon48.png
 	:scale: 50 %
-.. |lower image| image:: ../../image/down_icon&48.png
+.. |lower image| image:: ../../image/down_icon48.png
 	:scale: 50 %
 
 |raise image| Nosta kohdetta
@@ -116,11 +116,11 @@ Poistaa aktiivisen kohteen ja aktivoi piirtojärjestyksessä edellisen kohteen. 
 Näytä
 -----
 
-.. |in image| image:: ../../image/plus_icon&48.png
+.. |in image| image:: ../../image/plus_icon48.png
 	:scale: 50 %
-.. |out image| image:: ../../image/minus_icon&48.png
+.. |out image| image:: ../../image/minus_icon48.png
 	:scale: 50 %
-.. |all image| image:: ../../image/zoom_icon&48.png
+.. |all image| image:: ../../image/zoom_icon48.png
 	:scale: 50 %
 
 |in image| Lähennä
@@ -138,9 +138,9 @@ Zoomaa näyttöä kauemmas. Pikanäppäin Ctrl+-.
 
 Zoomaa ruudukon maksimikokoon ja lopettaa mahdollisen esikatselutilan. Pikanäppäin Ctrl+0.
 
-.. |grid image| image:: ../../image/grid_icon&48.png
+.. |grid image| image:: ../../image/grid_icon48.png
 	:scale: 50 %
-.. |preview image| image:: ../../image/eye_icon&48.png
+.. |preview image| image:: ../../image/eye_icon48.png
 	:scale: 50 %
 
 |grid image| Ruudukko
@@ -161,9 +161,9 @@ Katso :doc:`tools`.
 Ohje
 ----
 
-.. |help image| image:: ../../image/bubble_icon&48.png
+.. |help image| image:: ../../image/bubble_icon48.png
 	:scale: 50 %
-.. |info image| image:: ../../image/info_icon&48.png
+.. |info image| image:: ../../image/info_icon48.png
 	:scale: 50 %
 
 |help image| Ohje

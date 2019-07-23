@@ -10,7 +10,7 @@ All drawing methods behave same way. Pressing the mouse button defines starting 
 
 Item start and end points must be different. Releasing the mouse button at start point does not create new item.
 
-.. |select image| image:: ../../image/cursor_icon&48.png
+.. |select image| image:: ../../image/cursor_icon48.png
 	:scale: 50 %
 
 |select image| Select

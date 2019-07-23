@@ -3,6 +3,7 @@
 #include <QSettings>
 #include <QDesktopServices>
 #include <QTextStream>
+#include <QFileInfo>
 #include <QFile>
 
 #include "symedit.h"
@@ -512,7 +513,18 @@ void SymEditManager::help(QString topic) const
 	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
 	path.append("/help/").append(Language).append("/symedit/index.html");
-	QDesktopServices::openUrl(QUrl(path));
+
+	QFileInfo info(path);
+	if ( info.exists() )
+		QDesktopServices::openUrl(QUrl(path));
+	else	// development version
+	{
+		path = QCoreApplication::applicationDirPath();
+		path.append("/../threedee/help/").append(Language).append("/symedit/index.html");
+		QFileInfo info(path);
+		if ( info.exists() )
+			QDesktopServices::openUrl(QUrl(path));
+	}
 }
 
 //! Open symbol file.
