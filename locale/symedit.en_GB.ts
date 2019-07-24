@@ -137,9 +137,13 @@
         <source></source>
         <translation>Quarter Circle</translation>
     </message>
-    <message id="id_menu_tool_text">
+    <message id="id_menu_tool_text_horizontal">
         <source></source>
-        <translation>Text</translation>
+        <translation>Horizontal text</translation>
+    </message>
+    <message id="id_menu_tool_text_rotated">
+        <source></source>
+        <translation>Rotated text</translation>
     </message>
     <message id="id_menu_help">
         <source></source>
@@ -155,15 +159,15 @@
     </message>
     <message id="id_tooltip_file_open">
         <source></source>
-        <translation type="vanished">Open file</translation>
+        <translation>Open file</translation>
     </message>
     <message id="id_tooltip_file_save">
         <source></source>
-        <translation type="vanished">Save file</translation>
+        <translation>Save file</translation>
     </message>
     <message id="id_tooltip_file_save_as">
         <source></source>
-        <translation type="vanished">Save file with other name</translation>
+        <translation>Save file with other name</translation>
     </message>
     <message id="id_tooltip_edit_undo">
         <source></source>
@@ -249,13 +253,17 @@
         <source></source>
         <translation>Quarter circle radius</translation>
     </message>
-    <message id="id_tooltip_tool_text">
+    <message id="id_tooltip_tool_text_horizontal">
         <source></source>
-        <translation>Draw text</translation>
+        <translation>Horizontal text</translation>
+    </message>
+    <message id="id_tooltip_tool_text_rotated">
+        <source></source>
+        <translation>Rotated text</translation>
     </message>
     <message id="id_toolbar_application_settings">
         <source></source>
-		<translation>&lt;b&gt;Editor:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Editor:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
@@ -275,7 +283,7 @@
     </message>
     <message id="id_toolbar_symbol_settings">
         <source></source>
-		<translation>&lt;b&gt;Symbol:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Symbol:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_color_index">
         <source></source>

@@ -233,7 +233,7 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint po
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
-	\param point		Item position.
+	\param point		Start position.
 	\param end			End position.
 	\param value		Item value.
 	\param color		Item color index.

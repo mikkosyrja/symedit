@@ -125,15 +125,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_menu_tool_arc_semi">
+    <message id="id_menu_tool_text_horizontal">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_menu_tool_arc_quarter">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_menu_tool_text">
+    <message id="id_menu_tool_text_rotated">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -217,15 +213,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_tool_semi_diameter">
+    <message id="id_tooltip_tool_text_horizontal">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_tooltip_tool_quarter_radius">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_tool_text">
+    <message id="id_tooltip_tool_text_rotated">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

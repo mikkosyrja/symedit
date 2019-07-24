@@ -13,8 +13,9 @@
         <file>image/rotate_left.png</file>
         <file>image/rotate_right.png</file>
         <file>image/save_icon48.png</file>
-        <file>image/text.png</file>
-        <file>image/delete.png</file>
+		<file>image/text_horizontal.png</file>
+		<file>image/text_rotated.png</file>
+		<file>image/delete.png</file>
         <file>image/redo_icon48.png</file>
         <file>image/undo_icon48.png</file>
         <file>image/copy_icon48.png</file>

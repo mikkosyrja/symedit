@@ -137,11 +137,15 @@
         <source></source>
         <translation>Neljännesympyrä</translation>
     </message>
-    <message id="id_menu_tool_text">
+    <message id="id_menu_tool_text_horizontal">
         <source></source>
-        <translation>Teksti</translation>
+        <translation>Vaakasuora teksti</translation>
     </message>
-    <message id="id_menu_help">
+    <message id="id_menu_tool_text_rotated">
+        <source></source>
+        <translation>Käännetty teksti</translation>
+    </message>
+	<message id="id_menu_help">
         <source></source>
         <translation>&amp;Ohje</translation>
     </message>
@@ -155,15 +159,15 @@
     </message>
     <message id="id_tooltip_file_open">
         <source></source>
-        <translation type="vanished">Avaa tiedosto</translation>
+        <translation>Avaa tiedosto</translation>
     </message>
     <message id="id_tooltip_file_save">
         <source></source>
-        <translation type="vanished">Tallenna tiedosto</translation>
+        <translation>Tallenna tiedosto</translation>
     </message>
     <message id="id_tooltip_file_save_as">
         <source></source>
-        <translation type="vanished">Tallenna tiedosto nimellä</translation>
+        <translation>Tallenna tiedosto nimellä</translation>
     </message>
     <message id="id_tooltip_edit_undo">
         <source></source>
@@ -249,13 +253,17 @@
         <source></source>
         <translation>Neljännesympyrä säde</translation>
     </message>
-    <message id="id_tooltip_tool_text">
+    <message id="id_tooltip_tool_text_horizontal">
         <source></source>
-        <translation>Piirrä teksti</translation>
+        <translation>Vaakasuora teksti</translation>
+    </message>
+    <message id="id_tooltip_tool_text_rotated">
+        <source></source>
+        <translation>Käännetty teksti</translation>
     </message>
     <message id="id_toolbar_application_settings">
         <source></source>
-		<translation>&lt;b&gt;Editori:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Editori:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_snap_grid">
         <source></source>
@@ -275,7 +283,7 @@
     </message>
     <message id="id_toolbar_symbol_settings">
         <source></source>
-		<translation>&lt;b&gt;Symboli:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Symboli:&lt;/b&gt;</translation>
     </message>
     <message id="id_toolbar_color_index">
         <source></source>

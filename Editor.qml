@@ -14,7 +14,8 @@ Rectangle
 		CircleCenter = 33,
 		ArcSemi = 41,
 		ArcQuarter = 42,
-		Text = 51
+		TextHorizontal = 51,
+		TextRotated = 52
 	}
 
 	property int units: 100
@@ -94,7 +95,7 @@ Rectangle
 			}
 			else if ( !preview )
 			{
-				if ( tool > 50 && tool < 60 )	// text
+				if ( tool === Editor.Tool.TextHorizontal )
 				{
 					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
 						symbol = manager.getSymbol(true)
@@ -154,6 +155,10 @@ Rectangle
 							radius = Math.sqrt(deltax * deltax + deltay * deltay)
 							//##
 						}
+					}
+					else if ( tool === Editor.Tool.TextRotated )
+					{
+						//##
 					}
 				}
 				else	// activate last
@@ -305,7 +310,7 @@ Rectangle
 			var point, position
 			for ( index = 0; index < count; index++ )
 			{
-				var operation = manager.getItemOperation(index)
+				operation = manager.getItemOperation(index)
 				position = manager.getItemPosition(index)
 				fill = manager.getItemFill(index)
 				color = manager.getItemColor(index)
@@ -437,10 +442,12 @@ Rectangle
 				}
 				else if ( tool > 50 && tool < 60 )	// text
 				{
-					if ( tool === Editor.Tool.Text )
-					{
-						setalignment(context, alignment)
+					setalignment(context, alignment)
+					if ( tool === Editor.Tool.TextHorizontal )
 						painttext(context, textvalue, Qt.point(mousex, mousey), true)
+					else if ( tool === Editor.Tool.TextRotated )
+					{
+						//##
 					}
 				}
 			}

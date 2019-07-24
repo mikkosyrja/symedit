@@ -303,7 +303,8 @@ QPoint SymEditManager::getItemPosition(int index) const
 	return QPoint(0, 0);
 }
 
-//! Get item int value.
+//@{
+//! Get item data value.
 /*!
 	\param index		Item index.
 	\return				Item value.
@@ -317,12 +318,6 @@ int SymEditManager::getItemValue(int index) const
 	}
 	return 0;
 }
-
-//! Get item point value.
-/*!
-	\param index		Item index.
-	\return				Item value.
-*/
 QPoint SymEditManager::getItemPoint(int index) const
 {
 	if ( Symbol.GetItemCount() )
@@ -334,12 +329,6 @@ QPoint SymEditManager::getItemPoint(int index) const
 	}
 	return QPoint(0, 0);
 }
-
-//! Get item text value.
-/*!
-	\param index		Item index.
-	\return				Item value.
-*/
 QString SymEditManager::getItemText(int index) const
 {
 	if ( Symbol.GetItemCount() )
@@ -349,8 +338,6 @@ QString SymEditManager::getItemText(int index) const
 	}
 	return "";
 }
-
-//
 int SymEditManager::getItemColor(int index) const
 {
 	if ( Symbol.GetItemCount() )
@@ -360,8 +347,6 @@ int SymEditManager::getItemColor(int index) const
 	}
 	return 1;
 }
-
-//
 int SymEditManager::getItemFill(int index) const
 {
 	if ( Symbol.GetItemCount() )
@@ -371,8 +356,6 @@ int SymEditManager::getItemFill(int index) const
 	}
 	return 0;
 }
-
-//
 int SymEditManager::getItemAlign(int index) const
 {
 	if ( Symbol.GetItemCount() )
@@ -382,6 +365,7 @@ int SymEditManager::getItemAlign(int index) const
 	}
 	return 0;
 }
+//@}
 
 //! Select item nearest to point.
 /*!
@@ -515,7 +499,7 @@ void SymEditManager::help(QString topic) const
 	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
 	path.append("/help/").append(Language).append("/symedit/index.html");
-	if ( QFileInfo(path).exists() )
+	if ( QFileInfo(path).exists() )		// release
 		QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
 	else	// visual studio
 	{
@@ -523,12 +507,19 @@ void SymEditManager::help(QString topic) const
 		path.append("/../threedee/help/").append(Language).append("/symedit/index.html");
 		if ( QFileInfo(path).exists() )
 			QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
-		else	// qt creator
+		else	// qt creator (windows)
 		{
 			path = QCoreApplication::applicationDirPath();
 			path.append("/../../symedit/help/").append(Language).append("/_build/html/index.html");
 			if ( QFileInfo(path).exists() )
 				QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
+			else	// qt creator (linux)
+			{
+				path = QCoreApplication::applicationDirPath();
+				path.append("/../symedit/help/").append(Language).append("/_build/html/index.html");
+				if ( QFileInfo(path).exists() )
+					QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
+			}
 		}
 	}
 }

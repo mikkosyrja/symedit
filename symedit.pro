@@ -51,14 +51,15 @@ DISTFILES += \
 	image/circle_center.kra \
 	image/circle_diameter.kra \
 	image/circle_corner.kra \
-    image/rectangle_center.kra \
-    image/rectangle_corner.kra \
+	image/rectangle_center.kra \
+	image/rectangle_corner.kra \
 	image/semi_diameter.kra \
 	image/quarter_radius.kra \
-	image/text.kra \
-    locale/symedit.ts \
-    locale/symedit.fi_FI.ts \
-    locale/symedit.en_GB.ts \
+	image/text_horizontal.kra \
+	image/text_rotated.kra \
+	locale/symedit.ts \
+	locale/symedit.fi_FI.ts \
+	locale/symedit.en_GB.ts \
     help/Makefile \
     help/fin/index.rst \
     help/fin/menu.rst \
