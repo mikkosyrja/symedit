@@ -341,7 +341,7 @@ int SymEditSymbol::SelectItem(QPoint point) const
 			}
 			case Operation::Circle:
 			{
-				check(fabs(length(difference(point, item.Point)) - item.End.x()));
+				check(fabs(length(difference(point, item.Point)) - item.Value));
 				break;
 			}
 			case Operation::Text:

@@ -6,6 +6,8 @@
 #include <QFileInfo>
 #include <QFile>
 
+#include <QMessageBox>
+
 #include "symedit.h"
 
 //
@@ -513,17 +515,21 @@ void SymEditManager::help(QString topic) const
 	Q_UNUSED(topic);
 	QString path = QCoreApplication::applicationDirPath();
 	path.append("/help/").append(Language).append("/symedit/index.html");
-
-	QFileInfo info(path);
-	if ( info.exists() )
-		QDesktopServices::openUrl(QUrl(path));
-	else	// development version
+	if ( QFileInfo(path).exists() )
+		QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
+	else	// visual studio
 	{
 		path = QCoreApplication::applicationDirPath();
 		path.append("/../threedee/help/").append(Language).append("/symedit/index.html");
-		QFileInfo info(path);
-		if ( info.exists() )
-			QDesktopServices::openUrl(QUrl(path));
+		if ( QFileInfo(path).exists() )
+			QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
+		else	// qt creator
+		{
+			path = QCoreApplication::applicationDirPath();
+			path.append("/../../symedit/help/").append(Language).append("/_build/html/index.html");
+			if ( QFileInfo(path).exists() )
+				QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
+		}
 	}
 }
 

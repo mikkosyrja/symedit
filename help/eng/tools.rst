@@ -68,15 +68,15 @@ Draws circle with center and radius.
 .. |arc quarter image| image:: ../../image/quarter_radius.png
 	:scale: 50 %
 
-|arc semi image| Semicircle
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. xxx |arc semi image| Semicircle
+.. xxx ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Draws semicircle between two diameter endpoints.
+.. xxx Draws semicircle between two diameter endpoints.
 
-|arc quarter image| Quarter circle
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. xxx |arc quarter image| Quarter circle
+.. xxx ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Draws quarter circle with center and radius.
+.. xxx Draws quarter circle with center and radius.
 
 .. |text image| image:: ../../image/text.png
 	:scale: 50 %

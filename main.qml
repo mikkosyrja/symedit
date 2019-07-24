@@ -100,9 +100,11 @@ ApplicationWindow
 			MenuTool { text: qsTrId("id_menu_tool_circle_corner"); tool: Editor.Tool.CircleCorner }
 			MenuTool { text: qsTrId("id_menu_tool_circle_diameter"); tool: Editor.Tool.CircleDiameter }
 			MenuTool { text: qsTrId("id_menu_tool_circle_center"); tool: Editor.Tool.CircleCenter }
+/*
 			MenuSeparator { }
 			MenuTool { text: qsTrId("id_menu_tool_arc_semi"); tool: Editor.Tool.ArcSemi }
 			MenuTool { text: qsTrId("id_menu_tool_arc_quarter"); tool: Editor.Tool.ArcQuarter }
+*/
 			MenuSeparator { }
 			MenuTool { text: qsTrId("id_menu_tool_text"); tool: Editor.Tool.Text }
 		}
@@ -127,24 +129,24 @@ ApplicationWindow
 //				BarTool { image: "image/save_icon48.png"; tooltip: qsTrId("id_tooltip_file_save"); onClicked: save(false) }
 //				BarTool { image: "image/save_as.png"; tooltip: qsTrId("id_tooltip_file_save_as"); onClicked: save(true) }
 //				BarSeparator { }
-                BarTool { image: "image/undo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
-                BarTool { image: "image/redo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }
-                BarTool { image: "image/cut_icon48.png"; tooltip: qsTrId("id_tooltip_edit_cut"); onClicked: cutsymbol() }
-                BarTool { image: "image/copy_icon48.png"; tooltip: qsTrId("id_tooltip_edit_copy"); onClicked: copysymbol() }
-                BarTool { image: "image/paste_icon48.png"; tooltip: qsTrId("id_tooltip_edit_paste"); onClicked: pastesymbol() }
+				BarTool { image: "image/undo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_undo"); onClicked: undo(true) }
+				BarTool { image: "image/redo_icon48.png"; tooltip: qsTrId("id_tooltip_edit_redo"); onClicked: undo(false) }
+				BarTool { image: "image/cut_icon48.png"; tooltip: qsTrId("id_tooltip_edit_cut"); onClicked: cutsymbol() }
+				BarTool { image: "image/copy_icon48.png"; tooltip: qsTrId("id_tooltip_edit_copy"); onClicked: copysymbol() }
+				BarTool { image: "image/paste_icon48.png"; tooltip: qsTrId("id_tooltip_edit_paste"); onClicked: pastesymbol() }
 				BarSeparator { }
 				BarTool { image: "image/rotate_right.png"; tooltip: qsTrId("id_tooltip_edit_rotate_right"); onClicked: rotatesymbol(1) }
 				BarTool { image: "image/rotate_left.png"; tooltip: qsTrId("id_tooltip_edit_rotate_left"); onClicked: rotatesymbol(-1) }
-                BarTool { image: "image/up_icon48.png"; tooltip: qsTrId("id_tooltip_edit_raise_item"); onClicked: raiseitem(1) }
-                BarTool { image: "image/down_icon48.png"; tooltip: qsTrId("id_tooltip_edit_lower_item"); onClicked: raiseitem(-1) }
+				BarTool { image: "image/up_icon48.png"; tooltip: qsTrId("id_tooltip_edit_raise_item"); onClicked: raiseitem(1) }
+				BarTool { image: "image/down_icon48.png"; tooltip: qsTrId("id_tooltip_edit_lower_item"); onClicked: raiseitem(-1) }
 				BarTool { image: "image/delete.png"; tooltip: qsTrId("id_tooltip_delete_item"); onClicked: removeitem() }
 				BarSeparator { }
 //				BarTool { image: "image/plus_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_in"); onClicked: zoom(1) }
 //				BarTool { image: "image/minus_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_out"); onClicked: zoom(-1) }
-                BarTool { image: "image/zoom_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_all"); onClicked: zoom(0) }
+				BarTool { image: "image/zoom_icon48.png"; tooltip: qsTrId("id_tooltip_zoom_all"); onClicked: zoom(0) }
 				BarTool
 				{
-                    image: "image/eye_icon48.png";
+					image: "image/eye_icon48.png";
 					tooltip: qsTrId("id_tooltip_zoom_preview");
 					checkable: true
 					checked: preview
@@ -155,7 +157,7 @@ ApplicationWindow
 					}
 				}
 				BarSeparator { }
-                BarTool { image: "image/cursor_icon48.png"; tooltip: qsTrId("id_tooltip_tool_select"); tool: Editor.Tool.Select }
+				BarTool { image: "image/cursor_icon48.png"; tooltip: qsTrId("id_tooltip_tool_select"); tool: Editor.Tool.Select }
 				BarSeparator { }
 				BarTool { image: "image/polyline.png"; tooltip: qsTrId("id_tooltip_tool_line"); tool: Editor.Tool.Line }
 				BarSeparator { }
@@ -165,9 +167,11 @@ ApplicationWindow
 				BarTool { image: "image/circle_corner.png"; tooltip: qsTrId("id_tooltip_tool_circle_corner"); tool: Editor.Tool.CircleCorner }
 				BarTool { image: "image/circle_diameter.png"; tooltip: qsTrId("id_tooltip_tool_circle_diameter"); tool: Editor.Tool.CircleDiameter }
 				BarTool { image: "image/circle_center.png"; tooltip: qsTrId("id_tooltip_tool_circle_center"); tool: Editor.Tool.CircleCenter }
+/*
 				BarSeparator { }
 				BarTool { image: "image/semi_diameter.png"; tooltip: qsTrId("id_tooltip_tool_semi_diameter"); tool: Editor.Tool.ArcSemi }
 				BarTool { image: "image/quarter_radius.png"; tooltip: qsTrId("id_tooltip_tool_quarter_radius"); tool: Editor.Tool.ArcQuarter }
+*/
 				BarSeparator { }
 				BarTool { image: "image/text.png"; tooltip: qsTrId("id_tooltip_tool_text"); tool: Editor.Tool.Text }
 			}

@@ -68,15 +68,15 @@ Piirtää ympyrän keskipisteestä kehälle.
 .. |arc quarter image| image:: ../../image/quarter_radius.png
 	:scale: 50 %
 
-|arc semi image| Puoliympyrä
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. xxx |arc semi image| Puoliympyrä
+.. xxx ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää puoliympyrän kahden vastakkaisen kehäpisteen välille.
+.. xxx Piirtää puoliympyrän kahden vastakkaisen kehäpisteen välille.
 
-|arc quarter image| Neljännesympyrä
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. xxx |arc quarter image| Neljännesympyrä
+.. xxx ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää neljännesympyrän keskipisteestä kehälle.
+.. xxx Piirtää neljännesympyrän keskipisteestä kehälle.
 
 .. |text image| image:: ../../image/text.png
 	:scale: 50 %
