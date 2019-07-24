@@ -97,8 +97,11 @@ Rectangle
 			{
 				if ( tool === Editor.Tool.TextHorizontal )
 				{
-					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), textvalue, colorindex, alignment) )
+					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), Qt.point(endx, endy), textvalue, colorindex, alignment) )
+					{
 						symbol = manager.getSymbol(true)
+						canvas.requestPaint()
+					}
 				}
 				else if ( startx != endx || starty != endy )
 				{
@@ -158,7 +161,8 @@ Rectangle
 					}
 					else if ( tool === Editor.Tool.TextRotated )
 					{
-						//##
+						if ( manager.addTextItem(Operation.Text, Qt.point(startx, starty), Qt.point(endx, endy), textvalue, colorindex, alignment) )
+							symbol = manager.getSymbol(true)
 					}
 				}
 				else	// activate last
@@ -258,23 +262,27 @@ Rectangle
 			}
 		}
 
-		function painttext(context, string, point, active)
+		function painttext(context, string, point, end, active)
 		{
 			var currentwidth = context.lineWidth
 			context.lineWidth = textsize * (preview ? zoommin : zoomscale) / 2
 			var fontsize = 30 * textsize * (preview ? zoommin : zoomscale)
 			context.font = fontsize.toString() + "px sans-serif"
 			var position = Qt.point((point.x + max + offsetx) * scalexy, (max - point.y + offsety) * scalexy)
-			context.fillText(string, position.x, position.y)
-			context.strokeText(string, position.x, position.y)
-			if ( !preview )
+			context.translate(position.x, position.y)
+			if ( point.x !== end.x || point.y !== end.y )	// rotate
+				context.rotate(Math.atan2(point.y - end.y, end.x - point.x))
+			context.fillText(string, 0, 0)
+			context.strokeText(string, 0, 0)
+			if ( !preview )		// attach point
 			{
 				if ( active )
 					context.fillStyle = editcolor
-				context.beginPath().ellipse(position.x - 5, position.y - 5, zoomscale * 10, zoomscale * 10).fill()
+				context.beginPath().ellipse(zoomscale * -5 , zoomscale * -5, zoomscale * 10, zoomscale * 10).fill()
 				if ( active )
 					context.fillStyle = paintcolor
 			}
+			context.resetTransform()
 			context.lineWidth = currentwidth
 		}
 
@@ -353,8 +361,9 @@ Rectangle
 				}
 				else if ( operation === Operation.Text )
 				{
+					point = manager.getItemPoint(index)
 					setalignment(context, manager.getItemAlign(index))
-					painttext(context, manager.getItemText(index), position, index === active)
+					painttext(context, manager.getItemText(index), position, point, index === active)
 				}
 			}
 		}
@@ -444,11 +453,9 @@ Rectangle
 				{
 					setalignment(context, alignment)
 					if ( tool === Editor.Tool.TextHorizontal )
-						painttext(context, textvalue, Qt.point(mousex, mousey), true)
+						painttext(context, textvalue, Qt.point(mousex, mousey), Qt.point(mousex, mousey), true)
 					else if ( tool === Editor.Tool.TextRotated )
-					{
-						//##
-					}
+						painttext(context, textvalue, Qt.point(startx, starty), Qt.point(mousex, mousey), true)
 				}
 			}
 

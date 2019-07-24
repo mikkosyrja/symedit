@@ -1,7 +1,7 @@
 Ohjelman käyttö
 ===============
 
-xxx
+Ohjelmaa voidaan käyttää suoraan yksittäisten symbolitiedostojen editointiin tai sitä voidaan kutsua muista ohjelmista komentoriviparametreilla ohjattuna.
 
 Komentorivi
 -----------
@@ -31,12 +31,12 @@ Näyttää komentorivin ohjeen.
 file
 ^^^^
 
-Symbolitiedoston nimi. Symbolitiedosto on tekstitiedosto, joka sisältää symbolin määrittelyn.
+Symbolitiedoston nimi. Symbolitiedosto on tekstitiedosto, joka sisältää yksittäisen symbolin määrittelyn. Katso :ref:`symbol-format-label`.
 
 Käyttöliitymä
 -------------
 
-xxx
+Käyttöliitymä on perinteinen työpöytäkäyttöliittymä. Kaikki työkalut ovat käytettävissä valikon kautta ja tärkeimmät myös työkalupalkin painikkeina.
 
 Valikko
 ^^^^^^^
@@ -54,7 +54,7 @@ Katso :doc:`tools`.
 Editori
 ^^^^^^^
 
-xxx
+Editointi tapahtuu valitsemalla ensin valikosta tai työkalupalkista piirtotyökalu. Hiiren painikkeen painaminen aloittaa uuden elementin lisäämisen ja painikkeen vapauttaminen tallentaa sen. Luotuja elementtejä ei voi muuttaa, vaan ne on ensin poistettaba ja piirrettävä sitten uudet.
 
 Tilarivi
 ^^^^^^^^

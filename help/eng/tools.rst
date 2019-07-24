@@ -78,13 +78,20 @@ Draws circle with center and radius.
 
 .. xxx Draws quarter circle with center and radius.
 
-.. |text image| image:: ../../image/text.png
+.. |text horizontal image| image:: ../../image/text_horizontal.png
+	:scale: 50 %
+.. |text rotated image| image:: ../../image/text_rotated.png
 	:scale: 50 %
 
-|text image| Text
-^^^^^^^^^^^^^^^^^
+|text horizontal image| Horizontal text
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Draws text to given position.
+Draws horizontal text to given position.
+
+|text rotated image| Rotated text
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Draws text to given position using other point as direction.
 
 Settings
 --------

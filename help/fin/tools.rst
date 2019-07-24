@@ -24,7 +24,7 @@ Valitsee hiirellä osoitetun kohteen aktiiviseksi. Alueet valitaan osoittamalla 
 |line image| Viiva
 ^^^^^^^^^^^^^^^^^^
 
-Piirtää kahden pisteen viivan. Peräkkäiset kahden pisteen viivat muodostavat murtoviivan ja sulkeminen alkupisteeseen muodosta alueen.
+Piirtää kahden pisteen viivan. Peräkkäiset kahden pisteen viivat muodostavat murtoviivan ja sulkeminen alkupisteeseen muodostaa alueen.
 
 .. |rect corner image| image:: ../../image/rectangle_corner.png
 	:scale: 50 %
@@ -78,13 +78,20 @@ Piirtää ympyrän keskipisteestä kehälle.
 
 .. xxx Piirtää neljännesympyrän keskipisteestä kehälle.
 
-.. |text image| image:: ../../image/text.png
+.. |text horizontal image| image:: ../../image/text_horizontal.png
+	:scale: 50 %
+.. |text rotated image| image:: ../../image/text_rotated.png
 	:scale: 50 %
 
-|text image| Teksti
-^^^^^^^^^^^^^^^^^^^
+|text horizontal image| Vaakasuora teksti
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Piirtää tekstin annettuun kohtaan.
+Piirtää vaakasuoran tekstin osoitettuun kohtaan.
+
+|text rotated image| Käännetty teksti
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Piirtää tekstin osoitettuun kohtaan käyttäen suuntana toista sijaintia.
 
 Asetukset
 ---------

@@ -1,7 +1,7 @@
 Application usage
 =================
 
-xxx
+Application can be used directly for editing single symbol defintion files or it can be called from other programs and controlled by command line parameters.
 
 Command line
 ------------
@@ -31,12 +31,12 @@ Displays command line help.
 file
 ^^^^
 
-Symbol file name. Symbol file is simple text file containing symbol definition.
+Symbol file name. Symbol file is simple text file containing single symbol definition. See :ref:`symbol-format-label`.
 
 User interface
 --------------
 
-xxx
+User interface is traditional desktop interface. All tools are available as menu commands and important ones also as toolbar buttons.
 
 Menu
 ^^^^
@@ -54,7 +54,8 @@ See :doc:`tools`.
 Editor
 ^^^^^^
 
-xxx
+Editing works by selecting first drawing tool from the menu or toolbar. Pressing the mouse button starts new element adding and releasing the button saves it. Already created elements cannot be modified. They must first be deleted and then redrawed.
+
 
 Statusbar
 ^^^^^^^^^

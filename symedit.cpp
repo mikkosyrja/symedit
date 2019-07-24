@@ -205,7 +205,7 @@ QString SymEditManager::getSymbol(bool rich) const
 bool SymEditManager::addPointItem(int operation, QPoint point, int value, int color, int fill)
 {
 	undosave();
-	Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, fill);
+	Symbol.AddItem(static_cast<Operation::Type>(operation), point, point, value, color, fill);
 	return true;
 }
 
@@ -230,17 +230,18 @@ bool SymEditManager::addLineItem(int operation, QPoint point, QPoint end, int va
 /*!
 	\param operation	Item operation.
 	\param point		Text position.
+	\param point		End position.
 	\param value		Text value.
 	\param color		Color index.
 	\param align		Text alignment.
 	\return				True for success.
 */
-bool SymEditManager::addTextItem(int operation, QPoint point, QString value, int color, int align)
+bool SymEditManager::addTextItem(int operation, QPoint point, QPoint end, QString value, int color, int align)
 {
 	if ( !value.isEmpty() )
 	{
 		undosave();
-		Symbol.AddItem(static_cast<Operation::Type>(operation), point, value, color, align);
+		Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, value, color, align);
 		return true;
 	}
 	return false;

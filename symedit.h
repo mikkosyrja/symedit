@@ -58,7 +58,7 @@ public:
 
 	Q_INVOKABLE bool addPointItem(int operation, QPoint point, int value, int color, int fill);
 	Q_INVOKABLE bool addLineItem(int operation, QPoint point, QPoint end, int value, int color, int fill);
-	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QString value, int color, int align);
+	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QPoint end, QString value, int color, int align);
 	Q_INVOKABLE bool removeItem();
 
 	Q_INVOKABLE int getItemCount() const;

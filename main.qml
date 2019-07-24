@@ -107,7 +107,7 @@ ApplicationWindow
 */
 			MenuSeparator { }
 			MenuTool { text: qsTrId("id_menu_tool_text_horizontal"); tool: Editor.Tool.TextHorizontal }
-//			MenuTool { text: qsTrId("id_menu_tool_text_rotated"); tool: Editor.Tool.TextRotated }
+			MenuTool { text: qsTrId("id_menu_tool_text_rotated"); tool: Editor.Tool.TextRotated }
 		}
 		Menu
 		{
@@ -175,7 +175,7 @@ ApplicationWindow
 */
 				BarSeparator { }
 				BarTool { image: "image/text_horizontal.png"; tooltip: qsTrId("id_tooltip_tool_text_horizontal"); tool: Editor.Tool.TextHorizontal }
-//				BarTool { image: "image/text_rotated.png"; tooltip: qsTrId("id_tooltip_tool_text_rotated"); tool: Editor.Tool.TextRotated }
+				BarTool { image: "image/text_rotated.png"; tooltip: qsTrId("id_tooltip_tool_text_rotated"); tool: Editor.Tool.TextRotated }
 			}
 			RowLayout
 			{
