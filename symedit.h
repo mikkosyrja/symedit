@@ -28,6 +28,7 @@ private:
 	QSize Size;								//!< Window size.
 
 	std::map<QString, int> IntValues;		//!< Integer setting values.
+	std::map<QString, double> RealValues;	//!< Real setting values.
 	std::map<QString, QString> TextValues;	//!< String setting values.
 };
 
@@ -51,6 +52,8 @@ public:
 
 	Q_INVOKABLE void setIntSetting(QString name, int value);
 	Q_INVOKABLE int getIntSetting(QString name) const;
+	Q_INVOKABLE void setRealSetting(QString name, double value);
+	Q_INVOKABLE double getRealSetting(QString name) const;
 	Q_INVOKABLE void setTextSetting(QString name, QString value);
 	Q_INVOKABLE QString getTextSetting(QString name) const;
 
@@ -58,7 +61,7 @@ public:
 
 	Q_INVOKABLE bool addPointItem(int operation, QPoint point, int value, int color, int fill);
 	Q_INVOKABLE bool addLineItem(int operation, QPoint point, QPoint end, int value, int color, int fill);
-	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QPoint end, QString value, int color, int align);
+	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int color, int align);
 	Q_INVOKABLE bool removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
@@ -70,6 +73,7 @@ public:
 	Q_INVOKABLE int getItemColor(int index) const;
 	Q_INVOKABLE int getItemFill(int index) const;
 	Q_INVOKABLE int getItemAlign(int index) const;
+	Q_INVOKABLE double getItemSize(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
 	Q_INVOKABLE bool setActiveIndex(int index);

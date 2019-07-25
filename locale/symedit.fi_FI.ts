@@ -273,9 +273,9 @@
         <source></source>
         <translation>Viivan leveys</translation>
     </message>
-    <message id="id_toolbar_text_size">
+    <message id="id_toolbar_symbol_size">
         <source></source>
-        <translation>Tekstin koko</translation>
+        <translation>Symbolin koko</translation>
     </message>
     <message id="id_toolbar_language">
         <source></source>
@@ -380,6 +380,10 @@
     <message id="id_toolbar_align_middle_left">
         <source></source>
         <translation>12   Puolivälissä vasemmalla</translation>
+    </message>
+    <message id="id_toolbar_text_size">
+        <source></source>
+        <translation>Tekstin koko</translation>
     </message>
     <message id="id_toolbar_text_field">
         <source></source>

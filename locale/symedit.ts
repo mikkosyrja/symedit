@@ -233,7 +233,7 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_toolbar_text_size">
+    <message id="id_toolbar_symbol_size">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -338,6 +338,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_toolbar_align_middle_left">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="id_toolbar_text_size">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

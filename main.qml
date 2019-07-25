@@ -18,12 +18,13 @@ ApplicationWindow
 
 	property int snapgrid: 1
 	property real linewidth: 1
-	property int textsize: 1
+	property real symbolsize: 5.0
 	property string language: "eng"
 
 	property int colorindex: 1
 	property int fillitem: 0
 	property int alignment: 1
+	property real textsize: 2.5
 
 	property string textvalue: textfield.text
 	property int tool: 0
@@ -214,14 +215,14 @@ ApplicationWindow
 					function setWidth() { currentIndex = linewidth - 1 }
 				}
 				BarSeparator { }
-				Text { text: qsTrId("id_toolbar_text_size") }
+				Text { text: qsTrId("id_toolbar_symbol_size") }
 				ComboBox
 				{
-					id: sizelist
+					id: symbollist
 					implicitWidth: 60
-					model: [ 1, 2, 3, 4, 5 ]
-					onCurrentIndexChanged: { textsize = currentIndex + 1; editor.update() }
-					function setSize() { currentIndex = textsize - 1 }
+					model: [ "1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "9.0", "10.0" ]
+					onCurrentIndexChanged: { symbolsize = currentIndex + 1; editor.update() }
+					function setSize() { currentIndex = symbolsize - 1 }
 				}
 				BarSeparator { }
 				Text { text: qsTrId("id_toolbar_language") }
@@ -292,6 +293,17 @@ ApplicationWindow
 					function setAlign() { currentIndex = alignment - 1 }
 				}
 				BarSeparator { }
+				Text { text: qsTrId("id_toolbar_text_size") }
+				ComboBox
+				{
+					id: sizelist
+					implicitWidth: 60
+					model: [ "-5.0", "-4.5", "-4.0", "-3.5", "-3.0", "-2.5", "-2.0", "-1.5", "-1.0", "-0.5",
+						"0.0", "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0" ]
+					onCurrentIndexChanged: { textsize = currentIndex / 2 - 5; editor.update() }
+					function setSize() { currentIndex = textsize * 2 + 10 }
+				}
+				BarSeparator { }
 				Text { text: qsTrId("id_toolbar_text_field") }
 				TextField
 				{
@@ -349,12 +361,13 @@ ApplicationWindow
 
 	onSnapgridChanged: { manager.setIntSetting("SnapGrid", snapgrid); editor.update() }
 	onLinewidthChanged: { manager.setIntSetting("LineWidth", linewidth) }
-	onTextsizeChanged: { manager.setIntSetting("TextSize", textsize) }
+	onSymbolsizeChanged: { manager.setRealSetting("SymbolSize", symbolsize) }
 	onLanguageChanged: { manager.setTextSetting("Language", language) }
 
 	onColorindexChanged: { manager.setIntSetting("ColorIndex", colorindex) }
 	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem) }
 	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment) }
+	onTextsizeChanged: { manager.setRealSetting("TextSize", textsize) }
 
 	onTextvalueChanged: { manager.setTextSetting("TextValue", textvalue) }
 	onToolChanged: { manager.setIntSetting("Tool", tool) }
@@ -368,24 +381,26 @@ ApplicationWindow
 
 		snapgrid = manager.getIntSetting("SnapGrid")
 		linewidth = manager.getIntSetting("LineWidth")
-		textsize = manager.getIntSetting("TextSize")
+		symbolsize = manager.getRealSetting("SymbolSize")
 		language = manager.getTextSetting("Language")
 
 		colorindex = manager.getIntSetting("ColorIndex")
 		fillitem = manager.getIntSetting("FillItem")
 		alignment = manager.getIntSetting("Alignment")
+		textsize = manager.getRealSetting("TextSize")
 
 		textfield.text = manager.getTextSetting("TextValue")
 		tool = manager.getIntSetting("Tool")
 
 		snaplist.setSnap()
 		widthlist.setWidth()
-		sizelist.setSize()
+		symbollist.setSize()
 		langlist.setLang()
 
 		colorlist.setColor()
 		filllist.setFill()
 		alignlist.setAlign()
+		sizelist.setSize()
 
 		symbol = manager.getSymbol(true)
 

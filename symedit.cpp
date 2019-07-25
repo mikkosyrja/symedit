@@ -18,11 +18,13 @@ SymEditSettings::SymEditSettings()
 {
 	IntValues.emplace("SnapGrid", 5);
 	IntValues.emplace("LineWidth", 1);
-	IntValues.emplace("TextSize", 1);
 	IntValues.emplace("ColorIndex", 1);
 	IntValues.emplace("FillItem", 0);
 	IntValues.emplace("Alignment", 9);
 	IntValues.emplace("Tool", 1);
+
+	RealValues.emplace("SymbolSize", 5.0);
+	RealValues.emplace("TextSize", 0.0);
 
 	TextValues.emplace("Language", "");
 	TextValues.emplace("TextValue", "");
@@ -43,14 +45,16 @@ void SymEditSettings::Load()
 
 	IntValues.at("SnapGrid") = settings.value("editor/snap", 5).toInt();
 	IntValues.at("LineWidth") = settings.value("editor/width", 1).toInt();
-	IntValues.at("TextSize") = settings.value("editor/size", 1).toInt();
+	RealValues.at("SymbolSize") = settings.value("editor/symbol", 5.0).toDouble();
 	TextValues.at("Language") = settings.value("editor/lang").toString();
 
 //	IntValues.at("ColorIndex") = settings.value("editor/color", 1).toInt();
 //	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
+//	RealValues.at("TextSize") = settings.value("editor/size", 0.0).toDouble();
 	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
-	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
+
 	TextValues.at("TextValue") = settings.value("editor/text").toString();
+	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
 }
 
 //! Save settings.
@@ -67,14 +71,16 @@ void SymEditSettings::Save() const
 
 	settings.setValue("editor/snap", IntValues.at("SnapGrid"));
 	settings.setValue("editor/width", IntValues.at("LineWidth"));
-	settings.setValue("editor/size", IntValues.at("TextSize"));
+	settings.setValue("editor/symbol", RealValues.at("SymbolSize"));
 	settings.setValue("editor/lang", TextValues.at("Language"));
 
 	settings.setValue("editor/color", IntValues.at("ColorIndex"));
 	settings.setValue("editor/fill", IntValues.at("FillItem"));
+	settings.setValue("editor/size", RealValues.at("TextSize"));
 	settings.setValue("editor/align", IntValues.at("Alignment"));
-	settings.setValue("editor/tool", IntValues.at("Tool"));
+
 	settings.setValue("editor/text", TextValues.at("TextValue"));
+	settings.setValue("editor/tool", IntValues.at("Tool"));
 }
 
 //
@@ -155,6 +161,11 @@ void SymEditManager::setIntSetting(QString name, int value)
 	if ( Settings.IntValues.find(name) != Settings.IntValues.end() )
 		Settings.IntValues.at(name) = value;
 }
+void SymEditManager::setRealSetting(QString name, double value)
+{
+	if ( Settings.RealValues.find(name) != Settings.RealValues.end() )
+		Settings.RealValues.at(name) = value;
+}
 void SymEditManager::setTextSetting(QString name, QString value)
 {
 	if ( Settings.TextValues.find(name) != Settings.TextValues.end() )
@@ -172,6 +183,12 @@ int SymEditManager::getIntSetting(QString name) const
 {
 	if ( Settings.IntValues.find(name) != Settings.IntValues.end() )
 		return Settings.IntValues.at(name);
+	return 0;
+}
+double SymEditManager::getRealSetting(QString name) const
+{
+	if ( Settings.RealValues.find(name) != Settings.RealValues.end() )
+		return Settings.RealValues.at(name);
 	return 0;
 }
 QString SymEditManager::getTextSetting(QString name) const
@@ -231,17 +248,18 @@ bool SymEditManager::addLineItem(int operation, QPoint point, QPoint end, int va
 	\param operation	Item operation.
 	\param point		Text position.
 	\param point		End position.
-	\param value		Text value.
+	\param text			Text string.
+	\param size			Text size.
 	\param color		Color index.
 	\param align		Text alignment.
 	\return				True for success.
 */
-bool SymEditManager::addTextItem(int operation, QPoint point, QPoint end, QString value, int color, int align)
+bool SymEditManager::addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int color, int align)
 {
-	if ( !value.isEmpty() )
+	if ( !text.isEmpty() )
 	{
 		undosave();
-		Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, value, color, align);
+		Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, text, size, color, align);
 		return true;
 	}
 	return false;
@@ -365,6 +383,15 @@ int SymEditManager::getItemAlign(int index) const
 		return item.Align;
 	}
 	return 0;
+}
+double SymEditManager::getItemSize(int index) const
+{
+	if ( Symbol.GetItemCount() )
+	{
+		const auto& item = Symbol.GetItem(index);
+		return item.Size;
+	}
+	return 0.0;
 }
 //@}
 

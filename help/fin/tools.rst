@@ -108,10 +108,10 @@ Viivan leveys
 
 Viivan leveys editoinnissa.
 
-Tekstin koko
-^^^^^^^^^^^^
+Symbolin koko
+^^^^^^^^^^^^^
 
-Tekstin koko editoinnissa.
+Symbolin koko editoinnissa.
 
 Kieli
 ^^^^^
@@ -137,8 +137,12 @@ Tekstin asemointi
 
 Tekstin asemointi 1-12.
 
+Tekstin koko
+^^^^^^^^^^^^
+
+Tekstin koko.
+
 Teksti
 ^^^^^^
 
 Symbolin teksti.
-

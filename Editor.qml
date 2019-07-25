@@ -59,14 +59,15 @@ Rectangle
 			{
 				mousex = Math.round((mouse.x - canvas.x) / scalexy / snapgrid) * snapgrid - max - offsetx
 				mousey = max - Math.round((mouse.y - canvas.y) / scalexy / snapgrid) * snapgrid + offsety
-				if ( mousex < -max)
-					mousex = -max
-				else if ( mousex > max )
-					mousex = max
-				if ( mousey < -max )
-					mousey = -max
-				else if ( mousey > max )
-					mousey = max
+
+				if ( mousex < -units )
+					mousex = -units
+				else if ( mousex > units )
+					mousex = units
+				if ( mousey < -units )
+					mousey = -units
+				else if ( mousey > units )
+					mousey = units
 
 				if ( down )
 					canvas.requestPaint()
@@ -97,7 +98,7 @@ Rectangle
 			{
 				if ( tool === Editor.Tool.TextHorizontal )
 				{
-					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), Qt.point(endx, endy), textvalue, colorindex, alignment) )
+					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), Qt.point(endx, endy), textvalue, textsize, colorindex, alignment) )
 					{
 						symbol = manager.getSymbol(true)
 						canvas.requestPaint()
@@ -161,7 +162,7 @@ Rectangle
 					}
 					else if ( tool === Editor.Tool.TextRotated )
 					{
-						if ( manager.addTextItem(Operation.Text, Qt.point(startx, starty), Qt.point(endx, endy), textvalue, colorindex, alignment) )
+						if ( manager.addTextItem(Operation.Text, Qt.point(startx, starty), Qt.point(endx, endy), textvalue, textsize, colorindex, alignment) )
 							symbol = manager.getSymbol(true)
 					}
 				}
@@ -262,11 +263,12 @@ Rectangle
 			}
 		}
 
-		function painttext(context, string, point, end, active)
+		function painttext(context, string, point, end, size, active)
 		{
 			var currentwidth = context.lineWidth
-			context.lineWidth = textsize * (preview ? zoommin : zoomscale) / 2
-			var fontsize = 30 * textsize * (preview ? zoommin : zoomscale)
+			size = Math.abs(size ? size : 2.5) * (preview ? zoommin : zoomscale) / symbolsize
+			context.lineWidth = size * 10
+			var fontsize = 300 * size
 			context.font = fontsize.toString() + "px sans-serif"
 			var position = Qt.point((point.x + max + offsetx) * scalexy, (max - point.y + offsety) * scalexy)
 			context.translate(position.x, position.y)
@@ -361,9 +363,10 @@ Rectangle
 				}
 				else if ( operation === Operation.Text )
 				{
+					var size = manager.getItemSize(index);
 					point = manager.getItemPoint(index)
 					setalignment(context, manager.getItemAlign(index))
-					painttext(context, manager.getItemText(index), position, point, index === active)
+					painttext(context, manager.getItemText(index), position, point, size, index === active)
 				}
 			}
 		}
@@ -453,9 +456,9 @@ Rectangle
 				{
 					setalignment(context, alignment)
 					if ( tool === Editor.Tool.TextHorizontal )
-						painttext(context, textvalue, Qt.point(mousex, mousey), Qt.point(mousex, mousey), true)
+						painttext(context, textvalue, Qt.point(mousex, mousey), Qt.point(mousex, mousey), textsize, true)
 					else if ( tool === Editor.Tool.TextRotated )
-						painttext(context, textvalue, Qt.point(startx, starty), Qt.point(mousex, mousey), true)
+						painttext(context, textvalue, Qt.point(startx, starty), Qt.point(mousex, mousey), textsize, true)
 				}
 			}
 

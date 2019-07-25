@@ -273,9 +273,9 @@
         <source></source>
         <translation>Line Width</translation>
     </message>
-    <message id="id_toolbar_text_size">
+    <message id="id_toolbar_symbol_size">
         <source></source>
-        <translation>Text Size</translation>
+        <translation>Symbol Size</translation>
     </message>
     <message id="id_toolbar_language">
         <source></source>
@@ -380,6 +380,10 @@
     <message id="id_toolbar_align_middle_left">
         <source></source>
         <translation>12   Middle left</translation>
+    </message>
+    <message id="id_toolbar_text_size">
+        <source></source>
+        <translation>Text Size</translation>
     </message>
     <message id="id_toolbar_text_field">
         <source></source>

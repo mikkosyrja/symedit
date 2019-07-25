@@ -23,7 +23,6 @@ SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9)
 
 }
 
-//@{
 //! Constructor.
 /*!
 	\param operation	Item operation.
@@ -34,16 +33,26 @@ SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9)
 	\param fill			Item area fill.
 */
 SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, int value, int color, int fill)
-	: Operation(operation), Point(point), End(end), Value(value), Color(color), Fill(fill), Align(0)
+	: Operation(operation), Point(point), End(end), Size(0.0), Value(value), Color(color), Fill(fill), Align(0)
 {
 
 }
-SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, QString value, int color, int align)
-	: Operation(operation), Point(point), End(end), Value(0), Text(value), Color(color), Fill(0), Align(align)
+
+//! Constructor.
+/*!
+	\param operation	Item operation.
+	\param point		Item position.
+	\param end			End position.
+	\param text			Text string.
+	\param size 		Text size.
+	\param color		Item color index.
+	\param align		Text alignment.
+*/
+SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int color, int align)
+	: Operation(operation), Point(point), End(end), Text(text), Size(size), Value(0), Color(color), Fill(0), Align(align)
 {
 
 }
-//@}
 
 //
 //	symbol functions
@@ -62,6 +71,7 @@ void SymEditSymbol::Load(const QString& buffer)
 {
 	Items.clear();
 	QPoint position(0, 0);
+	double size = 0.0;
 	int color = 1, fill = 0, align = 9, angle = 0;
 	for ( const auto& string : buffer.split(';', QString::SkipEmptyParts) )
 	{
@@ -88,6 +98,8 @@ void SymEditSymbol::Load(const QString& buffer)
 				fill = value;
 			else if ( type == 'J' )
 				align = value;
+			else if ( type == 'S' )
+				size = string.mid(1).toDouble();
 			else if ( type == 'G' )
 				angle = value;
 			else if ( type == 'R' )
@@ -100,7 +112,7 @@ void SymEditSymbol::Load(const QString& buffer)
 					double radian = angle / 200.0 * ConstPi;
 					end = QPoint(static_cast<int>(cos(radian) * 100.0), static_cast<int>(sin(radian) * 100.0));
 				}
-				Items.push_back(Item(Operation::Text, position, end, type == '!' ? string.mid(1) : string, color, align));
+				Items.push_back(Item(Operation::Text, position, end, type == '!' ? string.mid(1) : string, size, color, align));
 			}
 		}
 	}
@@ -132,6 +144,7 @@ QString& SymEditSymbol::Save(QString& buffer, bool rich) const
 
 	buffer.clear();
 	QPoint position(0, 0);
+	double size = 0.0;
 	int index = 0, color = 1, fill = 0, align = 9, angle = 0;
 	for ( const auto& item : Items )
 	{
@@ -175,6 +188,13 @@ QString& SymEditSymbol::Save(QString& buffer, bool rich) const
 					color = appendoption('C', buffer, item.Color);
 				if ( item.Align != align )
 					align = appendoption('J', buffer, item.Align);
+				if ( item.Size != size )
+				{
+//					size = appendoption('S', buffer, item.Size);
+					QString value;
+					size = item.Size;
+					buffer.append('S').append(value.setNum(size)).append(';');
+				}
 				if ( item.Point != position )
 					appendpoint(buffer.append('U'), item.Point, 2);
 				if ( item.Text.front() != '$' && item.Text.front() != '#' )
@@ -212,7 +232,6 @@ void SymEditSymbol::Clear()
 	Items.clear();
 }
 
-//@{
 //! Add symbol item.
 /*!
 	\param operation	Item operation.
@@ -230,14 +249,24 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint po
 	Items.push_back(item);
 	return Items.back();
 }
-SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QPoint end, QString value, int color, int align)
+
+//! Add symbol item.
+/*!
+	\param operation	Item operation.
+	\param point		Start position.
+	\param end			End position.
+	\param value		Item value.
+	\param color		Item color index.
+	\param fill			Item area fill.
+	\return				Reference to item.
+*/
+SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int color, int align)
 {
-	Item item(operation, point, end, value, color, align);
+	Item item(operation, point, end, text, size, color, align);
 	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();
 }
-//@}
 
 //! Remove item.
 /*!

@@ -108,10 +108,10 @@ Line width
 
 Line width in editing.
 
-Text size
-^^^^^^^^^
+Symbol size
+^^^^^^^^^^^
 
-Text size in editing.
+Symbol size in editing.
 
 Language
 ^^^^^^^^
@@ -136,6 +136,11 @@ Text Alignment
 ^^^^^^^^^^^^^^
 
 Text alignment value 1-12.
+
+Text size
+^^^^^^^^^
+
+Text size.
 
 Text
 ^^^^
