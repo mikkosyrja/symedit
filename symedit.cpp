@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QScreen>
 #include <QClipboard>
 #include <QSettings>
 #include <QDesktopServices>
@@ -36,10 +37,11 @@ void SymEditSettings::Load()
 {
 	QSettings settings;
 
-	Position.setX(settings.value("window/x", 100).toInt());
-	Position.setY(settings.value("window/y", 100).toInt());
-	Size.setWidth(settings.value("window/width", 500).toInt());
-	Size.setHeight(settings.value("window/height", 500).toInt());
+	QSize size = QGuiApplication::primaryScreen()->size();
+	Position.setX(settings.value("window/x", size.width() / 4).toInt());
+	Position.setY(settings.value("window/y", size.height() / 6).toInt());
+	Size.setWidth(settings.value("window/width", size.width() / 2).toInt());
+	Size.setHeight(settings.value("window/height", size.height() * 2 / 3).toInt());
 
 	TextValues.at("Directory") = settings.value("application/directory").toString();
 
@@ -101,12 +103,12 @@ SymEditManager::SymEditManager(QObject* parent) : QObject(parent)
 	\param symbol		Symbol string from command line.
 */
 SymEditManager::SymEditManager(const QString& filename, const QString& symbol)
-	: QObject(nullptr), FileName(filename)
+	: QObject(nullptr), Filename(filename)
 {
 	Settings.Load();
 
-	if ( !FileName.isEmpty() )
-		open(FileName);
+	if ( !Filename.isEmpty() )
+		open(Filename);
 
 	if ( !symbol.isEmpty() )
 		Symbol.Load(symbol);
@@ -573,7 +575,7 @@ bool SymEditManager::open(QUrl fileurl)
 */
 bool SymEditManager::save(QUrl fileurl)
 {
-	QString filename = FileName;
+	QString filename = Filename;
 	if ( !fileurl.isEmpty() )
 	{
 		QString filestring = fileurl.toString();
@@ -583,6 +585,24 @@ bool SymEditManager::save(QUrl fileurl)
 		filename = fileurl.toLocalFile();
 	}
 	return save(filename);
+}
+
+//! Check file name existence.
+/*!
+	\return				True for existing file name.
+*/
+bool SymEditManager::hasFilename() const
+{
+	return !Filename.isEmpty();
+}
+
+//! Get file name.
+/*!
+	\return				File name as url.
+*/
+QUrl SymEditManager::getFilename() const
+{
+	return QUrl(Filename);
 }
 
 //! Open symbol file.
@@ -597,7 +617,7 @@ bool SymEditManager::open(const QString& filename)
 	{
 		QTextStream input(&file);
 		Symbol.Load(input.readLine());
-		FileName = filename;
+		Filename = filename;
 		return true;
 	}
 	return false;
@@ -615,7 +635,7 @@ bool SymEditManager::save(const QString& filename)
 	{
 		QTextStream output(&file);
 		output << getSymbol(false);
-		FileName = filename;
+		Filename = filename;
 		return true;
 	}
 	return false;

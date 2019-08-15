@@ -91,6 +91,8 @@ public:
 
 	Q_INVOKABLE bool open(QUrl fileurl);
 	Q_INVOKABLE bool save(QUrl fileurl);
+	Q_INVOKABLE bool hasFilename() const;
+	Q_INVOKABLE QUrl getFilename() const;
 
 	bool open(const QString& filename);
 	bool save(const QString& filename);
@@ -100,7 +102,7 @@ private:
 	void undosave();
 
 	bool Initialized = false;				//!< Initialization mutex.
-	QString FileName;						//!< Symbol file name.
+	QString Filename;						//!< Symbol file name.
 	QString Language;						//!< Language id.
 
 	SymEditSymbol Symbol;					//!< Current symbol.
