@@ -596,13 +596,14 @@ bool SymEditManager::hasFilename() const
 	return !Filename.isEmpty();
 }
 
-//! Get file name.
+//! Get file name without path.
 /*!
 	\return				File name as url.
 */
 QUrl SymEditManager::getFilename() const
 {
-	return QUrl(Filename);
+	int index = Filename.lastIndexOf('/');
+	return QUrl(Filename.mid(index + 1));
 }
 
 //! Open symbol file.

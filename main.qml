@@ -421,8 +421,7 @@ ApplicationWindow
 		{
 			filedialog.fileMode = Labs.FileDialog.SaveFile
 			filedialog.folder = manager.getTextSetting("Directory")
-//			filedialog.file = manager.getFilename()
-			filedialog.currentFile = manager.getFilename()
+//			filedialog.currentFile = manager.getFilename()
 			filedialog.open()
 		}
 		else
