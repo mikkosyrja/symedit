@@ -140,7 +140,7 @@ Tekstin asemointi 1-12.
 Tekstin koko
 ^^^^^^^^^^^^
 
-Tekstin koko.
+Tekstin koko ja yksikkö.
 
 Teksti
 ^^^^^^

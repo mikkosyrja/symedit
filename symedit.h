@@ -61,7 +61,7 @@ public:
 
 	Q_INVOKABLE bool addPointItem(int operation, QPoint point, int value, int color, int fill);
 	Q_INVOKABLE bool addLineItem(int operation, QPoint point, QPoint end, int value, int color, int fill);
-	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int color, int align);
+	Q_INVOKABLE bool addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int unit, int color, int align);
 	Q_INVOKABLE bool removeItem();
 
 	Q_INVOKABLE int getItemCount() const;
@@ -74,6 +74,7 @@ public:
 	Q_INVOKABLE int getItemFill(int index) const;
 	Q_INVOKABLE int getItemAlign(int index) const;
 	Q_INVOKABLE double getItemSize(int index) const;
+	Q_INVOKABLE int getItemUnit(int index) const;
 
 	Q_INVOKABLE int selectItem(QPoint point) const;
 	Q_INVOKABLE bool setActiveIndex(int index);

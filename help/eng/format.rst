@@ -42,15 +42,15 @@ Draws rectangle using previous position and parameter coordinates as corners.
 
 Parameters: X,Y (``B40,40``)
 
-**C** - Set color index
-^^^^^^^^^^^^^^^^^^^^^^^
+**C** - Color index
+^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to current drawing color index. Affects until changed.
 
 Parameters: I (``C3``)
 
-**F** - Set area fill type
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**F** - Area fill type
+^^^^^^^^^^^^^^^^^^^^^^
 
 Sets area fill type index to one of the following values:
 
@@ -62,16 +62,30 @@ Fill type works with rectangle and circle commands. Border is drawn only when th
 
 Parameters: I (``F2``)
 
-**G** - Set text angle
-^^^^^^^^^^^^^^^^^^^^^^
+**G** - Text angle
+^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text angle as gons. Horizontal text angle is zero and rotation is counter-clockwise. Affects until changed.
 
 Parameters: I (``G50``)
 
-**J** - Set text alignment
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**J** - Text alignment
+^^^^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text alignment (1-12). Default is 9 (bottom left corner). Affects until changed.
 
 Parameters: I (``J9``)
+
+**S** - Text absolute size
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets parameter to text size as millimeters (positive) or meters (negative). Default zero uses application settings. Affects until changed.
+
+Parameters: S (``S2.5``)
+
+**P** - Text relative size
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets parameter to text size as a percentage of symbol size. Default zero uses application settings. Affects until changed.
+
+Parameters: P (``P50``)

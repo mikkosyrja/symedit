@@ -140,7 +140,7 @@ Text alignment value 1-12.
 Text size
 ^^^^^^^^^
 
-Text size.
+Text size and unit.
 
 Text
 ^^^^

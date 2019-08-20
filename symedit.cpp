@@ -22,6 +22,7 @@ SymEditSettings::SymEditSettings()
 	IntValues.emplace("ColorIndex", 1);
 	IntValues.emplace("FillItem", 0);
 	IntValues.emplace("Alignment", 9);
+	IntValues.emplace("SizeUnit", 0);
 	IntValues.emplace("Tool", 1);
 
 	RealValues.emplace("SymbolSize", 5.0);
@@ -54,6 +55,7 @@ void SymEditSettings::Load()
 //	IntValues.at("FillItem") = settings.value("editor/fill", 0).toInt();
 //	RealValues.at("TextSize") = settings.value("editor/size", 0.0).toDouble();
 	IntValues.at("Alignment") = settings.value("editor/align", 9).toInt();
+	IntValues.at("SizeUnit") = settings.value("editor/unit", 0).toInt();
 
 	TextValues.at("TextValue") = settings.value("editor/text").toString();
 	IntValues.at("Tool") = settings.value("editor/tool", 1).toInt();
@@ -80,6 +82,7 @@ void SymEditSettings::Save() const
 	settings.setValue("editor/fill", IntValues.at("FillItem"));
 	settings.setValue("editor/size", RealValues.at("TextSize"));
 	settings.setValue("editor/align", IntValues.at("Alignment"));
+	settings.setValue("editor/unit", IntValues.at("SizeUnit"));
 
 	settings.setValue("editor/text", TextValues.at("TextValue"));
 	settings.setValue("editor/tool", IntValues.at("Tool"));
@@ -252,16 +255,17 @@ bool SymEditManager::addLineItem(int operation, QPoint point, QPoint end, int va
 	\param point		End position.
 	\param text			Text string.
 	\param size			Text size.
+	\param unit			Size unit.
 	\param color		Color index.
 	\param align		Text alignment.
 	\return				True for success.
 */
-bool SymEditManager::addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int color, int align)
+bool SymEditManager::addTextItem(int operation, QPoint point, QPoint end, QString text, double size, int unit, int color, int align)
 {
 	if ( !text.isEmpty() )
 	{
 		undosave();
-		Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, text, size, color, align);
+		Symbol.AddItem(static_cast<Operation::Type>(operation), point, end, text, size, unit, color, align);
 		return true;
 	}
 	return false;
@@ -300,10 +304,7 @@ int SymEditManager::getItemCount() const
 int SymEditManager::getItemOperation(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Operation;
-	}
+		return Symbol.GetItem(index).Operation;
 	return Operation::None;
 }
 
@@ -333,10 +334,7 @@ QPoint SymEditManager::getItemPosition(int index) const
 int SymEditManager::getItemValue(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Value;
-	}
+		return Symbol.GetItem(index).Value;
 	return 0;
 }
 QPoint SymEditManager::getItemPoint(int index) const
@@ -353,47 +351,38 @@ QPoint SymEditManager::getItemPoint(int index) const
 QString SymEditManager::getItemText(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Text;
-	}
+		return Symbol.GetItem(index).Text;
 	return "";
 }
 int SymEditManager::getItemColor(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Color;
-	}
+		return Symbol.GetItem(index).Color;
 	return 1;
 }
 int SymEditManager::getItemFill(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Fill;
-	}
+		return Symbol.GetItem(index).Fill;
 	return 0;
 }
 int SymEditManager::getItemAlign(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Align;
-	}
+		return Symbol.GetItem(index).Align;
 	return 0;
 }
 double SymEditManager::getItemSize(int index) const
 {
 	if ( Symbol.GetItemCount() )
-	{
-		const auto& item = Symbol.GetItem(index);
-		return item.Size;
-	}
+		return Symbol.GetItem(index).Size;
 	return 0.0;
+}
+int SymEditManager::getItemUnit(int index) const
+{
+	if ( Symbol.GetItemCount() )
+		return Symbol.GetItem(index).Unit;
+	return 0;
 }
 //@}
 

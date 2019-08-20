@@ -25,6 +25,7 @@ ApplicationWindow
 	property int fillitem: 0
 	property int alignment: 1
 	property real textsize: 2.5
+	property int sizeunit: 0
 
 	property string textvalue: textfield.text
 	property int tool: 0
@@ -219,7 +220,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: symbollist
-					implicitWidth: 60
+					implicitWidth: 70
 					model: [ "1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "9.0", "10.0" ]
 					onCurrentIndexChanged: { symbolsize = currentIndex + 1; editor.update() }
 					function setSize() { currentIndex = symbolsize - 1 }
@@ -273,7 +274,7 @@ ApplicationWindow
 				ComboBox
 				{
 					id: alignlist
-					implicitWidth: 60
+					implicitWidth: 70
 					model:
 					[
 						qsTrId("id_toolbar_align_top_right"),
@@ -297,11 +298,19 @@ ApplicationWindow
 				ComboBox
 				{
 					id: sizelist
+					implicitWidth: 70
+					model: [ "0.0", "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0",
+						"5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5", "10.0" ]
+					onCurrentIndexChanged: { textsize = currentIndex / 2.0; editor.update() }
+					function setSize() { currentIndex = textsize * 2 }
+				}
+				ComboBox
+				{
+					id: unitlist
 					implicitWidth: 60
-					model: [ "-5.0", "-4.5", "-4.0", "-3.5", "-3.0", "-2.5", "-2.0", "-1.5", "-1.0", "-0.5",
-						"0.0", "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0" ]
-					onCurrentIndexChanged: { textsize = currentIndex / 2 - 5; editor.update() }
-					function setSize() { currentIndex = textsize * 2 + 10 }
+					model: [ "mm", "m", "%" ]
+					onCurrentIndexChanged: { sizeunit = currentIndex; editor.update() }
+					function setUnit() { currentIndex = sizeunit }
 				}
 				BarSeparator { }
 				Text { text: qsTrId("id_toolbar_text_field") }
@@ -367,7 +376,8 @@ ApplicationWindow
 	onColorindexChanged: { manager.setIntSetting("ColorIndex", colorindex) }
 	onFillitemChanged: { manager.setIntSetting("FillItem", fillitem) }
 	onAlignmentChanged: { manager.setIntSetting("Alignment", alignment) }
-	onTextsizeChanged: { manager.setRealSetting("TextSize", textsize) }
+	onTextsizeChanged: { manager.setRealSetting("TextSize", textsize); editor.update() }
+	onSizeunitChanged: { manager.setIntSetting("SizeUnit", sizeunit) }
 
 	onTextvalueChanged: { manager.setTextSetting("TextValue", textvalue) }
 	onToolChanged: { manager.setIntSetting("Tool", tool) }
@@ -388,6 +398,7 @@ ApplicationWindow
 		fillitem = manager.getIntSetting("FillItem")
 		alignment = manager.getIntSetting("Alignment")
 		textsize = manager.getRealSetting("TextSize")
+		sizeunit = manager.getIntSetting("SizeUnit")
 
 		textfield.text = manager.getTextSetting("TextValue")
 		tool = manager.getIntSetting("Tool")
@@ -401,6 +412,7 @@ ApplicationWindow
 		filllist.setFill()
 		alignlist.setAlign()
 		sizelist.setSize()
+		unitlist.setUnit()
 
 		symbol = manager.getSymbol(true)
 

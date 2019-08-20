@@ -98,7 +98,7 @@ Rectangle
 			{
 				if ( tool === Editor.Tool.TextHorizontal )
 				{
-					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), Qt.point(endx, endy), textvalue, textsize, colorindex, alignment) )
+					if ( manager.addTextItem(Operation.Text, Qt.point(endx, endy), Qt.point(endx, endy), textvalue, textsize, sizeunit, colorindex, alignment) )
 					{
 						symbol = manager.getSymbol(true)
 						canvas.requestPaint()
@@ -162,7 +162,7 @@ Rectangle
 					}
 					else if ( tool === Editor.Tool.TextRotated )
 					{
-						if ( manager.addTextItem(Operation.Text, Qt.point(startx, starty), Qt.point(endx, endy), textvalue, textsize, colorindex, alignment) )
+						if ( manager.addTextItem(Operation.Text, Qt.point(startx, starty), Qt.point(endx, endy), textvalue, textsize, sizeunit, colorindex, alignment) )
 							symbol = manager.getSymbol(true)
 					}
 				}
@@ -263,10 +263,10 @@ Rectangle
 			}
 		}
 
-		function painttext(context, string, point, end, size, active)
+		function painttext(context, string, point, end, size, unit, active)
 		{
 			var currentwidth = context.lineWidth
-			size = Math.abs(size ? size : 2.5) * (preview ? zoommin : zoomscale) / symbolsize
+			size = (unit === 2 ? symbolsize * size / 10.0 : (size ? size : 2.5)) * (preview ? zoommin : zoomscale) / symbolsize
 			context.lineWidth = size * 10
 			var fontsize = 300 * size
 			context.font = fontsize.toString() + "px sans-serif"
@@ -364,9 +364,10 @@ Rectangle
 				else if ( operation === Operation.Text )
 				{
 					var size = manager.getItemSize(index);
+					var unit = manager.getItemUnit(index);
 					point = manager.getItemPoint(index)
 					setalignment(context, manager.getItemAlign(index))
-					painttext(context, manager.getItemText(index), position, point, size, index === active)
+					painttext(context, manager.getItemText(index), position, point, size, unit, index === active)
 				}
 			}
 		}
@@ -456,9 +457,9 @@ Rectangle
 				{
 					setalignment(context, alignment)
 					if ( tool === Editor.Tool.TextHorizontal )
-						painttext(context, textvalue, Qt.point(mousex, mousey), Qt.point(mousex, mousey), textsize, true)
+						painttext(context, textvalue, Qt.point(mousex, mousey), Qt.point(mousex, mousey), textsize, sizeunit, true)
 					else if ( tool === Editor.Tool.TextRotated )
-						painttext(context, textvalue, Qt.point(startx, starty), Qt.point(mousex, mousey), textsize, true)
+						painttext(context, textvalue, Qt.point(startx, starty), Qt.point(mousex, mousey), textsize, sizeunit, true)
 				}
 			}
 

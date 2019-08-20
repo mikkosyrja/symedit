@@ -18,7 +18,7 @@ namespace Operation
 const SymEditSymbol::Item gDefaultItem;		//!< Empty default item.
 
 //! Constructor.
-SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9)
+SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9), Unit(0)
 {
 
 }
@@ -33,7 +33,7 @@ SymEditSymbol::Item::Item() : Operation(Operation::None), Fill(0), Align(9)
 	\param fill			Item area fill.
 */
 SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, int value, int color, int fill)
-	: Operation(operation), Point(point), End(end), Size(0.0), Value(value), Color(color), Fill(fill), Align(0)
+	: Operation(operation), Point(point), End(end), Size(0.0), Value(value), Color(color), Fill(fill), Align(0), Unit(0)
 {
 
 }
@@ -45,11 +45,12 @@ SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, i
 	\param end			End position.
 	\param text			Text string.
 	\param size 		Text size.
+	\param unit 		Size unit.
 	\param color		Item color index.
 	\param align		Text alignment.
 */
-SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int color, int align)
-	: Operation(operation), Point(point), End(end), Text(text), Size(size), Value(0), Color(color), Fill(0), Align(align)
+SymEditSymbol::Item::Item(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int unit, int color, int align)
+	: Operation(operation), Point(point), End(end), Text(text), Size(size), Value(0), Color(color), Fill(0), Align(align), Unit(unit)
 {
 
 }
@@ -72,7 +73,7 @@ void SymEditSymbol::Load(const QString& buffer)
 	Items.clear();
 	QPoint position(0, 0);
 	double size = 0.0;
-	int color = 1, fill = 0, align = 9, angle = 0;
+	int color = 1, fill = 0, align = 9, angle = 0, unit = 0;
 	for ( const auto& string : buffer.split(';', QString::SkipEmptyParts) )
 	{
 		int type = string.at(0).toLatin1();
@@ -98,8 +99,12 @@ void SymEditSymbol::Load(const QString& buffer)
 				fill = value;
 			else if ( type == 'J' )
 				align = value;
-			else if ( type == 'S' )
+			else if ( type == 'S' || type == 'P' )
+			{
 				size = string.mid(1).toDouble();
+				unit = (type == 'P' ? 2 : (size < 0.0 ? 1 : 0));
+				size = fabs(size) * (type == 'P' ? 10.0 : 1.0);
+			}
 			else if ( type == 'G' )
 				angle = value;
 			else if ( type == 'R' )
@@ -112,7 +117,7 @@ void SymEditSymbol::Load(const QString& buffer)
 					double radian = angle / 200.0 * ConstPi;
 					end = QPoint(static_cast<int>(cos(radian) * 100.0), static_cast<int>(sin(radian) * 100.0));
 				}
-				Items.push_back(Item(Operation::Text, position, end, type == '!' ? string.mid(1) : string, size, color, align));
+				Items.push_back(Item(Operation::Text, position, end, type == '!' ? string.mid(1) : string, size, unit, color, align));
 			}
 		}
 	}
@@ -145,7 +150,7 @@ QString& SymEditSymbol::Save(QString& buffer, bool rich) const
 	buffer.clear();
 	QPoint position(0, 0);
 	double size = 0.0;
-	int index = 0, color = 1, fill = 0, align = 9, angle = 0;
+	int index = 0, color = 1, fill = 0, align = 9, angle = 0, unit = 0;
 	for ( const auto& item : Items )
 	{
 		if ( rich && index == ActiveIndex )
@@ -188,12 +193,12 @@ QString& SymEditSymbol::Save(QString& buffer, bool rich) const
 					color = appendoption('C', buffer, item.Color);
 				if ( item.Align != align )
 					align = appendoption('J', buffer, item.Align);
-				if ( item.Size != size )
+				if ( item.Size != size || item.Unit != unit )
 				{
-//					size = appendoption('S', buffer, item.Size);
 					QString value;
-					size = item.Size;
-					buffer.append('S').append(value.setNum(size)).append(';');
+					unit = item.Unit;
+					size = item.Size * (unit == 2 ? 10.0 : 1.0);
+					buffer.append(unit == 2 ? 'P' : 'S').append(value.setNum(size * (unit == 1 ? -1.0 : 1.0))).append(';');
 				}
 				if ( item.Point != position )
 					appendpoint(buffer.append('U'), item.Point, 2);
@@ -255,14 +260,16 @@ SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint po
 	\param operation	Item operation.
 	\param point		Start position.
 	\param end			End position.
-	\param value		Item value.
+	\param text			Text string.
+	\param size 		Text size.
+	\param unit 		Size unit.
 	\param color		Item color index.
-	\param fill			Item area fill.
+	\param align		Text alignment.
 	\return				Reference to item.
 */
-SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int color, int align)
+SymEditSymbol::Item& SymEditSymbol::AddItem(Operation::Type operation, QPoint point, QPoint end, QString text, double size, int unit, int color, int align)
 {
-	Item item(operation, point, end, text, size, color, align);
+	Item item(operation, point, end, text, size, unit, color, align);
 	ActiveIndex = static_cast<int>(Items.size());
 	Items.push_back(item);
 	return Items.back();

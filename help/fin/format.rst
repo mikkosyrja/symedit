@@ -42,15 +42,15 @@ Piirtää suorakaiteen käyttäen edellistä sijantia ja parametrin koordinaatte
 
 Parametrit: X,Y (``B40,40``)
 
-**C** - Aseta väri-indeksi
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**C** - Väri-indeksi
+^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin piirron väri-ideksiksi. Voimassa kunnes muutetaan.
 
 Parametrit: I (``C3``)
 
-**F** - Aseta alueen täyttö
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**F** - Alueen täyttö
+^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa alueen täytöksi jonkin seuraavan tyypin:
 
@@ -62,16 +62,30 @@ Alueen täyttö toimii suorakaiteen ja ympyrän kanssa. Reunaviiva piirretään 
 
 Parametrit: I (``F2``)
 
-**G** - Aseta tekstin kulma
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**G** - Tekstin kulma
+^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin kulmaksi gooneina. Vaakasuoran tekstin kulma on nolla ja kiertosuunta on vastapäivään. Voimassa kunnes muutetaan.
 
 Parametrit: I (``G50``)
 
-**J** - Aseta tekstin asemointi
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**J** - Tekstin asemointi
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin asemoinniksi (1-12). Oletus on 9 (vasen alakulma). Voimassa kunnes muutetaan.
 
 Parametrit: I (``J9``)
+
+**S** - Tekstin absoluuttinen koko
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Asettaa parametrin tekstin kooksi millimetreinä (positiivinen) tai metreinä (negatiivinen). Oletus nolla käyttää sovelluksen asetuksia. Voimassa kunnes muutetaan.
+
+Parametrit: S (``S2.5``)
+
+**P** - Tekstin suhteellinen koko
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Asettaa parametrin tekstin kooksi prosentteina symbolin koosta. Oletus nolla käyttää sovelluksen asetuksia. Voimassa kunnes muutetaan.
+
+Parametrit: P (``P50``)
