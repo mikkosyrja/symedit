@@ -43,7 +43,6 @@ Menu
 
 See :doc:`menu`.
 
-
 Toolbar
 ^^^^^^^
 
@@ -56,8 +55,18 @@ Editor
 
 Editing works by selecting first drawing tool from the menu or toolbar. Pressing the mouse button starts new element adding and releasing the button saves it. Already created elements cannot be modified. They must first be deleted and then redrawed.
 
-
 Statusbar
 ^^^^^^^^^
 
 Bottom status bar shows mouse coordinates at left and symbol textual representation at right. Representation is same as format used for saving symbol to text file, but the active item definition is highlighted.
+
+Settings
+--------
+
+Program settings are stored to following locations depending on operating system:
+
+| Linux: ``/home/<username>/.config/Syrja/SymEdit.ini``
+| Windows: ``C:\Users\<username>\AppData\Roaming\Syrja\SymEdit.ini``
+
+Setting file uses normal INI-file format.
+

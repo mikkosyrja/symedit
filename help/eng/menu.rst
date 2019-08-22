@@ -175,4 +175,3 @@ Opens this help in browser. Shortcut key F1.
 ^^^^^^^^^^^^^^^^^^
 
 Information about program.
-

@@ -111,7 +111,7 @@ Viivan leveys editoinnissa.
 Symbolin koko
 ^^^^^^^^^^^^^
 
-Symbolin koko editoinnissa.
+Symbolin koko millimetreinä tai metreinä editoinnissa. Olettaa mittakaavaksi 1:1000. Tekstien koon skaalaukseen.
 
 Kieli
 ^^^^^
@@ -121,28 +121,55 @@ Sovelluksen kieli: englanti (eng) tai suomi (fin).
 Värin indeksi
 ^^^^^^^^^^^^^
 
-Värin indeksi 3D-Win kooditaulukon mukaan.
+Värin indeksi 3D-Win kooditaulukon mukaan (``C1``).
 
 Kohteen täyttö
 ^^^^^^^^^^^^^^
 
-Kohteen täyttömoodi.
+Kohteen täyttötapa.
 
-1. Ei täyttöä
-2. Taustaväri
-3. Alueen täyttö
+1. Ei täyttöä, vain alueen reuna piirretään (``F0``)
+2. Taustaväri, täyttää koko alueen taustavärillä (``F1``)
+3. Alueen täyttö, täyttää koko alueen aktiivisella värillä (``F2``)
 
 Tekstin asemointi
 ^^^^^^^^^^^^^^^^^
 
-Tekstin asemointi 1-12.
+Tekstin kiinnityspisteen sijainti.
+
+1. Ylhäällä oikealla (``J1``)
+2. Ylhäällä keskellä (``J2``)
+3. Ylhäällä vasemmalla (``J3``)
+4. Alareunassa oikealla (``J4``)
+5. Alareunassa keskellä (``J5``)
+6. Alareunassa vasemmalla (``J6``)
+7. Alhaalla oikealla (``J7``)
+8. Alhaalla keskellä (``J8``)
+9. Alhaalla vasemmalla (``J9``)
+10. Puolivälissä oikealla (``J10``)
+11. Puolivälissä keskellä (``J11``)
+12. Puolivälissä vasemmalla (``J12``)
 
 Tekstin koko
 ^^^^^^^^^^^^
 
 Tekstin koko ja yksikkö.
 
+*mm*
+    Koko millimetreinä, positiivinen arvo (``S2.5``)
+*m*
+    Koko metreinä, negatiivinen arvo (``S-2.5``)
+*%*
+    Koko prosentteina symbolin koosta (``P25``)
+
 Teksti
 ^^^^^^
 
-Symbolin teksti.
+Teksti symbolissa.
+
+*!*
+    Vakioteksti, oletustyyppi (``Teksti``)
+*$*
+    Ominaisuuden arvo symbolin kohteelta (``$ID``)
+*#*
+    Makron arvo symbolin kohteelta (``#Z``)

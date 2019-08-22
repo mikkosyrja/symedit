@@ -33,8 +33,8 @@ file
 
 Symbolitiedoston nimi. Symbolitiedosto on tekstitiedosto, joka sisältää yksittäisen symbolin määrittelyn. Katso :ref:`symbol-format-label`.
 
-Käyttöliitymä
--------------
+Käyttöliittymä
+--------------
 
 Käyttöliitymä on perinteinen työpöytäkäyttöliittymä. Kaikki työkalut ovat käytettävissä valikon kautta ja tärkeimmät myös työkalupalkin painikkeina.
 
@@ -42,7 +42,6 @@ Valikko
 ^^^^^^^
 
 Katso :doc:`menu`.
-
 
 Työkalupalkki
 ^^^^^^^^^^^^^
@@ -54,10 +53,19 @@ Katso :doc:`tools`.
 Editori
 ^^^^^^^
 
-Editointi tapahtuu valitsemalla ensin valikosta tai työkalupalkista piirtotyökalu. Hiiren painikkeen painaminen aloittaa uuden elementin lisäämisen ja painikkeen vapauttaminen tallentaa sen. Luotuja elementtejä ei voi muuttaa, vaan ne on ensin poistettaba ja piirrettävä sitten uudet.
+Editointi tapahtuu valitsemalla ensin valikosta tai työkalupalkista piirtotyökalu. Hiiren painikkeen painaminen aloittaa uuden elementin lisäämisen ja painikkeen vapauttaminen tallentaa sen. Luotuja elementtejä ei voi muuttaa, vaan ne on ensin poistettava ja piirrettävä sitten uudet.
 
 Tilarivi
 ^^^^^^^^
 
 Alareunan tilarivi näyttää vasemmalla hiiren koordinaatit ja oikealla symbolin tekstimuotoisen esityksen. Muoto on sama, jossa symboli tallentuu tekstitiedostoon, mutta lisäksi aktiivisen kohteen määritys on korostettu.
 
+Asetukset
+---------
+
+Ohjelman asetukset tallentuvat seuraaviin paikkoihin käyttöjärjestelmästä riippuen:
+
+| Linux: ``/home/<username>/.config/Syrja/SymEdit.ini``
+| Windows: ``C:\Users\<username>\AppData\Roaming\Syrja\SymEdit.ini``
+
+Asetustiedosto käyttää normaalia INI-tiedoston muotoa.

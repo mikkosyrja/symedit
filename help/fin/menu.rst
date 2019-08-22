@@ -175,4 +175,3 @@ Avaa tämän ohjeen selaimessa. Pikanäppäin F1.
 ^^^^^^^^^^^^^^^^^^^^
 
 Tietoja ohjelmasta.
-

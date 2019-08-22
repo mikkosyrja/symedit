@@ -111,7 +111,7 @@ Line width in editing.
 Symbol size
 ^^^^^^^^^^^
 
-Symbol size in editing.
+Symbol size in millimeters or meters in editing. Assumes scale 1:1000. For text size scaling.
 
 Language
 ^^^^^^^^
@@ -121,29 +121,55 @@ Application language: english (eng) or finnish (fin).
 Color index
 ^^^^^^^^^^^
 
-3D-Win code file color index.
+3D-Win code file color index (``C1``).
 
 Item Fill
 ^^^^^^^^^
 
 Item fill mode.
 
-1. No fill
-2. Backgroud
-3. Area fill
+1. No fill, only area border is drawn (``F0``)
+2. Backgroud, fills whole area with background color (``F1``)
+3. Area fill, fills whoel area with active color (``F2``)
 
 Text Alignment
 ^^^^^^^^^^^^^^
 
-Text alignment value 1-12.
+Text attachment point location.
+
+1. Top right (``J1``)
+2. Top center (``J2``)
+3. Top left (``J3``)
+4. Base right (``J4``)
+5. Base center (``J5``)
+6. Base left (``J6``)
+7. Bottom right (``J7``)
+8. Bottom center (``J8``)
+9. Bottom left (``J9``)
+10. Middle right (``J10``)
+11. Middle center (``J11``)
+12. Middle left (``J12``)
 
 Text size
 ^^^^^^^^^
 
 Text size and unit.
 
+*mm*
+    Size in millimeters, positive value (``S2.5``)
+*m*
+    Size in meters, negative value (``S-2.5``)
+*%*
+    Size in percentage of symbol size (``P25``)
+
 Text
 ^^^^
 
-Symbol text.
+Text in symbol.
 
+*!*
+    Constant text, default type (``Text``)
+*$*
+    Attribute value from symbol object (``$ID``)
+*#*
+    Macro value from symbol object (``#Z``)

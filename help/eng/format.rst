@@ -19,35 +19,35 @@ Following drawing commads are available.
 
 Changes current position to parameter coordinates.
 
-Parameters: X,Y (``U10,10``)
+Parameters: position x,y (``U10,10``)
 
 **D** - Draw line
 ^^^^^^^^^^^^^^^^^
 
 Draws line from previous position to parameter coordinates.
 
-Parameters: X,Y (``U20,20``)
+Parameters: position x,y (``U20,20``)
 
 **R** - Draw circle
 ^^^^^^^^^^^^^^^^^^^
 
 Draws parameter radius circle using previous position as center.
 
-Parameters: R (``R30``)
+Parameters: radius (``R30``)
 
 **B** - Draw rectangle
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Draws rectangle using previous position and parameter coordinates as corners.
 
-Parameters: X,Y (``B40,40``)
+Parameters: positin x,y (``B40,40``)
 
 **C** - Color index
 ^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to current drawing color index. Affects until changed.
 
-Parameters: I (``C3``)
+Parameters: color index (``C3``)
 
 **F** - Area fill type
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -60,32 +60,32 @@ Sets area fill type index to one of the following values:
 
 Fill type works with rectangle and circle commands. Border is drawn only when the fill type is zero. Affects until changed.
 
-Parameters: I (``F2``)
+Parameters: fill type (``F2``)
 
 **G** - Text angle
 ^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text angle as gons. Horizontal text angle is zero and rotation is counter-clockwise. Affects until changed.
 
-Parameters: I (``G50``)
+Parameters: angle (``G50``)
 
 **J** - Text alignment
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text alignment (1-12). Default is 9 (bottom left corner). Affects until changed.
 
-Parameters: I (``J9``)
+Parameters: alignment (``J9``)
 
 **S** - Text absolute size
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text size as millimeters (positive) or meters (negative). Default zero uses application settings. Affects until changed.
 
-Parameters: S (``S2.5``)
+Parameters: size (``S2.5``)
 
 **P** - Text relative size
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sets parameter to text size as a percentage of symbol size. Default zero uses application settings. Affects until changed.
 
-Parameters: P (``P50``)
+Parameters: percentage (``P50``)

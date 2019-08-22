@@ -19,35 +19,35 @@ Käytettävissä ovat seuraavat piirtokomennot.
 
 Muuttaa nykyisen sijainnin parametrin koordinaatteihin.
 
-Parametrit: X,Y (``U10,10``)
+Parametrit: sijainti x,y (``U10,10``)
 
 **D** - Piirrä viiva
 ^^^^^^^^^^^^^^^^^^^^
 
 Piirtää viivan edellisestä sijainnista parametrin koordinaatteihin.
 
-Parametrit: X,Y (``U20,20``)
+Parametrit: sijainti x,y (``U20,20``)
 
 **R** - Piirrä ympyrä
 ^^^^^^^^^^^^^^^^^^^^^
 
 Piirtää parametrin säteisen ympyrän käyttäen edellistä sijaintia keskipisteenä.
 
-Parametrit: R (``R30``)
+Parametrit: säde (``R30``)
 
 **B** - Piirrä suorakaide
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Piirtää suorakaiteen käyttäen edellistä sijantia ja parametrin koordinaatteja kulmina.
 
-Parametrit: X,Y (``B40,40``)
+Parametrit: sijainti x,y (``B40,40``)
 
 **C** - Väri-indeksi
 ^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin piirron väri-ideksiksi. Voimassa kunnes muutetaan.
 
-Parametrit: I (``C3``)
+Parametrit: väri-indeksi (``C3``)
 
 **F** - Alueen täyttö
 ^^^^^^^^^^^^^^^^^^^^^
@@ -60,32 +60,32 @@ Asettaa alueen täytöksi jonkin seuraavan tyypin:
 
 Alueen täyttö toimii suorakaiteen ja ympyrän kanssa. Reunaviiva piirretään vain, jos täyttö on nolla. Voimassa kunnes muutetaan.
 
-Parametrit: I (``F2``)
+Parametrit: täyttötyyppi (``F2``)
 
 **G** - Tekstin kulma
 ^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin kulmaksi gooneina. Vaakasuoran tekstin kulma on nolla ja kiertosuunta on vastapäivään. Voimassa kunnes muutetaan.
 
-Parametrit: I (``G50``)
+Parametrit: kulma (``G50``)
 
 **J** - Tekstin asemointi
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin asemoinniksi (1-12). Oletus on 9 (vasen alakulma). Voimassa kunnes muutetaan.
 
-Parametrit: I (``J9``)
+Parametrit: asemointi (``J9``)
 
 **S** - Tekstin absoluuttinen koko
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin kooksi millimetreinä (positiivinen) tai metreinä (negatiivinen). Oletus nolla käyttää sovelluksen asetuksia. Voimassa kunnes muutetaan.
 
-Parametrit: S (``S2.5``)
+Parametrit: koko (``S2.5``)
 
 **P** - Tekstin suhteellinen koko
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Asettaa parametrin tekstin kooksi prosentteina symbolin koosta. Oletus nolla käyttää sovelluksen asetuksia. Voimassa kunnes muutetaan.
 
-Parametrit: P (``P50``)
+Parametrit: prosentti (``P50``)
