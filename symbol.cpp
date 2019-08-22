@@ -103,7 +103,7 @@ void SymEditSymbol::Load(const QString& buffer)
 			{
 				size = string.mid(1).toDouble();
 				unit = (type == 'P' ? 2 : (size < 0.0 ? 1 : 0));
-				size = fabs(size) * (type == 'P' ? 10.0 : 1.0);
+				size = fabs(size) * (type == 'P' ? 0.1 : 1.0);
 			}
 			else if ( type == 'G' )
 				angle = value;
