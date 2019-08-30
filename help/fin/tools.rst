@@ -111,7 +111,7 @@ Viivan leveys editoinnissa.
 Symbolin koko
 ^^^^^^^^^^^^^
 
-Symbolin koko millimetreinä tai metreinä editoinnissa. Olettaa mittakaavaksi 1:1000. Tekstien koon skaalaukseen.
+Symbolin koko millimetreinä tai metreinä editoinnissa. Olettaa mittakaavaksi 1:1000. Vaikuttaa tekstien skaalaukseen.
 
 Kieli
 ^^^^^
@@ -149,6 +149,8 @@ Tekstin kiinnityspisteen sijainti.
 10. Puolivälissä oikealla (``J10``)
 11. Puolivälissä keskellä (``J11``)
 12. Puolivälissä vasemmalla (``J12``)
+
+.. image:: ../image/alignment.png
 
 Tekstin koko
 ^^^^^^^^^^^^

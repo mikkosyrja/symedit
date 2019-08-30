@@ -111,7 +111,7 @@ Line width in editing.
 Symbol size
 ^^^^^^^^^^^
 
-Symbol size in millimeters or meters in editing. Assumes scale 1:1000. For text size scaling.
+Symbol size in millimeters or meters in editing. Assumes scale 1:1000. Affects text scaling.
 
 Language
 ^^^^^^^^
@@ -149,6 +149,8 @@ Text attachment point location.
 10. Middle right (``J10``)
 11. Middle center (``J11``)
 12. Middle left (``J12``)
+
+.. image:: ../image/alignment.png
 
 Text size
 ^^^^^^^^^

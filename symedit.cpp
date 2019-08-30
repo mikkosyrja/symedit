@@ -520,19 +520,19 @@ void SymEditManager::help(QString topic) const
 	path.append("/help/").append(Language).append("/symedit/index.html");
 	if ( QFileInfo(path).exists() )		// release
 		QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
-	else	// visual studio
+	else	// development
 	{
 		path = QCoreApplication::applicationDirPath();
 		path.append("/../threedee/help/").append(Language).append("/symedit/index.html");
-		if ( QFileInfo(path).exists() )
+		if ( QFileInfo(path).exists() )		// visual studio
 			QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
-		else	// qt creator (windows)
+		else	// qt creator
 		{
 			path = QCoreApplication::applicationDirPath();
 			path.append("/../../symedit/help/").append(Language).append("/_build/html/index.html");
-			if ( QFileInfo(path).exists() )
+			if ( QFileInfo(path).exists() )		// windows
 				QDesktopServices::openUrl(QUrl(path.insert(0, "file:///"), QUrl::TolerantMode));
-			else	// qt creator (linux)
+			else	// linux
 			{
 				path = QCoreApplication::applicationDirPath();
 				path.append("/../symedit/help/").append(Language).append("/_build/html/index.html");

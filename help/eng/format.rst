@@ -14,29 +14,29 @@ Commands
 
 Following drawing commads are available.
 
-**U** - Change position
-^^^^^^^^^^^^^^^^^^^^^^^
+**U** - Position
+^^^^^^^^^^^^^^^^
 
 Changes current position to parameter coordinates.
 
 Parameters: position x,y (``U10,10``)
 
-**D** - Draw line
-^^^^^^^^^^^^^^^^^
+**D** - Line
+^^^^^^^^^^^^
 
 Draws line from previous position to parameter coordinates.
 
 Parameters: position x,y (``U20,20``)
 
-**R** - Draw circle
-^^^^^^^^^^^^^^^^^^^
+**R** - Circle
+^^^^^^^^^^^^^^
 
 Draws parameter radius circle using previous position as center.
 
 Parameters: radius (``R30``)
 
-**B** - Draw rectangle
-^^^^^^^^^^^^^^^^^^^^^^
+**B** - Rectangle
+^^^^^^^^^^^^^^^^^
 
 Draws rectangle using previous position and parameter coordinates as corners.
 

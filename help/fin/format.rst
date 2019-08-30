@@ -14,29 +14,29 @@ Komennot
 
 Käytettävissä ovat seuraavat piirtokomennot.
 
-**U** - Muuta sijaintia
-^^^^^^^^^^^^^^^^^^^^^^^
+**U** - Sijainti
+^^^^^^^^^^^^^^^^
 
 Muuttaa nykyisen sijainnin parametrin koordinaatteihin.
 
 Parametrit: sijainti x,y (``U10,10``)
 
-**D** - Piirrä viiva
-^^^^^^^^^^^^^^^^^^^^
+**D** - Viiva
+^^^^^^^^^^^^^
 
 Piirtää viivan edellisestä sijainnista parametrin koordinaatteihin.
 
 Parametrit: sijainti x,y (``U20,20``)
 
-**R** - Piirrä ympyrä
-^^^^^^^^^^^^^^^^^^^^^
+**R** - Ympyrä
+^^^^^^^^^^^^^^
 
 Piirtää parametrin säteisen ympyrän käyttäen edellistä sijaintia keskipisteenä.
 
 Parametrit: säde (``R30``)
 
-**B** - Piirrä suorakaide
-^^^^^^^^^^^^^^^^^^^^^^^^^
+**B** - Suorakaide
+^^^^^^^^^^^^^^^^^^
 
 Piirtää suorakaiteen käyttäen edellistä sijantia ja parametrin koordinaatteja kulmina.
 

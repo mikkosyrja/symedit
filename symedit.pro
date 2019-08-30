@@ -61,26 +61,27 @@ DISTFILES += \
 	locale/symedit.fi_FI.ts \
 	locale/symedit.en_GB.ts \
     help/Makefile \
+    help/eng/format.rst \
     help/fin/index.rst \
     help/fin/menu.rst \
     help/fin/tools.rst \
     help/fin/usage.rst \
     help/fin/Makefile \
     help/fin/conf.py \
+    help/fin/_static/icon256.png \
+    help/fin/format.rst \
     help/eng/index.rst \
     help/eng/menu.rst \
     help/eng/tools.rst \
     help/eng/usage.rst \
     help/eng/Makefile \
 	help/eng/conf.py \
+    help/eng/_static/icon256.png \
+    help/image/alignment.png \
     image/icon16.png \
     image/icon24.png \
     image/icon32.png \
     image/icon48.png \
     image/icon256.png \
     image/icon.ico \
-    image/icon.kra \
-    help/eng/_static/icon256.png \
-    help/fin/_static/icon256.png \
-    help/eng/format.rst \
-    help/fin/format.rst
+    image/icon.kra
