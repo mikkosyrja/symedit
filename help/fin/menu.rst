@@ -158,6 +158,14 @@ Työkalut
 
 Katso :doc:`tools`.
 
+Asetukset
+---------
+
+Kieli
+^^^^^
+
+Sovelluksen kieli: englanti (eng) tai suomi (fin).
+
 Ohje
 ----
 

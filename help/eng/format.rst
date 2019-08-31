@@ -74,6 +74,21 @@ Parameters: angle (``G50``)
 
 Sets parameter to text alignment (1-12). Default is 9 (bottom left corner). Affects until changed.
 
+1. Top right (``J1``)
+2. Top center (``J2``)
+3. Top left (``J3``)
+4. Base right (``J4``)
+5. Base center (``J5``)
+6. Base left (``J6``)
+7. Bottom right (``J7``)
+8. Bottom center (``J8``)
+9. Bottom left (``J9``)
+10. Middle right (``J10``)
+11. Middle center (``J11``)
+12. Middle left (``J12``)
+
+.. image:: ../image/alignment.png
+
 Parameters: alignment (``J9``)
 
 **S** - Text absolute size

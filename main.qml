@@ -113,6 +113,26 @@ ApplicationWindow
 		}
 		Menu
 		{
+			title: qsTrId("id_menu_settings")
+			Menu
+			{
+				title: qsTrId("id_menu_settings_lang")
+				MenuItem
+				{
+					text: qsTrId("id_menu_settings_eng")
+					checkable : true; checked: language === "eng"
+					onTriggered: setlanguage("eng")
+				}
+				MenuItem
+				{
+					text: qsTrId("id_menu_settings_fin")
+					checkable : true; checked: language === "fin"
+					onTriggered: setlanguage("fin")
+				}
+			}
+		}
+		Menu
+		{
 			title: qsTrId("id_menu_help")
 			MenuItem { text: qsTrId("id_menu_help_contents"); shortcut: "F1"; onTriggered: help() }
 			MenuSeparator { }
@@ -224,16 +244,6 @@ ApplicationWindow
 					model: [ "1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "9.0", "10.0" ]
 					onCurrentIndexChanged: { symbolsize = currentIndex + 1; editor.update() }
 					function setSize() { currentIndex = symbolsize - 1 }
-				}
-				BarSeparator { }
-				Text { text: qsTrId("id_toolbar_language") }
-				ComboBox
-				{
-					id: langlist
-					implicitWidth: 60
-					model: [ "eng", "fin" ]
-					onCurrentIndexChanged: { language = (currentIndex ? "fin" : "eng") }
-					function setLang() { currentIndex = (language === "eng" ? 0 : 1) }
 				}
 			}
 			RowLayout
@@ -406,7 +416,7 @@ ApplicationWindow
 		snaplist.setSnap()
 		widthlist.setWidth()
 		symbollist.setSize()
-		langlist.setLang()
+//		langlist.setLang()
 
 		colorlist.setColor()
 		filllist.setFill()
@@ -519,6 +529,11 @@ ApplicationWindow
 		manager.removeItem()
 		symbol = manager.getSymbol(true)
 		editor.update()
+	}
+
+	function setlanguage(lang)
+	{
+		language = lang
 	}
 
 	function help()

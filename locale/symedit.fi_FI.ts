@@ -145,6 +145,22 @@
         <source></source>
         <translation>Käännetty teksti</translation>
     </message>
+	<message id="id_menu_settings">
+	    <source></source>
+		<translation>Asetukset</translation>
+		</message>
+	<message id="id_menu_settings_lang">
+	    <source></source>
+		<translation>Kieli</translation>
+		</message>
+	<message id="id_menu_settings_eng">
+	    <source></source>
+		<translation>Englanti</translation>
+		</message>
+	<message id="id_menu_settings_fin">
+	    <source></source>
+		<translation>Suomi</translation>
+		</message>
 	<message id="id_menu_help">
         <source></source>
         <translation>&amp;Ohje</translation>
@@ -276,10 +292,6 @@
     <message id="id_toolbar_symbol_size">
         <source></source>
         <translation>Symbolin koko</translation>
-    </message>
-    <message id="id_toolbar_language">
-        <source></source>
-        <translation>Kieli</translation>
     </message>
     <message id="id_toolbar_symbol_settings">
         <source></source>

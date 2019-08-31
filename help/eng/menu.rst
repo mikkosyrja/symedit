@@ -158,6 +158,14 @@ Tools
 
 See :doc:`tools`.
 
+Settings
+--------
+
+Language
+^^^^^^^^
+
+Application language: english (eng) or finnish (fin).
+
 Help
 ----
 

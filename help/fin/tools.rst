@@ -113,11 +113,6 @@ Symbolin koko
 
 Symbolin koko millimetreinä tai metreinä editoinnissa. Olettaa mittakaavaksi 1:1000. Vaikuttaa tekstien skaalaukseen.
 
-Kieli
-^^^^^
-
-Sovelluksen kieli: englanti (eng) tai suomi (fin).
-
 Värin indeksi
 ^^^^^^^^^^^^^
 

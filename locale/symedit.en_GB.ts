@@ -145,7 +145,23 @@
         <source></source>
         <translation>Rotated text</translation>
     </message>
-    <message id="id_menu_help">
+	<message id="id_menu_settings">
+	    <source></source>
+		<translation>Settings</translation>
+		</message>
+	<message id="id_menu_settings_lang">
+	    <source></source>
+		<translation>Language</translation>
+		</message>
+	<message id="id_menu_settings_eng">
+	    <source></source>
+		<translation>English</translation>
+		</message>
+	<message id="id_menu_settings_fin">
+	    <source></source>
+		<translation>Finnish</translation>
+		</message>
+	<message id="id_menu_help">
         <source></source>
         <translation>&amp;Help</translation>
     </message>
@@ -276,10 +292,6 @@
     <message id="id_toolbar_symbol_size">
         <source></source>
         <translation>Symbol Size</translation>
-    </message>
-    <message id="id_toolbar_language">
-        <source></source>
-        <translation>Language</translation>
     </message>
     <message id="id_toolbar_symbol_settings">
         <source></source>

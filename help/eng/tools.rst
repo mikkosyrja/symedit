@@ -113,11 +113,6 @@ Symbol size
 
 Symbol size in millimeters or meters in editing. Assumes scale 1:1000. Affects text scaling.
 
-Language
-^^^^^^^^
-
-Application language: english (eng) or finnish (fin).
-
 Color index
 ^^^^^^^^^^^
 

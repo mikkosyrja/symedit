@@ -133,11 +133,35 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="id_menu_help">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_tooltip_edit_undo">
+	<message id="id_menu_settings">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_menu_settings_lang">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_menu_settings_eng">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_menu_settings_fin">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_menu_help">
+	    <source></source>
+		<translation type="unfinished"></translation>
+	</message>
+	<message id="id_menu_help_contents">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_menu_help_about">
+	    <source></source>
+		<translation type="unfinished"></translation>
+		</message>
+	<message id="id_tooltip_edit_undo">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -234,10 +258,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_toolbar_symbol_size">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_toolbar_language">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,14 +394,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="id_application_title">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_menu_help_contents">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="id_menu_help_about">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
