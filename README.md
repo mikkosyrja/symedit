@@ -20,12 +20,12 @@ sphinx-build -M html . _build
 
 Windows deployment:
 
-C:\Users\Mikko\Code\Qt\5.12.4\msvc2017_64\bin\windeployqt.exe
+C:\Users\Mikko\Code\Qt\5.12.5\msvc2017_64\bin\windeployqt.exe
 	--debug --qmldir ../../symedit
 	--no-translations --no-compiler-runtime --no-webkit2 --no-angle --no-opengl-sw
 	.
 
-C:\Users\Mikko\Code\Qt\5.12.4\msvc2017_64\bin\windeployqt.exe
+C:\Users\Mikko\Code\Qt\5.12.5\msvc2017_64\bin\windeployqt.exe
 	--release --qmldir ../../symedit
 	--no-translations --no-compiler-runtime --no-webkit2 --no-angle --no-opengl-sw
 	.
