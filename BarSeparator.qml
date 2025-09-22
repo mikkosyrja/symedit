@@ -1,10 +1,10 @@
-import QtQuick 2.9
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Controls
 
 ToolButton
 {
-	implicitWidth: 8
+    implicitWidth: 8
 
-	// prevent clicking animation
-	MouseArea { anchors.fill: parent }
+    // prevent clicking animation
+    MouseArea { anchors.fill: parent }
 }
